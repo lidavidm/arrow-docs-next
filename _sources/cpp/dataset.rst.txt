@@ -53,7 +53,7 @@ of a directory with two parquet files:
 
 .. literalinclude:: ../../../cpp/examples/arrow/dataset-documentation-example.cc
    :language: cpp
-   :lines: 50-84
+   :lines: 50-85
    :linenos:
    :lineno-match:
 
@@ -69,8 +69,8 @@ given the base directory path:
 
 .. literalinclude:: ../../../cpp/examples/arrow/dataset-documentation-example.cc
    :language: cpp
-   :lines: 147-165
-   :emphasize-lines: 4-10
+   :lines: 151-170
+   :emphasize-lines: 6-11
    :linenos:
    :lineno-match:
 
@@ -103,8 +103,8 @@ method:
 
 .. literalinclude:: ../../../cpp/examples/arrow/dataset-documentation-example.cc
    :language: cpp
-   :lines: 147-165
-   :emphasize-lines: 15-18
+   :lines: 151-170
+   :emphasize-lines: 16-19
    :linenos:
    :lineno-match:
 
@@ -125,7 +125,7 @@ If we save the table as a Feather file instead of Parquet files:
 
 .. literalinclude:: ../../../cpp/examples/arrow/dataset-documentation-example.cc
    :language: cpp
-   :lines: 70-84
+   :lines: 87-104
    :linenos:
    :lineno-match:
 
@@ -134,7 +134,7 @@ then we can read the Feather file using the same functions, but passing a
 
 .. literalinclude:: ../../../cpp/examples/arrow/dataset-documentation-example.cc
    :language: cpp
-   :lines: 286,302
+   :lines: 310,323
    :linenos:
 
 Customizing file formats
@@ -162,8 +162,8 @@ columns:
 
 .. literalinclude:: ../../../cpp/examples/arrow/dataset-documentation-example.cc
    :language: cpp
-   :lines: 167-182
-   :emphasize-lines: 12
+   :lines: 172-188
+   :emphasize-lines: 13
    :linenos:
    :lineno-match:
 
@@ -176,8 +176,8 @@ the returned table.
 
 .. literalinclude:: ../../../cpp/examples/arrow/dataset-documentation-example.cc
    :language: cpp
-   :lines: 167-182
-   :emphasize-lines: 13
+   :lines: 172-188
+   :emphasize-lines: 14
    :linenos:
    :lineno-match:
 
@@ -195,8 +195,8 @@ and a vector of names for the columns:
 
 .. literalinclude:: ../../../cpp/examples/arrow/dataset-documentation-example.cc
    :language: cpp
-   :lines: 184-205
-   :emphasize-lines: 12-19
+   :lines: 190-215
+   :emphasize-lines: 13-23
    :linenos:
    :lineno-match:
 
@@ -207,8 +207,8 @@ dataset schema:
 
 .. literalinclude:: ../../../cpp/examples/arrow/dataset-documentation-example.cc
    :language: cpp
-   :lines: 207-229
-   :emphasize-lines: 12-19
+   :lines: 217-243
+   :emphasize-lines: 14-23
    :linenos:
    :lineno-match:
 
@@ -249,8 +249,8 @@ functionality.
 
 .. literalinclude:: ../../../cpp/examples/arrow/dataset-documentation-example.cc
    :language: cpp
-   :lines: 106-145
-   :emphasize-lines: 24-38
+   :lines: 106-149
+   :emphasize-lines: 25-42
    :linenos:
    :lineno-match:
 
@@ -263,21 +263,42 @@ partitioning scheme:
 
 .. literalinclude:: ../../../cpp/examples/arrow/dataset-documentation-example.cc
    :language: cpp
-   :lines: 231-250
-   :emphasize-lines: 6,8
+   :lines: 245-268
+   :emphasize-lines: 7,9-11
    :linenos:
    :lineno-match:
 
 Although the partition fields are not included in the actual Parquet files,
 they will be added back to the resulting table when scanning this dataset:
 
+.. code-block:: text
+
+   $ ./debug/dataset-documentation-example file:///tmp parquet_hive partitioned
+   Found fragment: /tmp/parquet_dataset/part=a/part0.parquet
+   Partition expression: (part == "a")
+   Found fragment: /tmp/parquet_dataset/part=b/part1.parquet
+   Partition expression: (part == "b")
+   Read 20 rows
+   a: int64
+     -- field metadata --
+     PARQUET:field_id: '1'
+   b: double
+     -- field metadata --
+     PARQUET:field_id: '2'
+   c: int64
+     -- field metadata --
+     PARQUET:field_id: '3'
+   part: string
+   ----
+   # snip...
+
 We can now filter on the partition keys, which avoids loading files
 altogether if they do not match the predicate:
 
 .. literalinclude:: ../../../cpp/examples/arrow/dataset-documentation-example.cc
    :language: cpp
-   :lines: 253-268
-   :emphasize-lines: 13-14
+   :lines: 270-290
+   :emphasize-lines: 15-18
    :linenos:
    :lineno-match:
 
