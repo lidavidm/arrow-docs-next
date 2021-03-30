@@ -32,134 +32,44 @@ Interface
 .. doxygenclass:: arrow::dataset::Dataset
    :members:
 
-.. doxygenclass:: arrow::dataset::Partitioning
-   :members:
-
 Partitioning
 ============
 
-.. doxygenclass:: arrow::dataset::PartitioningFactory
-   :members:
-
-.. doxygenstruct:: arrow::dataset::PartitioningFactoryOptions
-   :members:
-
-.. doxygenclass:: arrow::dataset::PartitioningOrFactory
-   :members:
-
-.. doxygenclass:: arrow::dataset::KeyValuePartitioning
-   :members:
-
-.. doxygenclass:: arrow::dataset::DirectoryPartitioning
-   :members:
-
-.. doxygenclass:: arrow::dataset::HivePartitioning
-   :members:
-
-.. doxygenstruct:: arrow::dataset::HivePartitioningFactoryOptions
-   :members:
-
-.. doxygenclass:: arrow::dataset::FunctionPartitioning
+.. doxygengroup:: dataset-partitioning
+   :content-only:
    :members:
 
 Dataset discovery/factories
 ===========================
 
-.. doxygenclass:: arrow::dataset::DatasetFactory
-   :members:
-
-.. doxygenstruct:: arrow::dataset::InspectOptions
-   :members:
-
-.. doxygenstruct:: arrow::dataset::FinishOptions
+.. doxygengroup:: dataset-discovery
+   :content-only:
    :members:
 
 Scanning
 ========
 
-.. doxygenclass:: arrow::dataset::Scanner
-   :members:
-
-.. doxygenclass:: arrow::dataset::ScannerBuilder
-   :members:
-
-.. doxygenstruct:: arrow::dataset::ScanOptions
-   :members:
-
-.. doxygenclass:: arrow::dataset::FragmentScanOptions
+.. doxygengroup:: dataset-scanning
+   :content-only:
    :members:
 
 Concrete implementations
 ========================
 
-.. doxygenclass:: arrow::dataset::InMemoryDataset
-   :members:
-
-.. doxygenclass:: arrow::dataset::InMemoryFragment
-   :members:
-
-.. doxygenclass:: arrow::dataset::UnionDataset
-   :members:
-
-.. doxygenclass:: arrow::dataset::UnionDatasetFactory
+.. doxygengroup:: dataset-implementations
+   :content-only:
    :members:
 
 File System Datasets
 --------------------
 
-.. doxygenclass:: arrow::dataset::FileSource
-   :members:
-
-.. doxygenclass:: arrow::dataset::FileFormat
-   :members:
-
-.. doxygenclass:: arrow::dataset::FileFragment
-   :members:
-
-.. doxygenclass:: arrow::dataset::FileSystemDataset
-   :members:
-
-.. doxygenclass:: arrow::dataset::FileSystemDatasetFactory
-   :members:
-
-.. doxygenstruct:: arrow::dataset::FileSystemFactoryOptions
-   :members:
-
-.. doxygenclass:: arrow::dataset::FileWriteOptions
-   :members:
-
-.. doxygenclass:: arrow::dataset::FileWriter
-   :members:
-
-.. doxygenstruct:: arrow::dataset::FileSystemDatasetWriteOptions
+.. doxygengroup:: dataset-filesystem
+   :content-only:
    :members:
 
 File Formats
 ------------
 
-.. doxygenclass:: arrow::dataset::CsvFileFormat
-   :members:
-
-.. doxygenstruct:: arrow::dataset::CsvFragmentScanOptions
-   :members:
-
-.. doxygenclass:: arrow::dataset::IpcFileFormat
-   :members:
-
-.. doxygenclass:: arrow::dataset::IpcFileWriteOptions
-   :members:
-
-.. doxygenclass:: arrow::dataset::ParquetFileFormat
-   :members:
-
-.. doxygenclass:: arrow::dataset::ParquetFileFragment
-   :members:
-
-.. doxygenclass:: arrow::dataset::ParquetFileWriteOptions
-   :members:
-
-.. doxygenclass:: arrow::dataset::ParquetDatasetFactory
-   :members:
-
-.. doxygenstruct:: arrow::dataset::ParquetFactoryOptions
+.. doxygengroup:: dataset-file-formats
+   :content-only:
    :members:

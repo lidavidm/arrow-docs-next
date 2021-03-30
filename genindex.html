@@ -1580,6 +1580,10 @@
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset19IpcFileWriteOptions7optionsE">arrow::dataset::IpcFileWriteOptions::options (C++ member)</a>
 </li>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset13IpcFileWriterE">arrow::dataset::IpcFileWriter (C++ class)</a>
+</li>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset13IpcFileWriter5WriteERKNSt10shared_ptrI11RecordBatchEE">arrow::dataset::IpcFileWriter::Write (C++ function)</a>
+</li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset20KeyValuePartitioningE">arrow::dataset::KeyValuePartitioning (C++ class)</a>
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset20KeyValuePartitioning3KeyE">arrow::dataset::KeyValuePartitioning::Key (C++ struct)</a>
@@ -1644,6 +1648,10 @@
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset23ParquetFileWriteOptions17writer_propertiesE">arrow::dataset::ParquetFileWriteOptions::writer_properties (C++ member)</a>
 </li>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset17ParquetFileWriterE">arrow::dataset::ParquetFileWriter (C++ class)</a>
+</li>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset17ParquetFileWriter5WriteERKNSt10shared_ptrI11RecordBatchEE">arrow::dataset::ParquetFileWriter::Write (C++ function)</a>
+</li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset12PartitioningE">arrow::dataset::Partitioning (C++ class)</a>
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset12Partitioning7DefaultEv">arrow::dataset::Partitioning::Default (C++ function)</a>
@@ -1706,13 +1714,25 @@
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset11ScanOptionsE">arrow::dataset::ScanOptions (C++ struct)</a>
 </li>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset11ScanOptions10batch_sizeE">arrow::dataset::ScanOptions::batch_size (C++ member)</a>
+</li>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset11ScanOptions14dataset_schemaE">arrow::dataset::ScanOptions::dataset_schema (C++ member)</a>
+</li>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset11ScanOptions6filterE">arrow::dataset::ScanOptions::filter (C++ member)</a>
+</li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset11ScanOptions21fragment_scan_optionsE">arrow::dataset::ScanOptions::fragment_scan_options (C++ member)</a>
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset11ScanOptions4poolE">arrow::dataset::ScanOptions::pool (C++ member)</a>
 </li>
-      <li><a href="cpp/api/dataset.html#_CPPv4NK5arrow7dataset11ScanOptions9TaskGroupEv">arrow::dataset::ScanOptions::TaskGroup (C++ function)</a>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset11ScanOptions16projected_schemaE">arrow::dataset::ScanOptions::projected_schema (C++ member)</a>
+</li>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset11ScanOptions10projectionE">arrow::dataset::ScanOptions::projection (C++ member)</a>
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset11ScanOptions11use_threadsE">arrow::dataset::ScanOptions::use_threads (C++ member)</a>
+</li>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset8ScanTaskE">arrow::dataset::ScanTask (C++ class)</a>
+</li>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset8ScanTask7ExecuteEv">arrow::dataset::ScanTask::Execute (C++ function)</a>
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset12UnionDatasetE">arrow::dataset::UnionDataset (C++ class)</a>
 </li>
@@ -2270,6 +2290,8 @@
 </li>
       <li><a href="cpp/api/flight.html#_CPPv4N5arrow6flight18FlightStatusDetail14set_extra_infoENSt6stringE">arrow::flight::FlightStatusDetail::set_extra_info (C++ function)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="cpp/api/flight.html#_CPPv4NK5arrow6flight18FlightStatusDetail8ToStringEv">arrow::flight::FlightStatusDetail::ToString (C++ function)</a>
 </li>
       <li><a href="cpp/api/flight.html#_CPPv4NK5arrow6flight18FlightStatusDetail7type_idEv">arrow::flight::FlightStatusDetail::type_id (C++ function)</a>
@@ -2280,8 +2302,6 @@
 </li>
       <li><a href="cpp/api/flight.html#_CPPv4N5arrow6flight18FlightStreamReader6CancelEv">arrow::flight::FlightStreamReader::Cancel (C++ function)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="cpp/api/flight.html#_CPPv4N5arrow6flight18FlightStreamWriterE">arrow::flight::FlightStreamWriter (C++ class)</a>
 </li>
       <li><a href="cpp/api/flight.html#_CPPv4N5arrow6flight18FlightStreamWriter11DoneWritingEv">arrow::flight::FlightStreamWriter::DoneWriting (C++ function)</a>
@@ -6282,10 +6302,14 @@
 <h2 id="K">K</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="python/generated/pyarrow.MapType.html#pyarrow.MapType.key_type">key_type (pyarrow.MapType attribute)</a>
+      <li><a href="cpp/api/dataset.html#_CPPv417kDefaultBatchSize">kDefaultBatchSize (C++ member)</a>
+</li>
+      <li><a href="cpp/api/dataset.html#_CPPv424kDefaultHiveNullFallback">kDefaultHiveNullFallback (C++ member)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="python/generated/pyarrow.MapType.html#pyarrow.MapType.key_type">key_type (pyarrow.MapType attribute)</a>
+</li>
       <li><a href="python/generated/pyarrow.StructScalar.html#pyarrow.StructScalar.keys">keys() (pyarrow.StructScalar method)</a>
 </li>
   </ul></td>

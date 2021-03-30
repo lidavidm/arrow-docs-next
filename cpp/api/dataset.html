@@ -333,10 +333,38 @@
 </div>
 </dd></dl>
 
+</div>
+<div class="section" id="partitioning">
+<h2><a class="toc-backref" href="#id2">Partitioning</a><a class="headerlink" href="#partitioning" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp var">
+<dt id="_CPPv424kDefaultHiveNullFallback">
+<span id="_CPPv324kDefaultHiveNullFallback"></span><span id="_CPPv224kDefaultHiveNullFallback"></span><span id="kDefaultHiveNullFallback__cA"></span><span class="target" id="group__dataset-partitioning_1ga748eb813cc9d96f51d5a0f534bdf26a1"></span><em class="property">static</em> <em class="property">constexpr</em> char <code class="sig-name descname">kDefaultHiveNullFallback</code>[] = &quot;__HIVE_DEFAULT_PARTITION__&quot;<a class="headerlink" href="#_CPPv424kDefaultHiveNullFallback" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The default fallback used for null values in a Hive-style partitioning. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt>
+<span class="target" id="group__dataset-partitioning_1ga523a635c260333ed9082eb4e57018c8d"></span><code class="sig-name descname">ARROW_DS_EXPORT std::string StripPrefixAndFilename (const std::string &amp;path, const std::string &amp;prefix)</code></dt>
+<dd><p>Remove a prefix and the filename of a path. </p>
+<p>e.g., <code class="docutils literal notranslate"><span class="pre">StripPrefixAndFilename(&quot;/data/year=2019/c.txt&quot;,</span> <span class="pre">&quot;/data&quot;)</span> <span class="pre">-&gt;</span> <span class="pre">&quot;year=2019&quot;</span></code> </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt>
+<span class="target" id="group__dataset-partitioning_1gaab1b052304bd6442c7437147a7c266af"></span><code class="sig-name descname">ARROW_DS_EXPORT std::vector&lt; std::string &gt; StripPrefixAndFilename (const std::vector&lt; std::string &gt; &amp;paths, const std::string &amp;prefix)</code></dt>
+<dd><p>Vector version of StripPrefixAndFilename. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt>
+<span class="target" id="group__dataset-partitioning_1ga970cb16a814c425ee7ad40af148e406f"></span><code class="sig-name descname">ARROW_DS_EXPORT std::vector&lt; std::string &gt; StripPrefixAndFilename (const std::vector&lt; fs::FileInfo &gt; &amp;files, const std::string &amp;prefix)</code></dt>
+<dd><p>Vector version of StripPrefixAndFilename. </p>
+</dd></dl>
+
 <dl class="cpp class">
 <dt id="_CPPv4N5arrow7dataset12PartitioningE">
 <span id="_CPPv3N5arrow7dataset12PartitioningE"></span><span id="_CPPv2N5arrow7dataset12PartitioningE"></span><span id="arrow::dataset::Partitioning"></span><span class="target" id="classarrow_1_1dataset_1_1_partitioning"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">Partitioning</code><a class="headerlink" href="#_CPPv4N5arrow7dataset12PartitioningE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Interface for parsing partition expressions from string partition identifiers. </p>
+<dd><em>#include &lt;arrow/dataset/partition.h&gt;</em><p>Interface for parsing partition expressions from string partition identifiers. </p>
 <p>For example, the identifier “foo=5” might be parsed to an equality expression between the “foo” field and the value 5.</p>
 <p>Some partitionings may store the field names in a metadata store instead of in file paths, for example dataset_root/2009/11/… could be used when the partition fields are “year” and “month”</p>
 <p>Paths are consumed from left to right. Paths must be relative to the root of a partition; path prefixes must be removed before passing the path to a partitioning for parsing. </p>
@@ -374,18 +402,53 @@
 <dl class="cpp struct">
 <dt id="_CPPv4N5arrow7dataset12Partitioning18PartitionedBatchesE">
 <span id="_CPPv3N5arrow7dataset12Partitioning18PartitionedBatchesE"></span><span id="_CPPv2N5arrow7dataset12Partitioning18PartitionedBatchesE"></span><span id="arrow::dataset::Partitioning::PartitionedBatches"></span><span class="target" id="structarrow_1_1dataset_1_1_partitioning_1_1_partitioned_batches"></span><em class="property">struct </em><code class="sig-name descname">PartitionedBatches</code><a class="headerlink" href="#_CPPv4N5arrow7dataset12Partitioning18PartitionedBatchesE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>If the input batch shares any fields with this partitioning, produce sub-batches which satisfy mutually exclusive Expressions. </p>
+<dd><em>#include &lt;arrow/dataset/partition.h&gt;</em><p>If the input batch shares any fields with this partitioning, produce sub-batches which satisfy mutually exclusive Expressions. </p>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="cpp struct">
+<dt id="_CPPv4N5arrow7dataset26PartitioningFactoryOptionsE">
+<span id="_CPPv3N5arrow7dataset26PartitioningFactoryOptionsE"></span><span id="_CPPv2N5arrow7dataset26PartitioningFactoryOptionsE"></span><span id="arrow::dataset::PartitioningFactoryOptions"></span><span class="target" id="structarrow_1_1dataset_1_1_partitioning_factory_options"></span><em class="property">struct </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">PartitioningFactoryOptions</code><a class="headerlink" href="#_CPPv4N5arrow7dataset26PartitioningFactoryOptionsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;arrow/dataset/partition.h&gt;</em><p>Options for inferring a partitioning. </p>
+<p>Subclassed by <a class="reference internal" href="#structarrow_1_1dataset_1_1_hive_partitioning_factory_options"><span class="std std-ref">arrow::dataset::HivePartitioningFactoryOptions</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset26PartitioningFactoryOptions16infer_dictionaryE">
+<span id="_CPPv3N5arrow7dataset26PartitioningFactoryOptions16infer_dictionaryE"></span><span id="_CPPv2N5arrow7dataset26PartitioningFactoryOptions16infer_dictionaryE"></span><span id="arrow::dataset::PartitioningFactoryOptions::infer_dictionary__b"></span><span class="target" id="structarrow_1_1dataset_1_1_partitioning_factory_options_1a113c844746abc258034eb0edb6dd1da6"></span>bool <code class="sig-name descname">infer_dictionary</code> = false<a class="headerlink" href="#_CPPv4N5arrow7dataset26PartitioningFactoryOptions16infer_dictionaryE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>When inferring a schema for partition fields, yield dictionary encoded types instead of plain. </p>
+<p>This can be more efficient when materializing virtual columns, and Expressions parsed by the finished <a class="reference internal" href="#classarrow_1_1dataset_1_1_partitioning"><span class="std std-ref">Partitioning</span></a> will include dictionaries of all unique inspected values for each field. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset26PartitioningFactoryOptions6schemaE">
+<span id="_CPPv3N5arrow7dataset26PartitioningFactoryOptions6schemaE"></span><span id="_CPPv2N5arrow7dataset26PartitioningFactoryOptions6schemaE"></span><span id="arrow::dataset::PartitioningFactoryOptions::schema__std::shared_ptr:Schema:"></span><span class="target" id="structarrow_1_1dataset_1_1_partitioning_factory_options_1a1078577bc1b2126823c136735a8387b0"></span>std::shared_ptr&lt;<a class="reference internal" href="datatype.html#_CPPv4N5arrow6SchemaE" title="arrow::Schema">Schema</a>&gt; <code class="sig-name descname">schema</code><a class="headerlink" href="#_CPPv4N5arrow7dataset26PartitioningFactoryOptions6schemaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Optionally, an expected schema can be provided, in which case inference will only check discovered fields against the schema and update internal state (such as dictionaries). </p>
 </dd></dl>
 
 </div>
-<div class="section" id="partitioning">
-<h2><a class="toc-backref" href="#id2">Partitioning</a><a class="headerlink" href="#partitioning" title="Permalink to this headline">¶</a></h2>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt id="_CPPv4N5arrow7dataset30HivePartitioningFactoryOptionsE">
+<span id="_CPPv3N5arrow7dataset30HivePartitioningFactoryOptionsE"></span><span id="_CPPv2N5arrow7dataset30HivePartitioningFactoryOptionsE"></span><span id="arrow::dataset::HivePartitioningFactoryOptions"></span><span class="target" id="structarrow_1_1dataset_1_1_hive_partitioning_factory_options"></span><em class="property">struct </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">HivePartitioningFactoryOptions</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset26PartitioningFactoryOptionsE" title="arrow::dataset::PartitioningFactoryOptions">PartitioningFactoryOptions</a><a class="headerlink" href="#_CPPv4N5arrow7dataset30HivePartitioningFactoryOptionsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;arrow/dataset/partition.h&gt;</em><p>Options for inferring a hive-style partitioning. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset30HivePartitioningFactoryOptions13null_fallbackE">
+<span id="_CPPv3N5arrow7dataset30HivePartitioningFactoryOptions13null_fallbackE"></span><span id="_CPPv2N5arrow7dataset30HivePartitioningFactoryOptions13null_fallbackE"></span><span id="arrow::dataset::HivePartitioningFactoryOptions::null_fallback__ss"></span><span class="target" id="structarrow_1_1dataset_1_1_hive_partitioning_factory_options_1a8e48cce66a027ba832654f1593be8b3e"></span>std::string <code class="sig-name descname">null_fallback</code><a class="headerlink" href="#_CPPv4N5arrow7dataset30HivePartitioningFactoryOptions13null_fallbackE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hive partitioning scheme maps null to a hard coded fallback string. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
 <dl class="cpp class">
 <dt id="_CPPv4N5arrow7dataset19PartitioningFactoryE">
 <span id="_CPPv3N5arrow7dataset19PartitioningFactoryE"></span><span id="_CPPv2N5arrow7dataset19PartitioningFactoryE"></span><span id="arrow::dataset::PartitioningFactory"></span><span class="target" id="classarrow_1_1dataset_1_1_partitioning_factory"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">PartitioningFactory</code><a class="headerlink" href="#_CPPv4N5arrow7dataset19PartitioningFactoryE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p><a class="reference internal" href="#classarrow_1_1dataset_1_1_partitioning_factory"><span class="std std-ref">PartitioningFactory</span></a> provides creation of a partitioning when the specific schema must be inferred from available paths (no explicit schema is known). </p>
+<dd><em>#include &lt;arrow/dataset/partition.h&gt;</em><p><a class="reference internal" href="#classarrow_1_1dataset_1_1_partitioning_factory"><span class="std std-ref">PartitioningFactory</span></a> provides creation of a partitioning when the specific schema must be inferred from available paths (no explicit schema is known). </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="cpp function">
@@ -410,60 +473,10 @@
 </div>
 </dd></dl>
 
-<dl class="cpp struct">
-<dt id="_CPPv4N5arrow7dataset26PartitioningFactoryOptionsE">
-<span id="_CPPv3N5arrow7dataset26PartitioningFactoryOptionsE"></span><span id="_CPPv2N5arrow7dataset26PartitioningFactoryOptionsE"></span><span id="arrow::dataset::PartitioningFactoryOptions"></span><span class="target" id="structarrow_1_1dataset_1_1_partitioning_factory_options"></span><em class="property">struct </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">PartitioningFactoryOptions</code><a class="headerlink" href="#_CPPv4N5arrow7dataset26PartitioningFactoryOptionsE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Options for inferring a partitioning. </p>
-<p>Subclassed by <a class="reference internal" href="#structarrow_1_1dataset_1_1_hive_partitioning_factory_options"><span class="std std-ref">arrow::dataset::HivePartitioningFactoryOptions</span></a></p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Members</p>
-<dl class="cpp var">
-<dt id="_CPPv4N5arrow7dataset26PartitioningFactoryOptions16infer_dictionaryE">
-<span id="_CPPv3N5arrow7dataset26PartitioningFactoryOptions16infer_dictionaryE"></span><span id="_CPPv2N5arrow7dataset26PartitioningFactoryOptions16infer_dictionaryE"></span><span id="arrow::dataset::PartitioningFactoryOptions::infer_dictionary__b"></span><span class="target" id="structarrow_1_1dataset_1_1_partitioning_factory_options_1a113c844746abc258034eb0edb6dd1da6"></span>bool <code class="sig-name descname">infer_dictionary</code> = false<a class="headerlink" href="#_CPPv4N5arrow7dataset26PartitioningFactoryOptions16infer_dictionaryE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>When inferring a schema for partition fields, yield dictionary encoded types instead of plain. </p>
-<p>This can be more efficient when materializing virtual columns, and Expressions parsed by the finished <a class="reference internal" href="#classarrow_1_1dataset_1_1_partitioning"><span class="std std-ref">Partitioning</span></a> will include dictionaries of all unique inspected values for each field. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt id="_CPPv4N5arrow7dataset26PartitioningFactoryOptions6schemaE">
-<span id="_CPPv3N5arrow7dataset26PartitioningFactoryOptions6schemaE"></span><span id="_CPPv2N5arrow7dataset26PartitioningFactoryOptions6schemaE"></span><span id="arrow::dataset::PartitioningFactoryOptions::schema__std::shared_ptr:Schema:"></span><span class="target" id="structarrow_1_1dataset_1_1_partitioning_factory_options_1a1078577bc1b2126823c136735a8387b0"></span>std::shared_ptr&lt;<a class="reference internal" href="datatype.html#_CPPv4N5arrow6SchemaE" title="arrow::Schema">Schema</a>&gt; <code class="sig-name descname">schema</code><a class="headerlink" href="#_CPPv4N5arrow7dataset26PartitioningFactoryOptions6schemaE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Optionally, an expected schema can be provided, in which case inference will only check discovered fields against the schema and update internal state (such as dictionaries). </p>
-</dd></dl>
-
-</div>
-</dd></dl>
-
-<dl class="cpp class">
-<dt id="_CPPv4N5arrow7dataset21PartitioningOrFactoryE">
-<span id="_CPPv3N5arrow7dataset21PartitioningOrFactoryE"></span><span id="_CPPv2N5arrow7dataset21PartitioningOrFactoryE"></span><span id="arrow::dataset::PartitioningOrFactory"></span><span class="target" id="classarrow_1_1dataset_1_1_partitioning_or_factory"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">PartitioningOrFactory</code><a class="headerlink" href="#_CPPv4N5arrow7dataset21PartitioningOrFactoryE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Either a <a class="reference internal" href="#classarrow_1_1dataset_1_1_partitioning"><span class="std std-ref">Partitioning</span></a> or a <a class="reference internal" href="#classarrow_1_1dataset_1_1_partitioning_factory"><span class="std std-ref">PartitioningFactory</span></a>. </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
-<dl class="cpp function">
-<dt id="_CPPv4NK5arrow7dataset21PartitioningOrFactory12partitioningEv">
-<span id="_CPPv3NK5arrow7dataset21PartitioningOrFactory12partitioningEv"></span><span id="_CPPv2NK5arrow7dataset21PartitioningOrFactory12partitioningEv"></span><span id="arrow::dataset::PartitioningOrFactory::partitioningC"></span><span class="target" id="classarrow_1_1dataset_1_1_partitioning_or_factory_1adf893490b52fd3761f75056d360aa040"></span><em class="property">inline</em> <em class="property">const</em> std::shared_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow7dataset12PartitioningE" title="arrow::dataset::Partitioning">Partitioning</a>&gt; &amp;<code class="sig-name descname">partitioning</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK5arrow7dataset21PartitioningOrFactory12partitioningEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>The partitioning (if given). </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt id="_CPPv4NK5arrow7dataset21PartitioningOrFactory7factoryEv">
-<span id="_CPPv3NK5arrow7dataset21PartitioningOrFactory7factoryEv"></span><span id="_CPPv2NK5arrow7dataset21PartitioningOrFactory7factoryEv"></span><span id="arrow::dataset::PartitioningOrFactory::factoryC"></span><span class="target" id="classarrow_1_1dataset_1_1_partitioning_or_factory_1aeaadd56fdfb179bc6b53e8fda83b9cd3"></span><em class="property">inline</em> <em class="property">const</em> std::shared_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow7dataset19PartitioningFactoryE" title="arrow::dataset::PartitioningFactory">PartitioningFactory</a>&gt; &amp;<code class="sig-name descname">factory</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK5arrow7dataset21PartitioningOrFactory7factoryEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>The partition factory (if given). </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt id="_CPPv4N5arrow7dataset21PartitioningOrFactory16GetOrInferSchemaERKNSt6vectorINSt6stringEEE">
-<span id="_CPPv3N5arrow7dataset21PartitioningOrFactory16GetOrInferSchemaERKNSt6vectorINSt6stringEEE"></span><span id="_CPPv2N5arrow7dataset21PartitioningOrFactory16GetOrInferSchemaERKNSt6vectorINSt6stringEEE"></span><span id="arrow::dataset::PartitioningOrFactory::GetOrInferSchema__std::vector:ss:CR"></span><span class="target" id="classarrow_1_1dataset_1_1_partitioning_or_factory_1afa9b03e3ed01361864661d267c7c2318"></span><a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;std::shared_ptr&lt;<a class="reference internal" href="datatype.html#_CPPv4N5arrow6SchemaE" title="arrow::Schema">Schema</a>&gt;&gt; <code class="sig-name descname">GetOrInferSchema</code><span class="sig-paren">(</span><em class="property">const</em> std::vector&lt;std::string&gt; &amp;<em>paths</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5arrow7dataset21PartitioningOrFactory16GetOrInferSchemaERKNSt6vectorINSt6stringEEE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Get the partition schema, inferring it with the given factory if needed. </p>
-</dd></dl>
-
-</div>
-</dd></dl>
-
 <dl class="cpp class">
 <dt id="_CPPv4N5arrow7dataset20KeyValuePartitioningE">
 <span id="_CPPv3N5arrow7dataset20KeyValuePartitioningE"></span><span id="_CPPv2N5arrow7dataset20KeyValuePartitioningE"></span><span id="arrow::dataset::KeyValuePartitioning"></span><span class="target" id="classarrow_1_1dataset_1_1_key_value_partitioning"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">KeyValuePartitioning</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset12PartitioningE" title="arrow::dataset::Partitioning">Partitioning</a><a class="headerlink" href="#_CPPv4N5arrow7dataset20KeyValuePartitioningE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Subclass for the common case of a partitioning which yields an equality expression for each segment. </p>
+<dd><em>#include &lt;arrow/dataset/partition.h&gt;</em><p>Subclass for the common case of a partitioning which yields an equality expression for each segment. </p>
 <p>Subclassed by <a class="reference internal" href="#classarrow_1_1dataset_1_1_directory_partitioning"><span class="std std-ref">arrow::dataset::DirectoryPartitioning</span></a>, <a class="reference internal" href="#classarrow_1_1dataset_1_1_hive_partitioning"><span class="std std-ref">arrow::dataset::HivePartitioning</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
@@ -477,7 +490,7 @@
 <dl class="cpp struct">
 <dt id="_CPPv4N5arrow7dataset20KeyValuePartitioning3KeyE">
 <span id="_CPPv3N5arrow7dataset20KeyValuePartitioning3KeyE"></span><span id="_CPPv2N5arrow7dataset20KeyValuePartitioning3KeyE"></span><span id="arrow::dataset::KeyValuePartitioning::Key"></span><span class="target" id="structarrow_1_1dataset_1_1_key_value_partitioning_1_1_key"></span><em class="property">struct </em><code class="sig-name descname">Key</code><a class="headerlink" href="#_CPPv4N5arrow7dataset20KeyValuePartitioning3KeyE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>An unconverted equality expression consisting of a field name and the representation of a scalar value. </p>
+<dd><em>#include &lt;arrow/dataset/partition.h&gt;</em><p>An unconverted equality expression consisting of a field name and the representation of a scalar value. </p>
 </dd></dl>
 
 </dd></dl>
@@ -485,7 +498,7 @@
 <dl class="cpp class">
 <dt id="_CPPv4N5arrow7dataset21DirectoryPartitioningE">
 <span id="_CPPv3N5arrow7dataset21DirectoryPartitioningE"></span><span id="_CPPv2N5arrow7dataset21DirectoryPartitioningE"></span><span id="arrow::dataset::DirectoryPartitioning"></span><span class="target" id="classarrow_1_1dataset_1_1_directory_partitioning"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">DirectoryPartitioning</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset20KeyValuePartitioningE" title="arrow::dataset::KeyValuePartitioning">KeyValuePartitioning</a><a class="headerlink" href="#_CPPv4N5arrow7dataset21DirectoryPartitioningE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p><a class="reference internal" href="#classarrow_1_1dataset_1_1_directory_partitioning"><span class="std std-ref">DirectoryPartitioning</span></a> parses one segment of a path for each field in its schema. </p>
+<dd><em>#include &lt;arrow/dataset/partition.h&gt;</em><p><a class="reference internal" href="#classarrow_1_1dataset_1_1_directory_partitioning"><span class="std std-ref">DirectoryPartitioning</span></a> parses one segment of a path for each field in its schema. </p>
 <p>All fields are required, so paths passed to <a class="reference internal" href="#classarrow_1_1dataset_1_1_key_value_partitioning_1a2747e2ef3c8e39dfca19d71b2892a1ee"><span class="std std-ref">DirectoryPartitioning::Parse</span></a> must contain segments for each field.</p>
 <p>For example given schema&lt;year:int16, month:int8&gt; the path “/2009/11” would be parsed to (“year”_ == 2009 and “month”_ == 11) </p>
 <div class="breathe-sectiondef docutils container">
@@ -524,14 +537,14 @@
 <dl class="cpp class">
 <dt id="_CPPv4N5arrow7dataset16HivePartitioningE">
 <span id="_CPPv3N5arrow7dataset16HivePartitioningE"></span><span id="_CPPv2N5arrow7dataset16HivePartitioningE"></span><span id="arrow::dataset::HivePartitioning"></span><span class="target" id="classarrow_1_1dataset_1_1_hive_partitioning"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">HivePartitioning</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset20KeyValuePartitioningE" title="arrow::dataset::KeyValuePartitioning">KeyValuePartitioning</a><a class="headerlink" href="#_CPPv4N5arrow7dataset16HivePartitioningE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Multi-level, directory based partitioning originating from Apache Hive with all data files stored in the leaf directories. </p>
+<dd><em>#include &lt;arrow/dataset/partition.h&gt;</em><p>Multi-level, directory based partitioning originating from Apache Hive with all data files stored in the leaf directories. </p>
 <p>Data is partitioned by static values of a particular column in the schema. Partition keys are represented in the form $key=$value in directory names. <a class="reference internal" href="datatype.html#classarrow_1_1_field"><span class="std std-ref">Field</span></a> order is ignored, as are missing or unrecognized field names.</p>
 <p>For example given schema&lt;year:int16, month:int8, day:int8&gt; the path “/day=321/ignored=3.4/year=2009” parses to (“year”_ == 2009 and “day”_ == 321) </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="cpp function">
 <dt id="_CPPv4N5arrow7dataset16HivePartitioning16HivePartitioningENSt10shared_ptrI6SchemaEE11ArrayVectorNSt6stringE">
-<span id="_CPPv3N5arrow7dataset16HivePartitioning16HivePartitioningENSt10shared_ptrI6SchemaEE11ArrayVectorNSt6stringE"></span><span id="_CPPv2N5arrow7dataset16HivePartitioning16HivePartitioningENSt10shared_ptrI6SchemaEE11ArrayVectorNSt6stringE"></span><span id="arrow::dataset::HivePartitioning::HivePartitioning__std::shared_ptr:Schema:.ArrayVector.ss"></span><span class="target" id="classarrow_1_1dataset_1_1_hive_partitioning_1a59b84f3bc2f04df60572a3381d5d9a50"></span><em class="property">inline</em> <em class="property">explicit</em> <code class="sig-name descname">HivePartitioning</code><span class="sig-paren">(</span>std::shared_ptr&lt;<a class="reference internal" href="datatype.html#_CPPv4N5arrow6SchemaE" title="arrow::Schema">Schema</a>&gt; <em>schema</em>, ArrayVector <em>dictionaries</em> = {}, std::string <em>null_fallback</em> = kDefaultHiveNullFallback<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5arrow7dataset16HivePartitioning16HivePartitioningENSt10shared_ptrI6SchemaEE11ArrayVectorNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N5arrow7dataset16HivePartitioning16HivePartitioningENSt10shared_ptrI6SchemaEE11ArrayVectorNSt6stringE"></span><span id="_CPPv2N5arrow7dataset16HivePartitioning16HivePartitioningENSt10shared_ptrI6SchemaEE11ArrayVectorNSt6stringE"></span><span id="arrow::dataset::HivePartitioning::HivePartitioning__std::shared_ptr:Schema:.ArrayVector.ss"></span><span class="target" id="classarrow_1_1dataset_1_1_hive_partitioning_1a59b84f3bc2f04df60572a3381d5d9a50"></span><em class="property">inline</em> <em class="property">explicit</em> <code class="sig-name descname">HivePartitioning</code><span class="sig-paren">(</span>std::shared_ptr&lt;<a class="reference internal" href="datatype.html#_CPPv4N5arrow6SchemaE" title="arrow::Schema">Schema</a>&gt; <em>schema</em>, ArrayVector <em>dictionaries</em> = {}, std::string <em>null_fallback</em> = <a class="reference internal" href="#_CPPv424kDefaultHiveNullFallback" title="kDefaultHiveNullFallback">kDefaultHiveNullFallback</a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5arrow7dataset16HivePartitioning16HivePartitioningENSt10shared_ptrI6SchemaEE11ArrayVectorNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>If a field in schema is of dictionary type, the corresponding element of dictionaries must be contain the dictionary of values for that field. </p>
 </dd></dl>
 
@@ -553,25 +566,10 @@
 </div>
 </dd></dl>
 
-<dl class="cpp struct">
-<dt id="_CPPv4N5arrow7dataset30HivePartitioningFactoryOptionsE">
-<span id="_CPPv3N5arrow7dataset30HivePartitioningFactoryOptionsE"></span><span id="_CPPv2N5arrow7dataset30HivePartitioningFactoryOptionsE"></span><span id="arrow::dataset::HivePartitioningFactoryOptions"></span><span class="target" id="structarrow_1_1dataset_1_1_hive_partitioning_factory_options"></span><em class="property">struct </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">HivePartitioningFactoryOptions</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset26PartitioningFactoryOptionsE" title="arrow::dataset::PartitioningFactoryOptions">PartitioningFactoryOptions</a><a class="headerlink" href="#_CPPv4N5arrow7dataset30HivePartitioningFactoryOptionsE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Options for inferring a hive-style partitioning. </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Members</p>
-<dl class="cpp var">
-<dt id="_CPPv4N5arrow7dataset30HivePartitioningFactoryOptions13null_fallbackE">
-<span id="_CPPv3N5arrow7dataset30HivePartitioningFactoryOptions13null_fallbackE"></span><span id="_CPPv2N5arrow7dataset30HivePartitioningFactoryOptions13null_fallbackE"></span><span id="arrow::dataset::HivePartitioningFactoryOptions::null_fallback__ss"></span><span class="target" id="structarrow_1_1dataset_1_1_hive_partitioning_factory_options_1a8e48cce66a027ba832654f1593be8b3e"></span>std::string <code class="sig-name descname">null_fallback</code><a class="headerlink" href="#_CPPv4N5arrow7dataset30HivePartitioningFactoryOptions13null_fallbackE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>The hive partitioning scheme maps null to a hard coded fallback string. </p>
-</dd></dl>
-
-</div>
-</dd></dl>
-
 <dl class="cpp class">
 <dt id="_CPPv4N5arrow7dataset20FunctionPartitioningE">
 <span id="_CPPv3N5arrow7dataset20FunctionPartitioningE"></span><span id="_CPPv2N5arrow7dataset20FunctionPartitioningE"></span><span id="arrow::dataset::FunctionPartitioning"></span><span class="target" id="classarrow_1_1dataset_1_1_function_partitioning"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">FunctionPartitioning</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset12PartitioningE" title="arrow::dataset::Partitioning">Partitioning</a><a class="headerlink" href="#_CPPv4N5arrow7dataset20FunctionPartitioningE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Implementation provided by lambda or other callable. </p>
+<dd><em>#include &lt;arrow/dataset/partition.h&gt;</em><p>Implementation provided by lambda or other callable. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="cpp function">
@@ -589,13 +587,93 @@
 </div>
 </dd></dl>
 
+<dl class="cpp class">
+<dt id="_CPPv4N5arrow7dataset21PartitioningOrFactoryE">
+<span id="_CPPv3N5arrow7dataset21PartitioningOrFactoryE"></span><span id="_CPPv2N5arrow7dataset21PartitioningOrFactoryE"></span><span id="arrow::dataset::PartitioningOrFactory"></span><span class="target" id="classarrow_1_1dataset_1_1_partitioning_or_factory"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">PartitioningOrFactory</code><a class="headerlink" href="#_CPPv4N5arrow7dataset21PartitioningOrFactoryE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;arrow/dataset/partition.h&gt;</em><p>Either a <a class="reference internal" href="#classarrow_1_1dataset_1_1_partitioning"><span class="std std-ref">Partitioning</span></a> or a <a class="reference internal" href="#classarrow_1_1dataset_1_1_partitioning_factory"><span class="std std-ref">PartitioningFactory</span></a>. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4NK5arrow7dataset21PartitioningOrFactory12partitioningEv">
+<span id="_CPPv3NK5arrow7dataset21PartitioningOrFactory12partitioningEv"></span><span id="_CPPv2NK5arrow7dataset21PartitioningOrFactory12partitioningEv"></span><span id="arrow::dataset::PartitioningOrFactory::partitioningC"></span><span class="target" id="classarrow_1_1dataset_1_1_partitioning_or_factory_1adf893490b52fd3761f75056d360aa040"></span><em class="property">inline</em> <em class="property">const</em> std::shared_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow7dataset12PartitioningE" title="arrow::dataset::Partitioning">Partitioning</a>&gt; &amp;<code class="sig-name descname">partitioning</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK5arrow7dataset21PartitioningOrFactory12partitioningEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The partitioning (if given). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK5arrow7dataset21PartitioningOrFactory7factoryEv">
+<span id="_CPPv3NK5arrow7dataset21PartitioningOrFactory7factoryEv"></span><span id="_CPPv2NK5arrow7dataset21PartitioningOrFactory7factoryEv"></span><span id="arrow::dataset::PartitioningOrFactory::factoryC"></span><span class="target" id="classarrow_1_1dataset_1_1_partitioning_or_factory_1aeaadd56fdfb179bc6b53e8fda83b9cd3"></span><em class="property">inline</em> <em class="property">const</em> std::shared_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow7dataset19PartitioningFactoryE" title="arrow::dataset::PartitioningFactory">PartitioningFactory</a>&gt; &amp;<code class="sig-name descname">factory</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK5arrow7dataset21PartitioningOrFactory7factoryEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The partition factory (if given). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N5arrow7dataset21PartitioningOrFactory16GetOrInferSchemaERKNSt6vectorINSt6stringEEE">
+<span id="_CPPv3N5arrow7dataset21PartitioningOrFactory16GetOrInferSchemaERKNSt6vectorINSt6stringEEE"></span><span id="_CPPv2N5arrow7dataset21PartitioningOrFactory16GetOrInferSchemaERKNSt6vectorINSt6stringEEE"></span><span id="arrow::dataset::PartitioningOrFactory::GetOrInferSchema__std::vector:ss:CR"></span><span class="target" id="classarrow_1_1dataset_1_1_partitioning_or_factory_1afa9b03e3ed01361864661d267c7c2318"></span><a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;std::shared_ptr&lt;<a class="reference internal" href="datatype.html#_CPPv4N5arrow6SchemaE" title="arrow::Schema">Schema</a>&gt;&gt; <code class="sig-name descname">GetOrInferSchema</code><span class="sig-paren">(</span><em class="property">const</em> std::vector&lt;std::string&gt; &amp;<em>paths</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5arrow7dataset21PartitioningOrFactory16GetOrInferSchemaERKNSt6vectorINSt6stringEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the partition schema, inferring it with the given factory if needed. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
 </div>
 <div class="section" id="dataset-discovery-factories">
 <h2><a class="toc-backref" href="#id3">Dataset discovery/factories</a><a class="headerlink" href="#dataset-discovery-factories" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp struct">
+<dt id="_CPPv4N5arrow7dataset14InspectOptionsE">
+<span id="_CPPv3N5arrow7dataset14InspectOptionsE"></span><span id="_CPPv2N5arrow7dataset14InspectOptionsE"></span><span id="arrow::dataset::InspectOptions"></span><span class="target" id="structarrow_1_1dataset_1_1_inspect_options"></span><em class="property">struct </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">InspectOptions</code><a class="headerlink" href="#_CPPv4N5arrow7dataset14InspectOptionsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;arrow/dataset/discovery.h&gt;</em><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset14InspectOptions9fragmentsE">
+<span id="_CPPv3N5arrow7dataset14InspectOptions9fragmentsE"></span><span id="_CPPv2N5arrow7dataset14InspectOptions9fragmentsE"></span><span id="arrow::dataset::InspectOptions::fragments__i"></span><span class="target" id="structarrow_1_1dataset_1_1_inspect_options_1a6a2b84b68816d279b5c3f94a3585b677"></span>int <code class="sig-name descname">fragments</code> = 1<a class="headerlink" href="#_CPPv4N5arrow7dataset14InspectOptions9fragmentsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Indicate how many fragments should be inspected to infer the unified dataset schema. </p>
+<p>Limiting the number of fragments accessed improves the latency of the discovery process when dealing with a high number of fragments and/or high latency file systems.</p>
+<p>The default value of <code class="docutils literal notranslate"><span class="pre">1</span></code> inspects the schema of the first (in no particular order) fragment only. If the dataset has a uniform schema for all fragments, this default is the optimal value. In order to inspect all fragments and robustly unify their potentially varying schemas, set this option to <code class="docutils literal notranslate"><span class="pre">kInspectAllFragments</span></code>. A value of <code class="docutils literal notranslate"><span class="pre">0</span></code> disables inspection of fragments altogether so only the partitioning schema will be inspected. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Static Attributes</p>
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset14InspectOptions20kInspectAllFragmentsE">
+<span id="_CPPv3N5arrow7dataset14InspectOptions20kInspectAllFragmentsE"></span><span id="_CPPv2N5arrow7dataset14InspectOptions20kInspectAllFragmentsE"></span><span id="arrow::dataset::InspectOptions::kInspectAllFragments__i"></span><span class="target" id="structarrow_1_1dataset_1_1_inspect_options_1ac662ba0cbd1629a62797abc62f584be8"></span><em class="property">static</em> <em class="property">constexpr</em> int <code class="sig-name descname">kInspectAllFragments</code> = -1<a class="headerlink" href="#_CPPv4N5arrow7dataset14InspectOptions20kInspectAllFragmentsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>See <code class="docutils literal notranslate"><span class="pre">fragments</span></code> property. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt id="_CPPv4N5arrow7dataset13FinishOptionsE">
+<span id="_CPPv3N5arrow7dataset13FinishOptionsE"></span><span id="_CPPv2N5arrow7dataset13FinishOptionsE"></span><span id="arrow::dataset::FinishOptions"></span><span class="target" id="structarrow_1_1dataset_1_1_finish_options"></span><em class="property">struct </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">FinishOptions</code><a class="headerlink" href="#_CPPv4N5arrow7dataset13FinishOptionsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;arrow/dataset/discovery.h&gt;</em><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset13FinishOptions6schemaE">
+<span id="_CPPv3N5arrow7dataset13FinishOptions6schemaE"></span><span id="_CPPv2N5arrow7dataset13FinishOptions6schemaE"></span><span id="arrow::dataset::FinishOptions::schema__std::shared_ptr:Schema:"></span><span class="target" id="structarrow_1_1dataset_1_1_finish_options_1a02b6442d0b26184f8016ab2b91d1aa8a"></span>std::shared_ptr&lt;<a class="reference internal" href="datatype.html#_CPPv4N5arrow6SchemaE" title="arrow::Schema">Schema</a>&gt; <code class="sig-name descname">schema</code> = NULLPTR<a class="headerlink" href="#_CPPv4N5arrow7dataset13FinishOptions6schemaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Finalize the dataset with this given schema. </p>
+<p>If the schema is not provided, infer the schema via the Inspect, see the <code class="docutils literal notranslate"><span class="pre">inspect_options</span></code> property. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset13FinishOptions15inspect_optionsE">
+<span id="_CPPv3N5arrow7dataset13FinishOptions15inspect_optionsE"></span><span id="_CPPv2N5arrow7dataset13FinishOptions15inspect_optionsE"></span><span id="arrow::dataset::FinishOptions::inspect_options__InspectOptions"></span><span class="target" id="structarrow_1_1dataset_1_1_finish_options_1a14dde92ea1ab7ea05923fb36ba1503d6"></span><a class="reference internal" href="#_CPPv4N5arrow7dataset14InspectOptionsE" title="arrow::dataset::InspectOptions">InspectOptions</a> <code class="sig-name descname">inspect_options</code> = {}<a class="headerlink" href="#_CPPv4N5arrow7dataset13FinishOptions15inspect_optionsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>If the schema is not provided, it will be discovered by passing the following options to <code class="docutils literal notranslate"><span class="pre">DatasetDiscovery::Inspect</span></code>. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset13FinishOptions18validate_fragmentsE">
+<span id="_CPPv3N5arrow7dataset13FinishOptions18validate_fragmentsE"></span><span id="_CPPv2N5arrow7dataset13FinishOptions18validate_fragmentsE"></span><span id="arrow::dataset::FinishOptions::validate_fragments__b"></span><span class="target" id="structarrow_1_1dataset_1_1_finish_options_1ad26a9261c353cdd02860e38903eac807"></span>bool <code class="sig-name descname">validate_fragments</code> = false<a class="headerlink" href="#_CPPv4N5arrow7dataset13FinishOptions18validate_fragmentsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Indicate if the given <a class="reference internal" href="datatype.html#classarrow_1_1_schema"><span class="std std-ref">Schema</span></a> (when specified), should be validated against the fragments’ schemas. </p>
+<p><code class="docutils literal notranslate"><span class="pre">inspect_options</span></code> will control how many fragments are checked. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
 <dl class="cpp class">
 <dt id="_CPPv4N5arrow7dataset14DatasetFactoryE">
 <span id="_CPPv3N5arrow7dataset14DatasetFactoryE"></span><span id="_CPPv2N5arrow7dataset14DatasetFactoryE"></span><span id="arrow::dataset::DatasetFactory"></span><span class="target" id="classarrow_1_1dataset_1_1_dataset_factory"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">DatasetFactory</code><a class="headerlink" href="#_CPPv4N5arrow7dataset14DatasetFactoryE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p><a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset_factory"><span class="std std-ref">DatasetFactory</span></a> provides a way to inspect/discover a <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a>’s expected schema before materializing said <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a>. </p>
+<dd><em>#include &lt;arrow/dataset/discovery.h&gt;</em><p><a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset_factory"><span class="std std-ref">DatasetFactory</span></a> provides a way to inspect/discover a <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a>’s expected schema before materializing said <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a>. </p>
 <p>Subclassed by <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_system_dataset_factory"><span class="std std-ref">arrow::dataset::FileSystemDatasetFactory</span></a>, <a class="reference internal" href="#classarrow_1_1dataset_1_1_parquet_dataset_factory"><span class="std std-ref">arrow::dataset::ParquetDatasetFactory</span></a>, <a class="reference internal" href="#classarrow_1_1dataset_1_1_union_dataset_factory"><span class="std std-ref">arrow::dataset::UnionDatasetFactory</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
@@ -644,74 +722,114 @@
 </div>
 </dd></dl>
 
-<dl class="cpp struct">
-<dt id="_CPPv4N5arrow7dataset14InspectOptionsE">
-<span id="_CPPv3N5arrow7dataset14InspectOptionsE"></span><span id="_CPPv2N5arrow7dataset14InspectOptionsE"></span><span id="arrow::dataset::InspectOptions"></span><span class="target" id="structarrow_1_1dataset_1_1_inspect_options"></span><em class="property">struct </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">InspectOptions</code><a class="headerlink" href="#_CPPv4N5arrow7dataset14InspectOptionsE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Members</p>
-<dl class="cpp var">
-<dt id="_CPPv4N5arrow7dataset14InspectOptions9fragmentsE">
-<span id="_CPPv3N5arrow7dataset14InspectOptions9fragmentsE"></span><span id="_CPPv2N5arrow7dataset14InspectOptions9fragmentsE"></span><span id="arrow::dataset::InspectOptions::fragments__i"></span><span class="target" id="structarrow_1_1dataset_1_1_inspect_options_1a6a2b84b68816d279b5c3f94a3585b677"></span>int <code class="sig-name descname">fragments</code> = 1<a class="headerlink" href="#_CPPv4N5arrow7dataset14InspectOptions9fragmentsE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Indicate how many fragments should be inspected to infer the unified dataset schema. </p>
-<p>Limiting the number of fragments accessed improves the latency of the discovery process when dealing with a high number of fragments and/or high latency file systems.</p>
-<p>The default value of <code class="docutils literal notranslate"><span class="pre">1</span></code> inspects the schema of the first (in no particular order) fragment only. If the dataset has a uniform schema for all fragments, this default is the optimal value. In order to inspect all fragments and robustly unify their potentially varying schemas, set this option to <code class="docutils literal notranslate"><span class="pre">kInspectAllFragments</span></code>. A value of <code class="docutils literal notranslate"><span class="pre">0</span></code> disables inspection of fragments altogether so only the partitioning schema will be inspected. </p>
-</dd></dl>
-
-</div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Static Attributes</p>
-<dl class="cpp var">
-<dt id="_CPPv4N5arrow7dataset14InspectOptions20kInspectAllFragmentsE">
-<span id="_CPPv3N5arrow7dataset14InspectOptions20kInspectAllFragmentsE"></span><span id="_CPPv2N5arrow7dataset14InspectOptions20kInspectAllFragmentsE"></span><span id="arrow::dataset::InspectOptions::kInspectAllFragments__i"></span><span class="target" id="structarrow_1_1dataset_1_1_inspect_options_1ac662ba0cbd1629a62797abc62f584be8"></span><em class="property">static</em> <em class="property">constexpr</em> int <code class="sig-name descname">kInspectAllFragments</code> = -1<a class="headerlink" href="#_CPPv4N5arrow7dataset14InspectOptions20kInspectAllFragmentsE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>See <code class="docutils literal notranslate"><span class="pre">fragments</span></code> property. </p>
-</dd></dl>
-
-</div>
-</dd></dl>
-
-<dl class="cpp struct">
-<dt id="_CPPv4N5arrow7dataset13FinishOptionsE">
-<span id="_CPPv3N5arrow7dataset13FinishOptionsE"></span><span id="_CPPv2N5arrow7dataset13FinishOptionsE"></span><span id="arrow::dataset::FinishOptions"></span><span class="target" id="structarrow_1_1dataset_1_1_finish_options"></span><em class="property">struct </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">FinishOptions</code><a class="headerlink" href="#_CPPv4N5arrow7dataset13FinishOptionsE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Members</p>
-<dl class="cpp var">
-<dt id="_CPPv4N5arrow7dataset13FinishOptions6schemaE">
-<span id="_CPPv3N5arrow7dataset13FinishOptions6schemaE"></span><span id="_CPPv2N5arrow7dataset13FinishOptions6schemaE"></span><span id="arrow::dataset::FinishOptions::schema__std::shared_ptr:Schema:"></span><span class="target" id="structarrow_1_1dataset_1_1_finish_options_1a02b6442d0b26184f8016ab2b91d1aa8a"></span>std::shared_ptr&lt;<a class="reference internal" href="datatype.html#_CPPv4N5arrow6SchemaE" title="arrow::Schema">Schema</a>&gt; <code class="sig-name descname">schema</code> = NULLPTR<a class="headerlink" href="#_CPPv4N5arrow7dataset13FinishOptions6schemaE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Finalize the dataset with this given schema. </p>
-<p>If the schema is not provided, infer the schema via the Inspect, see the <code class="docutils literal notranslate"><span class="pre">inspect_options</span></code> property. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt id="_CPPv4N5arrow7dataset13FinishOptions15inspect_optionsE">
-<span id="_CPPv3N5arrow7dataset13FinishOptions15inspect_optionsE"></span><span id="_CPPv2N5arrow7dataset13FinishOptions15inspect_optionsE"></span><span id="arrow::dataset::FinishOptions::inspect_options__InspectOptions"></span><span class="target" id="structarrow_1_1dataset_1_1_finish_options_1a14dde92ea1ab7ea05923fb36ba1503d6"></span><a class="reference internal" href="#_CPPv4N5arrow7dataset14InspectOptionsE" title="arrow::dataset::InspectOptions">InspectOptions</a> <code class="sig-name descname">inspect_options</code> = {}<a class="headerlink" href="#_CPPv4N5arrow7dataset13FinishOptions15inspect_optionsE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>If the schema is not provided, it will be discovered by passing the following options to <code class="docutils literal notranslate"><span class="pre">DatasetDiscovery::Inspect</span></code>. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt id="_CPPv4N5arrow7dataset13FinishOptions18validate_fragmentsE">
-<span id="_CPPv3N5arrow7dataset13FinishOptions18validate_fragmentsE"></span><span id="_CPPv2N5arrow7dataset13FinishOptions18validate_fragmentsE"></span><span id="arrow::dataset::FinishOptions::validate_fragments__b"></span><span class="target" id="structarrow_1_1dataset_1_1_finish_options_1ad26a9261c353cdd02860e38903eac807"></span>bool <code class="sig-name descname">validate_fragments</code> = false<a class="headerlink" href="#_CPPv4N5arrow7dataset13FinishOptions18validate_fragmentsE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Indicate if the given <a class="reference internal" href="datatype.html#classarrow_1_1_schema"><span class="std std-ref">Schema</span></a> (when specified), should be validated against the fragments’ schemas. </p>
-<p><code class="docutils literal notranslate"><span class="pre">inspect_options</span></code> will control how many fragments are checked. </p>
-</dd></dl>
-
-</div>
-</dd></dl>
-
 </div>
 <div class="section" id="scanning">
 <h2><a class="toc-backref" href="#id4">Scanning</a><a class="headerlink" href="#scanning" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp var">
+<dt id="_CPPv417kDefaultBatchSize">
+<span id="_CPPv317kDefaultBatchSize"></span><span id="_CPPv217kDefaultBatchSize"></span><span id="kDefaultBatchSize__int64_t"></span><span class="target" id="group__dataset-scanning_1ga073228430616d6b28274a6f3e570e5d7"></span><em class="property">constexpr</em> int64_t <code class="sig-name descname">kDefaultBatchSize</code> = 1 &lt;&lt; 20<a class="headerlink" href="#_CPPv417kDefaultBatchSize" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N5arrow7dataset19FragmentScanOptionsE">
+<span id="_CPPv3N5arrow7dataset19FragmentScanOptionsE"></span><span id="_CPPv2N5arrow7dataset19FragmentScanOptionsE"></span><span id="arrow::dataset::FragmentScanOptions"></span><span class="target" id="classarrow_1_1dataset_1_1_fragment_scan_options"></span><em class="property">class </em><code class="sig-name descname">FragmentScanOptions</code><a class="headerlink" href="#_CPPv4N5arrow7dataset19FragmentScanOptionsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;arrow/dataset/dataset.h&gt;</em><p>Per-scan options for fragment(s) in a dataset. </p>
+<p>These options are not intrinsic to the format or fragment itself, but do affect the results of a scan. These are options which make sense to change between repeated reads of the same dataset, such as format-specific conversion options (that do not affect the schema). </p>
+<p>Subclassed by <a class="reference internal" href="#structarrow_1_1dataset_1_1_csv_fragment_scan_options"><span class="std std-ref">arrow::dataset::CsvFragmentScanOptions</span></a></p>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt id="_CPPv4N5arrow7dataset11ScanOptionsE">
+<span id="_CPPv3N5arrow7dataset11ScanOptionsE"></span><span id="_CPPv2N5arrow7dataset11ScanOptionsE"></span><span id="arrow::dataset::ScanOptions"></span><span class="target" id="structarrow_1_1dataset_1_1_scan_options"></span><em class="property">struct </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">ScanOptions</code><a class="headerlink" href="#_CPPv4N5arrow7dataset11ScanOptionsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;arrow/dataset/scanner.h&gt;</em><p>Scan-specific options, which can be changed between scans of the same dataset. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset11ScanOptions6filterE">
+<span id="_CPPv3N5arrow7dataset11ScanOptions6filterE"></span><span id="_CPPv2N5arrow7dataset11ScanOptions6filterE"></span><span id="arrow::dataset::ScanOptions::filter__Expression"></span><span class="target" id="structarrow_1_1dataset_1_1_scan_options_1aa54e0de57a48424f1e29d48d7f2455d3"></span>Expression <code class="sig-name descname">filter</code> = literal(true)<a class="headerlink" href="#_CPPv4N5arrow7dataset11ScanOptions6filterE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A row filter (which can be pushed down to partitioning/reading if supported). </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset11ScanOptions10projectionE">
+<span id="_CPPv3N5arrow7dataset11ScanOptions10projectionE"></span><span id="_CPPv2N5arrow7dataset11ScanOptions10projectionE"></span><span id="arrow::dataset::ScanOptions::projection__Expression"></span><span class="target" id="structarrow_1_1dataset_1_1_scan_options_1a1c6246446ea41cf037b5691d14002e9d"></span>Expression <code class="sig-name descname">projection</code><a class="headerlink" href="#_CPPv4N5arrow7dataset11ScanOptions10projectionE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A projection expression (which can add/remove/rename columns). </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset11ScanOptions14dataset_schemaE">
+<span id="_CPPv3N5arrow7dataset11ScanOptions14dataset_schemaE"></span><span id="_CPPv2N5arrow7dataset11ScanOptions14dataset_schemaE"></span><span id="arrow::dataset::ScanOptions::dataset_schema__std::shared_ptr:Schema:"></span><span class="target" id="structarrow_1_1dataset_1_1_scan_options_1a6fbf0815c71758c41abfa26b06e0a5e1"></span>std::shared_ptr&lt;<a class="reference internal" href="datatype.html#_CPPv4N5arrow6SchemaE" title="arrow::Schema">Schema</a>&gt; <code class="sig-name descname">dataset_schema</code><a class="headerlink" href="#_CPPv4N5arrow7dataset11ScanOptions14dataset_schemaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><a class="reference internal" href="datatype.html#classarrow_1_1_schema"><span class="std std-ref">Schema</span></a> with which batches will be read from fragments. </p>
+<p>This is also known as the “reader schema” it will be used (for example) in constructing CSV file readers to identify column types for parsing. Usually only a subset of its fields (see MaterializedFields) will be materialized during a scan. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset11ScanOptions16projected_schemaE">
+<span id="_CPPv3N5arrow7dataset11ScanOptions16projected_schemaE"></span><span id="_CPPv2N5arrow7dataset11ScanOptions16projected_schemaE"></span><span id="arrow::dataset::ScanOptions::projected_schema__std::shared_ptr:Schema:"></span><span class="target" id="structarrow_1_1dataset_1_1_scan_options_1a32a9c0b11c73afb80c15686595df8483"></span>std::shared_ptr&lt;<a class="reference internal" href="datatype.html#_CPPv4N5arrow6SchemaE" title="arrow::Schema">Schema</a>&gt; <code class="sig-name descname">projected_schema</code><a class="headerlink" href="#_CPPv4N5arrow7dataset11ScanOptions16projected_schemaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><a class="reference internal" href="datatype.html#classarrow_1_1_schema"><span class="std std-ref">Schema</span></a> of projected record batches. </p>
+<p>This is independent of dataset_schema as its fields are derived from the projection. For example, let</p>
+<p>dataset_schema = {“a”: int32, “b”: int32, “id”: utf8} projection = project({equal(field_ref(“a”), field_ref(“b”))}, {“a_plus_b”})</p>
+<p>(no filter specified). In this case, the projected_schema would be</p>
+<p>{“a_plus_b”: int32} </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset11ScanOptions10batch_sizeE">
+<span id="_CPPv3N5arrow7dataset11ScanOptions10batch_sizeE"></span><span id="_CPPv2N5arrow7dataset11ScanOptions10batch_sizeE"></span><span id="arrow::dataset::ScanOptions::batch_size__int64_t"></span><span class="target" id="structarrow_1_1dataset_1_1_scan_options_1a3c28eef3c8804a93c488a4861ad193ee"></span>int64_t <code class="sig-name descname">batch_size</code> = <a class="reference internal" href="#_CPPv417kDefaultBatchSize" title="kDefaultBatchSize">kDefaultBatchSize</a><a class="headerlink" href="#_CPPv4N5arrow7dataset11ScanOptions10batch_sizeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Maximum row count for scanned batches. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset11ScanOptions4poolE">
+<span id="_CPPv3N5arrow7dataset11ScanOptions4poolE"></span><span id="_CPPv2N5arrow7dataset11ScanOptions4poolE"></span><span id="arrow::dataset::ScanOptions::pool__MemoryPoolP"></span><span class="target" id="structarrow_1_1dataset_1_1_scan_options_1a90fc341733356314293b9bf414fa4610"></span><a class="reference internal" href="memory.html#_CPPv4N5arrow10MemoryPoolE" title="arrow::MemoryPool">MemoryPool</a> *<code class="sig-name descname">pool</code> = arrow::<a class="reference internal" href="memory.html#_CPPv4N5arrow19default_memory_poolEv" title="arrow::default_memory_pool">default_memory_pool</a>()<a class="headerlink" href="#_CPPv4N5arrow7dataset11ScanOptions4poolE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A pool from which materialized and scanned arrays will be allocated. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset11ScanOptions11use_threadsE">
+<span id="_CPPv3N5arrow7dataset11ScanOptions11use_threadsE"></span><span id="_CPPv2N5arrow7dataset11ScanOptions11use_threadsE"></span><span id="arrow::dataset::ScanOptions::use_threads__b"></span><span class="target" id="structarrow_1_1dataset_1_1_scan_options_1a14c08f047d28e5a705ef1e275f11a98a"></span>bool <code class="sig-name descname">use_threads</code> = false<a class="headerlink" href="#_CPPv4N5arrow7dataset11ScanOptions11use_threadsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Indicate if the <a class="reference internal" href="#classarrow_1_1dataset_1_1_scanner"><span class="std std-ref">Scanner</span></a> should make use of a ThreadPool. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset11ScanOptions21fragment_scan_optionsE">
+<span id="_CPPv3N5arrow7dataset11ScanOptions21fragment_scan_optionsE"></span><span id="_CPPv2N5arrow7dataset11ScanOptions21fragment_scan_optionsE"></span><span id="arrow::dataset::ScanOptions::fragment_scan_options__std::shared_ptr:FragmentScanOptions:"></span><span class="target" id="structarrow_1_1dataset_1_1_scan_options_1a10146664bc67f796084a54c6c961d3c3"></span>std::shared_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow7dataset19FragmentScanOptionsE" title="arrow::dataset::FragmentScanOptions">FragmentScanOptions</a>&gt; <code class="sig-name descname">fragment_scan_options</code><a class="headerlink" href="#_CPPv4N5arrow7dataset11ScanOptions21fragment_scan_optionsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Fragment-specific scan options. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N5arrow7dataset8ScanTaskE">
+<span id="_CPPv3N5arrow7dataset8ScanTaskE"></span><span id="_CPPv2N5arrow7dataset8ScanTaskE"></span><span id="arrow::dataset::ScanTask"></span><span class="target" id="classarrow_1_1dataset_1_1_scan_task"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">ScanTask</code><a class="headerlink" href="#_CPPv4N5arrow7dataset8ScanTaskE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;arrow/dataset/scanner.h&gt;</em><p>Read record batches from a range of a single data fragment. </p>
+<p>A <a class="reference internal" href="#classarrow_1_1dataset_1_1_scan_task"><span class="std std-ref">ScanTask</span></a> is meant to be a unit of work to be dispatched. The implementation must be thread and concurrent safe. </p>
+<p>Subclassed by arrow::dataset::InMemoryScanTask</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N5arrow7dataset8ScanTask7ExecuteEv">
+<span id="_CPPv3N5arrow7dataset8ScanTask7ExecuteEv"></span><span id="_CPPv2N5arrow7dataset8ScanTask7ExecuteEv"></span><span id="arrow::dataset::ScanTask::Execute"></span><span class="target" id="classarrow_1_1dataset_1_1_scan_task_1a3ca31f90c5bf59165f79de1a5fb5fb0a"></span><em class="property">virtual</em> <a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;RecordBatchIterator&gt; <code class="sig-name descname">Execute</code><span class="sig-paren">(</span><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N5arrow7dataset8ScanTask7ExecuteEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Iterate through sequence of materialized record batches resulting from the Scan. </p>
+<p>Execution semantics are encapsulated in the particular <a class="reference internal" href="#classarrow_1_1dataset_1_1_scan_task"><span class="std std-ref">ScanTask</span></a> implementation </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
 <dl class="cpp class">
 <dt id="_CPPv4N5arrow7dataset7ScannerE">
 <span id="_CPPv3N5arrow7dataset7ScannerE"></span><span id="_CPPv2N5arrow7dataset7ScannerE"></span><span id="arrow::dataset::Scanner"></span><span class="target" id="classarrow_1_1dataset_1_1_scanner"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">Scanner</code><a class="headerlink" href="#_CPPv4N5arrow7dataset7ScannerE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p><a class="reference internal" href="#classarrow_1_1dataset_1_1_scanner"><span class="std std-ref">Scanner</span></a> is a materialized scan operation with context and options bound. </p>
-<p>A scanner is the class that glues ScanTask, <a class="reference internal" href="#classarrow_1_1dataset_1_1_fragment"><span class="std std-ref">Fragment</span></a>, and <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a>. In python pseudo code, it performs the following:</p>
+<dd><em>#include &lt;arrow/dataset/scanner.h&gt;</em><p><a class="reference internal" href="#classarrow_1_1dataset_1_1_scanner"><span class="std std-ref">Scanner</span></a> is a materialized scan operation with context and options bound. </p>
+<p>A scanner is the class that glues <a class="reference internal" href="#classarrow_1_1dataset_1_1_scan_task"><span class="std std-ref">ScanTask</span></a>, <a class="reference internal" href="#classarrow_1_1dataset_1_1_fragment"><span class="std std-ref">Fragment</span></a>, and <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a>. In python pseudo code, it performs the following:</p>
 <p>def <a class="reference internal" href="#classarrow_1_1dataset_1_1_scanner_1a86c105e69fb69e036ad46c3815226c4a"><span class="std std-ref">Scan()</span></a>: for fragment in self.dataset.GetFragments(this.options.filter): for scan_task in fragment.Scan(this.options): yield scan_task </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="cpp function">
 <dt id="_CPPv4N5arrow7dataset7Scanner4ScanEv">
 <span id="_CPPv3N5arrow7dataset7Scanner4ScanEv"></span><span id="_CPPv2N5arrow7dataset7Scanner4ScanEv"></span><span id="arrow::dataset::Scanner::Scan"></span><span class="target" id="classarrow_1_1dataset_1_1_scanner_1a86c105e69fb69e036ad46c3815226c4a"></span><a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;ScanTaskIterator&gt; <code class="sig-name descname">Scan</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5arrow7dataset7Scanner4ScanEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>The Scan operator returns a stream of ScanTask. </p>
+<dd><p>The Scan operator returns a stream of <a class="reference internal" href="#classarrow_1_1dataset_1_1_scan_task"><span class="std std-ref">ScanTask</span></a>. </p>
 <p>The caller is responsible to dispatch/schedule said tasks. Tasks should be safe to run in a concurrent fashion and outlive the iterator. </p>
 </dd></dl>
 
@@ -740,7 +858,7 @@
 <dl class="cpp class">
 <dt id="_CPPv4N5arrow7dataset14ScannerBuilderE">
 <span id="_CPPv3N5arrow7dataset14ScannerBuilderE"></span><span id="_CPPv2N5arrow7dataset14ScannerBuilderE"></span><span id="arrow::dataset::ScannerBuilder"></span><span class="target" id="classarrow_1_1dataset_1_1_scanner_builder"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">ScannerBuilder</code><a class="headerlink" href="#_CPPv4N5arrow7dataset14ScannerBuilderE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p><a class="reference internal" href="#classarrow_1_1dataset_1_1_scanner_builder"><span class="std std-ref">ScannerBuilder</span></a> is a factory class to construct a <a class="reference internal" href="#classarrow_1_1dataset_1_1_scanner"><span class="std std-ref">Scanner</span></a>. </p>
+<dd><em>#include &lt;arrow/dataset/scanner.h&gt;</em><p><a class="reference internal" href="#classarrow_1_1dataset_1_1_scanner_builder"><span class="std std-ref">ScannerBuilder</span></a> is a factory class to construct a <a class="reference internal" href="#classarrow_1_1dataset_1_1_scanner"><span class="std std-ref">Scanner</span></a>. </p>
 <p>It is used to pass information, notably a potential filter expression and a subset of columns to materialize. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
@@ -836,84 +954,13 @@
 </div>
 </dd></dl>
 
-<dl class="cpp struct">
-<dt id="_CPPv4N5arrow7dataset11ScanOptionsE">
-<span id="_CPPv3N5arrow7dataset11ScanOptionsE"></span><span id="_CPPv2N5arrow7dataset11ScanOptionsE"></span><span id="arrow::dataset::ScanOptions"></span><span class="target" id="structarrow_1_1dataset_1_1_scan_options"></span><em class="property">struct </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">ScanOptions</code><a class="headerlink" href="#_CPPv4N5arrow7dataset11ScanOptionsE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
-<dl class="cpp function">
-<dt id="_CPPv4NK5arrow7dataset11ScanOptions9TaskGroupEv">
-<span id="_CPPv3NK5arrow7dataset11ScanOptions9TaskGroupEv"></span><span id="_CPPv2NK5arrow7dataset11ScanOptions9TaskGroupEv"></span><span id="arrow::dataset::ScanOptions::TaskGroupC"></span><span class="target" id="structarrow_1_1dataset_1_1_scan_options_1a0906ca37e56219a46738c0ea5f0f058f"></span>std::shared_ptr&lt;internal::TaskGroup&gt; <code class="sig-name descname">TaskGroup</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK5arrow7dataset11ScanOptions9TaskGroupEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Return a threaded or serial TaskGroup according to use_threads. </p>
-</dd></dl>
-
-</div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Members</p>
-<dl class="cpp var">
-<dt id="_CPPv4N5arrow7dataset11ScanOptions4poolE">
-<span id="_CPPv3N5arrow7dataset11ScanOptions4poolE"></span><span id="_CPPv2N5arrow7dataset11ScanOptions4poolE"></span><span id="arrow::dataset::ScanOptions::pool__MemoryPoolP"></span><span class="target" id="structarrow_1_1dataset_1_1_scan_options_1a90fc341733356314293b9bf414fa4610"></span><a class="reference internal" href="memory.html#_CPPv4N5arrow10MemoryPoolE" title="arrow::MemoryPool">MemoryPool</a> *<code class="sig-name descname">pool</code> = arrow::<a class="reference internal" href="memory.html#_CPPv4N5arrow19default_memory_poolEv" title="arrow::default_memory_pool">default_memory_pool</a>()<a class="headerlink" href="#_CPPv4N5arrow7dataset11ScanOptions4poolE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>A pool from which materialized and scanned arrays will be allocated. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt id="_CPPv4N5arrow7dataset11ScanOptions11use_threadsE">
-<span id="_CPPv3N5arrow7dataset11ScanOptions11use_threadsE"></span><span id="_CPPv2N5arrow7dataset11ScanOptions11use_threadsE"></span><span id="arrow::dataset::ScanOptions::use_threads__b"></span><span class="target" id="structarrow_1_1dataset_1_1_scan_options_1a14c08f047d28e5a705ef1e275f11a98a"></span>bool <code class="sig-name descname">use_threads</code> = false<a class="headerlink" href="#_CPPv4N5arrow7dataset11ScanOptions11use_threadsE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Indicate if the <a class="reference internal" href="#classarrow_1_1dataset_1_1_scanner"><span class="std std-ref">Scanner</span></a> should make use of a ThreadPool. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt id="_CPPv4N5arrow7dataset11ScanOptions21fragment_scan_optionsE">
-<span id="_CPPv3N5arrow7dataset11ScanOptions21fragment_scan_optionsE"></span><span id="_CPPv2N5arrow7dataset11ScanOptions21fragment_scan_optionsE"></span><span id="arrow::dataset::ScanOptions::fragment_scan_options__std::shared_ptr:FragmentScanOptions:"></span><span class="target" id="structarrow_1_1dataset_1_1_scan_options_1a10146664bc67f796084a54c6c961d3c3"></span>std::shared_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow7dataset19FragmentScanOptionsE" title="arrow::dataset::FragmentScanOptions">FragmentScanOptions</a>&gt; <code class="sig-name descname">fragment_scan_options</code><a class="headerlink" href="#_CPPv4N5arrow7dataset11ScanOptions21fragment_scan_optionsE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Fragment-specific scan options. </p>
-</dd></dl>
-
-</div>
-</dd></dl>
-
-<dl class="cpp class">
-<dt id="_CPPv4N5arrow7dataset19FragmentScanOptionsE">
-<span id="_CPPv3N5arrow7dataset19FragmentScanOptionsE"></span><span id="_CPPv2N5arrow7dataset19FragmentScanOptionsE"></span><span id="arrow::dataset::FragmentScanOptions"></span><span class="target" id="classarrow_1_1dataset_1_1_fragment_scan_options"></span><em class="property">class </em><code class="sig-name descname">FragmentScanOptions</code><a class="headerlink" href="#_CPPv4N5arrow7dataset19FragmentScanOptionsE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Per-scan options for fragment(s) in a dataset. </p>
-<p>These options are not intrinsic to the format or fragment itself, but do affect the results of a scan. These are options which make sense to change between repeated reads of the same dataset, such as format-specific conversion options (that do not affect the schema). </p>
-<p>Subclassed by <a class="reference internal" href="#structarrow_1_1dataset_1_1_csv_fragment_scan_options"><span class="std std-ref">arrow::dataset::CsvFragmentScanOptions</span></a></p>
-</dd></dl>
-
 </div>
 <div class="section" id="concrete-implementations">
 <h2><a class="toc-backref" href="#id5">Concrete implementations</a><a class="headerlink" href="#concrete-implementations" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp class">
-<dt id="_CPPv4N5arrow7dataset15InMemoryDatasetE">
-<span id="_CPPv3N5arrow7dataset15InMemoryDatasetE"></span><span id="_CPPv2N5arrow7dataset15InMemoryDatasetE"></span><span id="arrow::dataset::InMemoryDataset"></span><span class="target" id="classarrow_1_1dataset_1_1_in_memory_dataset"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">InMemoryDataset</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset7DatasetE" title="arrow::dataset::Dataset">Dataset</a><a class="headerlink" href="#_CPPv4N5arrow7dataset15InMemoryDatasetE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>A Source which yields fragments wrapping a stream of record batches. </p>
-<p>The record batches must match the schema provided to the source at construction. </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
-<dl class="cpp function">
-<dt id="_CPPv4NK5arrow7dataset15InMemoryDataset9type_nameEv">
-<span id="_CPPv3NK5arrow7dataset15InMemoryDataset9type_nameEv"></span><span id="_CPPv2NK5arrow7dataset15InMemoryDataset9type_nameEv"></span><span id="arrow::dataset::InMemoryDataset::type_nameC"></span><span class="target" id="classarrow_1_1dataset_1_1_in_memory_dataset_1ae39b5d039ae08ed1c6e17bfe1641f380"></span><em class="property">inline</em> <em class="property">virtual</em> std::string <code class="sig-name descname">type_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> <em class="property">override</em><a class="headerlink" href="#_CPPv4NK5arrow7dataset15InMemoryDataset9type_nameEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>The name identifying the kind of <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a>. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt id="_CPPv4NK5arrow7dataset15InMemoryDataset13ReplaceSchemaENSt10shared_ptrI6SchemaEE">
-<span id="_CPPv3NK5arrow7dataset15InMemoryDataset13ReplaceSchemaENSt10shared_ptrI6SchemaEE"></span><span id="_CPPv2NK5arrow7dataset15InMemoryDataset13ReplaceSchemaENSt10shared_ptrI6SchemaEE"></span><span id="arrow::dataset::InMemoryDataset::ReplaceSchema__std::shared_ptr:Schema:C"></span><span class="target" id="classarrow_1_1dataset_1_1_in_memory_dataset_1a28d46d3d11d41e4d12f7157a57b6eca4"></span><em class="property">virtual</em> <a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;std::shared_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow7dataset7DatasetE" title="arrow::dataset::Dataset">Dataset</a>&gt;&gt; <code class="sig-name descname">ReplaceSchema</code><span class="sig-paren">(</span>std::shared_ptr&lt;<a class="reference internal" href="datatype.html#_CPPv4N5arrow6SchemaE" title="arrow::Schema">Schema</a>&gt; <em>schema</em><span class="sig-paren">)</span> <em class="property">const</em> <em class="property">override</em><a class="headerlink" href="#_CPPv4NK5arrow7dataset15InMemoryDataset13ReplaceSchemaENSt10shared_ptrI6SchemaEE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Return a copy of this <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a> with a different schema. </p>
-<p>The copy will view the same Fragments. If the new schema is not compatible with the original dataset’s schema then an error will be raised. </p>
-</dd></dl>
-
-</div>
-<dl class="cpp class">
-<dt id="_CPPv4N5arrow7dataset15InMemoryDataset20RecordBatchGeneratorE">
-<span id="_CPPv3N5arrow7dataset15InMemoryDataset20RecordBatchGeneratorE"></span><span id="_CPPv2N5arrow7dataset15InMemoryDataset20RecordBatchGeneratorE"></span><span id="arrow::dataset::InMemoryDataset::RecordBatchGenerator"></span><span class="target" id="classarrow_1_1dataset_1_1_in_memory_dataset_1_1_record_batch_generator"></span><em class="property">class </em><code class="sig-name descname">RecordBatchGenerator</code><a class="headerlink" href="#_CPPv4N5arrow7dataset15InMemoryDataset20RecordBatchGeneratorE" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="cpp class">
 <dt id="_CPPv4N5arrow7dataset16InMemoryFragmentE">
 <span id="_CPPv3N5arrow7dataset16InMemoryFragmentE"></span><span id="_CPPv2N5arrow7dataset16InMemoryFragmentE"></span><span id="arrow::dataset::InMemoryFragment"></span><span class="target" id="classarrow_1_1dataset_1_1_in_memory_fragment"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">InMemoryFragment</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset8FragmentE" title="arrow::dataset::Fragment">Fragment</a><a class="headerlink" href="#_CPPv4N5arrow7dataset16InMemoryFragmentE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>A trivial <a class="reference internal" href="#classarrow_1_1dataset_1_1_fragment"><span class="std std-ref">Fragment</span></a> that yields ScanTask out of a fixed set of <a class="reference internal" href="table.html#classarrow_1_1_record_batch"><span class="std std-ref">RecordBatch</span></a>. </p>
+<dd><em>#include &lt;arrow/dataset/dataset.h&gt;</em><p>A trivial <a class="reference internal" href="#classarrow_1_1dataset_1_1_fragment"><span class="std std-ref">Fragment</span></a> that yields <a class="reference internal" href="#classarrow_1_1dataset_1_1_scan_task"><span class="std std-ref">ScanTask</span></a> out of a fixed set of <a class="reference internal" href="table.html#classarrow_1_1_record_batch"><span class="std std-ref">RecordBatch</span></a>. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="cpp function">
@@ -934,9 +981,37 @@
 </dd></dl>
 
 <dl class="cpp class">
+<dt id="_CPPv4N5arrow7dataset15InMemoryDatasetE">
+<span id="_CPPv3N5arrow7dataset15InMemoryDatasetE"></span><span id="_CPPv2N5arrow7dataset15InMemoryDatasetE"></span><span id="arrow::dataset::InMemoryDataset"></span><span class="target" id="classarrow_1_1dataset_1_1_in_memory_dataset"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">InMemoryDataset</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset7DatasetE" title="arrow::dataset::Dataset">Dataset</a><a class="headerlink" href="#_CPPv4N5arrow7dataset15InMemoryDatasetE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;arrow/dataset/dataset.h&gt;</em><p>A Source which yields fragments wrapping a stream of record batches. </p>
+<p>The record batches must match the schema provided to the source at construction. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4NK5arrow7dataset15InMemoryDataset9type_nameEv">
+<span id="_CPPv3NK5arrow7dataset15InMemoryDataset9type_nameEv"></span><span id="_CPPv2NK5arrow7dataset15InMemoryDataset9type_nameEv"></span><span id="arrow::dataset::InMemoryDataset::type_nameC"></span><span class="target" id="classarrow_1_1dataset_1_1_in_memory_dataset_1ae39b5d039ae08ed1c6e17bfe1641f380"></span><em class="property">inline</em> <em class="property">virtual</em> std::string <code class="sig-name descname">type_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> <em class="property">override</em><a class="headerlink" href="#_CPPv4NK5arrow7dataset15InMemoryDataset9type_nameEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The name identifying the kind of <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK5arrow7dataset15InMemoryDataset13ReplaceSchemaENSt10shared_ptrI6SchemaEE">
+<span id="_CPPv3NK5arrow7dataset15InMemoryDataset13ReplaceSchemaENSt10shared_ptrI6SchemaEE"></span><span id="_CPPv2NK5arrow7dataset15InMemoryDataset13ReplaceSchemaENSt10shared_ptrI6SchemaEE"></span><span id="arrow::dataset::InMemoryDataset::ReplaceSchema__std::shared_ptr:Schema:C"></span><span class="target" id="classarrow_1_1dataset_1_1_in_memory_dataset_1a28d46d3d11d41e4d12f7157a57b6eca4"></span><em class="property">virtual</em> <a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;std::shared_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow7dataset7DatasetE" title="arrow::dataset::Dataset">Dataset</a>&gt;&gt; <code class="sig-name descname">ReplaceSchema</code><span class="sig-paren">(</span>std::shared_ptr&lt;<a class="reference internal" href="datatype.html#_CPPv4N5arrow6SchemaE" title="arrow::Schema">Schema</a>&gt; <em>schema</em><span class="sig-paren">)</span> <em class="property">const</em> <em class="property">override</em><a class="headerlink" href="#_CPPv4NK5arrow7dataset15InMemoryDataset13ReplaceSchemaENSt10shared_ptrI6SchemaEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Return a copy of this <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a> with a different schema. </p>
+<p>The copy will view the same Fragments. If the new schema is not compatible with the original dataset’s schema then an error will be raised. </p>
+</dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt id="_CPPv4N5arrow7dataset15InMemoryDataset20RecordBatchGeneratorE">
+<span id="_CPPv3N5arrow7dataset15InMemoryDataset20RecordBatchGeneratorE"></span><span id="_CPPv2N5arrow7dataset15InMemoryDataset20RecordBatchGeneratorE"></span><span id="arrow::dataset::InMemoryDataset::RecordBatchGenerator"></span><span class="target" id="classarrow_1_1dataset_1_1_in_memory_dataset_1_1_record_batch_generator"></span><em class="property">class </em><code class="sig-name descname">RecordBatchGenerator</code><a class="headerlink" href="#_CPPv4N5arrow7dataset15InMemoryDataset20RecordBatchGeneratorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;arrow/dataset/dataset.h&gt;</em></dd></dl>
+
+</dd></dl>
+
+<dl class="cpp class">
 <dt id="_CPPv4N5arrow7dataset12UnionDatasetE">
 <span id="_CPPv3N5arrow7dataset12UnionDatasetE"></span><span id="_CPPv2N5arrow7dataset12UnionDatasetE"></span><span id="arrow::dataset::UnionDataset"></span><span class="target" id="classarrow_1_1dataset_1_1_union_dataset"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">UnionDataset</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset7DatasetE" title="arrow::dataset::Dataset">Dataset</a><a class="headerlink" href="#_CPPv4N5arrow7dataset12UnionDatasetE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>A <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a> wrapping child Datasets. </p>
+<dd><em>#include &lt;arrow/dataset/dataset.h&gt;</em><p>A <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a> wrapping child Datasets. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="cpp function">
@@ -975,7 +1050,7 @@
 <dl class="cpp class">
 <dt id="_CPPv4N5arrow7dataset19UnionDatasetFactoryE">
 <span id="_CPPv3N5arrow7dataset19UnionDatasetFactoryE"></span><span id="_CPPv2N5arrow7dataset19UnionDatasetFactoryE"></span><span id="arrow::dataset::UnionDatasetFactory"></span><span class="target" id="classarrow_1_1dataset_1_1_union_dataset_factory"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">UnionDatasetFactory</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset14DatasetFactoryE" title="arrow::dataset::DatasetFactory">DatasetFactory</a><a class="headerlink" href="#_CPPv4N5arrow7dataset19UnionDatasetFactoryE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p><a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset_factory"><span class="std std-ref">DatasetFactory</span></a> provides a way to inspect/discover a <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a>’s expected schema before materialization. </p>
+<dd><em>#include &lt;arrow/dataset/discovery.h&gt;</em><p><a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset_factory"><span class="std std-ref">DatasetFactory</span></a> provides a way to inspect/discover a <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a>’s expected schema before materialization. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="cpp function">
@@ -1002,10 +1077,134 @@
 
 <div class="section" id="file-system-datasets">
 <h3><a class="toc-backref" href="#id6">File System Datasets</a><a class="headerlink" href="#file-system-datasets" title="Permalink to this headline">¶</a></h3>
+<dl class="cpp struct">
+<dt id="_CPPv4N5arrow7dataset24FileSystemFactoryOptionsE">
+<span id="_CPPv3N5arrow7dataset24FileSystemFactoryOptionsE"></span><span id="_CPPv2N5arrow7dataset24FileSystemFactoryOptionsE"></span><span id="arrow::dataset::FileSystemFactoryOptions"></span><span class="target" id="structarrow_1_1dataset_1_1_file_system_factory_options"></span><em class="property">struct </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">FileSystemFactoryOptions</code><a class="headerlink" href="#_CPPv4N5arrow7dataset24FileSystemFactoryOptionsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;arrow/dataset/discovery.h&gt;</em><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset24FileSystemFactoryOptions12partitioningE">
+<span id="_CPPv3N5arrow7dataset24FileSystemFactoryOptions12partitioningE"></span><span id="_CPPv2N5arrow7dataset24FileSystemFactoryOptions12partitioningE"></span><span id="arrow::dataset::FileSystemFactoryOptions::partitioning__PartitioningOrFactory"></span><span class="target" id="structarrow_1_1dataset_1_1_file_system_factory_options_1a69af22fb504696928af8963c04af38bb"></span><a class="reference internal" href="#_CPPv4N5arrow7dataset21PartitioningOrFactoryE" title="arrow::dataset::PartitioningOrFactory">PartitioningOrFactory</a> <code class="sig-name descname">partitioning</code> = {<a class="reference internal" href="#_CPPv4N5arrow7dataset12PartitioningE" title="arrow::dataset::Partitioning">Partitioning</a>::<a class="reference internal" href="#_CPPv4N5arrow7dataset12Partitioning7DefaultEv" title="arrow::dataset::Partitioning::Default">Default</a>()}<a class="headerlink" href="#_CPPv4N5arrow7dataset24FileSystemFactoryOptions12partitioningE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Either an explicit <a class="reference internal" href="#classarrow_1_1dataset_1_1_partitioning"><span class="std std-ref">Partitioning</span></a> or a <a class="reference internal" href="#classarrow_1_1dataset_1_1_partitioning_factory"><span class="std std-ref">PartitioningFactory</span></a> to discover one. </p>
+<p>If a factory is provided, it will be used to infer a schema for partition fields based on file and directory paths then construct a <a class="reference internal" href="#classarrow_1_1dataset_1_1_partitioning"><span class="std std-ref">Partitioning</span></a>. The default is a <a class="reference internal" href="#classarrow_1_1dataset_1_1_partitioning"><span class="std std-ref">Partitioning</span></a> which will yield no partition information.</p>
+<p>The (explicit or discovered) partitioning will be applied to discovered files and the resulting partition information embedded in the <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset24FileSystemFactoryOptions18partition_base_dirE">
+<span id="_CPPv3N5arrow7dataset24FileSystemFactoryOptions18partition_base_dirE"></span><span id="_CPPv2N5arrow7dataset24FileSystemFactoryOptions18partition_base_dirE"></span><span id="arrow::dataset::FileSystemFactoryOptions::partition_base_dir__ss"></span><span class="target" id="structarrow_1_1dataset_1_1_file_system_factory_options_1a5bfddc4e322fab63c777587eecfcf71f"></span>std::string <code class="sig-name descname">partition_base_dir</code><a class="headerlink" href="#_CPPv4N5arrow7dataset24FileSystemFactoryOptions18partition_base_dirE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>For the purposes of applying the partitioning, paths will be stripped of the partition_base_dir. </p>
+<p>Files not matching the partition_base_dir prefix will be skipped for partition discovery. The ignored files will still be part of the <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a>, but will not have partition information.</p>
+<p>Example: partition_base_dir = “/dataset”;</p>
+<p><ul class="simple">
+<li><p>“/dataset/US/sales.csv” -&gt; “US/sales.csv” will be given to the partitioning</p></li>
+<li><p>”/home/john/late_sales.csv” -&gt; Will be ignored for partition discovery.</p></li>
+</ul>
+</p>
+<p>This is useful for partitioning which parses directory when ordering is important, e.g. <a class="reference internal" href="#classarrow_1_1dataset_1_1_directory_partitioning"><span class="std std-ref">DirectoryPartitioning</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset24FileSystemFactoryOptions21exclude_invalid_filesE">
+<span id="_CPPv3N5arrow7dataset24FileSystemFactoryOptions21exclude_invalid_filesE"></span><span id="_CPPv2N5arrow7dataset24FileSystemFactoryOptions21exclude_invalid_filesE"></span><span id="arrow::dataset::FileSystemFactoryOptions::exclude_invalid_files__b"></span><span class="target" id="structarrow_1_1dataset_1_1_file_system_factory_options_1afe6dcef4df15e0f633068fde243e58c9"></span>bool <code class="sig-name descname">exclude_invalid_files</code> = false<a class="headerlink" href="#_CPPv4N5arrow7dataset24FileSystemFactoryOptions21exclude_invalid_filesE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Invalid files (via selector or explicitly) will be excluded by checking with the <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_format_1ae934a7b69d0402f36aecfa6037fa1343"><span class="std std-ref">FileFormat::IsSupported</span></a> method. </p>
+<p>This will incur IO for each files in a serial and single threaded fashion. Disabling this feature will skip the IO, but unsupported files may be present in the <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a> (resulting in an error at scan time). </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset24FileSystemFactoryOptions24selector_ignore_prefixesE">
+<span id="_CPPv3N5arrow7dataset24FileSystemFactoryOptions24selector_ignore_prefixesE"></span><span id="_CPPv2N5arrow7dataset24FileSystemFactoryOptions24selector_ignore_prefixesE"></span><span id="arrow::dataset::FileSystemFactoryOptions::selector_ignore_prefixes__std::vector:ss:"></span><span class="target" id="structarrow_1_1dataset_1_1_file_system_factory_options_1af00c6508a0956e77d535c7cd764b33a4"></span>std::vector&lt;std::string&gt; <code class="sig-name descname">selector_ignore_prefixes</code> = {&quot;.&quot;, &quot;_&quot;,}<a class="headerlink" href="#_CPPv4N5arrow7dataset24FileSystemFactoryOptions24selector_ignore_prefixesE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>When discovering from a Selector (and not from an explicit file list), ignore files and directories matching any of these prefixes. </p>
+<p>Example (with selector = “/dataset/&amp;zwj;**”): selector_ignore_prefixes = {“_”, “.DS_STORE” };</p>
+<p><ul class="simple">
+<li><p>“/dataset/data.csv” -&gt; not ignored</p></li>
+<li><p>”/dataset/_metadata” -&gt; ignored</p></li>
+<li><p>”/dataset/.DS_STORE” -&gt; ignored</p></li>
+<li><p>”/dataset/_hidden/dat” -&gt; ignored</p></li>
+<li><p>”/dataset/nested/.DS_STORE” -&gt; ignored </p></li>
+</ul>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N5arrow7dataset24FileSystemDatasetFactoryE">
+<span id="_CPPv3N5arrow7dataset24FileSystemDatasetFactoryE"></span><span id="_CPPv2N5arrow7dataset24FileSystemDatasetFactoryE"></span><span id="arrow::dataset::FileSystemDatasetFactory"></span><span class="target" id="classarrow_1_1dataset_1_1_file_system_dataset_factory"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">FileSystemDatasetFactory</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset14DatasetFactoryE" title="arrow::dataset::DatasetFactory">DatasetFactory</a><a class="headerlink" href="#_CPPv4N5arrow7dataset24FileSystemDatasetFactoryE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;arrow/dataset/discovery.h&gt;</em><p><a class="reference internal" href="#classarrow_1_1dataset_1_1_file_system_dataset_factory"><span class="std std-ref">FileSystemDatasetFactory</span></a> creates a <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a> from a vector of <a class="reference internal" href="filesystem.html#structarrow_1_1fs_1_1_file_info"><span class="std std-ref">fs::FileInfo</span></a> or a <a class="reference internal" href="filesystem.html#structarrow_1_1fs_1_1_file_selector"><span class="std std-ref">fs::FileSelector</span></a>. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N5arrow7dataset24FileSystemDatasetFactory14InspectSchemasE14InspectOptions">
+<span id="_CPPv3N5arrow7dataset24FileSystemDatasetFactory14InspectSchemasE14InspectOptions"></span><span id="_CPPv2N5arrow7dataset24FileSystemDatasetFactory14InspectSchemasE14InspectOptions"></span><span id="arrow::dataset::FileSystemDatasetFactory::InspectSchemas__InspectOptions"></span><span class="target" id="classarrow_1_1dataset_1_1_file_system_dataset_factory_1a89747f36564fd22e1110048aa3607535"></span><em class="property">virtual</em> <a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;std::vector&lt;std::shared_ptr&lt;<a class="reference internal" href="datatype.html#_CPPv4N5arrow6SchemaE" title="arrow::Schema">Schema</a>&gt;&gt;&gt; <code class="sig-name descname">InspectSchemas</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N5arrow7dataset14InspectOptionsE" title="arrow::dataset::InspectOptions">InspectOptions</a> <em>options</em><span class="sig-paren">)</span> <em class="property">override</em><a class="headerlink" href="#_CPPv4N5arrow7dataset24FileSystemDatasetFactory14InspectSchemasE14InspectOptions" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the schemas of the Fragments and <a class="reference internal" href="#classarrow_1_1dataset_1_1_partitioning"><span class="std std-ref">Partitioning</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N5arrow7dataset24FileSystemDatasetFactory6FinishE13FinishOptions">
+<span id="_CPPv3N5arrow7dataset24FileSystemDatasetFactory6FinishE13FinishOptions"></span><span id="_CPPv2N5arrow7dataset24FileSystemDatasetFactory6FinishE13FinishOptions"></span><span id="arrow::dataset::FileSystemDatasetFactory::Finish__FinishOptions"></span><span class="target" id="classarrow_1_1dataset_1_1_file_system_dataset_factory_1ac2f094573a36e0b76601a5e6c0517c9a"></span><em class="property">virtual</em> <a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;std::shared_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow7dataset7DatasetE" title="arrow::dataset::Dataset">Dataset</a>&gt;&gt; <code class="sig-name descname">Finish</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N5arrow7dataset13FinishOptionsE" title="arrow::dataset::FinishOptions">FinishOptions</a> <em>options</em><span class="sig-paren">)</span> <em class="property">override</em><a class="headerlink" href="#_CPPv4N5arrow7dataset24FileSystemDatasetFactory6FinishE13FinishOptions" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create a <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a> with the given options. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N5arrow7dataset24FileSystemDatasetFactory4MakeENSt10shared_ptrIN2fs10FileSystemEEERKNSt6vectorINSt6stringEEENSt10shared_ptrI10FileFormatEE24FileSystemFactoryOptions">
+<span id="_CPPv3N5arrow7dataset24FileSystemDatasetFactory4MakeENSt10shared_ptrIN2fs10FileSystemEEERKNSt6vectorINSt6stringEEENSt10shared_ptrI10FileFormatEE24FileSystemFactoryOptions"></span><span id="_CPPv2N5arrow7dataset24FileSystemDatasetFactory4MakeENSt10shared_ptrIN2fs10FileSystemEEERKNSt6vectorINSt6stringEEENSt10shared_ptrI10FileFormatEE24FileSystemFactoryOptions"></span><span id="arrow::dataset::FileSystemDatasetFactory::Make__std::shared_ptr:fs::FileSystem:.std::vector:ss:CR.std::shared_ptr:FileFormat:.FileSystemFactoryOptions"></span><span class="target" id="classarrow_1_1dataset_1_1_file_system_dataset_factory_1a2be4ad879d3e94308e8ae08b7d148044"></span><em class="property">static</em> <a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;std::shared_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow7dataset14DatasetFactoryE" title="arrow::dataset::DatasetFactory">DatasetFactory</a>&gt;&gt; <code class="sig-name descname">Make</code><span class="sig-paren">(</span>std::shared_ptr&lt;fs::<a class="reference internal" href="filesystem.html#_CPPv4N5arrow2fs10FileSystemE" title="arrow::fs::FileSystem">FileSystem</a>&gt; <em>filesystem</em>, <em class="property">const</em> std::vector&lt;std::string&gt; &amp;<em>paths</em>, std::shared_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow7dataset10FileFormatE" title="arrow::dataset::FileFormat">FileFormat</a>&gt; <em>format</em>, <a class="reference internal" href="#_CPPv4N5arrow7dataset24FileSystemFactoryOptionsE" title="arrow::dataset::FileSystemFactoryOptions">FileSystemFactoryOptions</a> <em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5arrow7dataset24FileSystemDatasetFactory4MakeENSt10shared_ptrIN2fs10FileSystemEEERKNSt6vectorINSt6stringEEENSt10shared_ptrI10FileFormatEE24FileSystemFactoryOptions" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Build a <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_system_dataset_factory"><span class="std std-ref">FileSystemDatasetFactory</span></a> from an explicit list of paths. </p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[in]</span> <span class="pre">filesystem</span></code>: passed to <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_system_dataset"><span class="std std-ref">FileSystemDataset</span></a> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[in]</span> <span class="pre">paths</span></code>: passed to <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_system_dataset"><span class="std std-ref">FileSystemDataset</span></a> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[in]</span> <span class="pre">format</span></code>: passed to <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_system_dataset"><span class="std std-ref">FileSystemDataset</span></a> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[in]</span> <span class="pre">options</span></code>: see <a class="reference internal" href="#structarrow_1_1dataset_1_1_file_system_factory_options"><span class="std std-ref">FileSystemFactoryOptions</span></a> for more information. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N5arrow7dataset24FileSystemDatasetFactory4MakeENSt10shared_ptrIN2fs10FileSystemEEEN2fs12FileSelectorENSt10shared_ptrI10FileFormatEE24FileSystemFactoryOptions">
+<span id="_CPPv3N5arrow7dataset24FileSystemDatasetFactory4MakeENSt10shared_ptrIN2fs10FileSystemEEEN2fs12FileSelectorENSt10shared_ptrI10FileFormatEE24FileSystemFactoryOptions"></span><span id="_CPPv2N5arrow7dataset24FileSystemDatasetFactory4MakeENSt10shared_ptrIN2fs10FileSystemEEEN2fs12FileSelectorENSt10shared_ptrI10FileFormatEE24FileSystemFactoryOptions"></span><span id="arrow::dataset::FileSystemDatasetFactory::Make__std::shared_ptr:fs::FileSystem:.fs::FileSelector.std::shared_ptr:FileFormat:.FileSystemFactoryOptions"></span><span class="target" id="classarrow_1_1dataset_1_1_file_system_dataset_factory_1a86b89c3ebe5cdab3cf7f7dbd9a633359"></span><em class="property">static</em> <a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;std::shared_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow7dataset14DatasetFactoryE" title="arrow::dataset::DatasetFactory">DatasetFactory</a>&gt;&gt; <code class="sig-name descname">Make</code><span class="sig-paren">(</span>std::shared_ptr&lt;fs::<a class="reference internal" href="filesystem.html#_CPPv4N5arrow2fs10FileSystemE" title="arrow::fs::FileSystem">FileSystem</a>&gt; <em>filesystem</em>, fs::<a class="reference internal" href="filesystem.html#_CPPv4N5arrow2fs12FileSelectorE" title="arrow::fs::FileSelector">FileSelector</a> <em>selector</em>, std::shared_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow7dataset10FileFormatE" title="arrow::dataset::FileFormat">FileFormat</a>&gt; <em>format</em>, <a class="reference internal" href="#_CPPv4N5arrow7dataset24FileSystemFactoryOptionsE" title="arrow::dataset::FileSystemFactoryOptions">FileSystemFactoryOptions</a> <em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5arrow7dataset24FileSystemDatasetFactory4MakeENSt10shared_ptrIN2fs10FileSystemEEEN2fs12FileSelectorENSt10shared_ptrI10FileFormatEE24FileSystemFactoryOptions" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Build a <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_system_dataset_factory"><span class="std std-ref">FileSystemDatasetFactory</span></a> from a <a class="reference internal" href="filesystem.html#structarrow_1_1fs_1_1_file_selector"><span class="std std-ref">fs::FileSelector</span></a>. </p>
+<p>The selector will expand to a vector of FileInfo. The expansion/crawling is performed in this function call. Thus, the finalized <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a> is working with a snapshot of the filesystem. If options.partition_base_dir is not provided, it will be overwritten with selector.base_dir.</p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[in]</span> <span class="pre">filesystem</span></code>: passed to <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_system_dataset"><span class="std std-ref">FileSystemDataset</span></a> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[in]</span> <span class="pre">selector</span></code>: used to crawl and search files </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[in]</span> <span class="pre">format</span></code>: passed to <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_system_dataset"><span class="std std-ref">FileSystemDataset</span></a> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[in]</span> <span class="pre">options</span></code>: see <a class="reference internal" href="#structarrow_1_1dataset_1_1_file_system_factory_options"><span class="std std-ref">FileSystemFactoryOptions</span></a> for more information. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N5arrow7dataset24FileSystemDatasetFactory4MakeENSt6stringENSt10shared_ptrI10FileFormatEE24FileSystemFactoryOptions">
+<span id="_CPPv3N5arrow7dataset24FileSystemDatasetFactory4MakeENSt6stringENSt10shared_ptrI10FileFormatEE24FileSystemFactoryOptions"></span><span id="_CPPv2N5arrow7dataset24FileSystemDatasetFactory4MakeENSt6stringENSt10shared_ptrI10FileFormatEE24FileSystemFactoryOptions"></span><span id="arrow::dataset::FileSystemDatasetFactory::Make__ss.std::shared_ptr:FileFormat:.FileSystemFactoryOptions"></span><span class="target" id="classarrow_1_1dataset_1_1_file_system_dataset_factory_1ab3e9380381cab2b628c4b23ae8690983"></span><em class="property">static</em> <a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;std::shared_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow7dataset14DatasetFactoryE" title="arrow::dataset::DatasetFactory">DatasetFactory</a>&gt;&gt; <code class="sig-name descname">Make</code><span class="sig-paren">(</span>std::string <em>uri</em>, std::shared_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow7dataset10FileFormatE" title="arrow::dataset::FileFormat">FileFormat</a>&gt; <em>format</em>, <a class="reference internal" href="#_CPPv4N5arrow7dataset24FileSystemFactoryOptionsE" title="arrow::dataset::FileSystemFactoryOptions">FileSystemFactoryOptions</a> <em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5arrow7dataset24FileSystemDatasetFactory4MakeENSt6stringENSt10shared_ptrI10FileFormatEE24FileSystemFactoryOptions" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Build a <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_system_dataset_factory"><span class="std std-ref">FileSystemDatasetFactory</span></a> from an uri including filesystem information. </p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[in]</span> <span class="pre">uri</span></code>: passed to <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_system_dataset"><span class="std std-ref">FileSystemDataset</span></a> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[in]</span> <span class="pre">format</span></code>: passed to <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_system_dataset"><span class="std std-ref">FileSystemDataset</span></a> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[in]</span> <span class="pre">options</span></code>: see <a class="reference internal" href="#structarrow_1_1dataset_1_1_file_system_factory_options"><span class="std std-ref">FileSystemFactoryOptions</span></a> for more information. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
 <dl class="cpp class">
 <dt id="_CPPv4N5arrow7dataset10FileSourceE">
 <span id="_CPPv3N5arrow7dataset10FileSourceE"></span><span id="_CPPv2N5arrow7dataset10FileSourceE"></span><span id="arrow::dataset::FileSource"></span><span class="target" id="classarrow_1_1dataset_1_1_file_source"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">FileSource</code><a class="headerlink" href="#_CPPv4N5arrow7dataset10FileSourceE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>The path and filesystem where an actual file is located or a buffer which can be read like a file. </p>
+<dd><em>#include &lt;arrow/dataset/file_base.h&gt;</em><p>The path and filesystem where an actual file is located or a buffer which can be read like a file. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="cpp function">
@@ -1057,7 +1256,7 @@
 <dl class="cpp class">
 <dt id="_CPPv4N5arrow7dataset10FileFormatE">
 <span id="_CPPv3N5arrow7dataset10FileFormatE"></span><span id="_CPPv2N5arrow7dataset10FileFormatE"></span><span id="arrow::dataset::FileFormat"></span><span class="target" id="classarrow_1_1dataset_1_1_file_format"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">FileFormat</code> : <em class="property">public</em> std::enable_shared_from_this&lt;<a class="reference internal" href="#_CPPv4N5arrow7dataset10FileFormatE" title="arrow::dataset::FileFormat">FileFormat</a>&gt;<a class="headerlink" href="#_CPPv4N5arrow7dataset10FileFormatE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Base class for file format implementation. </p>
+<dd><em>#include &lt;arrow/dataset/file_base.h&gt;</em><p>Base class for file format implementation. </p>
 <p>Subclassed by <a class="reference internal" href="#classarrow_1_1dataset_1_1_csv_file_format"><span class="std std-ref">arrow::dataset::CsvFileFormat</span></a>, <a class="reference internal" href="#classarrow_1_1dataset_1_1_ipc_file_format"><span class="std std-ref">arrow::dataset::IpcFileFormat</span></a>, <a class="reference internal" href="#classarrow_1_1dataset_1_1_parquet_file_format"><span class="std std-ref">arrow::dataset::ParquetFileFormat</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
@@ -1138,7 +1337,7 @@
 <dl class="cpp class">
 <dt id="_CPPv4N5arrow7dataset12FileFragmentE">
 <span id="_CPPv3N5arrow7dataset12FileFragmentE"></span><span id="_CPPv2N5arrow7dataset12FileFragmentE"></span><span id="arrow::dataset::FileFragment"></span><span class="target" id="classarrow_1_1dataset_1_1_file_fragment"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">FileFragment</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset8FragmentE" title="arrow::dataset::Fragment">Fragment</a><a class="headerlink" href="#_CPPv4N5arrow7dataset12FileFragmentE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>A <a class="reference internal" href="#classarrow_1_1dataset_1_1_fragment"><span class="std std-ref">Fragment</span></a> that is stored in a file with a known format. </p>
+<dd><em>#include &lt;arrow/dataset/file_base.h&gt;</em><p>A <a class="reference internal" href="#classarrow_1_1dataset_1_1_fragment"><span class="std std-ref">Fragment</span></a> that is stored in a file with a known format. </p>
 <p>Subclassed by <a class="reference internal" href="#classarrow_1_1dataset_1_1_parquet_file_fragment"><span class="std std-ref">arrow::dataset::ParquetFileFragment</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
@@ -1162,7 +1361,7 @@
 <dl class="cpp class">
 <dt id="_CPPv4N5arrow7dataset17FileSystemDatasetE">
 <span id="_CPPv3N5arrow7dataset17FileSystemDatasetE"></span><span id="_CPPv2N5arrow7dataset17FileSystemDatasetE"></span><span id="arrow::dataset::FileSystemDataset"></span><span class="target" id="classarrow_1_1dataset_1_1_file_system_dataset"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">FileSystemDataset</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset7DatasetE" title="arrow::dataset::Dataset">Dataset</a><a class="headerlink" href="#_CPPv4N5arrow7dataset17FileSystemDatasetE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>A <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a> of FileFragments. </p>
+<dd><em>#include &lt;arrow/dataset/file_base.h&gt;</em><p>A <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a> of FileFragments. </p>
 <p>A <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_system_dataset"><span class="std std-ref">FileSystemDataset</span></a> is composed of one or more <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_fragment"><span class="std std-ref">FileFragment</span></a>. The fragments are independent and don’t need to share the same format and/or filesystem. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
@@ -1232,141 +1431,17 @@
 </dd></dl>
 
 <dl class="cpp class">
-<dt id="_CPPv4N5arrow7dataset24FileSystemDatasetFactoryE">
-<span id="_CPPv3N5arrow7dataset24FileSystemDatasetFactoryE"></span><span id="_CPPv2N5arrow7dataset24FileSystemDatasetFactoryE"></span><span id="arrow::dataset::FileSystemDatasetFactory"></span><span class="target" id="classarrow_1_1dataset_1_1_file_system_dataset_factory"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">FileSystemDatasetFactory</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset14DatasetFactoryE" title="arrow::dataset::DatasetFactory">DatasetFactory</a><a class="headerlink" href="#_CPPv4N5arrow7dataset24FileSystemDatasetFactoryE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p><a class="reference internal" href="#classarrow_1_1dataset_1_1_file_system_dataset_factory"><span class="std std-ref">FileSystemDatasetFactory</span></a> creates a <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a> from a vector of <a class="reference internal" href="filesystem.html#structarrow_1_1fs_1_1_file_info"><span class="std std-ref">fs::FileInfo</span></a> or a <a class="reference internal" href="filesystem.html#structarrow_1_1fs_1_1_file_selector"><span class="std std-ref">fs::FileSelector</span></a>. </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
-<dl class="cpp function">
-<dt id="_CPPv4N5arrow7dataset24FileSystemDatasetFactory14InspectSchemasE14InspectOptions">
-<span id="_CPPv3N5arrow7dataset24FileSystemDatasetFactory14InspectSchemasE14InspectOptions"></span><span id="_CPPv2N5arrow7dataset24FileSystemDatasetFactory14InspectSchemasE14InspectOptions"></span><span id="arrow::dataset::FileSystemDatasetFactory::InspectSchemas__InspectOptions"></span><span class="target" id="classarrow_1_1dataset_1_1_file_system_dataset_factory_1a89747f36564fd22e1110048aa3607535"></span><em class="property">virtual</em> <a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;std::vector&lt;std::shared_ptr&lt;<a class="reference internal" href="datatype.html#_CPPv4N5arrow6SchemaE" title="arrow::Schema">Schema</a>&gt;&gt;&gt; <code class="sig-name descname">InspectSchemas</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N5arrow7dataset14InspectOptionsE" title="arrow::dataset::InspectOptions">InspectOptions</a> <em>options</em><span class="sig-paren">)</span> <em class="property">override</em><a class="headerlink" href="#_CPPv4N5arrow7dataset24FileSystemDatasetFactory14InspectSchemasE14InspectOptions" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Get the schemas of the Fragments and <a class="reference internal" href="#classarrow_1_1dataset_1_1_partitioning"><span class="std std-ref">Partitioning</span></a>. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt id="_CPPv4N5arrow7dataset24FileSystemDatasetFactory6FinishE13FinishOptions">
-<span id="_CPPv3N5arrow7dataset24FileSystemDatasetFactory6FinishE13FinishOptions"></span><span id="_CPPv2N5arrow7dataset24FileSystemDatasetFactory6FinishE13FinishOptions"></span><span id="arrow::dataset::FileSystemDatasetFactory::Finish__FinishOptions"></span><span class="target" id="classarrow_1_1dataset_1_1_file_system_dataset_factory_1ac2f094573a36e0b76601a5e6c0517c9a"></span><em class="property">virtual</em> <a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;std::shared_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow7dataset7DatasetE" title="arrow::dataset::Dataset">Dataset</a>&gt;&gt; <code class="sig-name descname">Finish</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N5arrow7dataset13FinishOptionsE" title="arrow::dataset::FinishOptions">FinishOptions</a> <em>options</em><span class="sig-paren">)</span> <em class="property">override</em><a class="headerlink" href="#_CPPv4N5arrow7dataset24FileSystemDatasetFactory6FinishE13FinishOptions" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Create a <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a> with the given options. </p>
-</dd></dl>
-
-</div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
-<dl class="cpp function">
-<dt id="_CPPv4N5arrow7dataset24FileSystemDatasetFactory4MakeENSt10shared_ptrIN2fs10FileSystemEEERKNSt6vectorINSt6stringEEENSt10shared_ptrI10FileFormatEE24FileSystemFactoryOptions">
-<span id="_CPPv3N5arrow7dataset24FileSystemDatasetFactory4MakeENSt10shared_ptrIN2fs10FileSystemEEERKNSt6vectorINSt6stringEEENSt10shared_ptrI10FileFormatEE24FileSystemFactoryOptions"></span><span id="_CPPv2N5arrow7dataset24FileSystemDatasetFactory4MakeENSt10shared_ptrIN2fs10FileSystemEEERKNSt6vectorINSt6stringEEENSt10shared_ptrI10FileFormatEE24FileSystemFactoryOptions"></span><span id="arrow::dataset::FileSystemDatasetFactory::Make__std::shared_ptr:fs::FileSystem:.std::vector:ss:CR.std::shared_ptr:FileFormat:.FileSystemFactoryOptions"></span><span class="target" id="classarrow_1_1dataset_1_1_file_system_dataset_factory_1a2be4ad879d3e94308e8ae08b7d148044"></span><em class="property">static</em> <a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;std::shared_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow7dataset14DatasetFactoryE" title="arrow::dataset::DatasetFactory">DatasetFactory</a>&gt;&gt; <code class="sig-name descname">Make</code><span class="sig-paren">(</span>std::shared_ptr&lt;fs::<a class="reference internal" href="filesystem.html#_CPPv4N5arrow2fs10FileSystemE" title="arrow::fs::FileSystem">FileSystem</a>&gt; <em>filesystem</em>, <em class="property">const</em> std::vector&lt;std::string&gt; &amp;<em>paths</em>, std::shared_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow7dataset10FileFormatE" title="arrow::dataset::FileFormat">FileFormat</a>&gt; <em>format</em>, <a class="reference internal" href="#_CPPv4N5arrow7dataset24FileSystemFactoryOptionsE" title="arrow::dataset::FileSystemFactoryOptions">FileSystemFactoryOptions</a> <em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5arrow7dataset24FileSystemDatasetFactory4MakeENSt10shared_ptrIN2fs10FileSystemEEERKNSt6vectorINSt6stringEEENSt10shared_ptrI10FileFormatEE24FileSystemFactoryOptions" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Build a <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_system_dataset_factory"><span class="std std-ref">FileSystemDatasetFactory</span></a> from an explicit list of paths. </p>
-<p><dl class="simple">
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">[in]</span> <span class="pre">filesystem</span></code>: passed to <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_system_dataset"><span class="std std-ref">FileSystemDataset</span></a> </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">[in]</span> <span class="pre">paths</span></code>: passed to <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_system_dataset"><span class="std std-ref">FileSystemDataset</span></a> </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">[in]</span> <span class="pre">format</span></code>: passed to <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_system_dataset"><span class="std std-ref">FileSystemDataset</span></a> </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">[in]</span> <span class="pre">options</span></code>: see <a class="reference internal" href="#structarrow_1_1dataset_1_1_file_system_factory_options"><span class="std std-ref">FileSystemFactoryOptions</span></a> for more information. </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt id="_CPPv4N5arrow7dataset24FileSystemDatasetFactory4MakeENSt10shared_ptrIN2fs10FileSystemEEEN2fs12FileSelectorENSt10shared_ptrI10FileFormatEE24FileSystemFactoryOptions">
-<span id="_CPPv3N5arrow7dataset24FileSystemDatasetFactory4MakeENSt10shared_ptrIN2fs10FileSystemEEEN2fs12FileSelectorENSt10shared_ptrI10FileFormatEE24FileSystemFactoryOptions"></span><span id="_CPPv2N5arrow7dataset24FileSystemDatasetFactory4MakeENSt10shared_ptrIN2fs10FileSystemEEEN2fs12FileSelectorENSt10shared_ptrI10FileFormatEE24FileSystemFactoryOptions"></span><span id="arrow::dataset::FileSystemDatasetFactory::Make__std::shared_ptr:fs::FileSystem:.fs::FileSelector.std::shared_ptr:FileFormat:.FileSystemFactoryOptions"></span><span class="target" id="classarrow_1_1dataset_1_1_file_system_dataset_factory_1a86b89c3ebe5cdab3cf7f7dbd9a633359"></span><em class="property">static</em> <a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;std::shared_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow7dataset14DatasetFactoryE" title="arrow::dataset::DatasetFactory">DatasetFactory</a>&gt;&gt; <code class="sig-name descname">Make</code><span class="sig-paren">(</span>std::shared_ptr&lt;fs::<a class="reference internal" href="filesystem.html#_CPPv4N5arrow2fs10FileSystemE" title="arrow::fs::FileSystem">FileSystem</a>&gt; <em>filesystem</em>, fs::<a class="reference internal" href="filesystem.html#_CPPv4N5arrow2fs12FileSelectorE" title="arrow::fs::FileSelector">FileSelector</a> <em>selector</em>, std::shared_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow7dataset10FileFormatE" title="arrow::dataset::FileFormat">FileFormat</a>&gt; <em>format</em>, <a class="reference internal" href="#_CPPv4N5arrow7dataset24FileSystemFactoryOptionsE" title="arrow::dataset::FileSystemFactoryOptions">FileSystemFactoryOptions</a> <em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5arrow7dataset24FileSystemDatasetFactory4MakeENSt10shared_ptrIN2fs10FileSystemEEEN2fs12FileSelectorENSt10shared_ptrI10FileFormatEE24FileSystemFactoryOptions" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Build a <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_system_dataset_factory"><span class="std std-ref">FileSystemDatasetFactory</span></a> from a <a class="reference internal" href="filesystem.html#structarrow_1_1fs_1_1_file_selector"><span class="std std-ref">fs::FileSelector</span></a>. </p>
-<p>The selector will expand to a vector of FileInfo. The expansion/crawling is performed in this function call. Thus, the finalized <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a> is working with a snapshot of the filesystem. If options.partition_base_dir is not provided, it will be overwritten with selector.base_dir.</p>
-<p><dl class="simple">
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">[in]</span> <span class="pre">filesystem</span></code>: passed to <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_system_dataset"><span class="std std-ref">FileSystemDataset</span></a> </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">[in]</span> <span class="pre">selector</span></code>: used to crawl and search files </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">[in]</span> <span class="pre">format</span></code>: passed to <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_system_dataset"><span class="std std-ref">FileSystemDataset</span></a> </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">[in]</span> <span class="pre">options</span></code>: see <a class="reference internal" href="#structarrow_1_1dataset_1_1_file_system_factory_options"><span class="std std-ref">FileSystemFactoryOptions</span></a> for more information. </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt id="_CPPv4N5arrow7dataset24FileSystemDatasetFactory4MakeENSt6stringENSt10shared_ptrI10FileFormatEE24FileSystemFactoryOptions">
-<span id="_CPPv3N5arrow7dataset24FileSystemDatasetFactory4MakeENSt6stringENSt10shared_ptrI10FileFormatEE24FileSystemFactoryOptions"></span><span id="_CPPv2N5arrow7dataset24FileSystemDatasetFactory4MakeENSt6stringENSt10shared_ptrI10FileFormatEE24FileSystemFactoryOptions"></span><span id="arrow::dataset::FileSystemDatasetFactory::Make__ss.std::shared_ptr:FileFormat:.FileSystemFactoryOptions"></span><span class="target" id="classarrow_1_1dataset_1_1_file_system_dataset_factory_1ab3e9380381cab2b628c4b23ae8690983"></span><em class="property">static</em> <a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;std::shared_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow7dataset14DatasetFactoryE" title="arrow::dataset::DatasetFactory">DatasetFactory</a>&gt;&gt; <code class="sig-name descname">Make</code><span class="sig-paren">(</span>std::string <em>uri</em>, std::shared_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow7dataset10FileFormatE" title="arrow::dataset::FileFormat">FileFormat</a>&gt; <em>format</em>, <a class="reference internal" href="#_CPPv4N5arrow7dataset24FileSystemFactoryOptionsE" title="arrow::dataset::FileSystemFactoryOptions">FileSystemFactoryOptions</a> <em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5arrow7dataset24FileSystemDatasetFactory4MakeENSt6stringENSt10shared_ptrI10FileFormatEE24FileSystemFactoryOptions" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Build a <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_system_dataset_factory"><span class="std std-ref">FileSystemDatasetFactory</span></a> from an uri including filesystem information. </p>
-<p><dl class="simple">
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">[in]</span> <span class="pre">uri</span></code>: passed to <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_system_dataset"><span class="std std-ref">FileSystemDataset</span></a> </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">[in]</span> <span class="pre">format</span></code>: passed to <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_system_dataset"><span class="std std-ref">FileSystemDataset</span></a> </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">[in]</span> <span class="pre">options</span></code>: see <a class="reference internal" href="#structarrow_1_1dataset_1_1_file_system_factory_options"><span class="std std-ref">FileSystemFactoryOptions</span></a> for more information. </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-</div>
-</dd></dl>
-
-<dl class="cpp struct">
-<dt id="_CPPv4N5arrow7dataset24FileSystemFactoryOptionsE">
-<span id="_CPPv3N5arrow7dataset24FileSystemFactoryOptionsE"></span><span id="_CPPv2N5arrow7dataset24FileSystemFactoryOptionsE"></span><span id="arrow::dataset::FileSystemFactoryOptions"></span><span class="target" id="structarrow_1_1dataset_1_1_file_system_factory_options"></span><em class="property">struct </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">FileSystemFactoryOptions</code><a class="headerlink" href="#_CPPv4N5arrow7dataset24FileSystemFactoryOptionsE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Members</p>
-<dl class="cpp var">
-<dt id="_CPPv4N5arrow7dataset24FileSystemFactoryOptions12partitioningE">
-<span id="_CPPv3N5arrow7dataset24FileSystemFactoryOptions12partitioningE"></span><span id="_CPPv2N5arrow7dataset24FileSystemFactoryOptions12partitioningE"></span><span id="arrow::dataset::FileSystemFactoryOptions::partitioning__PartitioningOrFactory"></span><span class="target" id="structarrow_1_1dataset_1_1_file_system_factory_options_1a69af22fb504696928af8963c04af38bb"></span><a class="reference internal" href="#_CPPv4N5arrow7dataset21PartitioningOrFactoryE" title="arrow::dataset::PartitioningOrFactory">PartitioningOrFactory</a> <code class="sig-name descname">partitioning</code> = {<a class="reference internal" href="#_CPPv4N5arrow7dataset12PartitioningE" title="arrow::dataset::Partitioning">Partitioning</a>::<a class="reference internal" href="#_CPPv4N5arrow7dataset12Partitioning7DefaultEv" title="arrow::dataset::Partitioning::Default">Default</a>()}<a class="headerlink" href="#_CPPv4N5arrow7dataset24FileSystemFactoryOptions12partitioningE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Either an explicit <a class="reference internal" href="#classarrow_1_1dataset_1_1_partitioning"><span class="std std-ref">Partitioning</span></a> or a <a class="reference internal" href="#classarrow_1_1dataset_1_1_partitioning_factory"><span class="std std-ref">PartitioningFactory</span></a> to discover one. </p>
-<p>If a factory is provided, it will be used to infer a schema for partition fields based on file and directory paths then construct a <a class="reference internal" href="#classarrow_1_1dataset_1_1_partitioning"><span class="std std-ref">Partitioning</span></a>. The default is a <a class="reference internal" href="#classarrow_1_1dataset_1_1_partitioning"><span class="std std-ref">Partitioning</span></a> which will yield no partition information.</p>
-<p>The (explicit or discovered) partitioning will be applied to discovered files and the resulting partition information embedded in the <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a>. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt id="_CPPv4N5arrow7dataset24FileSystemFactoryOptions18partition_base_dirE">
-<span id="_CPPv3N5arrow7dataset24FileSystemFactoryOptions18partition_base_dirE"></span><span id="_CPPv2N5arrow7dataset24FileSystemFactoryOptions18partition_base_dirE"></span><span id="arrow::dataset::FileSystemFactoryOptions::partition_base_dir__ss"></span><span class="target" id="structarrow_1_1dataset_1_1_file_system_factory_options_1a5bfddc4e322fab63c777587eecfcf71f"></span>std::string <code class="sig-name descname">partition_base_dir</code><a class="headerlink" href="#_CPPv4N5arrow7dataset24FileSystemFactoryOptions18partition_base_dirE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>For the purposes of applying the partitioning, paths will be stripped of the partition_base_dir. </p>
-<p>Files not matching the partition_base_dir prefix will be skipped for partition discovery. The ignored files will still be part of the <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a>, but will not have partition information.</p>
-<p>Example: partition_base_dir = “/dataset”;</p>
-<p><ul class="simple">
-<li><p>“/dataset/US/sales.csv” -&gt; “US/sales.csv” will be given to the partitioning</p></li>
-<li><p>”/home/john/late_sales.csv” -&gt; Will be ignored for partition discovery.</p></li>
-</ul>
-</p>
-<p>This is useful for partitioning which parses directory when ordering is important, e.g. <a class="reference internal" href="#classarrow_1_1dataset_1_1_directory_partitioning"><span class="std std-ref">DirectoryPartitioning</span></a>. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt id="_CPPv4N5arrow7dataset24FileSystemFactoryOptions21exclude_invalid_filesE">
-<span id="_CPPv3N5arrow7dataset24FileSystemFactoryOptions21exclude_invalid_filesE"></span><span id="_CPPv2N5arrow7dataset24FileSystemFactoryOptions21exclude_invalid_filesE"></span><span id="arrow::dataset::FileSystemFactoryOptions::exclude_invalid_files__b"></span><span class="target" id="structarrow_1_1dataset_1_1_file_system_factory_options_1afe6dcef4df15e0f633068fde243e58c9"></span>bool <code class="sig-name descname">exclude_invalid_files</code> = false<a class="headerlink" href="#_CPPv4N5arrow7dataset24FileSystemFactoryOptions21exclude_invalid_filesE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Invalid files (via selector or explicitly) will be excluded by checking with the <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_format_1ae934a7b69d0402f36aecfa6037fa1343"><span class="std std-ref">FileFormat::IsSupported</span></a> method. </p>
-<p>This will incur IO for each files in a serial and single threaded fashion. Disabling this feature will skip the IO, but unsupported files may be present in the <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a> (resulting in an error at scan time). </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt id="_CPPv4N5arrow7dataset24FileSystemFactoryOptions24selector_ignore_prefixesE">
-<span id="_CPPv3N5arrow7dataset24FileSystemFactoryOptions24selector_ignore_prefixesE"></span><span id="_CPPv2N5arrow7dataset24FileSystemFactoryOptions24selector_ignore_prefixesE"></span><span id="arrow::dataset::FileSystemFactoryOptions::selector_ignore_prefixes__std::vector:ss:"></span><span class="target" id="structarrow_1_1dataset_1_1_file_system_factory_options_1af00c6508a0956e77d535c7cd764b33a4"></span>std::vector&lt;std::string&gt; <code class="sig-name descname">selector_ignore_prefixes</code> = {&quot;.&quot;, &quot;_&quot;,}<a class="headerlink" href="#_CPPv4N5arrow7dataset24FileSystemFactoryOptions24selector_ignore_prefixesE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>When discovering from a Selector (and not from an explicit file list), ignore files and directories matching any of these prefixes. </p>
-<p>Example (with selector = “/dataset/&amp;zwj;**”): selector_ignore_prefixes = {“_”, “.DS_STORE” };</p>
-<p><ul class="simple">
-<li><p>“/dataset/data.csv” -&gt; not ignored</p></li>
-<li><p>”/dataset/_metadata” -&gt; ignored</p></li>
-<li><p>”/dataset/.DS_STORE” -&gt; ignored</p></li>
-<li><p>”/dataset/_hidden/dat” -&gt; ignored</p></li>
-<li><p>”/dataset/nested/.DS_STORE” -&gt; ignored </p></li>
-</ul>
-</p>
-</dd></dl>
-
-</div>
-</dd></dl>
-
-<dl class="cpp class">
 <dt id="_CPPv4N5arrow7dataset16FileWriteOptionsE">
 <span id="_CPPv3N5arrow7dataset16FileWriteOptionsE"></span><span id="_CPPv2N5arrow7dataset16FileWriteOptionsE"></span><span id="arrow::dataset::FileWriteOptions"></span><span class="target" id="classarrow_1_1dataset_1_1_file_write_options"></span><em class="property">class </em><code class="sig-name descname">FileWriteOptions</code><a class="headerlink" href="#_CPPv4N5arrow7dataset16FileWriteOptionsE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Options for writing a file of this format. </p>
+<dd><em>#include &lt;arrow/dataset/file_base.h&gt;</em><p>Options for writing a file of this format. </p>
 <p>Subclassed by <a class="reference internal" href="#classarrow_1_1dataset_1_1_ipc_file_write_options"><span class="std std-ref">arrow::dataset::IpcFileWriteOptions</span></a>, <a class="reference internal" href="#classarrow_1_1dataset_1_1_parquet_file_write_options"><span class="std std-ref">arrow::dataset::ParquetFileWriteOptions</span></a></p>
 </dd></dl>
 
 <dl class="cpp class">
 <dt id="_CPPv4N5arrow7dataset10FileWriterE">
 <span id="_CPPv3N5arrow7dataset10FileWriterE"></span><span id="_CPPv2N5arrow7dataset10FileWriterE"></span><span id="arrow::dataset::FileWriter"></span><span class="target" id="classarrow_1_1dataset_1_1_file_writer"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">FileWriter</code><a class="headerlink" href="#_CPPv4N5arrow7dataset10FileWriterE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>A writer for this format. </p>
-<p>Subclassed by arrow::dataset::IpcFileWriter, arrow::dataset::ParquetFileWriter</p>
+<dd><em>#include &lt;arrow/dataset/file_base.h&gt;</em><p>A writer for this format. </p>
+<p>Subclassed by <a class="reference internal" href="#classarrow_1_1dataset_1_1_ipc_file_writer"><span class="std std-ref">arrow::dataset::IpcFileWriter</span></a>, <a class="reference internal" href="#classarrow_1_1dataset_1_1_parquet_file_writer"><span class="std std-ref">arrow::dataset::ParquetFileWriter</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="cpp function">
@@ -1393,7 +1468,7 @@
 <dl class="cpp struct">
 <dt id="_CPPv4N5arrow7dataset29FileSystemDatasetWriteOptionsE">
 <span id="_CPPv3N5arrow7dataset29FileSystemDatasetWriteOptionsE"></span><span id="_CPPv2N5arrow7dataset29FileSystemDatasetWriteOptionsE"></span><span id="arrow::dataset::FileSystemDatasetWriteOptions"></span><span class="target" id="structarrow_1_1dataset_1_1_file_system_dataset_write_options"></span><em class="property">struct </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">FileSystemDatasetWriteOptions</code><a class="headerlink" href="#_CPPv4N5arrow7dataset29FileSystemDatasetWriteOptionsE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Options for writing a dataset. </p>
+<dd><em>#include &lt;arrow/dataset/file_base.h&gt;</em><p>Options for writing a dataset. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Members</p>
 <dl class="cpp var">
@@ -1442,7 +1517,7 @@
 <dl class="cpp class">
 <dt id="_CPPv4N5arrow7dataset13CsvFileFormatE">
 <span id="_CPPv3N5arrow7dataset13CsvFileFormatE"></span><span id="_CPPv2N5arrow7dataset13CsvFileFormatE"></span><span id="arrow::dataset::CsvFileFormat"></span><span class="target" id="classarrow_1_1dataset_1_1_csv_file_format"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">CsvFileFormat</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset10FileFormatE" title="arrow::dataset::FileFormat">FileFormat</a><a class="headerlink" href="#_CPPv4N5arrow7dataset13CsvFileFormatE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>A <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_format"><span class="std std-ref">FileFormat</span></a> implementation that reads from and writes to Csv files. </p>
+<dd><em>#include &lt;arrow/dataset/file_csv.h&gt;</em><p>A <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_format"><span class="std std-ref">FileFormat</span></a> implementation that reads from and writes to Csv files. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="cpp function">
@@ -1496,7 +1571,7 @@
 <dl class="cpp struct">
 <dt id="_CPPv4N5arrow7dataset22CsvFragmentScanOptionsE">
 <span id="_CPPv3N5arrow7dataset22CsvFragmentScanOptionsE"></span><span id="_CPPv2N5arrow7dataset22CsvFragmentScanOptionsE"></span><span id="arrow::dataset::CsvFragmentScanOptions"></span><span class="target" id="structarrow_1_1dataset_1_1_csv_fragment_scan_options"></span><em class="property">struct </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">CsvFragmentScanOptions</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset19FragmentScanOptionsE" title="arrow::dataset::FragmentScanOptions">FragmentScanOptions</a><a class="headerlink" href="#_CPPv4N5arrow7dataset22CsvFragmentScanOptionsE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Per-scan options for CSV fragments. </p>
+<dd><em>#include &lt;arrow/dataset/file_csv.h&gt;</em><p>Per-scan options for CSV fragments. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Members</p>
 <dl class="cpp var">
@@ -1518,7 +1593,7 @@
 <dl class="cpp class">
 <dt id="_CPPv4N5arrow7dataset13IpcFileFormatE">
 <span id="_CPPv3N5arrow7dataset13IpcFileFormatE"></span><span id="_CPPv2N5arrow7dataset13IpcFileFormatE"></span><span id="arrow::dataset::IpcFileFormat"></span><span class="target" id="classarrow_1_1dataset_1_1_ipc_file_format"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">IpcFileFormat</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset10FileFormatE" title="arrow::dataset::FileFormat">FileFormat</a><a class="headerlink" href="#_CPPv4N5arrow7dataset13IpcFileFormatE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>A <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_format"><span class="std std-ref">FileFormat</span></a> implementation that reads from and writes to Ipc files. </p>
+<dd><em>#include &lt;arrow/dataset/file_ipc.h&gt;</em><p>A <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_format"><span class="std std-ref">FileFormat</span></a> implementation that reads from and writes to Ipc files. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="cpp function">
@@ -1569,7 +1644,7 @@
 <dl class="cpp class">
 <dt id="_CPPv4N5arrow7dataset19IpcFileWriteOptionsE">
 <span id="_CPPv3N5arrow7dataset19IpcFileWriteOptionsE"></span><span id="_CPPv2N5arrow7dataset19IpcFileWriteOptionsE"></span><span id="arrow::dataset::IpcFileWriteOptions"></span><span class="target" id="classarrow_1_1dataset_1_1_ipc_file_write_options"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">IpcFileWriteOptions</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset16FileWriteOptionsE" title="arrow::dataset::FileWriteOptions">FileWriteOptions</a><a class="headerlink" href="#_CPPv4N5arrow7dataset19IpcFileWriteOptionsE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><div class="breathe-sectiondef docutils container">
+<dd><em>#include &lt;arrow/dataset/file_ipc.h&gt;</em><div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Members</p>
 <dl class="cpp var">
 <dt id="_CPPv4N5arrow7dataset19IpcFileWriteOptions7optionsE">
@@ -1587,9 +1662,23 @@
 </dd></dl>
 
 <dl class="cpp class">
+<dt id="_CPPv4N5arrow7dataset13IpcFileWriterE">
+<span id="_CPPv3N5arrow7dataset13IpcFileWriterE"></span><span id="_CPPv2N5arrow7dataset13IpcFileWriterE"></span><span id="arrow::dataset::IpcFileWriter"></span><span class="target" id="classarrow_1_1dataset_1_1_ipc_file_writer"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">IpcFileWriter</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset10FileWriterE" title="arrow::dataset::FileWriter">FileWriter</a><a class="headerlink" href="#_CPPv4N5arrow7dataset13IpcFileWriterE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;arrow/dataset/file_ipc.h&gt;</em><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N5arrow7dataset13IpcFileWriter5WriteERKNSt10shared_ptrI11RecordBatchEE">
+<span id="_CPPv3N5arrow7dataset13IpcFileWriter5WriteERKNSt10shared_ptrI11RecordBatchEE"></span><span id="_CPPv2N5arrow7dataset13IpcFileWriter5WriteERKNSt10shared_ptrI11RecordBatchEE"></span><span id="arrow::dataset::IpcFileWriter::Write__std::shared_ptr:RecordBatch:CR"></span><span class="target" id="classarrow_1_1dataset_1_1_ipc_file_writer_1a16d4003a52404a1f0665ea836232dd6a"></span><em class="property">virtual</em> <a class="reference internal" href="support.html#_CPPv4N5arrow6StatusE" title="arrow::Status">Status</a> <code class="sig-name descname">Write</code><span class="sig-paren">(</span><em class="property">const</em> std::shared_ptr&lt;<a class="reference internal" href="table.html#_CPPv4N5arrow11RecordBatchE" title="arrow::RecordBatch">RecordBatch</a>&gt; &amp;<em>batch</em><span class="sig-paren">)</span> <em class="property">override</em><a class="headerlink" href="#_CPPv4N5arrow7dataset13IpcFileWriter5WriteERKNSt10shared_ptrI11RecordBatchEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write the given batch. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
 <dt id="_CPPv4N5arrow7dataset17ParquetFileFormatE">
 <span id="_CPPv3N5arrow7dataset17ParquetFileFormatE"></span><span id="_CPPv2N5arrow7dataset17ParquetFileFormatE"></span><span id="arrow::dataset::ParquetFileFormat"></span><span class="target" id="classarrow_1_1dataset_1_1_parquet_file_format"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">ParquetFileFormat</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset10FileFormatE" title="arrow::dataset::FileFormat">FileFormat</a><a class="headerlink" href="#_CPPv4N5arrow7dataset17ParquetFileFormatE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>A <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_format"><span class="std std-ref">FileFormat</span></a> implementation that reads from Parquet files. </p>
+<dd><em>#include &lt;arrow/dataset/file_parquet.h&gt;</em><p>A <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_format"><span class="std std-ref">FileFormat</span></a> implementation that reads from Parquet files. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="cpp function">
@@ -1681,7 +1770,7 @@
 <dl class="cpp struct">
 <dt id="_CPPv4N5arrow7dataset17ParquetFileFormat13ReaderOptionsE">
 <span id="_CPPv3N5arrow7dataset17ParquetFileFormat13ReaderOptionsE"></span><span id="_CPPv2N5arrow7dataset17ParquetFileFormat13ReaderOptionsE"></span><span id="arrow::dataset::ParquetFileFormat::ReaderOptions"></span><span class="target" id="structarrow_1_1dataset_1_1_parquet_file_format_1_1_reader_options"></span><em class="property">struct </em><code class="sig-name descname">ReaderOptions</code><a class="headerlink" href="#_CPPv4N5arrow7dataset17ParquetFileFormat13ReaderOptionsE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><div class="breathe-sectiondef docutils container">
+<dd><em>#include &lt;arrow/dataset/file_parquet.h&gt;</em><div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Members</p>
 <dl class="cpp var">
 <dt id="_CPPv4N5arrow7dataset17ParquetFileFormat13ReaderOptions33enable_parallel_column_conversionE">
@@ -1698,7 +1787,7 @@
 <dl class="cpp class">
 <dt id="_CPPv4N5arrow7dataset19ParquetFileFragmentE">
 <span id="_CPPv3N5arrow7dataset19ParquetFileFragmentE"></span><span id="_CPPv2N5arrow7dataset19ParquetFileFragmentE"></span><span id="arrow::dataset::ParquetFileFragment"></span><span class="target" id="classarrow_1_1dataset_1_1_parquet_file_fragment"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">ParquetFileFragment</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset12FileFragmentE" title="arrow::dataset::FileFragment">FileFragment</a><a class="headerlink" href="#_CPPv4N5arrow7dataset19ParquetFileFragmentE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>A <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_fragment"><span class="std std-ref">FileFragment</span></a> with parquet logic. </p>
+<dd><em>#include &lt;arrow/dataset/file_parquet.h&gt;</em><p>A <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_fragment"><span class="std std-ref">FileFragment</span></a> with parquet logic. </p>
 <p><a class="reference internal" href="#classarrow_1_1dataset_1_1_parquet_file_fragment"><span class="std std-ref">ParquetFileFragment</span></a> provides a lazy (with respect to IO) interface to scan parquet files. Any heavy IO calls are deferred to the <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_fragment_1a75e7f4660a81f88d6e0c71f63550039f"><span class="std std-ref">Scan()</span></a> method.</p>
 <p>The caller can provide an optional list of selected RowGroups to limit the number of scanned RowGroups, or to partition the scans across multiple threads.</p>
 <p>Metadata can be explicitly provided, enabling pushdown predicate benefits without the potentially heavy IO of loading Metadata from the file system. This can induce significant performance boost when scanning high latency file systems. </p>
@@ -1734,7 +1823,7 @@
 <dl class="cpp class">
 <dt id="_CPPv4N5arrow7dataset23ParquetFileWriteOptionsE">
 <span id="_CPPv3N5arrow7dataset23ParquetFileWriteOptionsE"></span><span id="_CPPv2N5arrow7dataset23ParquetFileWriteOptionsE"></span><span id="arrow::dataset::ParquetFileWriteOptions"></span><span class="target" id="classarrow_1_1dataset_1_1_parquet_file_write_options"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">ParquetFileWriteOptions</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset16FileWriteOptionsE" title="arrow::dataset::FileWriteOptions">FileWriteOptions</a><a class="headerlink" href="#_CPPv4N5arrow7dataset23ParquetFileWriteOptionsE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><div class="breathe-sectiondef docutils container">
+<dd><em>#include &lt;arrow/dataset/file_parquet.h&gt;</em><div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Members</p>
 <dl class="cpp var">
 <dt id="_CPPv4N5arrow7dataset23ParquetFileWriteOptions17writer_propertiesE">
@@ -1752,9 +1841,61 @@
 </dd></dl>
 
 <dl class="cpp class">
+<dt id="_CPPv4N5arrow7dataset17ParquetFileWriterE">
+<span id="_CPPv3N5arrow7dataset17ParquetFileWriterE"></span><span id="_CPPv2N5arrow7dataset17ParquetFileWriterE"></span><span id="arrow::dataset::ParquetFileWriter"></span><span class="target" id="classarrow_1_1dataset_1_1_parquet_file_writer"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">ParquetFileWriter</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset10FileWriterE" title="arrow::dataset::FileWriter">FileWriter</a><a class="headerlink" href="#_CPPv4N5arrow7dataset17ParquetFileWriterE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;arrow/dataset/file_parquet.h&gt;</em><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N5arrow7dataset17ParquetFileWriter5WriteERKNSt10shared_ptrI11RecordBatchEE">
+<span id="_CPPv3N5arrow7dataset17ParquetFileWriter5WriteERKNSt10shared_ptrI11RecordBatchEE"></span><span id="_CPPv2N5arrow7dataset17ParquetFileWriter5WriteERKNSt10shared_ptrI11RecordBatchEE"></span><span id="arrow::dataset::ParquetFileWriter::Write__std::shared_ptr:RecordBatch:CR"></span><span class="target" id="classarrow_1_1dataset_1_1_parquet_file_writer_1a01e4be6f29331d11fe0bdb39ff0ac111"></span><em class="property">virtual</em> <a class="reference internal" href="support.html#_CPPv4N5arrow6StatusE" title="arrow::Status">Status</a> <code class="sig-name descname">Write</code><span class="sig-paren">(</span><em class="property">const</em> std::shared_ptr&lt;<a class="reference internal" href="table.html#_CPPv4N5arrow11RecordBatchE" title="arrow::RecordBatch">RecordBatch</a>&gt; &amp;<em>batch</em><span class="sig-paren">)</span> <em class="property">override</em><a class="headerlink" href="#_CPPv4N5arrow7dataset17ParquetFileWriter5WriteERKNSt10shared_ptrI11RecordBatchEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write the given batch. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt id="_CPPv4N5arrow7dataset21ParquetFactoryOptionsE">
+<span id="_CPPv3N5arrow7dataset21ParquetFactoryOptionsE"></span><span id="_CPPv2N5arrow7dataset21ParquetFactoryOptionsE"></span><span id="arrow::dataset::ParquetFactoryOptions"></span><span class="target" id="structarrow_1_1dataset_1_1_parquet_factory_options"></span><em class="property">struct </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">ParquetFactoryOptions</code><a class="headerlink" href="#_CPPv4N5arrow7dataset21ParquetFactoryOptionsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;arrow/dataset/file_parquet.h&gt;</em><p>Options for making a <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_system_dataset"><span class="std std-ref">FileSystemDataset</span></a> from a Parquet _metadata file. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset21ParquetFactoryOptions12partitioningE">
+<span id="_CPPv3N5arrow7dataset21ParquetFactoryOptions12partitioningE"></span><span id="_CPPv2N5arrow7dataset21ParquetFactoryOptions12partitioningE"></span><span id="arrow::dataset::ParquetFactoryOptions::partitioning__PartitioningOrFactory"></span><span class="target" id="structarrow_1_1dataset_1_1_parquet_factory_options_1a0d841ce12972071d3330601e90cc0c6c"></span><a class="reference internal" href="#_CPPv4N5arrow7dataset21PartitioningOrFactoryE" title="arrow::dataset::PartitioningOrFactory">PartitioningOrFactory</a> <code class="sig-name descname">partitioning</code> = {<a class="reference internal" href="#_CPPv4N5arrow7dataset12PartitioningE" title="arrow::dataset::Partitioning">Partitioning</a>::<a class="reference internal" href="#_CPPv4N5arrow7dataset12Partitioning7DefaultEv" title="arrow::dataset::Partitioning::Default">Default</a>()}<a class="headerlink" href="#_CPPv4N5arrow7dataset21ParquetFactoryOptions12partitioningE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Either an explicit <a class="reference internal" href="#classarrow_1_1dataset_1_1_partitioning"><span class="std std-ref">Partitioning</span></a> or a <a class="reference internal" href="#classarrow_1_1dataset_1_1_partitioning_factory"><span class="std std-ref">PartitioningFactory</span></a> to discover one. </p>
+<p>If a factory is provided, it will be used to infer a schema for partition fields based on file and directory paths then construct a <a class="reference internal" href="#classarrow_1_1dataset_1_1_partitioning"><span class="std std-ref">Partitioning</span></a>. The default is a <a class="reference internal" href="#classarrow_1_1dataset_1_1_partitioning"><span class="std std-ref">Partitioning</span></a> which will yield no partition information.</p>
+<p>The (explicit or discovered) partitioning will be applied to discovered files and the resulting partition information embedded in the <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset21ParquetFactoryOptions18partition_base_dirE">
+<span id="_CPPv3N5arrow7dataset21ParquetFactoryOptions18partition_base_dirE"></span><span id="_CPPv2N5arrow7dataset21ParquetFactoryOptions18partition_base_dirE"></span><span id="arrow::dataset::ParquetFactoryOptions::partition_base_dir__ss"></span><span class="target" id="structarrow_1_1dataset_1_1_parquet_factory_options_1a0500a2e1614da5dfefc3c16800c73956"></span>std::string <code class="sig-name descname">partition_base_dir</code><a class="headerlink" href="#_CPPv4N5arrow7dataset21ParquetFactoryOptions18partition_base_dirE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>For the purposes of applying the partitioning, paths will be stripped of the partition_base_dir. </p>
+<p>Files not matching the partition_base_dir prefix will be skipped for partition discovery. The ignored files will still be part of the <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a>, but will not have partition information.</p>
+<p>Example: partition_base_dir = “/dataset”;</p>
+<p><ul class="simple">
+<li><p>“/dataset/US/sales.csv” -&gt; “US/sales.csv” will be given to the partitioning</p></li>
+<li><p>”/home/john/late_sales.csv” -&gt; Will be ignored for partition discovery.</p></li>
+</ul>
+</p>
+<p>This is useful for partitioning which parses directory when ordering is important, e.g. <a class="reference internal" href="#classarrow_1_1dataset_1_1_directory_partitioning"><span class="std std-ref">DirectoryPartitioning</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset21ParquetFactoryOptions27validate_column_chunk_pathsE">
+<span id="_CPPv3N5arrow7dataset21ParquetFactoryOptions27validate_column_chunk_pathsE"></span><span id="_CPPv2N5arrow7dataset21ParquetFactoryOptions27validate_column_chunk_pathsE"></span><span id="arrow::dataset::ParquetFactoryOptions::validate_column_chunk_paths__b"></span><span class="target" id="structarrow_1_1dataset_1_1_parquet_factory_options_1a1bef5686124c1bf64c02f53ce783624c"></span>bool <code class="sig-name descname">validate_column_chunk_paths</code> = false<a class="headerlink" href="#_CPPv4N5arrow7dataset21ParquetFactoryOptions27validate_column_chunk_pathsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Assert that all ColumnChunk paths are consistent. </p>
+<p>The parquet spec allows for ColumnChunk data to be stored in multiple files, but <a class="reference internal" href="#classarrow_1_1dataset_1_1_parquet_dataset_factory"><span class="std std-ref">ParquetDatasetFactory</span></a> supports only a single file with all ColumnChunk data. If this flag is set construction of a <a class="reference internal" href="#classarrow_1_1dataset_1_1_parquet_dataset_factory"><span class="std std-ref">ParquetDatasetFactory</span></a> will raise an error if ColumnChunk data is not resident in a single file. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
 <dt id="_CPPv4N5arrow7dataset21ParquetDatasetFactoryE">
 <span id="_CPPv3N5arrow7dataset21ParquetDatasetFactoryE"></span><span id="_CPPv2N5arrow7dataset21ParquetDatasetFactoryE"></span><span id="arrow::dataset::ParquetDatasetFactory"></span><span class="target" id="classarrow_1_1dataset_1_1_parquet_dataset_factory"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">ParquetDatasetFactory</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset14DatasetFactoryE" title="arrow::dataset::DatasetFactory">DatasetFactory</a><a class="headerlink" href="#_CPPv4N5arrow7dataset21ParquetDatasetFactoryE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Create <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_system_dataset"><span class="std std-ref">FileSystemDataset</span></a> from custom <code class="docutils literal notranslate"><span class="pre">_metadata</span></code> cache file. </p>
+<dd><em>#include &lt;arrow/dataset/file_parquet.h&gt;</em><p>Create <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_system_dataset"><span class="std std-ref">FileSystemDataset</span></a> from custom <code class="docutils literal notranslate"><span class="pre">_metadata</span></code> cache file. </p>
 <p>Dask and other systems will generate a cache metadata file by concatenating the RowGroupMetaData of multiple parquet files into a single parquet file that only contains metadata and no ColumnChunk data.</p>
 <p><a class="reference internal" href="#classarrow_1_1dataset_1_1_parquet_dataset_factory"><span class="std std-ref">ParquetDatasetFactory</span></a> creates a <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_system_dataset"><span class="std std-ref">FileSystemDataset</span></a> composed of <a class="reference internal" href="#classarrow_1_1dataset_1_1_parquet_file_fragment"><span class="std std-ref">ParquetFileFragment</span></a> where each fragment is pre-populated with the exact number of row groups and statistics for each columns. </p>
 <div class="breathe-sectiondef docutils container">
@@ -1807,44 +1948,6 @@
 </dd>
 </dl>
 </p>
-</dd></dl>
-
-</div>
-</dd></dl>
-
-<dl class="cpp struct">
-<dt id="_CPPv4N5arrow7dataset21ParquetFactoryOptionsE">
-<span id="_CPPv3N5arrow7dataset21ParquetFactoryOptionsE"></span><span id="_CPPv2N5arrow7dataset21ParquetFactoryOptionsE"></span><span id="arrow::dataset::ParquetFactoryOptions"></span><span class="target" id="structarrow_1_1dataset_1_1_parquet_factory_options"></span><em class="property">struct </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">ParquetFactoryOptions</code><a class="headerlink" href="#_CPPv4N5arrow7dataset21ParquetFactoryOptionsE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Options for making a <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_system_dataset"><span class="std std-ref">FileSystemDataset</span></a> from a Parquet _metadata file. </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Members</p>
-<dl class="cpp var">
-<dt id="_CPPv4N5arrow7dataset21ParquetFactoryOptions12partitioningE">
-<span id="_CPPv3N5arrow7dataset21ParquetFactoryOptions12partitioningE"></span><span id="_CPPv2N5arrow7dataset21ParquetFactoryOptions12partitioningE"></span><span id="arrow::dataset::ParquetFactoryOptions::partitioning__PartitioningOrFactory"></span><span class="target" id="structarrow_1_1dataset_1_1_parquet_factory_options_1a0d841ce12972071d3330601e90cc0c6c"></span><a class="reference internal" href="#_CPPv4N5arrow7dataset21PartitioningOrFactoryE" title="arrow::dataset::PartitioningOrFactory">PartitioningOrFactory</a> <code class="sig-name descname">partitioning</code> = {<a class="reference internal" href="#_CPPv4N5arrow7dataset12PartitioningE" title="arrow::dataset::Partitioning">Partitioning</a>::<a class="reference internal" href="#_CPPv4N5arrow7dataset12Partitioning7DefaultEv" title="arrow::dataset::Partitioning::Default">Default</a>()}<a class="headerlink" href="#_CPPv4N5arrow7dataset21ParquetFactoryOptions12partitioningE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Either an explicit <a class="reference internal" href="#classarrow_1_1dataset_1_1_partitioning"><span class="std std-ref">Partitioning</span></a> or a <a class="reference internal" href="#classarrow_1_1dataset_1_1_partitioning_factory"><span class="std std-ref">PartitioningFactory</span></a> to discover one. </p>
-<p>If a factory is provided, it will be used to infer a schema for partition fields based on file and directory paths then construct a <a class="reference internal" href="#classarrow_1_1dataset_1_1_partitioning"><span class="std std-ref">Partitioning</span></a>. The default is a <a class="reference internal" href="#classarrow_1_1dataset_1_1_partitioning"><span class="std std-ref">Partitioning</span></a> which will yield no partition information.</p>
-<p>The (explicit or discovered) partitioning will be applied to discovered files and the resulting partition information embedded in the <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a>. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt id="_CPPv4N5arrow7dataset21ParquetFactoryOptions18partition_base_dirE">
-<span id="_CPPv3N5arrow7dataset21ParquetFactoryOptions18partition_base_dirE"></span><span id="_CPPv2N5arrow7dataset21ParquetFactoryOptions18partition_base_dirE"></span><span id="arrow::dataset::ParquetFactoryOptions::partition_base_dir__ss"></span><span class="target" id="structarrow_1_1dataset_1_1_parquet_factory_options_1a0500a2e1614da5dfefc3c16800c73956"></span>std::string <code class="sig-name descname">partition_base_dir</code><a class="headerlink" href="#_CPPv4N5arrow7dataset21ParquetFactoryOptions18partition_base_dirE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>For the purposes of applying the partitioning, paths will be stripped of the partition_base_dir. </p>
-<p>Files not matching the partition_base_dir prefix will be skipped for partition discovery. The ignored files will still be part of the <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a>, but will not have partition information.</p>
-<p>Example: partition_base_dir = “/dataset”;</p>
-<p><ul class="simple">
-<li><p>“/dataset/US/sales.csv” -&gt; “US/sales.csv” will be given to the partitioning</p></li>
-<li><p>”/home/john/late_sales.csv” -&gt; Will be ignored for partition discovery.</p></li>
-</ul>
-</p>
-<p>This is useful for partitioning which parses directory when ordering is important, e.g. <a class="reference internal" href="#classarrow_1_1dataset_1_1_directory_partitioning"><span class="std std-ref">DirectoryPartitioning</span></a>. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt id="_CPPv4N5arrow7dataset21ParquetFactoryOptions27validate_column_chunk_pathsE">
-<span id="_CPPv3N5arrow7dataset21ParquetFactoryOptions27validate_column_chunk_pathsE"></span><span id="_CPPv2N5arrow7dataset21ParquetFactoryOptions27validate_column_chunk_pathsE"></span><span id="arrow::dataset::ParquetFactoryOptions::validate_column_chunk_paths__b"></span><span class="target" id="structarrow_1_1dataset_1_1_parquet_factory_options_1a1bef5686124c1bf64c02f53ce783624c"></span>bool <code class="sig-name descname">validate_column_chunk_paths</code> = false<a class="headerlink" href="#_CPPv4N5arrow7dataset21ParquetFactoryOptions27validate_column_chunk_pathsE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Assert that all ColumnChunk paths are consistent. </p>
-<p>The parquet spec allows for ColumnChunk data to be stored in multiple files, but <a class="reference internal" href="#classarrow_1_1dataset_1_1_parquet_dataset_factory"><span class="std std-ref">ParquetDatasetFactory</span></a> supports only a single file with all ColumnChunk data. If this flag is set construction of a <a class="reference internal" href="#classarrow_1_1dataset_1_1_parquet_dataset_factory"><span class="std std-ref">ParquetDatasetFactory</span></a> will raise an error if ColumnChunk data is not resident in a single file. </p>
 </dd></dl>
 
 </div>
