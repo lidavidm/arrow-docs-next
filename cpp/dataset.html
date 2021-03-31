@@ -125,7 +125,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#filtering-data">Filtering data</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#projecting-columns">Projecting columns</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#reading-and-writing-partitioned-data">Reading and writing partitioned data</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#reading-from-cloud-storage">Reading from cloud storage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reading-from-other-data-sources">Reading from other data sources</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#full-example">Full Example</a></li>
 </ul>
 </li>
@@ -248,7 +248,7 @@ cloud).</p></li>
 <li><p>Discovery of sources (crawling directories, handle directory-based partitioned
 datasets, basic schema normalization, ..)</p></li>
 <li><p>Optimized reading with predicate pushdown (filtering rows), projection
-(selecting columns), parallel reading or fine-grained managing of tasks.</p></li>
+(selecting columns), parallel reading, or fine-grained managing of tasks.</p></li>
 </ul>
 <p>Currently, only Parquet, Feather / Arrow IPC, and CSV files are supported. The
 goal is to expand this in the future to other file formats and data sources
@@ -493,8 +493,8 @@ more formats are planned in the future.</p>
 <p>then we can read the Feather file using the same functions, but passing a
 <a class="reference internal" href="api/dataset.html#_CPPv4N5arrow7dataset13IpcFileFormatE" title="arrow::dataset::IpcFileFormat"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">arrow::dataset::IpcFileFormat</span></code></a>:</p>
 <div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="n">format</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">ds</span><span class="o">::</span><span class="n">ParquetFileFormat</span><span class="o">&gt;</span><span class="p">();</span>
-    <span class="n">table</span> <span class="o">=</span> <span class="n">ScanWholeDataset</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">format</span><span class="p">,</span> <span class="n">base_path</span><span class="p">);</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span>  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">format_name</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">format_name</span> <span class="o">==</span> <span class="s">&quot;parquet_hive&quot;</span><span class="p">)</span> <span class="p">{</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -532,7 +532,13 @@ columns:</p>
 <span class="normal">185</span>
 <span class="normal">186</span>
 <span class="normal">187</span>
-<span class="normal">188</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// Read a dataset, but select only column &quot;b&quot; and only rows where b &lt; 4.</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// Read a dataset, but select only column &quot;b&quot; and only rows where b &lt; 4.</span>
+<span class="c1">//</span>
+<span class="c1">// This is useful when you only want a few columns from a dataset. Where possible,</span>
+<span class="c1">// Datasets will push down the column selection such that less work is done.</span>
 <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">arrow</span><span class="o">::</span><span class="n">Table</span><span class="o">&gt;</span> <span class="n">FilterAndSelectDataset</span><span class="p">(</span>
     <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">fs</span><span class="o">::</span><span class="n">FileSystem</span><span class="o">&gt;&amp;</span> <span class="n">filesystem</span><span class="p">,</span>
     <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ds</span><span class="o">::</span><span class="n">FileFormat</span><span class="o">&gt;&amp;</span> <span class="n">format</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">base_dir</span><span class="p">)</span> <span class="p">{</span>
@@ -572,7 +578,13 @@ the returned table.</p>
 <span class="normal">185</span>
 <span class="normal">186</span>
 <span class="normal">187</span>
-<span class="normal">188</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// Read a dataset, but select only column &quot;b&quot; and only rows where b &lt; 4.</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// Read a dataset, but select only column &quot;b&quot; and only rows where b &lt; 4.</span>
+<span class="c1">//</span>
+<span class="c1">// This is useful when you only want a few columns from a dataset. Where possible,</span>
+<span class="c1">// Datasets will push down the column selection such that less work is done.</span>
 <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">arrow</span><span class="o">::</span><span class="n">Table</span><span class="o">&gt;</span> <span class="n">FilterAndSelectDataset</span><span class="p">(</span>
     <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">fs</span><span class="o">::</span><span class="n">FileSystem</span><span class="o">&gt;&amp;</span> <span class="n">filesystem</span><span class="p">,</span>
     <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ds</span><span class="o">::</span><span class="n">FileFormat</span><span class="o">&gt;&amp;</span> <span class="n">format</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">base_dir</span><span class="p">)</span> <span class="p">{</span>
@@ -599,10 +611,7 @@ the returned table.</p>
 complex projections in combination with expressions.</p>
 <p>In this case, we pass a vector of expressions used to construct column values,
 and a vector of names for the columns:</p>
-<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">190</span>
-<span class="normal">191</span>
-<span class="normal">192</span>
-<span class="normal">193</span>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">193</span>
 <span class="normal">194</span>
 <span class="normal">195</span>
 <span class="normal">196</span>
@@ -624,7 +633,20 @@ and a vector of names for the columns:</p>
 <span class="normal">212</span>
 <span class="normal">213</span>
 <span class="normal">214</span>
-<span class="normal">215</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// Read a dataset, but with column projection.</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// Read a dataset, but with column projection.</span>
+<span class="c1">//</span>
+<span class="c1">// This is useful to derive new columns from existing data. For example, here we</span>
+<span class="c1">// demonstrate casting a column to a different type, and turning a numeric column into a</span>
+<span class="c1">// boolean column based on a predicate. You could also rename columns or perform</span>
+<span class="c1">// computations involving multiple columns.</span>
 <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">arrow</span><span class="o">::</span><span class="n">Table</span><span class="o">&gt;</span> <span class="n">ProjectDataset</span><span class="p">(</span>
     <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">fs</span><span class="o">::</span><span class="n">FileSystem</span><span class="o">&gt;&amp;</span> <span class="n">filesystem</span><span class="p">,</span>
     <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ds</span><span class="o">::</span><span class="n">FileFormat</span><span class="o">&gt;&amp;</span> <span class="n">format</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">base_dir</span><span class="p">)</span> <span class="p">{</span>
@@ -656,15 +678,7 @@ and a vector of names for the columns:</p>
 present in the resulting table. If you want to include a derived column in
 <em>addition</em> to the existing columns, you can build up the expressions from the
 dataset schema:</p>
-<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">217</span>
-<span class="normal">218</span>
-<span class="normal">219</span>
-<span class="normal">220</span>
-<span class="normal">221</span>
-<span class="normal">222</span>
-<span class="normal">223</span>
-<span class="normal">224</span>
-<span class="normal">225</span>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">225</span>
 <span class="normal">226</span>
 <span class="normal">227</span>
 <span class="normal">228</span>
@@ -682,8 +696,22 @@ dataset schema:</p>
 <span class="normal">240</span>
 <span class="normal">241</span>
 <span class="normal">242</span>
-<span class="normal">243</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// Read a dataset, but with column projection.</span>
-<span class="c1">// This time, we read all original columns plus one derived column.</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// Read a dataset, but with column projection.</span>
+<span class="c1">//</span>
+<span class="c1">// This time, we read all original columns plus one derived column. This simply combines</span>
+<span class="c1">// the previous two examples: selecting a subset of columns by name, and deriving new</span>
+<span class="c1">// columns with an expression.</span>
 <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">arrow</span><span class="o">::</span><span class="n">Table</span><span class="o">&gt;</span> <span class="n">SelectAndProjectDataset</span><span class="p">(</span>
     <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">fs</span><span class="o">::</span><span class="n">FileSystem</span><span class="o">&gt;&amp;</span> <span class="n">filesystem</span><span class="p">,</span>
     <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ds</span><span class="o">::</span><span class="n">FileFormat</span><span class="o">&gt;&amp;</span> <span class="n">format</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">base_dir</span><span class="p">)</span> <span class="p">{</span>
@@ -705,8 +733,8 @@ dataset schema:</p>
 </span><span class="hll">  <span class="c1">// Also derive a new column.</span>
 </span><span class="hll">  <span class="n">names</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="s">&quot;b_large&quot;</span><span class="p">);</span>
 </span><span class="hll">  <span class="n">exprs</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">ds</span><span class="o">::</span><span class="n">greater</span><span class="p">(</span><span class="n">ds</span><span class="o">::</span><span class="n">field_ref</span><span class="p">(</span><span class="s">&quot;b&quot;</span><span class="p">),</span> <span class="n">ds</span><span class="o">::</span><span class="n">literal</span><span class="p">(</span><span class="mi">1</span><span class="p">)));</span>
-</span>  <span class="n">ABORT_ON_FAILURE</span><span class="p">(</span><span class="n">scan_builder</span><span class="o">-&gt;</span><span class="n">Project</span><span class="p">(</span><span class="n">exprs</span><span class="p">,</span> <span class="n">names</span><span class="p">));</span>
-  <span class="k">auto</span> <span class="n">scanner</span> <span class="o">=</span> <span class="n">scan_builder</span><span class="o">-&gt;</span><span class="n">Finish</span><span class="p">().</span><span class="n">ValueOrDie</span><span class="p">();</span>
+</span><span class="hll">  <span class="n">ABORT_ON_FAILURE</span><span class="p">(</span><span class="n">scan_builder</span><span class="o">-&gt;</span><span class="n">Project</span><span class="p">(</span><span class="n">exprs</span><span class="p">,</span> <span class="n">names</span><span class="p">));</span>
+</span>  <span class="k">auto</span> <span class="n">scanner</span> <span class="o">=</span> <span class="n">scan_builder</span><span class="o">-&gt;</span><span class="n">Finish</span><span class="p">().</span><span class="n">ValueOrDie</span><span class="p">();</span>
   <span class="k">return</span> <span class="n">scanner</span><span class="o">-&gt;</span><span class="n">ToTable</span><span class="p">().</span><span class="n">ValueOrDie</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
@@ -835,18 +863,7 @@ and the Parquet files written in those directories no longer include the “part
 column.</p>
 <p>Reading this dataset, we now specify that the dataset uses a Hive-like
 partitioning scheme:</p>
-<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">245</span>
-<span class="normal">246</span>
-<span class="normal">247</span>
-<span class="normal">248</span>
-<span class="normal">249</span>
-<span class="normal">250</span>
-<span class="normal">251</span>
-<span class="normal">252</span>
-<span class="normal">253</span>
-<span class="normal">254</span>
-<span class="normal">255</span>
-<span class="normal">256</span>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">256</span>
 <span class="normal">257</span>
 <span class="normal">258</span>
 <span class="normal">259</span>
@@ -858,7 +875,18 @@ partitioning scheme:</p>
 <span class="normal">265</span>
 <span class="normal">266</span>
 <span class="normal">267</span>
-<span class="normal">268</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// Read an entire dataset, but with partitioning information.</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// Read an entire dataset, but with partitioning information.</span>
 <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">arrow</span><span class="o">::</span><span class="n">Table</span><span class="o">&gt;</span> <span class="n">ScanPartitionedDataset</span><span class="p">(</span>
     <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">fs</span><span class="o">::</span><span class="n">FileSystem</span><span class="o">&gt;&amp;</span> <span class="n">filesystem</span><span class="p">,</span>
     <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ds</span><span class="o">::</span><span class="n">FileFormat</span><span class="o">&gt;&amp;</span> <span class="n">format</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">base_dir</span><span class="p">)</span> <span class="p">{</span>
@@ -908,18 +936,7 @@ part: string
 </div>
 <p>We can now filter on the partition keys, which avoids loading files
 altogether if they do not match the predicate:</p>
-<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">270</span>
-<span class="normal">271</span>
-<span class="normal">272</span>
-<span class="normal">273</span>
-<span class="normal">274</span>
-<span class="normal">275</span>
-<span class="normal">276</span>
-<span class="normal">277</span>
-<span class="normal">278</span>
-<span class="normal">279</span>
-<span class="normal">280</span>
-<span class="normal">281</span>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">281</span>
 <span class="normal">282</span>
 <span class="normal">283</span>
 <span class="normal">284</span>
@@ -928,7 +945,18 @@ altogether if they do not match the predicate:</p>
 <span class="normal">287</span>
 <span class="normal">288</span>
 <span class="normal">289</span>
-<span class="normal">290</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// Read an entire dataset, but with partitioning information. Also, filter the dataset on</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// Read an entire dataset, but with partitioning information. Also, filter the dataset on</span>
 <span class="c1">// the partition values.</span>
 <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">arrow</span><span class="o">::</span><span class="n">Table</span><span class="o">&gt;</span> <span class="n">FilterPartitionedDataset</span><span class="p">(</span>
     <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">fs</span><span class="o">::</span><span class="n">FileSystem</span><span class="o">&gt;&amp;</span> <span class="n">filesystem</span><span class="p">,</span>
@@ -978,11 +1006,118 @@ when constructing a directory partitioning:</p>
 types from file paths.</p>
 </div>
 </div>
+<div class="section" id="reading-from-other-data-sources">
+<h2>Reading from other data sources<a class="headerlink" href="#reading-from-other-data-sources" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="reading-in-memory-data">
+<h3>Reading in-memory data<a class="headerlink" href="#reading-in-memory-data" title="Permalink to this headline">¶</a></h3>
+<p>If you already have data in memory that you’d like to use with the Datasets
+interface (e.g. to filter/project data, or to write it out to a filesystem),
+you can wrap it in a <a class="reference internal" href="api/dataset.html#_CPPv4N5arrow7dataset15InMemoryDatasetE" title="arrow::dataset::InMemoryDataset"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">arrow::dataset::InMemoryDataset</span></code></a>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span> <span class="n">table</span> <span class="o">=</span> <span class="n">arrow</span><span class="o">::</span><span class="n">Table</span><span class="o">::</span><span class="n">FromRecordBatches</span><span class="p">(...);</span>
+<span class="k">auto</span> <span class="n">dataset</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">arrow</span><span class="o">::</span><span class="n">dataset</span><span class="o">::</span><span class="n">InMemoryDataset</span><span class="o">&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">table</span><span class="p">));</span>
+<span class="c1">// Scan the dataset, filter, it, etc.</span>
+<span class="k">auto</span> <span class="n">scanner_builder</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">-&gt;</span><span class="n">NewScan</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>In the example, we used the InMemoryDataset to write our example data to local
+disk to be used in the rest of the example:</p>
+<div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// Set up a dataset by writing files with partitioning</span>
+<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">CreateExampleParquetHivePartitionedDataset</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">fs</span><span class="o">::</span><span class="n">FileSystem</span><span class="o">&gt;&amp;</span> <span class="n">filesystem</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">root_path</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">auto</span> <span class="n">base_path</span> <span class="o">=</span> <span class="n">root_path</span> <span class="o">+</span> <span class="s">&quot;/parquet_dataset&quot;</span><span class="p">;</span>
+  <span class="n">ABORT_ON_FAILURE</span><span class="p">(</span><span class="n">filesystem</span><span class="o">-&gt;</span><span class="n">CreateDir</span><span class="p">(</span><span class="n">base_path</span><span class="p">));</span>
+  <span class="c1">// Create an Arrow Table</span>
+  <span class="k">auto</span> <span class="n">schema</span> <span class="o">=</span> <span class="n">arrow</span><span class="o">::</span><span class="n">schema</span><span class="p">(</span>
+      <span class="p">{</span><span class="n">arrow</span><span class="o">::</span><span class="n">field</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="n">arrow</span><span class="o">::</span><span class="n">int64</span><span class="p">()),</span> <span class="n">arrow</span><span class="o">::</span><span class="n">field</span><span class="p">(</span><span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="n">arrow</span><span class="o">::</span><span class="n">int64</span><span class="p">()),</span>
+       <span class="n">arrow</span><span class="o">::</span><span class="n">field</span><span class="p">(</span><span class="s">&quot;c&quot;</span><span class="p">,</span> <span class="n">arrow</span><span class="o">::</span><span class="n">int64</span><span class="p">()),</span> <span class="n">arrow</span><span class="o">::</span><span class="n">field</span><span class="p">(</span><span class="s">&quot;part&quot;</span><span class="p">,</span> <span class="n">arrow</span><span class="o">::</span><span class="n">utf8</span><span class="p">())});</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">arrow</span><span class="o">::</span><span class="n">Array</span><span class="o">&gt;&gt;</span> <span class="n">arrays</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+  <span class="n">arrow</span><span class="o">::</span><span class="n">NumericBuilder</span><span class="o">&lt;</span><span class="n">arrow</span><span class="o">::</span><span class="n">Int64Type</span><span class="o">&gt;</span> <span class="n">builder</span><span class="p">;</span>
+  <span class="n">ABORT_ON_FAILURE</span><span class="p">(</span><span class="n">builder</span><span class="p">.</span><span class="n">AppendValues</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">}));</span>
+  <span class="n">ABORT_ON_FAILURE</span><span class="p">(</span><span class="n">builder</span><span class="p">.</span><span class="n">Finish</span><span class="p">(</span><span class="o">&amp;</span><span class="n">arrays</span><span class="p">[</span><span class="mi">0</span><span class="p">]));</span>
+  <span class="n">builder</span><span class="p">.</span><span class="n">Reset</span><span class="p">();</span>
+  <span class="n">ABORT_ON_FAILURE</span><span class="p">(</span><span class="n">builder</span><span class="p">.</span><span class="n">AppendValues</span><span class="p">({</span><span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">}));</span>
+  <span class="n">ABORT_ON_FAILURE</span><span class="p">(</span><span class="n">builder</span><span class="p">.</span><span class="n">Finish</span><span class="p">(</span><span class="o">&amp;</span><span class="n">arrays</span><span class="p">[</span><span class="mi">1</span><span class="p">]));</span>
+  <span class="n">builder</span><span class="p">.</span><span class="n">Reset</span><span class="p">();</span>
+  <span class="n">ABORT_ON_FAILURE</span><span class="p">(</span><span class="n">builder</span><span class="p">.</span><span class="n">AppendValues</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}));</span>
+  <span class="n">ABORT_ON_FAILURE</span><span class="p">(</span><span class="n">builder</span><span class="p">.</span><span class="n">Finish</span><span class="p">(</span><span class="o">&amp;</span><span class="n">arrays</span><span class="p">[</span><span class="mi">2</span><span class="p">]));</span>
+  <span class="n">arrow</span><span class="o">::</span><span class="n">StringBuilder</span> <span class="n">string_builder</span><span class="p">;</span>
+  <span class="n">ABORT_ON_FAILURE</span><span class="p">(</span>
+      <span class="n">string_builder</span><span class="p">.</span><span class="n">AppendValues</span><span class="p">({</span><span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="s">&quot;b&quot;</span><span class="p">}));</span>
+  <span class="n">ABORT_ON_FAILURE</span><span class="p">(</span><span class="n">string_builder</span><span class="p">.</span><span class="n">Finish</span><span class="p">(</span><span class="o">&amp;</span><span class="n">arrays</span><span class="p">[</span><span class="mi">3</span><span class="p">]));</span>
+<span class="hll">  <span class="k">auto</span> <span class="n">table</span> <span class="o">=</span> <span class="n">arrow</span><span class="o">::</span><span class="n">Table</span><span class="o">::</span><span class="n">Make</span><span class="p">(</span><span class="n">schema</span><span class="p">,</span> <span class="n">arrays</span><span class="p">);</span>
+</span><span class="hll">  <span class="c1">// Write it using Datasets</span>
+</span><span class="hll">  <span class="k">auto</span> <span class="n">dataset</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">ds</span><span class="o">::</span><span class="n">InMemoryDataset</span><span class="o">&gt;</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
+</span><span class="hll">  <span class="k">auto</span> <span class="n">scanner_builder</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">-&gt;</span><span class="n">NewScan</span><span class="p">().</span><span class="n">ValueOrDie</span><span class="p">();</span>
+</span><span class="hll">  <span class="k">auto</span> <span class="n">scanner</span> <span class="o">=</span> <span class="n">scanner_builder</span><span class="o">-&gt;</span><span class="n">Finish</span><span class="p">().</span><span class="n">ValueOrDie</span><span class="p">();</span>
+</span>
+  <span class="c1">// The partition schema determines which fields are part of the partitioning.</span>
+  <span class="k">auto</span> <span class="n">partition_schema</span> <span class="o">=</span> <span class="n">arrow</span><span class="o">::</span><span class="n">schema</span><span class="p">({</span><span class="n">arrow</span><span class="o">::</span><span class="n">field</span><span class="p">(</span><span class="s">&quot;part&quot;</span><span class="p">,</span> <span class="n">arrow</span><span class="o">::</span><span class="n">utf8</span><span class="p">())});</span>
+  <span class="c1">// We&#39;ll use Hive-style partitioning, which creates directories with &quot;key=value&quot; pairs.</span>
+  <span class="k">auto</span> <span class="n">partitioning</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">ds</span><span class="o">::</span><span class="n">HivePartitioning</span><span class="o">&gt;</span><span class="p">(</span><span class="n">partition_schema</span><span class="p">);</span>
+  <span class="c1">// We&#39;ll write Parquet files.</span>
+  <span class="k">auto</span> <span class="n">format</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">ds</span><span class="o">::</span><span class="n">ParquetFileFormat</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="n">ds</span><span class="o">::</span><span class="n">FileSystemDatasetWriteOptions</span> <span class="n">write_options</span><span class="p">;</span>
+  <span class="n">write_options</span><span class="p">.</span><span class="n">file_write_options</span> <span class="o">=</span> <span class="n">format</span><span class="o">-&gt;</span><span class="n">DefaultWriteOptions</span><span class="p">();</span>
+  <span class="n">write_options</span><span class="p">.</span><span class="n">filesystem</span> <span class="o">=</span> <span class="n">filesystem</span><span class="p">;</span>
+  <span class="n">write_options</span><span class="p">.</span><span class="n">base_dir</span> <span class="o">=</span> <span class="n">base_path</span><span class="p">;</span>
+  <span class="n">write_options</span><span class="p">.</span><span class="n">partitioning</span> <span class="o">=</span> <span class="n">partitioning</span><span class="p">;</span>
+  <span class="n">write_options</span><span class="p">.</span><span class="n">basename_template</span> <span class="o">=</span> <span class="s">&quot;part{i}.parquet&quot;</span><span class="p">;</span>
+  <span class="n">ABORT_ON_FAILURE</span><span class="p">(</span><span class="n">ds</span><span class="o">::</span><span class="n">FileSystemDataset</span><span class="o">::</span><span class="n">Write</span><span class="p">(</span><span class="n">write_options</span><span class="p">,</span> <span class="n">scanner</span><span class="p">));</span>
+  <span class="k">return</span> <span class="n">base_path</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div>
 <div class="section" id="reading-from-cloud-storage">
-<h2>Reading from cloud storage<a class="headerlink" href="#reading-from-cloud-storage" title="Permalink to this headline">¶</a></h2>
+<h3>Reading from cloud storage<a class="headerlink" href="#reading-from-cloud-storage" title="Permalink to this headline">¶</a></h3>
 <p>In addition to local files, Arrow Datasets also supports reading from cloud
 storage by passing a different filesystem.</p>
-<p>See the <a class="reference internal" href="io.html#cpp-filesystems"><span class="std std-ref">filesystem</span></a> docs for more details.</p>
+<p>See the <a class="reference internal" href="io.html#cpp-filesystems"><span class="std std-ref">filesystem</span></a> docs for more details on the available
+filesystems.</p>
+</div>
 </div>
 <div class="section" id="full-example">
 <span id="cpp-dataset-full-example"></span><h2>Full Example<a class="headerlink" href="#full-example" title="Permalink to this headline">¶</a></h2>
@@ -1329,7 +1464,18 @@ storage by passing a different filesystem.</p>
 <span class="normal">341</span>
 <span class="normal">342</span>
 <span class="normal">343</span>
-<span class="normal">344</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span>
+<span class="normal">349</span>
+<span class="normal">350</span>
+<span class="normal">351</span>
+<span class="normal">352</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// Licensed to the Apache Software Foundation (ASF) under one</span>
 <span class="c1">// or more contributor license agreements. See the NOTICE file</span>
 <span class="c1">// distributed with this work for additional information</span>
 <span class="c1">// regarding copyright ownership. The ASF licenses this file</span>
@@ -1501,6 +1647,9 @@ storage by passing a different filesystem.</p>
 <span class="p">}</span>
 
 <span class="c1">// Read a dataset, but select only column &quot;b&quot; and only rows where b &lt; 4.</span>
+<span class="c1">//</span>
+<span class="c1">// This is useful when you only want a few columns from a dataset. Where possible,</span>
+<span class="c1">// Datasets will push down the column selection such that less work is done.</span>
 <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">arrow</span><span class="o">::</span><span class="n">Table</span><span class="o">&gt;</span> <span class="n">FilterAndSelectDataset</span><span class="p">(</span>
     <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">fs</span><span class="o">::</span><span class="n">FileSystem</span><span class="o">&gt;&amp;</span> <span class="n">filesystem</span><span class="p">,</span>
     <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ds</span><span class="o">::</span><span class="n">FileFormat</span><span class="o">&gt;&amp;</span> <span class="n">format</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">base_dir</span><span class="p">)</span> <span class="p">{</span>
@@ -1519,6 +1668,11 @@ storage by passing a different filesystem.</p>
 <span class="p">}</span>
 
 <span class="c1">// Read a dataset, but with column projection.</span>
+<span class="c1">//</span>
+<span class="c1">// This is useful to derive new columns from existing data. For example, here we</span>
+<span class="c1">// demonstrate casting a column to a different type, and turning a numeric column into a</span>
+<span class="c1">// boolean column based on a predicate. You could also rename columns or perform</span>
+<span class="c1">// computations involving multiple columns.</span>
 <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">arrow</span><span class="o">::</span><span class="n">Table</span><span class="o">&gt;</span> <span class="n">ProjectDataset</span><span class="p">(</span>
     <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">fs</span><span class="o">::</span><span class="n">FileSystem</span><span class="o">&gt;&amp;</span> <span class="n">filesystem</span><span class="p">,</span>
     <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ds</span><span class="o">::</span><span class="n">FileFormat</span><span class="o">&gt;&amp;</span> <span class="n">format</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">base_dir</span><span class="p">)</span> <span class="p">{</span>
@@ -1546,7 +1700,10 @@ storage by passing a different filesystem.</p>
 <span class="p">}</span>
 
 <span class="c1">// Read a dataset, but with column projection.</span>
-<span class="c1">// This time, we read all original columns plus one derived column.</span>
+<span class="c1">//</span>
+<span class="c1">// This time, we read all original columns plus one derived column. This simply combines</span>
+<span class="c1">// the previous two examples: selecting a subset of columns by name, and deriving new</span>
+<span class="c1">// columns with an expression.</span>
 <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">arrow</span><span class="o">::</span><span class="n">Table</span><span class="o">&gt;</span> <span class="n">SelectAndProjectDataset</span><span class="p">(</span>
     <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">fs</span><span class="o">::</span><span class="n">FileSystem</span><span class="o">&gt;&amp;</span> <span class="n">filesystem</span><span class="p">,</span>
     <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ds</span><span class="o">::</span><span class="n">FileFormat</span><span class="o">&gt;&amp;</span> <span class="n">format</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">base_dir</span><span class="p">)</span> <span class="p">{</span>

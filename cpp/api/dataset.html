@@ -988,6 +988,24 @@
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="cpp function">
+<dt id="_CPPv4N5arrow7dataset15InMemoryDataset15InMemoryDatasetENSt10shared_ptrI6SchemaEENSt10shared_ptrI20RecordBatchGeneratorEE">
+<span id="_CPPv3N5arrow7dataset15InMemoryDataset15InMemoryDatasetENSt10shared_ptrI6SchemaEENSt10shared_ptrI20RecordBatchGeneratorEE"></span><span id="_CPPv2N5arrow7dataset15InMemoryDataset15InMemoryDatasetENSt10shared_ptrI6SchemaEENSt10shared_ptrI20RecordBatchGeneratorEE"></span><span id="arrow::dataset::InMemoryDataset::InMemoryDataset__std::shared_ptr:Schema:.std::shared_ptr:RecordBatchGenerator:"></span><span class="target" id="classarrow_1_1dataset_1_1_in_memory_dataset_1ac0db38bfc1de7b4d13240efa6f47662c"></span><em class="property">inline</em> <code class="sig-name descname">InMemoryDataset</code><span class="sig-paren">(</span>std::shared_ptr&lt;<a class="reference internal" href="datatype.html#_CPPv4N5arrow6SchemaE" title="arrow::Schema">Schema</a>&gt; <em>schema</em>, std::shared_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow7dataset15InMemoryDataset20RecordBatchGeneratorE" title="arrow::dataset::InMemoryDataset::RecordBatchGenerator">RecordBatchGenerator</a>&gt; <em>get_batches</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5arrow7dataset15InMemoryDataset15InMemoryDatasetENSt10shared_ptrI6SchemaEENSt10shared_ptrI20RecordBatchGeneratorEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Construct a dataset from a schema and a factory of record batch iterators. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N5arrow7dataset15InMemoryDataset15InMemoryDatasetENSt10shared_ptrI6SchemaEE17RecordBatchVector">
+<span id="_CPPv3N5arrow7dataset15InMemoryDataset15InMemoryDatasetENSt10shared_ptrI6SchemaEE17RecordBatchVector"></span><span id="_CPPv2N5arrow7dataset15InMemoryDataset15InMemoryDatasetENSt10shared_ptrI6SchemaEE17RecordBatchVector"></span><span id="arrow::dataset::InMemoryDataset::InMemoryDataset__std::shared_ptr:Schema:.RecordBatchVector"></span><span class="target" id="classarrow_1_1dataset_1_1_in_memory_dataset_1a479b929b6e00e4722052a6e7b0a231fe"></span><code class="sig-name descname">InMemoryDataset</code><span class="sig-paren">(</span>std::shared_ptr&lt;<a class="reference internal" href="datatype.html#_CPPv4N5arrow6SchemaE" title="arrow::Schema">Schema</a>&gt; <em>schema</em>, RecordBatchVector <em>batches</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5arrow7dataset15InMemoryDataset15InMemoryDatasetENSt10shared_ptrI6SchemaEE17RecordBatchVector" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Convenience constructor taking a fixed list of batches. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N5arrow7dataset15InMemoryDataset15InMemoryDatasetENSt10shared_ptrI5TableEE">
+<span id="_CPPv3N5arrow7dataset15InMemoryDataset15InMemoryDatasetENSt10shared_ptrI5TableEE"></span><span id="_CPPv2N5arrow7dataset15InMemoryDataset15InMemoryDatasetENSt10shared_ptrI5TableEE"></span><span id="arrow::dataset::InMemoryDataset::InMemoryDataset__std::shared_ptr:Table:"></span><span class="target" id="classarrow_1_1dataset_1_1_in_memory_dataset_1ab589f1c3da256de2ab3cde77d9b86965"></span><em class="property">explicit</em> <code class="sig-name descname">InMemoryDataset</code><span class="sig-paren">(</span>std::shared_ptr&lt;<a class="reference internal" href="table.html#_CPPv4N5arrow5TableE" title="arrow::Table">Table</a>&gt; <em>table</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5arrow7dataset15InMemoryDataset15InMemoryDatasetENSt10shared_ptrI5TableEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Convenience constructor taking a <a class="reference internal" href="table.html#classarrow_1_1_table"><span class="std std-ref">Table</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
 <dt id="_CPPv4NK5arrow7dataset15InMemoryDataset9type_nameEv">
 <span id="_CPPv3NK5arrow7dataset15InMemoryDataset9type_nameEv"></span><span id="_CPPv2NK5arrow7dataset15InMemoryDataset9type_nameEv"></span><span id="arrow::dataset::InMemoryDataset::type_nameC"></span><span class="target" id="classarrow_1_1dataset_1_1_in_memory_dataset_1ae39b5d039ae08ed1c6e17bfe1641f380"></span><em class="property">inline</em> <em class="property">virtual</em> std::string <code class="sig-name descname">type_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> <em class="property">override</em><a class="headerlink" href="#_CPPv4NK5arrow7dataset15InMemoryDataset9type_nameEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>The name identifying the kind of <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a>. </p>

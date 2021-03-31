@@ -39,7 +39,7 @@ tabular, potentially larger than memory and multi-file datasets:
 * Discovery of sources (crawling directories, handle directory-based partitioned
   datasets, basic schema normalization, ..)
 * Optimized reading with predicate pushdown (filtering rows), projection
-  (selecting columns), parallel reading or fine-grained managing of tasks.
+  (selecting columns), parallel reading, or fine-grained managing of tasks.
 
 Currently, only Parquet, Feather / Arrow IPC, and CSV files are supported. The
 goal is to expand this in the future to other file formats and data sources
@@ -162,8 +162,8 @@ columns:
 
 .. literalinclude:: ../../../cpp/examples/arrow/dataset-documentation-example.cc
    :language: cpp
-   :lines: 172-188
-   :emphasize-lines: 13
+   :lines: 172-191
+   :emphasize-lines: 16
    :linenos:
    :lineno-match:
 
@@ -176,8 +176,8 @@ the returned table.
 
 .. literalinclude:: ../../../cpp/examples/arrow/dataset-documentation-example.cc
    :language: cpp
-   :lines: 172-188
-   :emphasize-lines: 14
+   :lines: 172-191
+   :emphasize-lines: 17
    :linenos:
    :lineno-match:
 
@@ -195,8 +195,8 @@ and a vector of names for the columns:
 
 .. literalinclude:: ../../../cpp/examples/arrow/dataset-documentation-example.cc
    :language: cpp
-   :lines: 190-215
-   :emphasize-lines: 13-23
+   :lines: 193-223
+   :emphasize-lines: 18-28
    :linenos:
    :lineno-match:
 
@@ -207,8 +207,8 @@ dataset schema:
 
 .. literalinclude:: ../../../cpp/examples/arrow/dataset-documentation-example.cc
    :language: cpp
-   :lines: 217-243
-   :emphasize-lines: 14-23
+   :lines: 225-254
+   :emphasize-lines: 17-27
    :linenos:
    :lineno-match:
 
@@ -263,7 +263,7 @@ partitioning scheme:
 
 .. literalinclude:: ../../../cpp/examples/arrow/dataset-documentation-example.cc
    :language: cpp
-   :lines: 245-268
+   :lines: 256-279
    :emphasize-lines: 7,9-11
    :linenos:
    :lineno-match:
@@ -297,7 +297,7 @@ altogether if they do not match the predicate:
 
 .. literalinclude:: ../../../cpp/examples/arrow/dataset-documentation-example.cc
    :language: cpp
-   :lines: 270-290
+   :lines: 281-301
    :emphasize-lines: 15-18
    :linenos:
    :lineno-match:
@@ -335,13 +335,41 @@ when constructing a directory partitioning:
 Directory partitioning also supports providing a full schema rather than inferring
 types from file paths.
 
+Reading from other data sources
+-------------------------------
+
+Reading in-memory data
+~~~~~~~~~~~~~~~~~~~~~~
+
+If you already have data in memory that you'd like to use with the Datasets
+interface (e.g. to filter/project data, or to write it out to a filesystem),
+you can wrap it in a :class:`arrow::dataset::InMemoryDataset`:
+
+.. code-block:: cpp
+
+   auto table = arrow::Table::FromRecordBatches(...);
+   auto dataset = std::make_shared<arrow::dataset::InMemoryDataset>(std::move(table));
+   // Scan the dataset, filter, it, etc.
+   auto scanner_builder = dataset->NewScan();
+
+In the example, we used the InMemoryDataset to write our example data to local
+disk to be used in the rest of the example:
+
+.. literalinclude:: ../../../cpp/examples/arrow/dataset-documentation-example.cc
+   :language: cpp
+   :lines: 106-149
+   :emphasize-lines: 24-28
+   :linenos:
+   :lineno-match:
+
 Reading from cloud storage
---------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In addition to local files, Arrow Datasets also supports reading from cloud
 storage by passing a different filesystem.
 
-See the :ref:`filesystem <cpp-filesystems>` docs for more details.
+See the :ref:`filesystem <cpp-filesystems>` docs for more details on the available
+filesystems.
 
 .. _cpp-dataset-full-example:
 
