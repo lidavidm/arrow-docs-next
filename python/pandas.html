@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Pandas Integration &mdash; Apache Arrow v4.0.0.dev6043+g76924612b.d20210325</title>
+  <title>Pandas Integration &mdash; Apache Arrow v4.0.0.dev6150+g5287d181c.d20210407</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                4.0.0.dev6043+g76924612b.d20210325
+                4.0.0.dev6150+g5287d181c.d20210407
               </div>
             
           
@@ -539,6 +539,19 @@ process to crash.</p></li>
 </div>
 <p>will yield significantly lower memory usage in some scenarios. Without these
 options, <code class="docutils literal notranslate"><span class="pre">to_pandas</span></code> will always double memory.</p>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">self_destruct=True</span></code> is not guaranteed to save memory. Since the
+conversion happens column by column, memory is also freed column by column. But
+if multiple columns share an underlying buffer, then no memory will be freed
+until all of those columns are converted. In particular, due to implementation
+details, data that comes from IPC or Flight is prone to this, as memory will be
+laid out as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Record</span> <span class="n">Batch</span> <span class="mi">0</span><span class="p">:</span> <span class="n">Allocation</span> <span class="mi">0</span><span class="p">:</span> <span class="n">array</span> <span class="mi">0</span> <span class="n">chunk</span> <span class="mi">0</span><span class="p">,</span> <span class="n">array</span> <span class="mi">1</span> <span class="n">chunk</span> <span class="mi">0</span><span class="p">,</span> <span class="o">...</span>
+<span class="n">Record</span> <span class="n">Batch</span> <span class="mi">1</span><span class="p">:</span> <span class="n">Allocation</span> <span class="mi">1</span><span class="p">:</span> <span class="n">array</span> <span class="mi">0</span> <span class="n">chunk</span> <span class="mi">1</span><span class="p">,</span> <span class="n">array</span> <span class="mi">1</span> <span class="n">chunk</span> <span class="mi">1</span><span class="p">,</span> <span class="o">...</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>In this case, no memory can be freed until the entire table is converted, even
+with <code class="docutils literal notranslate"><span class="pre">self_destruct=True</span></code>.</p>
 </div>
 </div>
 </div>

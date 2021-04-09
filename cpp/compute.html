@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Compute Functions &mdash; Apache Arrow v4.0.0.dev6043+g76924612b.d20210325</title>
+  <title>Compute Functions &mdash; Apache Arrow v4.0.0.dev6150+g5287d181c.d20210407</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                4.0.0.dev6043+g76924612b.d20210325
+                4.0.0.dev6150+g5287d181c.d20210407
               </div>
             
           
@@ -125,6 +125,7 @@
 <li class="toctree-l3"><a class="reference internal" href="parquet.html">Reading and writing Parquet files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="csv.html">Reading CSV files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="json.html">Reading JSON files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html">Tabular Datasets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="flight.html">Arrow Flight RPC</a></li>
 </ul>
 </li>
@@ -943,18 +944,19 @@ i.e. only bytes in [0, 127].</p></li>
 <h4><a class="toc-backref" href="#id17">String transforms</a><a class="headerlink" href="#string-transforms" title="Permalink to this headline">¶</a></h4>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 28%" />
-<col style="width: 13%" />
-<col style="width: 27%" />
-<col style="width: 23%" />
-<col style="width: 10%" />
+<col style="width: 20%" />
+<col style="width: 9%" />
+<col style="width: 19%" />
+<col style="width: 16%" />
+<col style="width: 7%" />
+<col style="width: 30%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Function name</p></th>
 <th class="head"><p>Arity</p></th>
 <th class="head"><p>Input types</p></th>
 <th class="head"><p>Output type</p></th>
-<th class="head"><p>Notes</p></th>
+<th class="head" colspan="2"><p>Notes   | Options class</p></th>
 </tr>
 </thead>
 <tbody>
@@ -963,36 +965,56 @@ i.e. only bytes in [0, 127].</p></li>
 <td><p>String-like</p></td>
 <td><p>String-like</p></td>
 <td><p>(1)</p></td>
+<td></td>
 </tr>
 <tr class="row-odd"><td><p>ascii_upper</p></td>
 <td><p>Unary</p></td>
 <td><p>String-like</p></td>
 <td><p>String-like</p></td>
 <td><p>(1)</p></td>
+<td></td>
 </tr>
 <tr class="row-even"><td><p>binary_length</p></td>
 <td><p>Unary</p></td>
 <td><p>Binary- or String-like</p></td>
 <td><p>Int32 or Int64</p></td>
 <td><p>(2)</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>replace_substring</p></td>
+<td><p>Unary</p></td>
+<td><p>String-like</p></td>
+<td><p>String-like</p></td>
+<td><p>(3)</p></td>
+<td><p><a class="reference internal" href="api/compute.html#_CPPv4N5arrow7compute23ReplaceSubstringOptionsE" title="arrow::compute::ReplaceSubstringOptions"><code class="xref cpp cpp-struct docutils literal notranslate"><span class="pre">ReplaceSubstringOptions</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p>replace_substring_regex</p></td>
+<td><p>Unary</p></td>
+<td><p>String-like</p></td>
+<td><p>String-like</p></td>
+<td><p>(4)</p></td>
+<td><p><a class="reference internal" href="api/compute.html#_CPPv4N5arrow7compute23ReplaceSubstringOptionsE" title="arrow::compute::ReplaceSubstringOptions"><code class="xref cpp cpp-struct docutils literal notranslate"><span class="pre">ReplaceSubstringOptions</span></code></a></p></td>
 </tr>
 <tr class="row-odd"><td><p>utf8_length</p></td>
 <td><p>Unary</p></td>
 <td><p>String-like</p></td>
 <td><p>Int32 or Int64</p></td>
-<td><p>(3)</p></td>
+<td><p>(5)</p></td>
+<td></td>
 </tr>
 <tr class="row-even"><td><p>utf8_lower</p></td>
 <td><p>Unary</p></td>
 <td><p>String-like</p></td>
 <td><p>String-like</p></td>
-<td><p>(4)</p></td>
+<td><p>(6)</p></td>
+<td></td>
 </tr>
 <tr class="row-odd"><td><p>utf8_upper</p></td>
 <td><p>Unary</p></td>
 <td><p>String-like</p></td>
 <td><p>String-like</p></td>
-<td><p>(4)</p></td>
+<td><p>(6)</p></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -1001,9 +1023,20 @@ i.e. only bytes in [0, 127].</p></li>
 uppercase.  Non-ASCII characters are left untouched.</p></li>
 <li><p>(2) Output is the physical length in bytes of each input element.  Output
 type is Int32 for Binary / String, Int64 for LargeBinary / LargeString.</p></li>
-<li><p>(3) Output is the number of characters (not bytes) of each input element.
+<li><p>(3) Replace non-overlapping substrings that match to
+<a class="reference internal" href="api/compute.html#_CPPv4N5arrow7compute23ReplaceSubstringOptions7patternE" title="arrow::compute::ReplaceSubstringOptions::pattern"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ReplaceSubstringOptions::pattern</span></code></a> by
+<a class="reference internal" href="api/compute.html#_CPPv4N5arrow7compute23ReplaceSubstringOptions11replacementE" title="arrow::compute::ReplaceSubstringOptions::replacement"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ReplaceSubstringOptions::replacement</span></code></a>. If
+<a class="reference internal" href="api/compute.html#_CPPv4N5arrow7compute23ReplaceSubstringOptions16max_replacementsE" title="arrow::compute::ReplaceSubstringOptions::max_replacements"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ReplaceSubstringOptions::max_replacements</span></code></a> != -1, it determines the
+maximum number of replacements made, counting from the left.</p></li>
+<li><p>(4) Replace non-overlapping substrings that match to the regular expression
+<a class="reference internal" href="api/compute.html#_CPPv4N5arrow7compute23ReplaceSubstringOptions7patternE" title="arrow::compute::ReplaceSubstringOptions::pattern"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ReplaceSubstringOptions::pattern</span></code></a> by
+<a class="reference internal" href="api/compute.html#_CPPv4N5arrow7compute23ReplaceSubstringOptions11replacementE" title="arrow::compute::ReplaceSubstringOptions::replacement"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ReplaceSubstringOptions::replacement</span></code></a>, using the Google RE2 library. If
+<a class="reference internal" href="api/compute.html#_CPPv4N5arrow7compute23ReplaceSubstringOptions16max_replacementsE" title="arrow::compute::ReplaceSubstringOptions::max_replacements"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ReplaceSubstringOptions::max_replacements</span></code></a> != -1, it determines the
+maximum number of replacements made, counting from the left. Note that if the
+pattern contains groups, backreferencing can be used.</p></li>
+<li><p>(5) Output is the number of characters (not bytes) of each input element.
 Output type is Int32 for String, Int64 for LargeString.</p></li>
-<li><p>(4) Each UTF8-encoded character in the input is converted to lowercase or
+<li><p>(6) Each UTF8-encoded character in the input is converted to lowercase or
 uppercase.</p></li>
 </ul>
 </div>
@@ -1130,11 +1163,11 @@ trimmed off.</p></li>
 <h4><a class="toc-backref" href="#id19">Containment tests</a><a class="headerlink" href="#containment-tests" title="Permalink to this headline">¶</a></h4>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 16%" />
-<col style="width: 10%" />
-<col style="width: 29%" />
+<col style="width: 21%" />
+<col style="width: 9%" />
+<col style="width: 28%" />
 <col style="width: 12%" />
-<col style="width: 33%" />
+<col style="width: 31%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Function name</p></th>
@@ -1151,18 +1184,24 @@ trimmed off.</p></li>
 <td><p>Boolean (1)</p></td>
 <td><p><a class="reference internal" href="api/compute.html#_CPPv4N5arrow7compute21MatchSubstringOptionsE" title="arrow::compute::MatchSubstringOptions"><code class="xref cpp cpp-struct docutils literal notranslate"><span class="pre">MatchSubstringOptions</span></code></a></p></td>
 </tr>
-<tr class="row-odd"><td><p>index_in</p></td>
+<tr class="row-odd"><td><p>match_substring_regex</p></td>
+<td><p>Unary</p></td>
+<td><p>String-like</p></td>
+<td><p>Boolean (2)</p></td>
+<td><p><a class="reference internal" href="api/compute.html#_CPPv4N5arrow7compute21MatchSubstringOptionsE" title="arrow::compute::MatchSubstringOptions"><code class="xref cpp cpp-struct docutils literal notranslate"><span class="pre">MatchSubstringOptions</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p>index_in</p></td>
 <td><p>Unary</p></td>
 <td><p>Boolean, Null, Numeric, Temporal,
 Binary- and String-like</p></td>
-<td><p>Int32 (2)</p></td>
+<td><p>Int32 (3)</p></td>
 <td><p><a class="reference internal" href="api/compute.html#_CPPv4N5arrow7compute16SetLookupOptionsE" title="arrow::compute::SetLookupOptions"><code class="xref cpp cpp-struct docutils literal notranslate"><span class="pre">SetLookupOptions</span></code></a></p></td>
 </tr>
-<tr class="row-even"><td><p>is_in</p></td>
+<tr class="row-odd"><td><p>is_in</p></td>
 <td><p>Unary</p></td>
 <td><p>Boolean, Null, Numeric, Temporal,
 Binary- and String-like</p></td>
-<td><p>Boolean (3)</p></td>
+<td><p>Boolean (4)</p></td>
 <td><p><a class="reference internal" href="api/compute.html#_CPPv4N5arrow7compute16SetLookupOptionsE" title="arrow::compute::SetLookupOptions"><code class="xref cpp cpp-struct docutils literal notranslate"><span class="pre">SetLookupOptions</span></code></a></p></td>
 </tr>
 </tbody>
@@ -1170,10 +1209,12 @@ Binary- and String-like</p></td>
 <ul class="simple">
 <li><p>(1) Output is true iff <a class="reference internal" href="api/compute.html#_CPPv4N5arrow7compute21MatchSubstringOptions7patternE" title="arrow::compute::MatchSubstringOptions::pattern"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">MatchSubstringOptions::pattern</span></code></a>
 is a substring of the corresponding input element.</p></li>
-<li><p>(2) Output is the index of the corresponding input element in
+<li><p>(2) Output is true iff <a class="reference internal" href="api/compute.html#_CPPv4N5arrow7compute21MatchSubstringOptions7patternE" title="arrow::compute::MatchSubstringOptions::pattern"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">MatchSubstringOptions::pattern</span></code></a>
+matches the corresponding input element at any position.</p></li>
+<li><p>(3) Output is the index of the corresponding input element in
 <a class="reference internal" href="api/compute.html#_CPPv4N5arrow7compute16SetLookupOptions9value_setE" title="arrow::compute::SetLookupOptions::value_set"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">SetLookupOptions::value_set</span></code></a>, if found there.  Otherwise,
 output is null.</p></li>
-<li><p>(3) Output is true iff the corresponding input element is equal to one
+<li><p>(4) Output is true iff the corresponding input element is equal to one
 of the elements in <a class="reference internal" href="api/compute.html#_CPPv4N5arrow7compute16SetLookupOptions9value_setE" title="arrow::compute::SetLookupOptions::value_set"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">SetLookupOptions::value_set</span></code></a>.</p></li>
 </ul>
 </div>

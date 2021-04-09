@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Arrow Flight RPC &mdash; Apache Arrow v4.0.0.dev6043+g76924612b.d20210325</title>
+  <title>Arrow Flight RPC &mdash; Apache Arrow v4.0.0.dev6150+g5287d181c.d20210407</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                4.0.0.dev6043+g76924612b.d20210325
+                4.0.0.dev6150+g5287d181c.d20210407
               </div>
             
           
@@ -235,11 +235,6 @@
 <p class="admonition-title">Note</p>
 <p>Flight is currently unstable. APIs are subject to change,
 though we don’t expect drastic changes.</p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Flight is currently only available when built from source
-appropriately.</p>
 </div>
 <div class="section" id="common-types">
 <h2>Common Types<a class="headerlink" href="#common-types" title="Permalink to this headline">¶</a></h2>
@@ -945,7 +940,7 @@ appropriately.</p>
 
 <dl class="cpp function">
 <dt id="_CPPv4N5arrow6flight12FlightClient7ConnectERK8LocationRK19FlightClientOptionsPNSt10unique_ptrI12FlightClientEE">
-<span id="_CPPv3N5arrow6flight12FlightClient7ConnectERK8LocationRK19FlightClientOptionsPNSt10unique_ptrI12FlightClientEE"></span><span id="_CPPv2N5arrow6flight12FlightClient7ConnectERK8LocationRK19FlightClientOptionsPNSt10unique_ptrI12FlightClientEE"></span><span id="arrow::flight::FlightClient::Connect__LocationCR.FlightClientOptionsCR.std::unique_ptr:FlightClient:P"></span><span class="target" id="classarrow_1_1flight_1_1_flight_client_1a8cf7a50ad0ec8554a3888d07d2e14219"></span><em class="property">static</em> <a class="reference internal" href="support.html#_CPPv4N5arrow6StatusE" title="arrow::Status">Status</a> <code class="sig-name descname">Connect</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N5arrow6flight8LocationE" title="arrow::flight::Location">Location</a> &amp;<em>location</em>, <em class="property">const</em> FlightClientOptions &amp;<em>options</em>, std::unique_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow6flight12FlightClientE" title="arrow::flight::FlightClient">FlightClient</a>&gt; *<em>client</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5arrow6flight12FlightClient7ConnectERK8LocationRK19FlightClientOptionsPNSt10unique_ptrI12FlightClientEE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N5arrow6flight12FlightClient7ConnectERK8LocationRK19FlightClientOptionsPNSt10unique_ptrI12FlightClientEE"></span><span id="_CPPv2N5arrow6flight12FlightClient7ConnectERK8LocationRK19FlightClientOptionsPNSt10unique_ptrI12FlightClientEE"></span><span id="arrow::flight::FlightClient::Connect__LocationCR.FlightClientOptionsCR.std::unique_ptr:FlightClient:P"></span><span class="target" id="classarrow_1_1flight_1_1_flight_client_1a8cf7a50ad0ec8554a3888d07d2e14219"></span><em class="property">static</em> <a class="reference internal" href="support.html#_CPPv4N5arrow6StatusE" title="arrow::Status">Status</a> <code class="sig-name descname">Connect</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N5arrow6flight8LocationE" title="arrow::flight::Location">Location</a> &amp;<em>location</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N5arrow6flight19FlightClientOptionsE" title="arrow::flight::FlightClientOptions">FlightClientOptions</a> &amp;<em>options</em>, std::unique_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow6flight12FlightClientE" title="arrow::flight::FlightClient">FlightClient</a>&gt; *<em>client</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5arrow6flight12FlightClient7ConnectERK8LocationRK19FlightClientOptionsPNSt10unique_ptrI12FlightClientEE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Connect to an unauthenticated flight service. </p>
 <p><dl class="simple">
 <dt><strong>Return</strong></dt><dd><p><a class="reference internal" href="support.html#classarrow_1_1_status"><span class="std std-ref">Status</span></a> OK status may not indicate that the connection was successful </p>
@@ -963,10 +958,72 @@ appropriately.</p>
 </div>
 </dd></dl>
 
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenclass: Cannot find class “arrow::flight::FlightClientOptions” in doxygen xml output for project “arrow_cpp” from directory: ../../cpp/apidoc/xml</p>
+<dl class="cpp struct">
+<dt id="_CPPv4N5arrow6flight19FlightClientOptionsE">
+<span id="_CPPv3N5arrow6flight19FlightClientOptionsE"></span><span id="_CPPv2N5arrow6flight19FlightClientOptionsE"></span><span id="arrow::flight::FlightClientOptions"></span><span class="target" id="structarrow_1_1flight_1_1_flight_client_options"></span><em class="property">struct </em><code class="sig-prename descclassname">arrow::flight<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">FlightClientOptions</code><a class="headerlink" href="#_CPPv4N5arrow6flight19FlightClientOptionsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow6flight19FlightClientOptions14tls_root_certsE">
+<span id="_CPPv3N5arrow6flight19FlightClientOptions14tls_root_certsE"></span><span id="_CPPv2N5arrow6flight19FlightClientOptions14tls_root_certsE"></span><span id="arrow::flight::FlightClientOptions::tls_root_certs__ss"></span><span class="target" id="structarrow_1_1flight_1_1_flight_client_options_1add5f255e136e5d25243a504bfbe90958"></span>std::string <code class="sig-name descname">tls_root_certs</code><a class="headerlink" href="#_CPPv4N5arrow6flight19FlightClientOptions14tls_root_certsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Root certificates to use for validating server certificates. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow6flight19FlightClientOptions17override_hostnameE">
+<span id="_CPPv3N5arrow6flight19FlightClientOptions17override_hostnameE"></span><span id="_CPPv2N5arrow6flight19FlightClientOptions17override_hostnameE"></span><span id="arrow::flight::FlightClientOptions::override_hostname__ss"></span><span class="target" id="structarrow_1_1flight_1_1_flight_client_options_1a494b451fcfece2fd181c609cfe4f0e4b"></span>std::string <code class="sig-name descname">override_hostname</code><a class="headerlink" href="#_CPPv4N5arrow6flight19FlightClientOptions17override_hostnameE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Override the hostname checked by TLS. Use with caution. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow6flight19FlightClientOptions10cert_chainE">
+<span id="_CPPv3N5arrow6flight19FlightClientOptions10cert_chainE"></span><span id="_CPPv2N5arrow6flight19FlightClientOptions10cert_chainE"></span><span id="arrow::flight::FlightClientOptions::cert_chain__ss"></span><span class="target" id="structarrow_1_1flight_1_1_flight_client_options_1a2bc5e5269cb3a82eb5ba0d8b6251193e"></span>std::string <code class="sig-name descname">cert_chain</code><a class="headerlink" href="#_CPPv4N5arrow6flight19FlightClientOptions10cert_chainE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The client certificate to use if using Mutual TLS. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow6flight19FlightClientOptions11private_keyE">
+<span id="_CPPv3N5arrow6flight19FlightClientOptions11private_keyE"></span><span id="_CPPv2N5arrow6flight19FlightClientOptions11private_keyE"></span><span id="arrow::flight::FlightClientOptions::private_key__ss"></span><span class="target" id="structarrow_1_1flight_1_1_flight_client_options_1aaeb361d048b6b807689d9d3c0e027065"></span>std::string <code class="sig-name descname">private_key</code><a class="headerlink" href="#_CPPv4N5arrow6flight19FlightClientOptions11private_keyE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The private key associated with the client certificate for Mutual TLS. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow6flight19FlightClientOptions10middlewareE">
+<span id="_CPPv3N5arrow6flight19FlightClientOptions10middlewareE"></span><span id="_CPPv2N5arrow6flight19FlightClientOptions10middlewareE"></span><span id="arrow::flight::FlightClientOptions::middleware__std::vector:std::shared_ptr:ClientMiddlewareFactory::"></span><span class="target" id="structarrow_1_1flight_1_1_flight_client_options_1a1b798cd0468120edb6a2acf7a87e931b"></span>std::vector&lt;std::shared_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow6flight23ClientMiddlewareFactoryE" title="arrow::flight::ClientMiddlewareFactory">ClientMiddlewareFactory</a>&gt;&gt; <code class="sig-name descname">middleware</code><a class="headerlink" href="#_CPPv4N5arrow6flight19FlightClientOptions10middlewareE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A list of client middleware to apply. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow6flight19FlightClientOptions22write_size_limit_bytesE">
+<span id="_CPPv3N5arrow6flight19FlightClientOptions22write_size_limit_bytesE"></span><span id="_CPPv2N5arrow6flight19FlightClientOptions22write_size_limit_bytesE"></span><span id="arrow::flight::FlightClientOptions::write_size_limit_bytes__int64_t"></span><span class="target" id="structarrow_1_1flight_1_1_flight_client_options_1ae9af5c10b0f2ab2f74a773f8ea6591b1"></span>int64_t <code class="sig-name descname">write_size_limit_bytes</code> = 0<a class="headerlink" href="#_CPPv4N5arrow6flight19FlightClientOptions22write_size_limit_bytesE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A soft limit on the number of bytes to write in a single batch when sending Arrow data to a server. </p>
+<p>Used to help limit server memory consumption. Only enabled if positive. When enabled, FlightStreamWriter.Write* may yield a IOError with error detail FlightWriteSizeStatusDetail. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow6flight19FlightClientOptions15generic_optionsE">
+<span id="_CPPv3N5arrow6flight19FlightClientOptions15generic_optionsE"></span><span id="_CPPv2N5arrow6flight19FlightClientOptions15generic_optionsE"></span><span id="arrow::flight::FlightClientOptions::generic_options__std::vector:std::pair:ss.util::Variant:i.ss:::"></span><span class="target" id="structarrow_1_1flight_1_1_flight_client_options_1ac478d924edecf9c10313f3909ac1ff28"></span>std::vector&lt;std::pair&lt;std::string, util::Variant&lt;int, std::string&gt;&gt;&gt; <code class="sig-name descname">generic_options</code><a class="headerlink" href="#_CPPv4N5arrow6flight19FlightClientOptions15generic_optionsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Generic connection options, passed to the underlying transport; interpretation is implementation-dependent. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow6flight19FlightClientOptions27disable_server_verificationE">
+<span id="_CPPv3N5arrow6flight19FlightClientOptions27disable_server_verificationE"></span><span id="_CPPv2N5arrow6flight19FlightClientOptions27disable_server_verificationE"></span><span id="arrow::flight::FlightClientOptions::disable_server_verification__b"></span><span class="target" id="structarrow_1_1flight_1_1_flight_client_options_1a41311f8730083f5dbaf6032da9a8a171"></span>bool <code class="sig-name descname">disable_server_verification</code> = false<a class="headerlink" href="#_CPPv4N5arrow6flight19FlightClientOptions27disable_server_verificationE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Use TLS without validating the server certificate. Use with caution. </p>
+</dd></dl>
+
 </div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N5arrow6flight19FlightClientOptions8DefaultsEv">
+<span id="_CPPv3N5arrow6flight19FlightClientOptions8DefaultsEv"></span><span id="_CPPv2N5arrow6flight19FlightClientOptions8DefaultsEv"></span><span id="arrow::flight::FlightClientOptions::Defaults"></span><span class="target" id="structarrow_1_1flight_1_1_flight_client_options_1a8e55ccb95e5bbf3db24e2577df5eead8"></span><em class="property">static</em> <a class="reference internal" href="#_CPPv4N5arrow6flight19FlightClientOptionsE" title="arrow::flight::FlightClientOptions">FlightClientOptions</a> <code class="sig-name descname">Defaults</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5arrow6flight19FlightClientOptions8DefaultsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get default options. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
 <dl class="cpp class">
 <dt id="_CPPv4N5arrow6flight17FlightCallOptionsE">
 <span id="_CPPv3N5arrow6flight17FlightCallOptionsE"></span><span id="_CPPv2N5arrow6flight17FlightCallOptionsE"></span><span id="arrow::flight::FlightCallOptions"></span><span class="target" id="classarrow_1_1flight_1_1_flight_call_options"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::flight<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">FlightCallOptions</code><a class="headerlink" href="#_CPPv4N5arrow6flight17FlightCallOptionsE" title="Permalink to this definition">¶</a><br /></dt>
@@ -1790,16 +1847,21 @@ error codes.</p>
 </div>
 </dd></dl>
 
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenfunction: Unable to resolve function “arrow::flight::MakeFlightError” with arguments None in doxygen xml output for project “arrow_cpp” from directory: ../../cpp/apidoc/xml.
-Potential matches:
+<dl class="cpp function">
+<dt id="_CPPv4N5arrow6flight15MakeFlightErrorE16FlightStatusCodeNSt6stringENSt6stringE">
+<span id="_CPPv3N5arrow6flight15MakeFlightErrorE16FlightStatusCodeNSt6stringENSt6stringE"></span><span id="_CPPv2N5arrow6flight15MakeFlightErrorE16FlightStatusCodeNSt6stringENSt6stringE"></span><span id="arrow::flight::MakeFlightError__FlightStatusCode.ss.ss"></span><span class="target" id="namespacearrow_1_1flight_1a4fa5fe5f0e743ee65c77564b353dfef7"></span><a class="reference internal" href="support.html#_CPPv4N5arrow6StatusE" title="arrow::Status">Status</a> <code class="sig-prename descclassname">arrow::flight<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">MakeFlightError</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N5arrow6flight16FlightStatusCodeE" title="arrow::flight::FlightStatusCode">FlightStatusCode</a> <em>code</em>, std::string <em>message</em>, std::string <em>extra_info</em> = {}<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5arrow6flight15MakeFlightErrorE16FlightStatusCodeNSt6stringENSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Make an appropriate Arrow status for the given Flight-specific status. </p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">code</span></code>: The Flight status code. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">message</span></code>: The message for the error. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">extra_info</span></code>: Optional extra binary info for the error (eg protobuf) </p></li>
+</ul>
+</dd>
+</dl>
 </p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">Status</span> <span class="n">MakeFlightError</span><span class="p">(</span><span class="n">FlightStatusCode</span> <span class="n">code</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">message</span><span class="p">)</span>
-<span class="o">-</span> <span class="n">Status</span> <span class="n">MakeFlightError</span><span class="p">(</span><span class="n">FlightStatusCode</span> <span class="n">code</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">message</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">extra_info</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
+</dd></dl>
+
 </div>
 </div>
 

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>pyarrow.compute &mdash; Apache Arrow v4.0.0.dev6043+g76924612b.d20210325</title>
+  <title>pyarrow.compute &mdash; Apache Arrow v4.0.0.dev6150+g5287d181c.d20210407</title>
   
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                4.0.0.dev6043+g76924612b.d20210325
+                4.0.0.dev6150+g5287d181c.d20210407
               </div>
             
           
@@ -237,6 +237,7 @@
     <span class="n">PartitionNthOptions</span><span class="p">,</span>
     <span class="n">ProjectOptions</span><span class="p">,</span>
     <span class="n">QuantileOptions</span><span class="p">,</span>
+    <span class="n">ReplaceSubstringOptions</span><span class="p">,</span>
     <span class="n">SetLookupOptions</span><span class="p">,</span>
     <span class="n">SortOptions</span><span class="p">,</span>
     <span class="n">StrptimeOptions</span><span class="p">,</span>
@@ -497,6 +498,24 @@
 <span class="sd">    result : pyarrow.Array or pyarrow.ChunkedArray</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">call_function</span><span class="p">(</span><span class="s2">&quot;match_substring&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">array</span><span class="p">],</span>
+                         <span class="n">MatchSubstringOptions</span><span class="p">(</span><span class="n">pattern</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="match_substring_regex"><a class="viewcode-back" href="../../python/generated/pyarrow.compute.match_substring_regex.html#pyarrow.compute.match_substring_regex">[docs]</a><span class="k">def</span> <span class="nf">match_substring_regex</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Test if regex *pattern* matches at any position a value of a string array.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    array : pyarrow.Array or pyarrow.ChunkedArray</span>
+<span class="sd">    pattern : str</span>
+<span class="sd">        regex pattern to search</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    result : pyarrow.Array or pyarrow.ChunkedArray</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">call_function</span><span class="p">(</span><span class="s2">&quot;match_substring_regex&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">array</span><span class="p">],</span>
                          <span class="n">MatchSubstringOptions</span><span class="p">(</span><span class="n">pattern</span><span class="p">))</span></div>
 
 

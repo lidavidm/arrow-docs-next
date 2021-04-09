@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>pyarrow.UnionArray &mdash; Apache Arrow v4.0.0.dev6043+g76924612b.d20210325</title>
+  <title>pyarrow.UnionArray &mdash; Apache Arrow v4.0.0.dev6150+g5287d181c.d20210407</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                4.0.0.dev6043+g76924612b.d20210325
+                4.0.0.dev6150+g5287d181c.d20210407
               </div>
             
           
@@ -670,10 +670,14 @@ is a safe cast or not.</p></li>
 creating a pandas.DataFrame from a RecordBatch or Table. While this
 can temporarily reduce memory note that various pandas operations
 can trigger “consolidation” which may balloon memory use.</p></li>
-<li><p><strong>self_destruct</strong> (<em>bool</em><em>, </em><em>default False</em>) – EXPERIMENTAL: If True, attempt to deallocate the originating Arrow
+<li><p><strong>self_destruct</strong> (<em>bool</em><em>, </em><em>default False</em>) – <p>EXPERIMENTAL: If True, attempt to deallocate the originating Arrow
 memory while converting the Arrow object to pandas. If you use the
 object after calling to_pandas with this option it will crash your
-program.</p></li>
+program.</p>
+<p>Note that you may not see always memory usage improvements. For
+example, if multiple columns share an underlying allocation,
+memory can’t be freed until all columns are converted.</p>
+</p></li>
 <li><p><strong>types_mapper</strong> (<em>function</em><em>, </em><em>default None</em>) – A function mapping a pyarrow DataType to a pandas ExtensionDtype.
 This can be used to override the default pandas type for conversion
 of built-in pyarrow types or in absence of pandas_metadata in the

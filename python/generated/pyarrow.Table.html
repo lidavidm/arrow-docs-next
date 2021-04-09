@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>pyarrow.Table &mdash; Apache Arrow v4.0.0.dev6043+g76924612b.d20210325</title>
+  <title>pyarrow.Table &mdash; Apache Arrow v4.0.0.dev6150+g5287d181c.d20210407</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                4.0.0.dev6043+g76924612b.d20210325
+                4.0.0.dev6150+g5287d181c.d20210407
               </div>
             
           
@@ -280,7 +280,7 @@ methods instead.</p>
 <td><p>Append column at end of columns.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#pyarrow.Table.cast" title="pyarrow.Table.cast"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cast</span></code></a>(self, Schema target_schema, bool safe=True)</p></td>
-<td><p>Cast table values to another schema</p></td>
+<td><p>Cast table values to another schema.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#pyarrow.Table.column" title="pyarrow.Table.column"><code class="xref py py-obj docutils literal notranslate"><span class="pre">column</span></code></a>(self, i)</p></td>
 <td><p>Select a column by its column name, or numeric index.</p></td>
@@ -304,7 +304,7 @@ methods instead.</p>
 <td><p>Flatten this Table.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#pyarrow.Table.from_arrays" title="pyarrow.Table.from_arrays"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_arrays</span></code></a>(arrays[, names, schema, metadata])</p></td>
-<td><p>Construct a Table from Arrow arrays</p></td>
+<td><p>Construct a Table from Arrow arrays.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#pyarrow.Table.from_batches" title="pyarrow.Table.from_batches"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_batches</span></code></a>(batches, Schema schema=None)</p></td>
 <td><p>Construct a Table from a sequence or iterator of Arrow RecordBatches.</p></td>
@@ -313,7 +313,7 @@ methods instead.</p>
 <td><p>Convert pandas.DataFrame to an Arrow Table.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#pyarrow.Table.from_pydict" title="pyarrow.Table.from_pydict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_pydict</span></code></a>(mapping[, schema, metadata])</p></td>
-<td><p>Construct a Table from Arrow arrays or columns</p></td>
+<td><p>Construct a Table from Arrow arrays or columns.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#pyarrow.Table.itercolumns" title="pyarrow.Table.itercolumns"><code class="xref py py-obj docutils literal notranslate"><span class="pre">itercolumns</span></code></a>(self)</p></td>
 <td><p>Iterator over all columns in their numerical order.</p></td>
@@ -325,7 +325,7 @@ methods instead.</p>
 <td><p>Create new table with columns renamed to provided names.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#pyarrow.Table.replace_schema_metadata" title="pyarrow.Table.replace_schema_metadata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">replace_schema_metadata</span></code></a>(self[, metadata])</p></td>
-<td><p>EXPERIMENTAL: Create shallow copy of table by replacing schema key-value metadata with the indicated new metadata (which may be None, which deletes any existing metadata</p></td>
+<td><p>EXPERIMENTAL: Create shallow copy of table by replacing schema key-value metadata with the indicated new metadata (which may be None), which deletes any existing metadata.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#pyarrow.Table.select" title="pyarrow.Table.select"><code class="xref py py-obj docutils literal notranslate"><span class="pre">select</span></code></a>(self, columns)</p></td>
 <td><p>Select columns of the Table.</p></td>
@@ -334,7 +334,7 @@ methods instead.</p>
 <td><p>Replace column in Table at position.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#pyarrow.Table.slice" title="pyarrow.Table.slice"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slice</span></code></a>(self[, offset, length])</p></td>
-<td><p>Compute zero-copy slice of this Table</p></td>
+<td><p>Compute zero-copy slice of this Table.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#pyarrow.Table.take" title="pyarrow.Table.take"><code class="xref py py-obj docutils literal notranslate"><span class="pre">take</span></code></a>(self, indices)</p></td>
 <td><p>Select records from an Table.</p></td>
@@ -349,7 +349,7 @@ methods instead.</p>
 <td><p>Convert the Table to a dict or OrderedDict.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#pyarrow.Table.to_string" title="pyarrow.Table.to_string"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_string</span></code></a>(self[, show_metadata])</p></td>
-<td><p></p></td>
+<td><p>Return human-readable string representation of Table.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#pyarrow.Table.unify_dictionaries" title="pyarrow.Table.unify_dictionaries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unify_dictionaries</span></code></a>(self, …)</p></td>
 <td><p>Unify dictionaries across all chunks.</p></td>
@@ -367,7 +367,7 @@ methods instead.</p>
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#pyarrow.Table.column_names" title="pyarrow.Table.column_names"><code class="xref py py-obj docutils literal notranslate"><span class="pre">column_names</span></code></a></p></td>
-<td><p>Names of the table’s columns</p></td>
+<td><p>Names of the table’s columns.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#pyarrow.Table.columns" title="pyarrow.Table.columns"><code class="xref py py-obj docutils literal notranslate"><span class="pre">columns</span></code></a></p></td>
 <td><p>List of all columns in numerical order.</p></td>
@@ -405,7 +405,7 @@ data.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>pyarrow.Table</strong> (<em>New table with the passed column added.</em>)</p>
+<dd class="field-even"><p><em>Table</em> – New table with the passed column added.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -423,7 +423,7 @@ data.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><em>pyarrow.Table</em> – New table with the passed column added.</p>
+<dd class="field-even"><p><em>Table</em> – New table with the passed column added.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -431,16 +431,16 @@ data.</p></li>
 <dl class="py method">
 <dt id="pyarrow.Table.cast">
 <code class="sig-name descname">cast</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">Schema target_schema</em>, <em class="sig-param">bool safe=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pyarrow.Table.cast" title="Permalink to this definition">¶</a></dt>
-<dd><p>Cast table values to another schema</p>
+<dd><p>Cast table values to another schema.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>target_schema</strong> (<a class="reference internal" href="pyarrow.Schema.html#pyarrow.Schema" title="pyarrow.Schema"><em>Schema</em></a>) – Schema to cast to, the names and order of fields must match</p></li>
-<li><p><strong>safe</strong> (<em>bool</em><em>, </em><em>default True</em>) – Check for overflows or other unsafe conversions</p></li>
+<li><p><strong>target_schema</strong> (<a class="reference internal" href="pyarrow.Schema.html#pyarrow.Schema" title="pyarrow.Schema"><em>Schema</em></a>) – Schema to cast to, the names and order of fields must match.</p></li>
+<li><p><strong>safe</strong> (<em>bool</em><em>, </em><em>default True</em>) – Check for overflows or other unsafe conversions.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>casted</strong> (<em>Table</em>)</p>
+<dd class="field-even"><p><em>Table</em></p>
 </dd>
 </dl>
 </dd></dl>
@@ -454,7 +454,7 @@ data.</p></li>
 <dd class="field-odd"><p><strong>i</strong> (<em>int</em><em> or </em><em>string</em>) – The index or name of the column to retrieve.</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><em>pyarrow.ChunkedArray</em></p>
+<dd class="field-even"><p><em>ChunkedArray</em></p>
 </dd>
 </dl>
 </dd></dl>
@@ -462,7 +462,12 @@ data.</p></li>
 <dl class="py attribute">
 <dt id="pyarrow.Table.column_names">
 <code class="sig-name descname">column_names</code><a class="headerlink" href="#pyarrow.Table.column_names" title="Permalink to this definition">¶</a></dt>
-<dd><p>Names of the table’s columns</p>
+<dd><p>Names of the table’s columns.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><em>list of str</em></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py attribute">
@@ -471,7 +476,7 @@ data.</p></li>
 <dd><p>List of all columns in numerical order.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p><em>list of pa.ChunkedArray</em></p>
+<dd class="field-odd"><p><em>list of ChunkedArray</em></p>
 </dd>
 </dl>
 </dd></dl>
@@ -484,10 +489,10 @@ data.</p></li>
 concatenated into zero or one chunk.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>memory_pool</strong> (<a class="reference internal" href="pyarrow.MemoryPool.html#pyarrow.MemoryPool" title="pyarrow.MemoryPool"><em>MemoryPool</em></a><em>, </em><em>default None</em>) – For memory allocations, if required, otherwise use default pool</p>
+<dd class="field-odd"><p><strong>memory_pool</strong> (<a class="reference internal" href="pyarrow.MemoryPool.html#pyarrow.MemoryPool" title="pyarrow.MemoryPool"><em>MemoryPool</em></a><em>, </em><em>default None</em>) – For memory allocations, if required, otherwise use default pool.</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>result</strong> (<em>Table</em>)</p>
+<dd class="field-even"><p><em>Table</em></p>
 </dd>
 </dl>
 </dd></dl>
@@ -500,11 +505,11 @@ concatenated into zero or one chunk.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>columns</strong> (<em>list of str</em>) – List of field names referencing existing columns.</p>
 </dd>
-</dl>
-<p>:raises KeyError : if any of the passed columns name are not existing.:</p>
-<dl class="field-list simple">
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>KeyError</strong> – If any of the passed columns name are not existing.</p>
+</dd>
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p><em>pyarrow.Table</em> – New table without the columns.</p>
+<dd class="field-odd"><p><em>Table</em> – New table without the columns.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -521,7 +526,7 @@ concatenated into zero or one chunk.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>are_equal</strong> (<em>bool</em>)</p>
+<dd class="field-even"><p><em>bool</em></p>
 </dd>
 </dl>
 </dd></dl>
@@ -535,7 +540,7 @@ concatenated into zero or one chunk.</p>
 <dd class="field-odd"><p><strong>i</strong> (<em>int</em><em> or </em><em>string</em>) – The index or name of the field to retrieve.</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><em>pyarrow.Field</em></p>
+<dd class="field-even"><p><em>Field</em></p>
 </dd>
 </dl>
 </dd></dl>
@@ -543,20 +548,22 @@ concatenated into zero or one chunk.</p>
 <dl class="py method">
 <dt id="pyarrow.Table.filter">
 <code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">mask</span></em>, <em class="sig-param"><span class="n">null_selection_behavior</span><span class="o">=</span><span class="default_value">'drop'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyarrow.Table.filter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Select records from a Table. See pyarrow.compute.filter for full usage.</p>
+<dd><p>Select records from a Table. See <a class="reference internal" href="pyarrow.compute.filter.html#pyarrow.compute.filter" title="pyarrow.compute.filter"><code class="xref py py-func docutils literal notranslate"><span class="pre">pyarrow.compute.filter()</span></code></a> for
+full usage.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="pyarrow.Table.flatten">
 <code class="sig-name descname">flatten</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">MemoryPool memory_pool=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyarrow.Table.flatten" title="Permalink to this definition">¶</a></dt>
-<dd><p>Flatten this Table.  Each column with a struct type is flattened
+<dd><p>Flatten this Table.</p>
+<p>Each column with a struct type is flattened
 into one column per struct field.  Other columns are left unchanged.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>memory_pool</strong> (<a class="reference internal" href="pyarrow.MemoryPool.html#pyarrow.MemoryPool" title="pyarrow.MemoryPool"><em>MemoryPool</em></a><em>, </em><em>default None</em>) – For memory allocations, if required, otherwise use default pool</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>result</strong> (<em>Table</em>)</p>
+<dd class="field-even"><p><em>Table</em></p>
 </dd>
 </dl>
 </dd></dl>
@@ -564,18 +571,18 @@ into one column per struct field.  Other columns are left unchanged.</p>
 <dl class="py method">
 <dt id="pyarrow.Table.from_arrays">
 <em class="property">static </em><code class="sig-name descname">from_arrays</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arrays</span></em>, <em class="sig-param"><span class="n">names</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">schema</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metadata</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyarrow.Table.from_arrays" title="Permalink to this definition">¶</a></dt>
-<dd><p>Construct a Table from Arrow arrays</p>
+<dd><p>Construct a Table from Arrow arrays.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>arrays</strong> (<em>list of pyarrow.Array</em><em> or </em><a class="reference internal" href="pyarrow.ChunkedArray.html#pyarrow.ChunkedArray" title="pyarrow.ChunkedArray"><em>pyarrow.ChunkedArray</em></a>) – Equal-length arrays that should form the table.</p></li>
-<li><p><strong>names</strong> (<em>list of str</em><em>, </em><em>optional</em>) – Names for the table columns. If not passed, schema must be passed</p></li>
-<li><p><strong>schema</strong> (<a class="reference internal" href="pyarrow.Schema.html#pyarrow.Schema" title="pyarrow.Schema"><em>Schema</em></a><em>, </em><em>default None</em>) – Schema for the created table. If not passed, names must be passed</p></li>
+<li><p><strong>names</strong> (<em>list of str</em><em>, </em><em>optional</em>) – Names for the table columns. If not passed, schema must be passed.</p></li>
+<li><p><strong>schema</strong> (<a class="reference internal" href="pyarrow.Schema.html#pyarrow.Schema" title="pyarrow.Schema"><em>Schema</em></a><em>, </em><em>default None</em>) – Schema for the created table. If not passed, names must be passed.</p></li>
 <li><p><strong>metadata</strong> (<em>dict</em><em> or </em><em>Mapping</em><em>, </em><em>default None</em>) – Optional metadata for the schema (if inferred).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><em>pyarrow.Table</em></p>
+<dd class="field-even"><p><em>Table</em></p>
 </dd>
 </dl>
 </dd></dl>
@@ -592,7 +599,7 @@ into one column per struct field.  Other columns are left unchanged.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>table</strong> (<em>Table</em>)</p>
+<dd class="field-even"><p><em>Table</em></p>
 </dd>
 </dl>
 </dd></dl>
@@ -628,13 +635,13 @@ be ignored.</p></li>
 except for RangeIndex which is stored as metadata only. Use
 <code class="docutils literal notranslate"><span class="pre">preserve_index=True</span></code> to force it to be stored as a column.</p></li>
 <li><p><strong>nthreads</strong> (<em>int</em><em>, </em><em>default None</em><em> (</em><em>may use up to system CPU count threads</em><em>)</em>) – If greater than 1, convert columns to Arrow in parallel using
-indicated number of threads</p></li>
+indicated number of threads.</p></li>
 <li><p><strong>columns</strong> (<em>list</em><em>, </em><em>optional</em>) – List of column to be converted. If None, use all columns.</p></li>
-<li><p><strong>safe</strong> (<em>bool</em><em>, </em><em>default True</em>) – Check for overflows or other unsafe conversions</p></li>
+<li><p><strong>safe</strong> (<em>bool</em><em>, </em><em>default True</em>) – Check for overflows or other unsafe conversions.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><em>pyarrow.Table</em></p>
+<dd class="field-even"><p><em>Table</em></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -653,17 +660,17 @@ indicated number of threads</p></li>
 <dl class="py method">
 <dt id="pyarrow.Table.from_pydict">
 <em class="property">static </em><code class="sig-name descname">from_pydict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mapping</span></em>, <em class="sig-param"><span class="n">schema</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metadata</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyarrow.Table.from_pydict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Construct a Table from Arrow arrays or columns</p>
+<dd><p>Construct a Table from Arrow arrays or columns.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>mapping</strong> (<em>dict</em><em> or </em><em>Mapping</em>) – A mapping of strings to Arrays or Python lists.</p></li>
-<li><p><strong>schema</strong> (<a class="reference internal" href="pyarrow.Schema.html#pyarrow.Schema" title="pyarrow.Schema"><em>Schema</em></a><em>, </em><em>default None</em>) – If not passed, will be inferred from the Mapping values</p></li>
+<li><p><strong>schema</strong> (<a class="reference internal" href="pyarrow.Schema.html#pyarrow.Schema" title="pyarrow.Schema"><em>Schema</em></a><em>, </em><em>default None</em>) – If not passed, will be inferred from the Mapping values.</p></li>
 <li><p><strong>metadata</strong> (<em>dict</em><em> or </em><em>Mapping</em><em>, </em><em>default None</em>) – Optional metadata for the schema (if inferred).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><em>pyarrow.Table</em></p>
+<dd class="field-even"><p><em>Table</em></p>
 </dd>
 </dl>
 </dd></dl>
@@ -674,7 +681,7 @@ indicated number of threads</p></li>
 <dd><p>Iterator over all columns in their numerical order.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Yields</dt>
-<dd class="field-odd"><p><em>pyarrow.ChunkedArray</em></p>
+<dd class="field-odd"><p><em>ChunkedArray</em></p>
 </dd>
 </dl>
 </dd></dl>
@@ -683,6 +690,11 @@ indicated number of threads</p></li>
 <dt id="pyarrow.Table.nbytes">
 <code class="sig-name descname">nbytes</code><a class="headerlink" href="#pyarrow.Table.nbytes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Total number of bytes consumed by the elements of the table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><em>int</em></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py attribute">
@@ -718,7 +730,7 @@ rows.</p>
 <dd class="field-odd"><p><strong>i</strong> (<em>int</em>) – Index of column to remove.</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><em>pyarrow.Table</em> – New table without the column.</p>
+<dd class="field-even"><p><em>Table</em> – New table without the column.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -727,20 +739,28 @@ rows.</p>
 <dt id="pyarrow.Table.rename_columns">
 <code class="sig-name descname">rename_columns</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">names</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyarrow.Table.rename_columns" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create new table with columns renamed to provided names.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>names</strong> (<em>list of str</em>) – List of new column names.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>Table</em></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="pyarrow.Table.replace_schema_metadata">
 <code class="sig-name descname">replace_schema_metadata</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">metadata</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyarrow.Table.replace_schema_metadata" title="Permalink to this definition">¶</a></dt>
 <dd><p>EXPERIMENTAL: Create shallow copy of table by replacing schema
-key-value metadata with the indicated new metadata (which may be None,
-which deletes any existing metadata</p>
+key-value metadata with the indicated new metadata (which may be None),
+which deletes any existing metadata.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>metadata</strong> (<em>dict</em><em>, </em><em>default None</em>) – </p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>shallow_copy</strong> (<em>Table</em>)</p>
+<dd class="field-even"><p><em>Table</em></p>
 </dd>
 </dl>
 </dd></dl>
@@ -751,7 +771,7 @@ which deletes any existing metadata</p>
 <dd><p>Schema of the table and its columns.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p><em>pyarrow.Schema</em></p>
+<dd class="field-odd"><p><em>Schema</em></p>
 </dd>
 </dl>
 </dd></dl>
@@ -786,7 +806,7 @@ data.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><em>pyarrow.Table</em> – New table with the passed column set.</p>
+<dd class="field-even"><p><em>Table</em> – New table with the passed column set.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -808,17 +828,17 @@ data.</p></li>
 <dl class="py method">
 <dt id="pyarrow.Table.slice">
 <code class="sig-name descname">slice</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">offset</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">length</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyarrow.Table.slice" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute zero-copy slice of this Table</p>
+<dd><p>Compute zero-copy slice of this Table.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>offset</strong> (<em>int</em><em>, </em><em>default 0</em>) – Offset from start of table to slice</p></li>
+<li><p><strong>offset</strong> (<em>int</em><em>, </em><em>default 0</em>) – Offset from start of table to slice.</p></li>
 <li><p><strong>length</strong> (<em>int</em><em>, </em><em>default None</em>) – Length of slice (default is until end of table starting from
-offset)</p></li>
+offset).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>sliced</strong> (<em>Table</em>)</p>
+<dd class="field-even"><p><em>Table</em></p>
 </dd>
 </dl>
 </dd></dl>
@@ -826,7 +846,7 @@ offset)</p></li>
 <dl class="py method">
 <dt id="pyarrow.Table.take">
 <code class="sig-name descname">take</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">indices</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyarrow.Table.take" title="Permalink to this definition">¶</a></dt>
-<dd><p>Select records from an Table. See pyarrow.compute.take for full
+<dd><p>Select records from an Table. See <a class="reference internal" href="pyarrow.compute.take.html#pyarrow.compute.take" title="pyarrow.compute.take"><code class="xref py py-func docutils literal notranslate"><span class="pre">pyarrow.compute.take()</span></code></a> for full
 usage.</p>
 </dd></dl>
 
@@ -840,7 +860,7 @@ usage.</p>
 smaller depending on the chunk layout of individual columns.</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>batches</strong> (<em>list of RecordBatch</em>)</p>
+<dd class="field-even"><p><em>list of RecordBatch</em></p>
 </dd>
 </dl>
 </dd></dl>
@@ -878,10 +898,14 @@ is a safe cast or not.</p></li>
 creating a pandas.DataFrame from a RecordBatch or Table. While this
 can temporarily reduce memory note that various pandas operations
 can trigger “consolidation” which may balloon memory use.</p></li>
-<li><p><strong>self_destruct</strong> (<em>bool</em><em>, </em><em>default False</em>) – EXPERIMENTAL: If True, attempt to deallocate the originating Arrow
+<li><p><strong>self_destruct</strong> (<em>bool</em><em>, </em><em>default False</em>) – <p>EXPERIMENTAL: If True, attempt to deallocate the originating Arrow
 memory while converting the Arrow object to pandas. If you use the
 object after calling to_pandas with this option it will crash your
-program.</p></li>
+program.</p>
+<p>Note that you may not see always memory usage improvements. For
+example, if multiple columns share an underlying allocation,
+memory can’t be freed until all columns are converted.</p>
+</p></li>
 <li><p><strong>types_mapper</strong> (<em>function</em><em>, </em><em>default None</em>) – A function mapping a pyarrow DataType to a pandas ExtensionDtype.
 This can be used to override the default pandas type for conversion
 of built-in pyarrow types or in absence of pandas_metadata in the
@@ -911,7 +935,16 @@ a dictionary mapping, you can pass <code class="docutils literal notranslate"><s
 <dl class="py method">
 <dt id="pyarrow.Table.to_string">
 <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">show_metadata</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyarrow.Table.to_string" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Return human-readable string representation of Table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>show_metadata</strong> (<em>bool</em><em>, </em><em>default True</em>) – Display Field-level and Schema-level KeyValueMetadata.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="pyarrow.Table.unify_dictionaries">
@@ -926,7 +959,7 @@ are transposed accordingly.</p>
 <dd class="field-odd"><p><strong>memory_pool</strong> (<a class="reference internal" href="pyarrow.MemoryPool.html#pyarrow.MemoryPool" title="pyarrow.MemoryPool"><em>MemoryPool</em></a><em>, </em><em>default None</em>) – For memory allocations, if required, otherwise use default pool</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>result</strong> (<em>Table</em>)</p>
+<dd class="field-even"><p><em>Table</em></p>
 </dd>
 </dl>
 </dd></dl>

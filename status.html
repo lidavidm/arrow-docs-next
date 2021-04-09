@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Implementation Status &mdash; Apache Arrow v4.0.0.dev6043+g76924612b.d20210325</title>
+  <title>Implementation Status &mdash; Apache Arrow v4.0.0.dev6150+g5287d181c.d20210407</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                4.0.0.dev6043+g76924612b.d20210325
+                4.0.0.dev6150+g5287d181c.d20210407
               </div>
             
           
@@ -292,7 +292,7 @@ libraries follow the C++ Arrow library.</p>
 <td><p>✓</p></td>
 <td></td>
 <td></td>
-<td></td>
+<td><p>✓</p></td>
 <td><p>✓</p></td>
 <td><p>✓</p></td>
 </tr>
@@ -301,7 +301,7 @@ libraries follow the C++ Arrow library.</p>
 <td><p>✓</p></td>
 <td></td>
 <td></td>
-<td></td>
+<td><p>✓</p></td>
 <td></td>
 <td><p>✓</p></td>
 </tr>
@@ -638,7 +638,7 @@ libraries follow the C++ Arrow library.</p>
 </tr>
 <tr class="row-even"><td><p>Buffer compression</p></td>
 <td><p>✓</p></td>
-<td></td>
+<td><p>✓ (3)</p></td>
 <td></td>
 <td></td>
 <td></td>
@@ -669,6 +669,7 @@ libraries follow the C++ Arrow library.</p>
 <ul class="simple">
 <li><p>(1) Delta dictionaries not supported on nested dictionaries</p></li>
 <li><p>(2) Data with non-native endianness can be byte-swapped automatically when reading.</p></li>
+<li><p>(3) LZ4 Codec currently is quite inefficient. ARROW-11901 tracks improving performance.</p></li>
 </ul>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -900,7 +901,7 @@ libraries follow the C++ Arrow library.</p>
 </tr>
 <tr class="row-odd"><td><p>Parquet</p></td>
 <td><p>R/W</p></td>
-<td></td>
+<td><p>R (2)</p></td>
 <td></td>
 <td></td>
 <td></td>
@@ -914,6 +915,7 @@ libraries follow the C++ Arrow library.</p>
 <li><p><em>R</em> = Read supported</p></li>
 <li><p><em>W</em> = Write supported</p></li>
 <li><p>(1) Nested read/write not supported</p></li>
+<li><p>(2) Through JNI bindings to datasets.</p></li>
 </ul>
 </div>
 </div>

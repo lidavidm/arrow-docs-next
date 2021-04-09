@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>pyarrow.dataset.dataset &mdash; Apache Arrow v4.0.0.dev6043+g76924612b.d20210325</title>
+  <title>pyarrow.dataset.dataset &mdash; Apache Arrow v4.0.0.dev6150+g5287d181c.d20210407</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                4.0.0.dev6043+g76924612b.d20210325
+                4.0.0.dev6150+g5287d181c.d20210407
               </div>
             
           
@@ -265,9 +265,12 @@ FilesystemDatasetFactory, etc.)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>source</strong> (<em>path</em><em>, </em><em>list of paths</em><em>, </em><em>dataset</em><em>, </em><em>list of datasets</em><em> or </em><em>URI</em>) – <dl class="simple">
-<dt>Path pointing to a single file:</dt><dd><p>Open a FileSystemDataset from a single file.</p>
-</dd>
+<li><p><strong>source</strong> (<em>path</em><em>, </em><em>list of paths</em><em>, </em><em>dataset</em><em>, </em><em>list of datasets</em><em>, </em><em>(</em><em>list of</em><em>) </em><em>batches</em>) – <p>or tables, iterable of batches, RecordBatchReader, or URI
+Path pointing to a single file:</p>
+<blockquote>
+<div><p>Open a FileSystemDataset from a single file.</p>
+</div></blockquote>
+<dl class="simple">
 <dt>Path pointing to a directory:</dt><dd><p>The directory gets discovered recursively according to a
 partitioning scheme if given.</p>
 </dd>
@@ -280,6 +283,11 @@ URIs as paths is not allowed.</p>
 <dt>List of datasets:</dt><dd><p>A nested UnionDataset gets constructed, it allows arbitrary
 composition of other datasets.
 Note that additional keyword arguments are not allowed.</p>
+</dd>
+<dt>(List of) batches or tables, iterable of batches, or RecordBatchReader:</dt><dd><p>Create an InMemoryDataset. If an iterable or empty list is given,
+a schema must also be given. If an iterable or RecordBatchReader
+is given, the resulting dataset can only be scanned once; further
+attempts will raise an error.</p>
 </dd>
 </dl>
 </p></li>

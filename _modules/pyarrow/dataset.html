@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>pyarrow.dataset &mdash; Apache Arrow v4.0.0.dev6043+g76924612b.d20210325</title>
+  <title>pyarrow.dataset &mdash; Apache Arrow v4.0.0.dev6150+g5287d181c.d20210407</title>
   
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                4.0.0.dev6043+g76924612b.d20210325
+                4.0.0.dev6150+g5287d181c.d20210407
               </div>
             
           
@@ -213,7 +213,7 @@
 <span class="sd">&quot;&quot;&quot;Dataset is currently unstable. APIs subject to change without notice.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">pyarrow</span> <span class="k">as</span> <span class="nn">pa</span>
-<span class="kn">from</span> <span class="nn">pyarrow.util</span> <span class="kn">import</span> <span class="n">_stringify_path</span><span class="p">,</span> <span class="n">_is_path_like</span>
+<span class="kn">from</span> <span class="nn">pyarrow.util</span> <span class="kn">import</span> <span class="n">_is_iterable</span><span class="p">,</span> <span class="n">_stringify_path</span><span class="p">,</span> <span class="n">_is_path_like</span>
 
 <span class="kn">from</span> <span class="nn">pyarrow._dataset</span> <span class="kn">import</span> <span class="p">(</span>  <span class="c1"># noqa</span>
     <span class="n">CsvFileFormat</span><span class="p">,</span>
@@ -232,6 +232,7 @@
     <span class="n">HivePartitioning</span><span class="p">,</span>
     <span class="n">IpcFileFormat</span><span class="p">,</span>
     <span class="n">IpcFileWriteOptions</span><span class="p">,</span>
+    <span class="n">InMemoryDataset</span><span class="p">,</span>
     <span class="n">ParquetDatasetFactory</span><span class="p">,</span>
     <span class="n">ParquetFactoryOptions</span><span class="p">,</span>
     <span class="n">ParquetFileFormat</span><span class="p">,</span>
@@ -603,6 +604,13 @@
     <span class="k">return</span> <span class="n">factory</span><span class="o">.</span><span class="n">finish</span><span class="p">(</span><span class="n">schema</span><span class="p">)</span>
 
 
+<span class="k">def</span> <span class="nf">_in_memory_dataset</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;For in-memory datasets, you cannot pass any additional arguments&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">InMemoryDataset</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
+
+
 <span class="k">def</span> <span class="nf">_union_dataset</span><span class="p">(</span><span class="n">children</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
@@ -703,7 +711,8 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    source : path, list of paths, dataset, list of datasets or URI</span>
+<span class="sd">    source : path, list of paths, dataset, list of datasets, (list of) batches</span>
+<span class="sd">             or tables, iterable of batches, RecordBatchReader, or URI</span>
 <span class="sd">        Path pointing to a single file:</span>
 <span class="sd">            Open a FileSystemDataset from a single file.</span>
 <span class="sd">        Path pointing to a directory:</span>
@@ -719,6 +728,11 @@
 <span class="sd">            A nested UnionDataset gets constructed, it allows arbitrary</span>
 <span class="sd">            composition of other datasets.</span>
 <span class="sd">            Note that additional keyword arguments are not allowed.</span>
+<span class="sd">        (List of) batches or tables, iterable of batches, or RecordBatchReader:</span>
+<span class="sd">            Create an InMemoryDataset. If an iterable or empty list is given,</span>
+<span class="sd">            a schema must also be given. If an iterable or RecordBatchReader</span>
+<span class="sd">            is given, the resulting dataset can only be scanned once; further</span>
+<span class="sd">            attempts will raise an error.</span>
 <span class="sd">    schema : Schema, optional</span>
 <span class="sd">        Optionally provide the Schema for the Dataset, in which case it will</span>
 <span class="sd">        not be inferred from the source.</span>
@@ -831,7 +845,6 @@
         <span class="n">selector_ignore_prefixes</span><span class="o">=</span><span class="n">ignore_prefixes</span>
     <span class="p">)</span>
 
-    <span class="c1"># TODO(kszucs): support InMemoryDataset for a table input</span>
     <span class="k">if</span> <span class="n">_is_path_like</span><span class="p">(</span><span class="n">source</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">_filesystem_dataset</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
@@ -839,13 +852,22 @@
             <span class="k">return</span> <span class="n">_filesystem_dataset</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">)</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">source</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">_union_dataset</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="p">(</span><span class="n">pa</span><span class="o">.</span><span class="n">RecordBatch</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">Table</span><span class="p">))</span>
+                 <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">source</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">_in_memory_dataset</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">unique_types</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">source</span><span class="p">)</span>
             <span class="n">type_names</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">unique_types</span><span class="p">)</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                <span class="s1">&#39;Expected a list of path-like or dataset objects. The given &#39;</span>
-                <span class="s1">&#39;list contains the following types: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">type_names</span><span class="p">)</span>
+                <span class="s1">&#39;Expected a list of path-like or dataset objects, or a list &#39;</span>
+                <span class="s1">&#39;of batches or tables. The given list contains the following &#39;</span>
+                <span class="s1">&#39;types: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">type_names</span><span class="p">)</span>
             <span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="p">(</span><span class="n">pa</span><span class="o">.</span><span class="n">RecordBatch</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">ipc</span><span class="o">.</span><span class="n">RecordBatchReader</span><span class="p">,</span>
+                             <span class="n">pa</span><span class="o">.</span><span class="n">Table</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="n">_in_memory_dataset</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">_is_iterable</span><span class="p">(</span><span class="n">source</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">_in_memory_dataset</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
             <span class="s1">&#39;Expected a path-like, list of path-likes or a list of Datasets &#39;</span>
@@ -871,9 +893,11 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    data : Dataset, Table/RecordBatch, or list of Table/RecordBatch</span>
+<span class="sd">    data : Dataset, Table/RecordBatch, RecordBatchReader, list of</span>
+<span class="sd">           Table/RecordBatch, or iterable of RecordBatch</span>
 <span class="sd">        The data to write. This can be a Dataset instance or</span>
-<span class="sd">        in-memory Arrow data.</span>
+<span class="sd">        in-memory Arrow data. If an iterable is given, the schema must</span>
+<span class="sd">        also be given.</span>
 <span class="sd">    base_dir : str</span>
 <span class="sd">        The root directory where to write the dataset.</span>
 <span class="sd">    basename_template : str, optional</span>
@@ -905,15 +929,17 @@
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">):</span>
         <span class="n">schema</span> <span class="o">=</span> <span class="n">schema</span> <span class="ow">or</span> <span class="n">data</span><span class="o">.</span><span class="n">schema</span>
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="n">pa</span><span class="o">.</span><span class="n">Table</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">RecordBatch</span><span class="p">)):</span>
-        <span class="n">schema</span> <span class="o">=</span> <span class="n">schema</span> <span class="ow">or</span> <span class="n">data</span><span class="o">.</span><span class="n">schema</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">data</span><span class="p">]</span>
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
         <span class="n">schema</span> <span class="o">=</span> <span class="n">schema</span> <span class="ow">or</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">schema</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">InMemoryDataset</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="n">pa</span><span class="o">.</span><span class="n">RecordBatch</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">ipc</span><span class="o">.</span><span class="n">RecordBatchReader</span><span class="p">,</span>
+                           <span class="n">pa</span><span class="o">.</span><span class="n">Table</span><span class="p">))</span> <span class="ow">or</span> <span class="n">_is_iterable</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">InMemoryDataset</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">)</span>
+        <span class="n">schema</span> <span class="o">=</span> <span class="n">schema</span> <span class="ow">or</span> <span class="n">data</span><span class="o">.</span><span class="n">schema</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;Only Dataset, Table/RecordBatch or a list of Table/RecordBatch &quot;</span>
-            <span class="s2">&quot;objects are supported.&quot;</span>
+            <span class="s2">&quot;Only Dataset, Table/RecordBatch, RecordBatchReader, a list &quot;</span>
+            <span class="s2">&quot;of Tables/RecordBatches, or iterable of batches are supported.&quot;</span>
         <span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">format</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">FileSystemDataset</span><span class="p">):</span>

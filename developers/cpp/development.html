@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Development Guidelines &mdash; Apache Arrow v4.0.0.dev6043+g76924612b.d20210325</title>
+  <title>Development Guidelines &mdash; Apache Arrow v4.0.0.dev6150+g5287d181c.d20210407</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                4.0.0.dev6043+g76924612b.d20210325
+                4.0.0.dev6150+g5287d181c.d20210407
               </div>
             
           
@@ -270,6 +270,12 @@ in <code class="docutils literal notranslate"><span class="pre">Release</span></
 <li><p>We relax the line length restriction to 90 characters.</p></li>
 <li><p>We use the <code class="docutils literal notranslate"><span class="pre">NULLPTR</span></code> macro in header files (instead of <code class="docutils literal notranslate"><span class="pre">nullptr</span></code>) defined
 in <code class="docutils literal notranslate"><span class="pre">src/arrow/util/macros.h</span></code> to support building C++/CLI (ARROW-1134)</p></li>
+<li><p>We relax the guide’s rules regarding structs.  For public headers we should
+use struct only for objects that are principally simple data containers where
+it is OK to expose all the internal members and any methods are primarily
+conveniences.  For private headers the rules are relaxed further and structs
+can be used where convenient for types that do not need access control even
+though they may not be simple data containers.</p></li>
 </ul>
 <p>Our continuous integration builds on GitHub Actions run the unit test
 suites on a variety of platforms and configuration, including using

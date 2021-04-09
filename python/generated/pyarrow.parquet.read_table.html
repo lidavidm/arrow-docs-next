@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>pyarrow.parquet.read_table &mdash; Apache Arrow v4.0.0.dev6043+g76924612b.d20210325</title>
+  <title>pyarrow.parquet.read_table &mdash; Apache Arrow v4.0.0.dev6150+g5287d181c.d20210407</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                4.0.0.dev6043+g76924612b.d20210325
+                4.0.0.dev6150+g5287d181c.d20210407
               </div>
             
           
@@ -282,7 +282,7 @@ In addition, a scheme like “/2009/11” is also supported, in which case
 you need to specify the field names or a full schema. See the
 <code class="docutils literal notranslate"><span class="pre">pyarrow.dataset.partitioning()</span></code> function for more details.</p></li>
 <li><p><strong>use_pandas_metadata</strong> (<em>bool</em><em>, </em><em>default False</em>) – If True and file has custom pandas schema metadata, ensure that
-index columns are also loaded</p></li>
+index columns are also loaded.</p></li>
 <li><p><strong>use_legacy_dataset</strong> (<em>bool</em><em>, </em><em>default False</em>) – By default, <cite>read_table</cite> uses the new Arrow Datasets API since
 pyarrow 1.0.0. Among other things, this allows to pass <cite>filters</cite>
 for all columns and not only the partition keys, enables

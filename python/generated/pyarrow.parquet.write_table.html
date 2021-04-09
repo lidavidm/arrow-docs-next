@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>pyarrow.parquet.write_table &mdash; Apache Arrow v4.0.0.dev6043+g76924612b.d20210325</title>
+  <title>pyarrow.parquet.write_table &mdash; Apache Arrow v4.0.0.dev6150+g5287d181c.d20210407</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                4.0.0.dev6043+g76924612b.d20210325
+                4.0.0.dev6150+g5287d181c.d20210407
               </div>
             
           
@@ -315,9 +315,9 @@ For <code class="docutils literal notranslate"><span class="pre">use_compliant_n
 with 3-level structure where the middle level, named <code class="docutils literal notranslate"><span class="pre">list</span></code>,
 is a repeated group with a single field named <code class="docutils literal notranslate"><span class="pre">element</span></code></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="nb">list</span><span class="o">-</span><span class="n">repetition</span><span class="o">&gt;</span> <span class="n">group</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">LIST</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">repeated</span> <span class="n">group</span> <span class="nb">list</span> <span class="p">{</span>
-    <span class="o">&lt;</span><span class="n">element</span><span class="o">-</span><span class="n">repetition</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">element</span><span class="o">-</span><span class="nb">type</span><span class="o">&gt;</span> <span class="n">element</span><span class="p">;</span>
-  <span class="p">}</span>
+    <span class="n">repeated</span> <span class="n">group</span> <span class="nb">list</span> <span class="p">{</span>
+          <span class="o">&lt;</span><span class="n">element</span><span class="o">-</span><span class="n">repetition</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">element</span><span class="o">-</span><span class="nb">type</span><span class="o">&gt;</span> <span class="n">element</span><span class="p">;</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -326,9 +326,9 @@ with 3-level structure, where the name of the single field of the middle
 level <code class="docutils literal notranslate"><span class="pre">list</span></code> is taken from the element name for nested columns in Arrow,
 which defaults to <code class="docutils literal notranslate"><span class="pre">item</span></code></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="nb">list</span><span class="o">-</span><span class="n">repetition</span><span class="o">&gt;</span> <span class="n">group</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">LIST</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">repeated</span> <span class="n">group</span> <span class="nb">list</span> <span class="p">{</span>
-    <span class="o">&lt;</span><span class="n">element</span><span class="o">-</span><span class="n">repetition</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">element</span><span class="o">-</span><span class="nb">type</span><span class="o">&gt;</span> <span class="n">item</span><span class="p">;</span>
- <span class="p">}</span>
+    <span class="n">repeated</span> <span class="n">group</span> <span class="nb">list</span> <span class="p">{</span>
+        <span class="o">&lt;</span><span class="n">element</span><span class="o">-</span><span class="n">repetition</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">element</span><span class="o">-</span><span class="nb">type</span><span class="o">&gt;</span> <span class="n">item</span><span class="p">;</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>

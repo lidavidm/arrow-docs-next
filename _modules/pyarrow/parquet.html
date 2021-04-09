@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>pyarrow.parquet &mdash; Apache Arrow v4.0.0.dev6043+g76924612b.d20210325</title>
+  <title>pyarrow.parquet &mdash; Apache Arrow v4.0.0.dev6150+g5287d181c.d20210407</title>
   
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                4.0.0.dev6043+g76924612b.d20210325
+                4.0.0.dev6150+g5287d181c.d20210407
               </div>
             
           
@@ -744,23 +744,22 @@
 <span class="s2">    with 3-level structure where the middle level, named ``list``,</span>
 <span class="s2">    is a repeated group with a single field named ``element``</span>
 <span class="s2">    ::</span>
-<span class="s2">      &lt;list-repetition&gt; group &lt;name&gt; (LIST) {</span>
-<span class="s2">        repeated group list {</span>
-<span class="s2">          &lt;element-repetition&gt; &lt;element-type&gt; element;</span>
+<span class="s2">        &lt;list-repetition&gt; group &lt;name&gt; (LIST) {</span>
+<span class="s2">            repeated group list {</span>
+<span class="s2">                  &lt;element-repetition&gt; &lt;element-type&gt; element;</span>
+<span class="s2">            }</span>
 <span class="s2">        }</span>
-<span class="s2">      }</span>
 
 <span class="s2">    For ``use_compliant_nested_type=False``, this will also write into a list</span>
 <span class="s2">    with 3-level structure, where the name of the single field of the middle</span>
 <span class="s2">    level ``list`` is taken from the element name for nested columns in Arrow,</span>
 <span class="s2">    which defaults to ``item``</span>
 <span class="s2">    ::</span>
-<span class="s2">      &lt;list-repetition&gt; group &lt;name&gt; (LIST) {</span>
-<span class="s2">        repeated group list {</span>
-<span class="s2">          &lt;element-repetition&gt; &lt;element-type&gt; item;</span>
-<span class="s2">       }</span>
-<span class="s2">      }</span>
-
+<span class="s2">        &lt;list-repetition&gt; group &lt;name&gt; (LIST) {</span>
+<span class="s2">            repeated group list {</span>
+<span class="s2">                &lt;element-repetition&gt; &lt;element-type&gt; item;</span>
+<span class="s2">            }</span>
+<span class="s2">        }</span>
 <span class="s2">&quot;&quot;&quot;</span>
 
 
@@ -1953,26 +1952,15 @@
     <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">_read_docstring_common</span><span class="p">,</span>
                <span class="sd">&quot;&quot;&quot;use_pandas_metadata : bool, default False</span>
 <span class="sd">    If True and file has custom pandas schema metadata, ensure that</span>
-<span class="sd">    index columns are also loaded&quot;&quot;&quot;</span><span class="p">)),</span>
+<span class="sd">    index columns are also loaded.&quot;&quot;&quot;</span><span class="p">)),</span>
     <span class="sd">&quot;&quot;&quot;pyarrow.Table</span>
 <span class="sd">    Content of the file as a table (of columns)&quot;&quot;&quot;</span><span class="p">,</span>
     <span class="n">_DNF_filter_doc</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="read_pandas"><a class="viewcode-back" href="../../python/generated/pyarrow.parquet.read_pandas.html#pyarrow.parquet.read_pandas">[docs]</a><span class="k">def</span> <span class="nf">read_pandas</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">use_threads</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">memory_map</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">buffer_size</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-                <span class="n">use_legacy_dataset</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ignore_prefixes</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="read_pandas"><a class="viewcode-back" href="../../python/generated/pyarrow.parquet.read_pandas.html#pyarrow.parquet.read_pandas">[docs]</a><span class="k">def</span> <span class="nf">read_pandas</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">read_table</span><span class="p">(</span>
-        <span class="n">source</span><span class="p">,</span>
-        <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span>
-        <span class="n">use_threads</span><span class="o">=</span><span class="n">use_threads</span><span class="p">,</span>
-        <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span>
-        <span class="n">filters</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span>
-        <span class="n">memory_map</span><span class="o">=</span><span class="n">memory_map</span><span class="p">,</span>
-        <span class="n">buffer_size</span><span class="o">=</span><span class="n">buffer_size</span><span class="p">,</span>
-        <span class="n">use_pandas_metadata</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="n">use_legacy_dataset</span><span class="o">=</span><span class="n">use_legacy_dataset</span><span class="p">,</span>
-        <span class="n">ignore_prefixes</span><span class="o">=</span><span class="n">ignore_prefixes</span>
+        <span class="n">source</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">use_pandas_metadata</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
     <span class="p">)</span></div>
 
 

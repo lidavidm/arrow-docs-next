@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Reading and Writing the Apache Parquet Format &mdash; Apache Arrow v4.0.0.dev6043+g76924612b.d20210325</title>
+  <title>Reading and Writing the Apache Parquet Format &mdash; Apache Arrow v4.0.0.dev6150+g5287d181c.d20210407</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                4.0.0.dev6043+g76924612b.d20210325
+                4.0.0.dev6150+g5287d181c.d20210407
               </div>
             
           
@@ -398,17 +398,17 @@ you may choose to omit it by passing <code class="docutils literal notranslate">
 
 <span class="gp">In [20]: </span><span class="n">parquet_file</span><span class="o">.</span><span class="n">metadata</span>
 <span class="gh">Out[20]: </span><span class="go"></span>
-<span class="go">&lt;pyarrow._parquet.FileMetaData object at 0x7f1acbd69040&gt;</span>
-<span class="go">  created_by: parquet-cpp version 1.5.1-SNAPSHOT</span>
+<span class="go">&lt;pyarrow._parquet.FileMetaData object at 0x7f59c4d84220&gt;</span>
+<span class="go">  created_by: parquet-cpp-arrow version 4.0.0-SNAPSHOT</span>
 <span class="go">  num_columns: 4</span>
 <span class="go">  num_rows: 3</span>
 <span class="go">  num_row_groups: 1</span>
 <span class="go">  format_version: 1.0</span>
-<span class="go">  serialized_size: 2639</span>
+<span class="go">  serialized_size: 2645</span>
 
 <span class="gp">In [21]: </span><span class="n">parquet_file</span><span class="o">.</span><span class="n">schema</span>
 <span class="gh">Out[21]: </span><span class="go"></span>
-<span class="go">&lt;pyarrow._parquet.ParquetSchema object at 0x7f1acbd74300&gt;</span>
+<span class="go">&lt;pyarrow._parquet.ParquetSchema object at 0x7f59c4dcdc00&gt;</span>
 <span class="go">required group field_id=0 schema {</span>
 <span class="go">  optional double field_id=1 one;</span>
 <span class="go">  optional binary field_id=2 two (String);</span>
@@ -471,13 +471,13 @@ concatenate them into a single table. You can read individual row groups with
 
 <span class="gp">In [33]: </span><span class="n">metadata</span>
 <span class="gh">Out[33]: </span><span class="go"></span>
-<span class="go">&lt;pyarrow._parquet.FileMetaData object at 0x7f1acbd7a720&gt;</span>
-<span class="go">  created_by: parquet-cpp version 1.5.1-SNAPSHOT</span>
+<span class="go">&lt;pyarrow._parquet.FileMetaData object at 0x7f59c4d90270&gt;</span>
+<span class="go">  created_by: parquet-cpp-arrow version 4.0.0-SNAPSHOT</span>
 <span class="go">  num_columns: 4</span>
 <span class="go">  num_rows: 3</span>
 <span class="go">  num_row_groups: 1</span>
 <span class="go">  format_version: 1.0</span>
-<span class="go">  serialized_size: 2639</span>
+<span class="go">  serialized_size: 2645</span>
 </pre></div>
 </div>
 <p>The returned <code class="docutils literal notranslate"><span class="pre">FileMetaData</span></code> object allows to inspect the
@@ -485,14 +485,14 @@ concatenate them into a single table. You can read individual row groups with
 such as the row groups and column chunk metadata and statistics:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [34]: </span><span class="n">metadata</span><span class="o">.</span><span class="n">row_group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="gh">Out[34]: </span><span class="go"></span>
-<span class="go">&lt;pyarrow._parquet.RowGroupMetaData object at 0x7f1acbd7a590&gt;</span>
+<span class="go">&lt;pyarrow._parquet.RowGroupMetaData object at 0x7f59c4d9e630&gt;</span>
 <span class="go">  num_columns: 4</span>
 <span class="go">  num_rows: 3</span>
 <span class="go">  total_byte_size: 282</span>
 
 <span class="gp">In [35]: </span><span class="n">metadata</span><span class="o">.</span><span class="n">row_group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="gh">Out[35]: </span><span class="go"></span>
-<span class="go">&lt;pyarrow._parquet.ColumnChunkMetaData object at 0x7f1acbd7a540&gt;</span>
+<span class="go">&lt;pyarrow._parquet.ColumnChunkMetaData object at 0x7f59c4d9e5e0&gt;</span>
 <span class="go">  file_offset: 108</span>
 <span class="go">  file_path: </span>
 <span class="go">  physical_type: DOUBLE</span>
@@ -500,7 +500,7 @@ such as the row groups and column chunk metadata and statistics:</p>
 <span class="go">  path_in_schema: one</span>
 <span class="go">  is_stats_set: True</span>
 <span class="go">  statistics:</span>
-<span class="go">    &lt;pyarrow._parquet.Statistics object at 0x7f1acbd8f360&gt;</span>
+<span class="go">    &lt;pyarrow._parquet.Statistics object at 0x7f59c4d9e360&gt;</span>
 <span class="go">      has_min_max: True</span>
 <span class="go">      min: -1.0</span>
 <span class="go">      max: 2.5</span>

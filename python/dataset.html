@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Tabular Datasets &mdash; Apache Arrow v4.0.0.dev6043+g76924612b.d20210325</title>
+  <title>Tabular Datasets &mdash; Apache Arrow v4.0.0.dev6150+g5287d181c.d20210407</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                4.0.0.dev6043+g76924612b.d20210325
+                4.0.0.dev6150+g5287d181c.d20210407
               </div>
             
           
@@ -247,19 +247,19 @@
 and a stable API is not yet guaranteed.</p>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">pyarrow.dataset</span></code> module provides functionality to efficiently work with
-tabular, potentially larger than memory and multi-file datasets:</p>
+tabular, potentially larger than memory, and multi-file datasets. This includes:</p>
 <ul class="simple">
-<li><p>A unified interface for different sources: supporting different sources and
-file formats (Parquet, Feather files) and different file systems (local,
-cloud).</p></li>
+<li><p>A unified interface that supports different sources and file formats
+(Parquet, Feather / Arrow IPC, and CSV files) and different file systems
+(local, cloud).</p></li>
 <li><p>Discovery of sources (crawling directories, handle directory-based partitioned
 datasets, basic schema normalization, ..)</p></li>
 <li><p>Optimized reading with predicate pushdown (filtering rows), projection
-(selecting columns), parallel reading or fine-grained managing of tasks.</p></li>
+(selecting and deriving columns), and optionally parallel reading.</p></li>
 </ul>
 <p>Currently, only Parquet, Feather / Arrow IPC, and CSV files are supported. The
 goal is to expand this in the future to other file formats and data sources
-(e.g.  database connections).</p>
+(e.g. database connections).</p>
 <p>For those familiar with the existing <a class="reference internal" href="generated/pyarrow.parquet.ParquetDataset.html#pyarrow.parquet.ParquetDataset" title="pyarrow.parquet.ParquetDataset"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyarrow.parquet.ParquetDataset</span></code></a> for
 reading Parquet datasets: <code class="docutils literal notranslate"><span class="pre">pyarrow.dataset</span></code>’s goal is similar but not specific
 to the Parquet format and not tied to Python: the same datasets API is exposed
@@ -300,15 +300,19 @@ can pass it the path to the directory containing the data files:</p>
 <span class="gp">In [11]: </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">dataset</span><span class="p">(</span><span class="n">base</span> <span class="o">/</span> <span class="s2">&quot;parquet_dataset&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;parquet&quot;</span><span class="p">)</span>
 
 <span class="gp">In [12]: </span><span class="n">dataset</span>
-<span class="gh">Out[12]: </span><span class="go">&lt;pyarrow._dataset.FileSystemDataset at 0x7f1a4f5e1830&gt;</span>
+<span class="gh">Out[12]: </span><span class="go">&lt;pyarrow._dataset.FileSystemDataset at 0x7f7e36bcdd30&gt;</span>
 </pre></div>
 </div>
-<p>In addition to a base directory path, <a class="reference internal" href="generated/pyarrow.dataset.dataset.html#pyarrow.dataset.dataset" title="pyarrow.dataset.dataset"><code class="xref py py-func docutils literal notranslate"><span class="pre">dataset()</span></code></a> accepts a path to a single
-file or a list of file paths.</p>
-<p>Creating a <a class="reference internal" href="generated/pyarrow.dataset.Dataset.html#pyarrow.dataset.Dataset" title="pyarrow.dataset.Dataset"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></a> object loads nothing into memory, it only crawls the
-directory to find all the files:</p>
+<p>In addition to searching a base directory, <a class="reference internal" href="generated/pyarrow.dataset.dataset.html#pyarrow.dataset.dataset" title="pyarrow.dataset.dataset"><code class="xref py py-func docutils literal notranslate"><span class="pre">dataset()</span></code></a> accepts a path to a
+single file or a list of file paths.</p>
+<p>Creating a <a class="reference internal" href="generated/pyarrow.dataset.Dataset.html#pyarrow.dataset.Dataset" title="pyarrow.dataset.Dataset"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></a> object does not begin reading the data itself. If
+needed, it only crawls the directory to find all the files:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">dataset</span><span class="o">.</span><span class="n">files</span>
-<span class="gh">Out[13]: </span><span class="go">[&#39;/tmp/parquet_dataset/data1.parquet&#39;, &#39;/tmp/parquet_dataset/data2.parquet&#39;]</span>
+<span class="gh">Out[13]: </span><span class="go"></span>
+<span class="go">[&#39;/tmp/parquet_dataset/data1.parquet&#39;,</span>
+<span class="go"> &#39;/tmp/parquet_dataset/data2.parquet&#39;,</span>
+<span class="go"> &#39;/tmp/parquet_dataset/part=a/part0.parquet&#39;,</span>
+<span class="go"> &#39;/tmp/parquet_dataset/part=b/part1.parquet&#39;]</span>
 </pre></div>
 </div>
 <p>… and infers the dataset’s schema (by default from the first file):</p>
@@ -331,44 +335,54 @@ this can require a lot of memory, see below on filtering / iterative loading):</
 <span class="go"># converting to pandas to see the contents of the scanned table</span>
 <span class="gp">In [16]: </span><span class="n">dataset</span><span class="o">.</span><span class="n">to_table</span><span class="p">()</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
 <span class="gh">Out[16]: </span><span class="go"></span>
-<span class="go">   a         b  c</span>
-<span class="go">0  0 -0.225323  1</span>
-<span class="go">1  1 -1.459746  2</span>
-<span class="go">2  2 -0.909798  1</span>
-<span class="go">3  3  0.896614  2</span>
-<span class="go">4  4 -0.245312  1</span>
-<span class="go">5  5  1.305330  2</span>
-<span class="go">6  6 -0.711179  1</span>
-<span class="go">7  7 -1.768824  2</span>
-<span class="go">8  8 -1.020502  1</span>
-<span class="go">9  9 -0.201028  2</span>
+<span class="go">    a         b  c</span>
+<span class="go">0   0  2.058450  1</span>
+<span class="go">1   1 -0.726163  2</span>
+<span class="go">2   2 -0.892485  1</span>
+<span class="go">3   3  1.119419  2</span>
+<span class="go">4   4  1.500696  1</span>
+<span class="go">5   5 -0.771233  2</span>
+<span class="go">6   6  0.641720  1</span>
+<span class="go">7   7  0.084275  2</span>
+<span class="go">8   8 -0.371125  1</span>
+<span class="go">9   9 -1.151080  2</span>
+<span class="go">10  0  9.000000  1</span>
+<span class="go">11  1  8.000000  2</span>
+<span class="go">12  2  7.000000  1</span>
+<span class="go">13  3  6.000000  2</span>
+<span class="go">14  4  5.000000  1</span>
+<span class="go">15  5  4.000000  2</span>
+<span class="go">16  6  3.000000  1</span>
+<span class="go">17  7  2.000000  2</span>
+<span class="go">18  8  1.000000  1</span>
+<span class="go">19  9  0.000000  2</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="reading-different-file-formats">
 <h3>Reading different file formats<a class="headerlink" href="#reading-different-file-formats" title="Permalink to this headline">¶</a></h3>
 <p>The above examples use Parquet files as dataset source but the Dataset API
-provides a consistent interface across multiple file formats and sources.
+provides a consistent interface across multiple file formats and filesystems.
 Currently, Parquet, Feather / Arrow IPC, and CSV file formats are supported;
 more formats are planned in the future.</p>
-<p>If we save the table as a Feather file instead of Parquet files:</p>
+<p>If we save the table as Feather files instead of Parquet files:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="kn">import</span> <span class="nn">pyarrow.feather</span> <span class="k">as</span> <span class="nn">feather</span>
 
 <span class="gp">In [18]: </span><span class="n">feather</span><span class="o">.</span><span class="n">write_feather</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">base</span> <span class="o">/</span> <span class="s2">&quot;data.feather&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>then we can read the Feather file using the same functions, but with specifying
+<p>…then we can read the Feather file using the same functions, but with specifying
 <code class="docutils literal notranslate"><span class="pre">format=&quot;feather&quot;</span></code>:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">dataset</span><span class="p">(</span><span class="n">base</span> <span class="o">/</span> <span class="s2">&quot;data.feather&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;feather&quot;</span><span class="p">)</span>
 
 <span class="gp">In [20]: </span><span class="n">dataset</span><span class="o">.</span><span class="n">to_table</span><span class="p">()</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 <span class="gh">Out[20]: </span><span class="go"></span>
 <span class="go">   a         b  c</span>
-<span class="go">0  0 -0.225323  1</span>
-<span class="go">1  1 -1.459746  2</span>
-<span class="go">2  2 -0.909798  1</span>
-<span class="go">3  3  0.896614  2</span>
-<span class="go">4  4 -0.245312  1</span>
+<span class="go">0  0  2.058450  1</span>
+<span class="go">1  1 -0.726163  2</span>
+<span class="go">2  2 -0.892485  1</span>
+<span class="go">3  3  1.119419  2</span>
+<span class="go">4  4  1.500696  1</span>
 </pre></div>
 </div>
 </div>
@@ -399,17 +413,27 @@ more formats are planned in the future.</p>
 
 <span class="gp">In [22]: </span><span class="n">dataset</span><span class="o">.</span><span class="n">to_table</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
 <span class="gh">Out[22]: </span><span class="go"></span>
-<span class="go">   a         b</span>
-<span class="go">0  0 -0.225323</span>
-<span class="go">1  1 -1.459746</span>
-<span class="go">2  2 -0.909798</span>
-<span class="go">3  3  0.896614</span>
-<span class="go">4  4 -0.245312</span>
-<span class="go">5  5  1.305330</span>
-<span class="go">6  6 -0.711179</span>
-<span class="go">7  7 -1.768824</span>
-<span class="go">8  8 -1.020502</span>
-<span class="go">9  9 -0.201028</span>
+<span class="go">    a         b</span>
+<span class="go">0   0  2.058450</span>
+<span class="go">1   1 -0.726163</span>
+<span class="go">2   2 -0.892485</span>
+<span class="go">3   3  1.119419</span>
+<span class="go">4   4  1.500696</span>
+<span class="go">5   5 -0.771233</span>
+<span class="go">6   6  0.641720</span>
+<span class="go">7   7  0.084275</span>
+<span class="go">8   8 -0.371125</span>
+<span class="go">9   9 -1.151080</span>
+<span class="go">10  0  9.000000</span>
+<span class="go">11  1  8.000000</span>
+<span class="go">12  2  7.000000</span>
+<span class="go">13  3  6.000000</span>
+<span class="go">14  4  5.000000</span>
+<span class="go">15  5  4.000000</span>
+<span class="go">16  6  3.000000</span>
+<span class="go">17  7  2.000000</span>
+<span class="go">18  8  1.000000</span>
+<span class="go">19  9  0.000000</span>
 </pre></div>
 </div>
 <p>With the <code class="docutils literal notranslate"><span class="pre">filter</span></code> keyword, rows which do not match the filter predicate will
@@ -418,18 +442,26 @@ not be included in the returned table. The keyword expects a boolean
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [23]: </span><span class="n">dataset</span><span class="o">.</span><span class="n">to_table</span><span class="p">(</span><span class="nb">filter</span><span class="o">=</span><span class="n">ds</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">7</span><span class="p">)</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
 <span class="gh">Out[23]: </span><span class="go"></span>
 <span class="go">   a         b  c</span>
-<span class="go">0  7 -1.768824  2</span>
-<span class="go">1  8 -1.020502  1</span>
-<span class="go">2  9 -0.201028  2</span>
+<span class="go">0  7  0.084275  2</span>
+<span class="go">1  8 -0.371125  1</span>
+<span class="go">2  9 -1.151080  2</span>
+<span class="go">3  7  2.000000  2</span>
+<span class="go">4  8  1.000000  1</span>
+<span class="go">5  9  0.000000  2</span>
 
 <span class="gp">In [24]: </span><span class="n">dataset</span><span class="o">.</span><span class="n">to_table</span><span class="p">(</span><span class="nb">filter</span><span class="o">=</span><span class="n">ds</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
 <span class="gh">Out[24]: </span><span class="go"></span>
 <span class="go">   a         b  c</span>
-<span class="go">0  1 -1.459746  2</span>
-<span class="go">1  3  0.896614  2</span>
-<span class="go">2  5  1.305330  2</span>
-<span class="go">3  7 -1.768824  2</span>
-<span class="go">4  9 -0.201028  2</span>
+<span class="go">0  1 -0.726163  2</span>
+<span class="go">1  3  1.119419  2</span>
+<span class="go">2  5 -0.771233  2</span>
+<span class="go">3  7  0.084275  2</span>
+<span class="go">4  9 -1.151080  2</span>
+<span class="go">5  1  8.000000  2</span>
+<span class="go">6  3  6.000000  2</span>
+<span class="go">7  5  4.000000  2</span>
+<span class="go">8  7  2.000000  2</span>
+<span class="go">9  9  0.000000  2</span>
 </pre></div>
 </div>
 <p>The easiest way to construct those <a class="reference internal" href="generated/pyarrow.dataset.Expression.html#pyarrow.dataset.Expression" title="pyarrow.dataset.Expression"><code class="xref py py-class docutils literal notranslate"><span class="pre">Expression</span></code></a> objects is by using the
@@ -474,11 +506,11 @@ values:</p>
 <span class="gp">In [29]: </span><span class="n">dataset</span><span class="o">.</span><span class="n">to_table</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">projection</span><span class="p">)</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 <span class="gh">Out[29]: </span><span class="go"></span>
 <span class="go">   a_renamed  b_as_float32    c_1</span>
-<span class="go">0          0     -0.225323   True</span>
-<span class="go">1          1     -1.459746  False</span>
-<span class="go">2          2     -0.909798   True</span>
-<span class="go">3          3      0.896614  False</span>
-<span class="go">4          4     -0.245312   True</span>
+<span class="go">0          0      2.058450   True</span>
+<span class="go">1          1     -0.726163  False</span>
+<span class="go">2          2     -0.892485   True</span>
+<span class="go">3          3      1.119419  False</span>
+<span class="go">4          4      1.500696   True</span>
 </pre></div>
 </div>
 <p>The dictionary also determines the column selection (only the keys in the
@@ -492,11 +524,11 @@ build up the dictionary from the dataset schema:</p>
 <span class="gp">In [32]: </span><span class="n">dataset</span><span class="o">.</span><span class="n">to_table</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">projection</span><span class="p">)</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 <span class="gh">Out[32]: </span><span class="go"></span>
 <span class="go">   a         b  c  b_large</span>
-<span class="go">0  0 -0.225323  1    False</span>
-<span class="go">1  1 -1.459746  2    False</span>
-<span class="go">2  2 -0.909798  1    False</span>
-<span class="go">3  3  0.896614  2    False</span>
-<span class="go">4  4 -0.245312  1    False</span>
+<span class="go">0  0  2.058450  1     True</span>
+<span class="go">1  1 -0.726163  2    False</span>
+<span class="go">2  2 -0.892485  1    False</span>
+<span class="go">3  3  1.119419  2     True</span>
+<span class="go">4  4  1.500696  1     True</span>
 </pre></div>
 </div>
 </div>
@@ -542,17 +574,25 @@ function can write such hive-like partitioned datasets.</p>
 and the Parquet files written in those directories no longer include the “part”
 column.</p>
 <p>Reading this dataset with <a class="reference internal" href="generated/pyarrow.dataset.dataset.html#pyarrow.dataset.dataset" title="pyarrow.dataset.dataset"><code class="xref py py-func docutils literal notranslate"><span class="pre">dataset()</span></code></a>, we now specify that the dataset
-uses a hive-like partitioning scheme with the <cite>partitioning</cite> keyword:</p>
+should use a hive-like partitioning scheme with the <cite>partitioning</cite> keyword:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [35]: </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">dataset</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">base</span> <span class="o">/</span> <span class="s2">&quot;parquet_dataset_partitioned&quot;</span><span class="p">),</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;parquet&quot;</span><span class="p">,</span>
 <span class="gp">   ....: </span>                     <span class="n">partitioning</span><span class="o">=</span><span class="s2">&quot;hive&quot;</span><span class="p">)</span>
 <span class="gp">   ....: </span>
 
 <span class="gp">In [36]: </span><span class="n">dataset</span><span class="o">.</span><span class="n">files</span>
 <span class="gh">Out[36]: </span><span class="go"></span>
-<span class="go">[&#39;/tmp/parquet_dataset_partitioned/part=a/1b320c4f71c2453ebbbfad91107b17f1.parquet&#39;,</span>
-<span class="go"> &#39;/tmp/parquet_dataset_partitioned/part=a/74ae075b7e294d4fad09ea097fe449c0.parquet&#39;,</span>
-<span class="go"> &#39;/tmp/parquet_dataset_partitioned/part=b/64fbe0e8b18a4bdb892111d61bc93f57.parquet&#39;,</span>
-<span class="go"> &#39;/tmp/parquet_dataset_partitioned/part=b/b5f8ada464db4271abcefe7f19556ccf.parquet&#39;]</span>
+<span class="go">[&#39;/tmp/parquet_dataset_partitioned/part=a/078c667d66fb44dda7e1ecbec60fad9f.parquet&#39;,</span>
+<span class="go"> &#39;/tmp/parquet_dataset_partitioned/part=a/22d0e751490243a19265f952e1972b07.parquet&#39;,</span>
+<span class="go"> &#39;/tmp/parquet_dataset_partitioned/part=a/2d7fc1d0bb934520b03bd0f70022e441.parquet&#39;,</span>
+<span class="go"> &#39;/tmp/parquet_dataset_partitioned/part=a/4c6c8194849d433588109e7cbe623939.parquet&#39;,</span>
+<span class="go"> &#39;/tmp/parquet_dataset_partitioned/part=a/b7a26728085e47c189050ed3b835864d.parquet&#39;,</span>
+<span class="go"> &#39;/tmp/parquet_dataset_partitioned/part=a/d213482e17da4cada79efbc6e03f08f2.parquet&#39;,</span>
+<span class="go"> &#39;/tmp/parquet_dataset_partitioned/part=b/2643ca5acd5441359943c1b6f975d510.parquet&#39;,</span>
+<span class="go"> &#39;/tmp/parquet_dataset_partitioned/part=b/52f5b147352248d5bd4805b2e719fc2c.parquet&#39;,</span>
+<span class="go"> &#39;/tmp/parquet_dataset_partitioned/part=b/75c3327358054a9197bcec8257c7a6ca.parquet&#39;,</span>
+<span class="go"> &#39;/tmp/parquet_dataset_partitioned/part=b/9611270cf3064c818a97fb974de45ab0.parquet&#39;,</span>
+<span class="go"> &#39;/tmp/parquet_dataset_partitioned/part=b/ce9ea23bcecf4ecc9167be1c8812a9a9.parquet&#39;,</span>
+<span class="go"> &#39;/tmp/parquet_dataset_partitioned/part=b/db2d2d4b07124d5e8cdceebcadb4ccc8.parquet&#39;]</span>
 </pre></div>
 </div>
 <p>Although the partition fields are not included in the actual Parquet files,
@@ -560,26 +600,46 @@ they will be added back to the resulting table when scanning this dataset:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [37]: </span><span class="n">dataset</span><span class="o">.</span><span class="n">to_table</span><span class="p">()</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="gh">Out[37]: </span><span class="go"></span>
 <span class="go">   a         b  c part</span>
-<span class="go">0  0  0.276631  1    a</span>
-<span class="go">1  1 -1.266900  2    a</span>
-<span class="go">2  2  0.304642  1    a</span>
+<span class="go">0  0 -0.929539  1    a</span>
+<span class="go">1  1 -0.315430  2    a</span>
+<span class="go">2  2 -0.708659  1    a</span>
 </pre></div>
 </div>
 <p>We can now filter on the partition keys, which avoids loading files
-altogether if they do not match the predicate:</p>
+altogether if they do not match the filter:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [38]: </span><span class="n">dataset</span><span class="o">.</span><span class="n">to_table</span><span class="p">(</span><span class="nb">filter</span><span class="o">=</span><span class="n">ds</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="s2">&quot;part&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;b&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
 <span class="gh">Out[38]: </span><span class="go"></span>
-<span class="go">   a         b  c part</span>
-<span class="go">0  5  0.456259  2    b</span>
-<span class="go">1  6 -0.816602  1    b</span>
-<span class="go">2  7  2.151267  2    b</span>
-<span class="go">3  8 -1.139496  1    b</span>
-<span class="go">4  9 -0.131814  2    b</span>
-<span class="go">5  5 -0.490343  2    b</span>
-<span class="go">6  6  1.545762  1    b</span>
-<span class="go">7  7  1.077479  2    b</span>
-<span class="go">8  8 -2.006225  1    b</span>
-<span class="go">9  9 -0.468423  2    b</span>
+<span class="go">    a         b  c part</span>
+<span class="go">0   5 -2.037048  2    b</span>
+<span class="go">1   6  0.202310  1    b</span>
+<span class="go">2   7  0.383527  2    b</span>
+<span class="go">3   8 -0.446533  1    b</span>
+<span class="go">4   9  1.352952  2    b</span>
+<span class="go">5   5 -0.250043  2    b</span>
+<span class="go">6   6 -0.737318  1    b</span>
+<span class="go">7   7  1.550079  2    b</span>
+<span class="go">8   8 -0.046998  1    b</span>
+<span class="go">9   9  0.572125  2    b</span>
+<span class="go">10  5 -0.515371  2    b</span>
+<span class="go">11  6 -1.372543  1    b</span>
+<span class="go">12  7  1.419620  2    b</span>
+<span class="go">13  8  0.966657  1    b</span>
+<span class="go">14  9  1.114534  2    b</span>
+<span class="go">15  5 -0.232987  2    b</span>
+<span class="go">16  6 -0.438890  1    b</span>
+<span class="go">17  7  0.866199  2    b</span>
+<span class="go">18  8  0.769221  1    b</span>
+<span class="go">19  9 -1.051839  2    b</span>
+<span class="go">20  5 -1.513707  2    b</span>
+<span class="go">21  6 -0.506497  1    b</span>
+<span class="go">22  7 -0.771608  2    b</span>
+<span class="go">23  8  0.391026  1    b</span>
+<span class="go">24  9  0.169107  2    b</span>
+<span class="go">25  5  0.047897  2    b</span>
+<span class="go">26  6  0.887667  1    b</span>
+<span class="go">27  7 -0.522376  2    b</span>
+<span class="go">28  8  1.057591  1    b</span>
+<span class="go">29  9  1.191596  2    b</span>
 </pre></div>
 </div>
 <div class="section" id="different-partitioning-schemes">
@@ -713,19 +773,19 @@ is materialized as columns when reading the data and can be used for filtering:<
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [46]: </span><span class="n">dataset</span><span class="o">.</span><span class="n">to_table</span><span class="p">()</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
 <span class="gh">Out[46]: </span><span class="go"></span>
 <span class="go">   year  col1      col2</span>
-<span class="go">0  2018     0 -0.361242</span>
-<span class="go">1  2018     1  1.592520</span>
-<span class="go">2  2018     2 -0.909246</span>
-<span class="go">3  2019     0 -0.361242</span>
-<span class="go">4  2019     1  1.592520</span>
-<span class="go">5  2019     2 -0.909246</span>
+<span class="go">0  2018     0 -0.030791</span>
+<span class="go">1  2018     1  0.364177</span>
+<span class="go">2  2018     2  1.177101</span>
+<span class="go">3  2019     0 -0.030791</span>
+<span class="go">4  2019     1  0.364177</span>
+<span class="go">5  2019     2  1.177101</span>
 
 <span class="gp">In [47]: </span><span class="n">dataset</span><span class="o">.</span><span class="n">to_table</span><span class="p">(</span><span class="nb">filter</span><span class="o">=</span><span class="n">ds</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2019</span><span class="p">)</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
 <span class="gh">Out[47]: </span><span class="go"></span>
 <span class="go">   year  col1      col2</span>
-<span class="go">0  2019     0 -0.361242</span>
-<span class="go">1  2019     1  1.592520</span>
-<span class="go">2  2019     2 -0.909246</span>
+<span class="go">0  2019     0 -0.030791</span>
+<span class="go">1  2019     1  0.364177</span>
+<span class="go">2  2019     2  1.177101</span>
 </pre></div>
 </div>
 </div>

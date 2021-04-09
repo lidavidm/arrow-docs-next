@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>pyarrow.feather &mdash; Apache Arrow v4.0.0.dev6043+g76924612b.d20210325</title>
+  <title>pyarrow.feather &mdash; Apache Arrow v4.0.0.dev6150+g5287d181c.d20210407</title>
   
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                4.0.0.dev6043+g76924612b.d20210325
+                4.0.0.dev6150+g5287d181c.d20210407
               </div>
             
           
@@ -217,10 +217,11 @@
 <span class="kn">from</span> <span class="nn">pyarrow.lib</span> <span class="kn">import</span> <span class="p">(</span><span class="n">Codec</span><span class="p">,</span> <span class="n">FeatherError</span><span class="p">,</span> <span class="n">Table</span><span class="p">,</span>  <span class="c1"># noqa</span>
                          <span class="n">concat_tables</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
 <span class="kn">import</span> <span class="nn">pyarrow.lib</span> <span class="k">as</span> <span class="nn">ext</span>
+<span class="kn">from</span> <span class="nn">pyarrow.vendored.version</span> <span class="kn">import</span> <span class="n">Version</span>
 
 
 <span class="k">def</span> <span class="nf">_check_pandas_version</span><span class="p">():</span>
-    <span class="k">if</span> <span class="n">_pandas_api</span><span class="o">.</span><span class="n">loose_version</span> <span class="o">&lt;</span> <span class="s1">&#39;0.17.0&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">_pandas_api</span><span class="o">.</span><span class="n">loose_version</span> <span class="o">&lt;</span> <span class="n">Version</span><span class="p">(</span><span class="s1">&#39;0.17.0&#39;</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;feather requires pandas &gt;= 0.17.0&quot;</span><span class="p">)</span>
 
 

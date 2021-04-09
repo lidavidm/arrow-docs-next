@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>pyarrow.array &mdash; Apache Arrow v4.0.0.dev6043+g76924612b.d20210325</title>
+  <title>pyarrow.array &mdash; Apache Arrow v4.0.0.dev6150+g5287d181c.d20210407</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                4.0.0.dev6043+g76924612b.d20210325
+                4.0.0.dev6150+g5287d181c.d20210407
               </div>
             
           
@@ -276,12 +276,12 @@ memory pool.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><p><strong>array</strong> (<em>pyarrow.Array or pyarrow.ChunkedArray</em>) – A ChunkedArray instead of an Array is returned if:
-- the object data overflowed binary storage.
-- the object’s <code class="docutils literal notranslate"><span class="pre">__arrow_array__</span></code> protocol method returned a chunked</p>
-<blockquote>
-<div><p>array.</p>
-</div></blockquote>
+<dd class="field-even"><p><p><strong>array</strong> (<em>pyarrow.Array or pyarrow.ChunkedArray</em>) – A ChunkedArray instead of an Array is returned if:</p>
+<ul class="simple">
+<li><p>the object data overflowed binary storage.</p></li>
+<li><p>the object’s <code class="docutils literal notranslate"><span class="pre">__arrow_array__</span></code> protocol method returned a chunked
+array.</p></li>
+</ul>
 </p>
 </dd>
 </dl>
