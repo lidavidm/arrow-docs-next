@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Packaging and Testing with Crossbow &mdash; Apache Arrow v4.0.0.dev6150+g5287d181c.d20210407</title>
+  <title>Packaging and Testing with Crossbow &mdash; Apache Arrow v4.0.0.dev6210+g6abb08e6f.d20210412</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                4.0.0.dev6150+g5287d181c.d20210407
+                4.0.0.dev6210+g6abb08e6f.d20210412
               </div>
             
           
@@ -254,7 +254,7 @@ configuration file to run the requested build (like <code class="docutils litera
 </div>
 <div class="section" id="scheduler">
 <h3>Scheduler<a class="headerlink" href="#scheduler" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference external" href="crossbow.py">Crossbow.py</a> handles version generation, task rendering and
+<p><a href="#id1"><span class="problematic" id="id2">`Crossbow.py`_</span></a> handles version generation, task rendering and
 submission. The tasks are defined in <code class="docutils literal notranslate"><span class="pre">tasks.yml</span></code>.</p>
 </div>
 </div>
@@ -282,7 +282,7 @@ this can configured through command line arguments.</p>
 authentication. Although it overwrites the repository urls provided with ssh
 protocol, it’s advisable to use the HTTPS repository URLs.</p>
 </li>
-<li><p><a class="reference external" href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/">Create a Personal Access Token</a> with <code class="docutils literal notranslate"><span class="pre">repo</span></code> permissions (other
+<li><p><a class="reference external" href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/">Create a Personal Access Token</a> with <code class="docutils literal notranslate"><span class="pre">repo</span></code> and <code class="docutils literal notranslate"><span class="pre">workflow</span></code> permissions (other
 permissions are not needed)</p></li>
 <li><p>Locally export the token as an environment variable:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">CROSSBOW_GITHUB_TOKEN</span><span class="o">=</span>&lt;token&gt;
@@ -311,25 +311,13 @@ on the web UI under crossbow repository’s settings.</p>
 <p>Miniconda is preferred, see installation instructions:
 <a class="reference external" href="https://conda.io/docs/user-guide/install/index.html">https://conda.io/docs/user-guide/install/index.html</a></p>
 </li>
-<li><p>Install the python dependencies for the script:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install -c conda-forge -y --file arrow/ci/conda_env_crossbow.txt
-</pre></div>
-</div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># pygit2 requires libgit2: http://www.pygit2.org/install.html</span>
-pip install <span class="se">\</span>
-    jinja2 <span class="se">\</span>
-    pygit2 <span class="se">\</span>
-    click <span class="se">\</span>
-    ruamel.yaml <span class="se">\</span>
-    setuptools_scm <span class="se">\</span>
-    github3.py <span class="se">\</span>
-    toolz <span class="se">\</span>
-    jira
+<li><p>Install the archery toolset containing crossbow itself:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -e arrow/dev/archery<span class="o">[</span>crossbow<span class="o">]</span>
 </pre></div>
 </div>
 </li>
 <li><p>Try running it:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ python crossbow.py --help
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ archery crossbow --help
 </pre></div>
 </div>
 </li>
@@ -346,8 +334,8 @@ repository.</p>
 $ git clone https://github.com/kszucs/crossbow
 
 $ <span class="nb">cd</span> arrow/dev/tasks
-$ python crossbow.py submit --help  <span class="c1"># show the available options</span>
-$ python crossbow.py submit conda-win conda-linux conda-osx
+$ archery crossbow submit --help  <span class="c1"># show the available options</span>
+$ archery crossbow submit conda-win conda-linux conda-osx
 </pre></div>
 </div>
 </li>
@@ -355,7 +343,7 @@ $ python crossbow.py submit conda-win conda-linux conda-osx
 generates the version number based on <a class="reference external" href="https://pypi.python.org/pypi/setuptools_scm">setuptools_scm</a>. So to build
 a particular branch check out before running the script:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout ARROW-&lt;ticket number&gt;
-python dev/tasks/crossbow.py submit --dry-run conda-linux conda-osx
+archery crossbow submit --dry-run conda-linux conda-osx
 </pre></div>
 </div>
 <blockquote>
@@ -376,13 +364,13 @@ section.</p></li>
 <h3>Query the build status<a class="headerlink" href="#query-the-build-status" title="Permalink to this headline">¶</a></h3>
 <p>Build id (which has a corresponding branch in the queue repository) is returned
 by the <code class="docutils literal notranslate"><span class="pre">submit</span></code> command.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python crossbow.py status &lt;build id / branch name&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>archery crossbow status &lt;build id / branch name&gt;
 </pre></div>
 </div>
 </div>
 <div class="section" id="download-the-build-artifacts">
 <h3>Download the build artifacts<a class="headerlink" href="#download-the-build-artifacts" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python crossbow.py artifacts &lt;build id / branch name&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>archery crossbow artifacts &lt;build id / branch name&gt;
 </pre></div>
 </div>
 </div>
@@ -391,7 +379,7 @@ by the <code class="docutils literal notranslate"><span class="pre">submit</span
 <p>Submit command accepts a list of task names and/or a list of task-group names
 to select which tasks to build.</p>
 <p>Run multiple builds:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ python crossbow.py submit debian-stretch conda-linux-gcc-py37-r40
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ archery crossbow submit debian-stretch conda-linux-gcc-py37-r40
 Repository: https://github.com/kszucs/arrow@tasks
 Commit SHA: 810a718836bb3a8cefc053055600bdcc440e6702
 Version: <span class="m">0</span>.9.1.dev48+g810a7188.d20180414
@@ -401,22 +389,22 @@ Pushed branches:
 </pre></div>
 </div>
 <p>Just render without applying or committing the changes:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ python crossbow.py submit --dry-run task_name
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ archery crossbow submit --dry-run task_name
 </pre></div>
 </div>
 <p>Run only <code class="docutils literal notranslate"><span class="pre">conda</span></code> package builds and a Linux one:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ python crossbow.py submit --group conda centos-7
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ archery crossbow submit --group conda centos-7
 </pre></div>
 </div>
 <p>Run <code class="docutils literal notranslate"><span class="pre">wheel</span></code> builds:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ python crossbow.py submit --group wheel
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ archery crossbow submit --group wheel
 </pre></div>
 </div>
 <p>There are multiple task groups in the <code class="docutils literal notranslate"><span class="pre">tasks.yml</span></code> like docker, integration
 and cpp-python for running docker based tests.</p>
-<p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">crossbow.py</span> <span class="pre">submit</span></code> supports multiple options and arguments, for more
+<p><code class="docutils literal notranslate"><span class="pre">archery</span> <span class="pre">crossbow</span> <span class="pre">submit</span></code> supports multiple options and arguments, for more
 see its help page:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ python crossbow.py submit --help
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ archery crossbow submit --help
 </pre></div>
 </div>
 </div>

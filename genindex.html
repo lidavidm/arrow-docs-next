@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Index &mdash; Apache Arrow v4.0.0.dev6150+g5287d181c.d20210407</title>
+  <title>Index &mdash; Apache Arrow v4.0.0.dev6210+g6abb08e6f.d20210412</title>
   
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                4.0.0.dev6150+g5287d181c.d20210407
+                4.0.0.dev6210+g6abb08e6f.d20210412
               </div>
             
           
@@ -1674,6 +1674,10 @@
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset13IpcFileWriter5WriteERKNSt10shared_ptrI11RecordBatchEE">arrow::dataset::IpcFileWriter::Write (C++ function)</a>
 </li>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset22IpcFragmentScanOptionsE">arrow::dataset::IpcFragmentScanOptions (C++ class)</a>
+</li>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset22IpcFragmentScanOptions7optionsE">arrow::dataset::IpcFragmentScanOptions::options (C++ member)</a>
+</li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset20KeyValuePartitioningE">arrow::dataset::KeyValuePartitioning (C++ class)</a>
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset20KeyValuePartitioning3KeyE">arrow::dataset::KeyValuePartitioning::Key (C++ struct)</a>
@@ -1714,8 +1718,6 @@
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset17ParquetFileFormat13ReaderOptionsE">arrow::dataset::ParquetFileFormat::ReaderOptions (C++ struct)</a>
 </li>
-      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset17ParquetFileFormat13ReaderOptions33enable_parallel_column_conversionE">arrow::dataset::ParquetFileFormat::ReaderOptions::enable_parallel_column_conversion (C++ member)</a>
-</li>
       <li><a href="cpp/api/dataset.html#_CPPv4NK5arrow7dataset17ParquetFileFormat8ScanFileENSt10shared_ptrI11ScanOptionsEERKNSt10shared_ptrI12FileFragmentEE">arrow::dataset::ParquetFileFormat::ScanFile (C++ function)</a>
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4NK5arrow7dataset17ParquetFileFormat10splittableEv">arrow::dataset::ParquetFileFormat::splittable (C++ function)</a>
@@ -1741,6 +1743,14 @@
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset17ParquetFileWriterE">arrow::dataset::ParquetFileWriter (C++ class)</a>
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset17ParquetFileWriter5WriteERKNSt10shared_ptrI11RecordBatchEE">arrow::dataset::ParquetFileWriter::Write (C++ function)</a>
+</li>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset26ParquetFragmentScanOptionsE">arrow::dataset::ParquetFragmentScanOptions (C++ class)</a>
+</li>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset26ParquetFragmentScanOptions23arrow_reader_propertiesE">arrow::dataset::ParquetFragmentScanOptions::arrow_reader_properties (C++ member)</a>
+</li>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset26ParquetFragmentScanOptions33enable_parallel_column_conversionE">arrow::dataset::ParquetFragmentScanOptions::enable_parallel_column_conversion (C++ member)</a>
+</li>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset26ParquetFragmentScanOptions17reader_propertiesE">arrow::dataset::ParquetFragmentScanOptions::reader_properties (C++ member)</a>
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset12PartitioningE">arrow::dataset::Partitioning (C++ class)</a>
 </li>
@@ -2344,12 +2354,12 @@
 </li>
       <li><a href="cpp/api/flight.html#_CPPv4N5arrow6flight16FlightServerBase4InitERK19FlightServerOptions">arrow::flight::FlightServerBase::Init (C++ function)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="cpp/api/flight.html#_CPPv4N5arrow6flight16FlightServerBase11ListActionsERK17ServerCallContextPNSt6vectorI10ActionTypeEE">arrow::flight::FlightServerBase::ListActions (C++ function)</a>
 </li>
       <li><a href="cpp/api/flight.html#_CPPv4N5arrow6flight16FlightServerBase11ListFlightsERK17ServerCallContextPK8CriteriaPNSt10unique_ptrI13FlightListingEE">arrow::flight::FlightServerBase::ListFlights (C++ function)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="cpp/api/flight.html#_CPPv4NK5arrow6flight16FlightServerBase4portEv">arrow::flight::FlightServerBase::port (C++ function)</a>
 </li>
       <li><a href="cpp/api/flight.html#_CPPv4N5arrow6flight16FlightServerBase5ServeEv">arrow::flight::FlightServerBase::Serve (C++ function)</a>
@@ -6400,11 +6410,15 @@
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv424kDefaultHiveNullFallback">kDefaultHiveNullFallback (C++ member)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="python/generated/pyarrow.MapType.html#pyarrow.MapType.key_type">key_type (pyarrow.MapType attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="python/generated/pyarrow.StructScalar.html#pyarrow.StructScalar.keys">keys() (pyarrow.StructScalar method)</a>
+</li>
+      <li><a href="cpp/api/dataset.html#_CPPv412kIpcTypeName">kIpcTypeName (C++ member)</a>
+</li>
+      <li><a href="cpp/api/dataset.html#_CPPv416kParquetTypeName">kParquetTypeName (C++ member)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -7993,6 +8007,8 @@
       <li><a href="python/generated/pyarrow.csv.ConvertOptions.html#pyarrow.csv.ConvertOptions.strings_can_be_null">strings_can_be_null (pyarrow.csv.ConvertOptions attribute)</a>
 </li>
       <li><a href="python/generated/pyarrow.StringScalar.html#pyarrow.StringScalar">StringScalar (class in pyarrow)</a>
+</li>
+      <li><a href="cpp/api/dataset.html#_CPPv422StripPrefixAndFilenameRKNSt6stringERKNSt6stringE">StripPrefixAndFilename (C++ function)</a>, <a href="cpp/api/dataset.html#_CPPv422StripPrefixAndFilenameRKNSt6vectorIN2fs8FileInfoEEERKNSt6stringE">[1]</a>, <a href="cpp/api/dataset.html#_CPPv422StripPrefixAndFilenameRKNSt6vectorINSt6stringEEERKNSt6stringE">[2]</a>
 </li>
       <li><a href="python/generated/pyarrow.compute.strptime.html#pyarrow.compute.strptime">strptime() (in module pyarrow.compute)</a>
 </li>

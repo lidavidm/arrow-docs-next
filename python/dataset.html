@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Tabular Datasets &mdash; Apache Arrow v4.0.0.dev6150+g5287d181c.d20210407</title>
+  <title>Tabular Datasets &mdash; Apache Arrow v4.0.0.dev6210+g6abb08e6f.d20210412</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                4.0.0.dev6150+g5287d181c.d20210407
+                4.0.0.dev6210+g6abb08e6f.d20210412
               </div>
             
           
@@ -300,7 +300,7 @@ can pass it the path to the directory containing the data files:</p>
 <span class="gp">In [11]: </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">dataset</span><span class="p">(</span><span class="n">base</span> <span class="o">/</span> <span class="s2">&quot;parquet_dataset&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;parquet&quot;</span><span class="p">)</span>
 
 <span class="gp">In [12]: </span><span class="n">dataset</span>
-<span class="gh">Out[12]: </span><span class="go">&lt;pyarrow._dataset.FileSystemDataset at 0x7f7e36bcdd30&gt;</span>
+<span class="gh">Out[12]: </span><span class="go">&lt;pyarrow._dataset.FileSystemDataset at 0x7f25f93f3b30&gt;</span>
 </pre></div>
 </div>
 <p>In addition to searching a base directory, <a class="reference internal" href="generated/pyarrow.dataset.dataset.html#pyarrow.dataset.dataset" title="pyarrow.dataset.dataset"><code class="xref py py-func docutils literal notranslate"><span class="pre">dataset()</span></code></a> accepts a path to a
@@ -336,16 +336,16 @@ this can require a lot of memory, see below on filtering / iterative loading):</
 <span class="gp">In [16]: </span><span class="n">dataset</span><span class="o">.</span><span class="n">to_table</span><span class="p">()</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
 <span class="gh">Out[16]: </span><span class="go"></span>
 <span class="go">    a         b  c</span>
-<span class="go">0   0  2.058450  1</span>
-<span class="go">1   1 -0.726163  2</span>
-<span class="go">2   2 -0.892485  1</span>
-<span class="go">3   3  1.119419  2</span>
-<span class="go">4   4  1.500696  1</span>
-<span class="go">5   5 -0.771233  2</span>
-<span class="go">6   6  0.641720  1</span>
-<span class="go">7   7  0.084275  2</span>
-<span class="go">8   8 -0.371125  1</span>
-<span class="go">9   9 -1.151080  2</span>
+<span class="go">0   0  2.372159  1</span>
+<span class="go">1   1 -0.003685  2</span>
+<span class="go">2   2 -1.698155  1</span>
+<span class="go">3   3 -0.919697  2</span>
+<span class="go">4   4 -0.037715  1</span>
+<span class="go">5   5 -0.106045  2</span>
+<span class="go">6   6  1.002458  1</span>
+<span class="go">7   7  0.175040  2</span>
+<span class="go">8   8 -0.331382  1</span>
+<span class="go">9   9 -1.415038  2</span>
 <span class="go">10  0  9.000000  1</span>
 <span class="go">11  1  8.000000  2</span>
 <span class="go">12  2  7.000000  1</span>
@@ -378,11 +378,11 @@ more formats are planned in the future.</p>
 <span class="gp">In [20]: </span><span class="n">dataset</span><span class="o">.</span><span class="n">to_table</span><span class="p">()</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 <span class="gh">Out[20]: </span><span class="go"></span>
 <span class="go">   a         b  c</span>
-<span class="go">0  0  2.058450  1</span>
-<span class="go">1  1 -0.726163  2</span>
-<span class="go">2  2 -0.892485  1</span>
-<span class="go">3  3  1.119419  2</span>
-<span class="go">4  4  1.500696  1</span>
+<span class="go">0  0  2.372159  1</span>
+<span class="go">1  1 -0.003685  2</span>
+<span class="go">2  2 -1.698155  1</span>
+<span class="go">3  3 -0.919697  2</span>
+<span class="go">4  4 -0.037715  1</span>
 </pre></div>
 </div>
 </div>
@@ -414,16 +414,16 @@ more formats are planned in the future.</p>
 <span class="gp">In [22]: </span><span class="n">dataset</span><span class="o">.</span><span class="n">to_table</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
 <span class="gh">Out[22]: </span><span class="go"></span>
 <span class="go">    a         b</span>
-<span class="go">0   0  2.058450</span>
-<span class="go">1   1 -0.726163</span>
-<span class="go">2   2 -0.892485</span>
-<span class="go">3   3  1.119419</span>
-<span class="go">4   4  1.500696</span>
-<span class="go">5   5 -0.771233</span>
-<span class="go">6   6  0.641720</span>
-<span class="go">7   7  0.084275</span>
-<span class="go">8   8 -0.371125</span>
-<span class="go">9   9 -1.151080</span>
+<span class="go">0   0  2.372159</span>
+<span class="go">1   1 -0.003685</span>
+<span class="go">2   2 -1.698155</span>
+<span class="go">3   3 -0.919697</span>
+<span class="go">4   4 -0.037715</span>
+<span class="go">5   5 -0.106045</span>
+<span class="go">6   6  1.002458</span>
+<span class="go">7   7  0.175040</span>
+<span class="go">8   8 -0.331382</span>
+<span class="go">9   9 -1.415038</span>
 <span class="go">10  0  9.000000</span>
 <span class="go">11  1  8.000000</span>
 <span class="go">12  2  7.000000</span>
@@ -442,9 +442,9 @@ not be included in the returned table. The keyword expects a boolean
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [23]: </span><span class="n">dataset</span><span class="o">.</span><span class="n">to_table</span><span class="p">(</span><span class="nb">filter</span><span class="o">=</span><span class="n">ds</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">7</span><span class="p">)</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
 <span class="gh">Out[23]: </span><span class="go"></span>
 <span class="go">   a         b  c</span>
-<span class="go">0  7  0.084275  2</span>
-<span class="go">1  8 -0.371125  1</span>
-<span class="go">2  9 -1.151080  2</span>
+<span class="go">0  7  0.175040  2</span>
+<span class="go">1  8 -0.331382  1</span>
+<span class="go">2  9 -1.415038  2</span>
 <span class="go">3  7  2.000000  2</span>
 <span class="go">4  8  1.000000  1</span>
 <span class="go">5  9  0.000000  2</span>
@@ -452,11 +452,11 @@ not be included in the returned table. The keyword expects a boolean
 <span class="gp">In [24]: </span><span class="n">dataset</span><span class="o">.</span><span class="n">to_table</span><span class="p">(</span><span class="nb">filter</span><span class="o">=</span><span class="n">ds</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
 <span class="gh">Out[24]: </span><span class="go"></span>
 <span class="go">   a         b  c</span>
-<span class="go">0  1 -0.726163  2</span>
-<span class="go">1  3  1.119419  2</span>
-<span class="go">2  5 -0.771233  2</span>
-<span class="go">3  7  0.084275  2</span>
-<span class="go">4  9 -1.151080  2</span>
+<span class="go">0  1 -0.003685  2</span>
+<span class="go">1  3 -0.919697  2</span>
+<span class="go">2  5 -0.106045  2</span>
+<span class="go">3  7  0.175040  2</span>
+<span class="go">4  9 -1.415038  2</span>
 <span class="go">5  1  8.000000  2</span>
 <span class="go">6  3  6.000000  2</span>
 <span class="go">7  5  4.000000  2</span>
@@ -506,11 +506,11 @@ values:</p>
 <span class="gp">In [29]: </span><span class="n">dataset</span><span class="o">.</span><span class="n">to_table</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">projection</span><span class="p">)</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 <span class="gh">Out[29]: </span><span class="go"></span>
 <span class="go">   a_renamed  b_as_float32    c_1</span>
-<span class="go">0          0      2.058450   True</span>
-<span class="go">1          1     -0.726163  False</span>
-<span class="go">2          2     -0.892485   True</span>
-<span class="go">3          3      1.119419  False</span>
-<span class="go">4          4      1.500696   True</span>
+<span class="go">0          0      2.372159   True</span>
+<span class="go">1          1     -0.003685  False</span>
+<span class="go">2          2     -1.698155   True</span>
+<span class="go">3          3     -0.919697  False</span>
+<span class="go">4          4     -0.037715   True</span>
 </pre></div>
 </div>
 <p>The dictionary also determines the column selection (only the keys in the
@@ -524,11 +524,11 @@ build up the dictionary from the dataset schema:</p>
 <span class="gp">In [32]: </span><span class="n">dataset</span><span class="o">.</span><span class="n">to_table</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">projection</span><span class="p">)</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 <span class="gh">Out[32]: </span><span class="go"></span>
 <span class="go">   a         b  c  b_large</span>
-<span class="go">0  0  2.058450  1     True</span>
-<span class="go">1  1 -0.726163  2    False</span>
-<span class="go">2  2 -0.892485  1    False</span>
-<span class="go">3  3  1.119419  2     True</span>
-<span class="go">4  4  1.500696  1     True</span>
+<span class="go">0  0  2.372159  1     True</span>
+<span class="go">1  1 -0.003685  2    False</span>
+<span class="go">2  2 -1.698155  1    False</span>
+<span class="go">3  3 -0.919697  2    False</span>
+<span class="go">4  4 -0.037715  1    False</span>
 </pre></div>
 </div>
 </div>
@@ -585,6 +585,7 @@ should use a hive-like partitioning scheme with the <cite>partitioning</cite> ke
 <span class="go"> &#39;/tmp/parquet_dataset_partitioned/part=a/22d0e751490243a19265f952e1972b07.parquet&#39;,</span>
 <span class="go"> &#39;/tmp/parquet_dataset_partitioned/part=a/2d7fc1d0bb934520b03bd0f70022e441.parquet&#39;,</span>
 <span class="go"> &#39;/tmp/parquet_dataset_partitioned/part=a/4c6c8194849d433588109e7cbe623939.parquet&#39;,</span>
+<span class="go"> &#39;/tmp/parquet_dataset_partitioned/part=a/659e058f7a6f4170ba3b3f96bd699431.parquet&#39;,</span>
 <span class="go"> &#39;/tmp/parquet_dataset_partitioned/part=a/b7a26728085e47c189050ed3b835864d.parquet&#39;,</span>
 <span class="go"> &#39;/tmp/parquet_dataset_partitioned/part=a/d213482e17da4cada79efbc6e03f08f2.parquet&#39;,</span>
 <span class="go"> &#39;/tmp/parquet_dataset_partitioned/part=b/2643ca5acd5441359943c1b6f975d510.parquet&#39;,</span>
@@ -592,7 +593,8 @@ should use a hive-like partitioning scheme with the <cite>partitioning</cite> ke
 <span class="go"> &#39;/tmp/parquet_dataset_partitioned/part=b/75c3327358054a9197bcec8257c7a6ca.parquet&#39;,</span>
 <span class="go"> &#39;/tmp/parquet_dataset_partitioned/part=b/9611270cf3064c818a97fb974de45ab0.parquet&#39;,</span>
 <span class="go"> &#39;/tmp/parquet_dataset_partitioned/part=b/ce9ea23bcecf4ecc9167be1c8812a9a9.parquet&#39;,</span>
-<span class="go"> &#39;/tmp/parquet_dataset_partitioned/part=b/db2d2d4b07124d5e8cdceebcadb4ccc8.parquet&#39;]</span>
+<span class="go"> &#39;/tmp/parquet_dataset_partitioned/part=b/db2d2d4b07124d5e8cdceebcadb4ccc8.parquet&#39;,</span>
+<span class="go"> &#39;/tmp/parquet_dataset_partitioned/part=b/df02af6256344eaa93c41b375db80d94.parquet&#39;]</span>
 </pre></div>
 </div>
 <p>Although the partition fields are not included in the actual Parquet files,
@@ -640,6 +642,11 @@ altogether if they do not match the filter:</p>
 <span class="go">27  7 -0.522376  2    b</span>
 <span class="go">28  8  1.057591  1    b</span>
 <span class="go">29  9  1.191596  2    b</span>
+<span class="go">30  5 -1.396714  2    b</span>
+<span class="go">31  6  0.973697  1    b</span>
+<span class="go">32  7  0.842607  2    b</span>
+<span class="go">33  8  0.828648  1    b</span>
+<span class="go">34  9 -2.491717  2    b</span>
 </pre></div>
 </div>
 <div class="section" id="different-partitioning-schemes">
@@ -773,19 +780,19 @@ is materialized as columns when reading the data and can be used for filtering:<
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [46]: </span><span class="n">dataset</span><span class="o">.</span><span class="n">to_table</span><span class="p">()</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
 <span class="gh">Out[46]: </span><span class="go"></span>
 <span class="go">   year  col1      col2</span>
-<span class="go">0  2018     0 -0.030791</span>
-<span class="go">1  2018     1  0.364177</span>
-<span class="go">2  2018     2  1.177101</span>
-<span class="go">3  2019     0 -0.030791</span>
-<span class="go">4  2019     1  0.364177</span>
-<span class="go">5  2019     2  1.177101</span>
+<span class="go">0  2018     0  0.980180</span>
+<span class="go">1  2018     1 -0.718627</span>
+<span class="go">2  2018     2  0.833267</span>
+<span class="go">3  2019     0  0.980180</span>
+<span class="go">4  2019     1 -0.718627</span>
+<span class="go">5  2019     2  0.833267</span>
 
 <span class="gp">In [47]: </span><span class="n">dataset</span><span class="o">.</span><span class="n">to_table</span><span class="p">(</span><span class="nb">filter</span><span class="o">=</span><span class="n">ds</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2019</span><span class="p">)</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
 <span class="gh">Out[47]: </span><span class="go"></span>
 <span class="go">   year  col1      col2</span>
-<span class="go">0  2019     0 -0.030791</span>
-<span class="go">1  2019     1  0.364177</span>
-<span class="go">2  2019     2  1.177101</span>
+<span class="go">0  2019     0  0.980180</span>
+<span class="go">1  2019     1 -0.718627</span>
+<span class="go">2  2019     2  0.833267</span>
 </pre></div>
 </div>
 </div>

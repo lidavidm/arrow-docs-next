@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Extending pyarrow &mdash; Apache Arrow v4.0.0.dev6150+g5287d181c.d20210407</title>
+  <title>Extending pyarrow &mdash; Apache Arrow v4.0.0.dev6210+g6abb08e6f.d20210412</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                4.0.0.dev6150+g5287d181c.d20210407
+                4.0.0.dev6210+g6abb08e6f.d20210412
               </div>
             
           
@@ -133,7 +133,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Extending pyarrow</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#controlling-conversion-to-pyarrow-array-with-the-arrow-array-protocol">Controlling conversion to pyarrow.Array with the <code class="docutils literal notranslate"><span class="pre">__arrow_array__</span></code> protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#defining-extension-types-user-defined-types">Defining extension types (“user-defined types”)</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#parametrized-extension-type">Parametrized extension type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameterized-extension-type">Parameterized extension type</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#custom-extension-array-class">Custom extension array class</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conversion-to-pandas">Conversion to pandas</a></li>
 </ul>
@@ -333,7 +333,7 @@ IPC protocol:</p>
         <span class="n">pa</span><span class="o">.</span><span class="n">ExtensionType</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">binary</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span> <span class="s2">&quot;my_package.uuid&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__arrow_ext_serialize__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># since we don&#39;t have a parametrized type, we don&#39;t need extra</span>
+        <span class="c1"># since we don&#39;t have a parameterized type, we don&#39;t need extra</span>
         <span class="c1"># metadata to be deserialized</span>
         <span class="k">return</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span>
 
@@ -361,10 +361,10 @@ the extension type as a “uuid” type, if it has implemented its own extension
 type to receive it.
 If the type is not registered in the receiving application, it will fall back
 to the storage type.</p>
-<div class="section" id="parametrized-extension-type">
-<h3>Parametrized extension type<a class="headerlink" href="#parametrized-extension-type" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="parameterized-extension-type">
+<h3>Parameterized extension type<a class="headerlink" href="#parameterized-extension-type" title="Permalink to this headline">¶</a></h3>
 <p>The above example used a fixed storage type with no further metadata. But
-more flexible, parametrized extension types are also possible.</p>
+more flexible, parameterized extension types are also possible.</p>
 <p>The example given here implements an extension type for the <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html#time-span-representation">pandas “period”
 data type</a>,
 representing time spans (e.g., a frequency of a day, a month, a quarter, etc).
@@ -403,7 +403,7 @@ in the example above, the <code class="docutils literal notranslate"><span class
 the reconstruction of the type instance after IPC will be incorrect.
 In the example above, the <code class="docutils literal notranslate"><span class="pre">freq</span></code> parameter is therefore stored in a private
 attribute with a public read-only property to access it.</p>
-<p>Parametrized extension types are also possible using the pickle-based type
+<p>Parameterized extension types are also possible using the pickle-based type
 subclassing <a class="reference internal" href="generated/pyarrow.PyExtensionType.html#pyarrow.PyExtensionType" title="pyarrow.PyExtensionType"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyExtensionType</span></code></a>. The equivalent example for the period
 data type from above would look like:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PeriodType</span><span class="p">(</span><span class="n">pa</span><span class="o">.</span><span class="n">PyExtensionType</span><span class="p">):</span>
@@ -420,7 +420,7 @@ data type from above would look like:</p>
         <span class="k">return</span> <span class="n">PeriodType</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">freq</span><span class="p">,)</span>
 </pre></div>
 </div>
-<p>Also the storage type does not need to be fixed but can be parametrized.</p>
+<p>Also the storage type does not need to be fixed but can be parameterized.</p>
 </div>
 <div class="section" id="custom-extension-array-class">
 <h3>Custom extension array class<a class="headerlink" href="#custom-extension-array-class" title="Permalink to this headline">¶</a></h3>

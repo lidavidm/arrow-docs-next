@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Implementation Status &mdash; Apache Arrow v4.0.0.dev6150+g5287d181c.d20210407</title>
+  <title>Implementation Status &mdash; Apache Arrow v4.0.0.dev6210+g6abb08e6f.d20210412</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                4.0.0.dev6150+g5287d181c.d20210407
+                4.0.0.dev6210+g6abb08e6f.d20210412
               </div>
             
           
@@ -290,7 +290,7 @@ libraries follow the C++ Arrow library.</p>
 <tr class="row-even"><td><p>Decimal128</p></td>
 <td><p>✓</p></td>
 <td><p>✓</p></td>
-<td></td>
+<td><p>✓</p></td>
 <td></td>
 <td><p>✓</p></td>
 <td><p>✓</p></td>
@@ -541,130 +541,6 @@ libraries follow the C++ Arrow library.</p>
 </div>
 <div class="section" id="ipc-format">
 <h2>IPC Format<a class="headerlink" href="#ipc-format" title="Permalink to this headline">¶</a></h2>
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 35%" />
-<col style="width: 8%" />
-<col style="width: 8%" />
-<col style="width: 8%" />
-<col style="width: 14%" />
-<col style="width: 8%" />
-<col style="width: 8%" />
-<col style="width: 8%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>IPC Feature</p></th>
-<th class="head"><p>C++</p></th>
-<th class="head"><p>Java</p></th>
-<th class="head"><p>Go</p></th>
-<th class="head"><p>JavaScript</p></th>
-<th class="head"><p>C#</p></th>
-<th class="head"><p>Rust</p></th>
-<th class="head"><p>Julia</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Arrow stream format</p></td>
-<td><p>✓</p></td>
-<td><p>✓</p></td>
-<td><p>✓</p></td>
-<td><p>✓</p></td>
-<td><p>✓</p></td>
-<td><p>✓</p></td>
-<td><p>✓</p></td>
-</tr>
-<tr class="row-odd"><td><p>Arrow file format</p></td>
-<td><p>✓</p></td>
-<td><p>✓</p></td>
-<td><p>✓</p></td>
-<td><p>✓</p></td>
-<td><p>✓</p></td>
-<td><p>✓</p></td>
-<td><p>✓</p></td>
-</tr>
-<tr class="row-even"><td><p>Record batches</p></td>
-<td><p>✓</p></td>
-<td><p>✓</p></td>
-<td><p>✓</p></td>
-<td><p>✓</p></td>
-<td><p>✓</p></td>
-<td><p>✓</p></td>
-<td><p>✓</p></td>
-</tr>
-<tr class="row-odd"><td><p>Dictionaries</p></td>
-<td><p>✓</p></td>
-<td><p>✓</p></td>
-<td><p>✓</p></td>
-<td><p>✓</p></td>
-<td></td>
-<td><p>✓</p></td>
-<td><p>✓</p></td>
-</tr>
-<tr class="row-even"><td><p>Replacement dictionaries</p></td>
-<td><p>✓</p></td>
-<td><p>✓</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td><p>✓</p></td>
-</tr>
-<tr class="row-odd"><td><p>Delta dictionaries</p></td>
-<td><p>✓ (1)</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td><p>✓</p></td>
-</tr>
-<tr class="row-even"><td><p>Tensors</p></td>
-<td><p>✓</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>Sparse tensors</p></td>
-<td><p>✓</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>Buffer compression</p></td>
-<td><p>✓</p></td>
-<td><p>✓ (3)</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td><p>✓</p></td>
-</tr>
-<tr class="row-odd"><td><p>Endianness conversion</p></td>
-<td><p>✓ (2)</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>Custom schema metadata</p></td>
-<td><p>✓</p></td>
-<td><p>✓</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td><p>✓</p></td>
-<td><p>✓</p></td>
-</tr>
-</tbody>
-</table>
 <p>Notes:</p>
 <ul class="simple">
 <li><p>(1) Delta dictionaries not supported on nested dictionaries</p></li>
@@ -704,7 +580,7 @@ libraries follow the C++ Arrow library.</p>
 <tr class="row-even"><td><p>gRPC transport</p></td>
 <td><p>✓</p></td>
 <td><p>✓</p></td>
-<td></td>
+<td><p>✓</p></td>
 <td></td>
 <td><p>✓ (1)</p></td>
 <td></td>
@@ -713,7 +589,7 @@ libraries follow the C++ Arrow library.</p>
 <tr class="row-odd"><td><p>gRPC + TLS transport</p></td>
 <td><p>✓</p></td>
 <td><p>✓</p></td>
-<td></td>
+<td><p>✓</p></td>
 <td></td>
 <td><p>✓</p></td>
 <td></td>
@@ -731,7 +607,7 @@ libraries follow the C++ Arrow library.</p>
 <tr class="row-odd"><td><p>Authentication handlers</p></td>
 <td><p>✓</p></td>
 <td><p>✓</p></td>
-<td></td>
+<td><p>✓</p></td>
 <td></td>
 <td><p>✓ (2)</p></td>
 <td></td>

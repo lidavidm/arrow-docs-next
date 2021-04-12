@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Building Arrow C++ &mdash; Apache Arrow v4.0.0.dev6150+g5287d181c.d20210407</title>
+  <title>Building Arrow C++ &mdash; Apache Arrow v4.0.0.dev6210+g6abb08e6f.d20210412</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                4.0.0.dev6150+g5287d181c.d20210407
+                4.0.0.dev6210+g6abb08e6f.d20210412
               </div>
             
           
@@ -264,10 +264,18 @@ sufficient. For Windows, at least Visual Studio 2015 is required.</p></li>
         make
 </pre></div>
 </div>
-<p>On macOS, you can use <a class="reference external" href="https://brew.sh/">Homebrew</a>.</p>
+<p>On macOS, you can use <a class="reference external" href="https://brew.sh/">Homebrew</a>:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/apache/arrow.git
 <span class="nb">cd</span> arrow
 brew update <span class="o">&amp;&amp;</span> brew bundle --file<span class="o">=</span>cpp/Brewfile
+</pre></div>
+</div>
+<p>With <a class="reference external" href="https://github.com/Microsoft/vcpkg">vcpkg</a>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/apache/arrow.git
+<span class="nb">cd</span> arrow
+vcpkg install <span class="se">\</span>
+  --x-manifest-root cpp <span class="se">\</span>
+  --clean-after-build
 </pre></div>
 </div>
 <p>On MSYS2:</p>
@@ -429,7 +437,7 @@ CMake:</p>
 <h3>LLVM and Clang Tools<a class="headerlink" href="#llvm-and-clang-tools" title="Permalink to this headline">¶</a></h3>
 <p>We are currently using LLVM 8 for library builds and for other developer tools
 such as code formatting with <code class="docutils literal notranslate"><span class="pre">clang-format</span></code>. LLVM can be installed via most
-modern package managers (apt, yum, conda, Homebrew, chocolatey).</p>
+modern package managers (apt, yum, conda, Homebrew, vcpkg, chocolatey).</p>
 </div>
 </div>
 <div class="section" id="build-dependency-management">
@@ -464,14 +472,15 @@ modern package managers (apt, yum, conda, Homebrew, chocolatey).</p>
 <p>The CMake option <code class="docutils literal notranslate"><span class="pre">ARROW_DEPENDENCY_SOURCE</span></code> is a global option that instructs
 the build system how to resolve each dependency. There are a few options:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">AUTO</span></code>: try to find package in the system default locations and build from
+<li><p><code class="docutils literal notranslate"><span class="pre">AUTO</span></code>: Try to find package in the system default locations and build from
 source if not found</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">BUNDLED</span></code>: Building the dependency automatically from source</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">SYSTEM</span></code>: Finding the dependency in system paths using CMake’s built-in
 <code class="docutils literal notranslate"><span class="pre">find_package</span></code> function, or using <code class="docutils literal notranslate"><span class="pre">pkg-config</span></code> for packages that do not
 have this feature</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">CONDA</span></code>: Use <code class="docutils literal notranslate"><span class="pre">$CONDA_PREFIX</span></code> as alternative <code class="docutils literal notranslate"><span class="pre">SYSTEM</span></code> PATH</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VCPKG</span></code>: Find dependencies installed by <code class="docutils literal notranslate"><span class="pre">vcpkg</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VCPKG</span></code>: Find dependencies installed by vcpkg, and if not found, run
+<code class="docutils literal notranslate"><span class="pre">vpckg</span> <span class="pre">install</span></code> to install them</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">BREW</span></code>: Use Homebrew default paths as an alternative <code class="docutils literal notranslate"><span class="pre">SYSTEM</span></code> path</p></li>
 </ul>
 <p>The default method is <code class="docutils literal notranslate"><span class="pre">AUTO</span></code> unless you are developing within an active conda

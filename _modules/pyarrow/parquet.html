@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>pyarrow.parquet &mdash; Apache Arrow v4.0.0.dev6150+g5287d181c.d20210407</title>
+  <title>pyarrow.parquet &mdash; Apache Arrow v4.0.0.dev6210+g6abb08e6f.d20210412</title>
   
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                4.0.0.dev6150+g5287d181c.d20210407
+                4.0.0.dev6210+g6abb08e6f.d20210412
               </div>
             
           
@@ -1731,7 +1731,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_enable_parallel_column_conversion</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="n">read_options</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">enable_parallel_column_conversion</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-            <span class="n">parquet_format</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">ParquetFileFormat</span><span class="p">(</span><span class="n">read_options</span><span class="o">=</span><span class="n">read_options</span><span class="p">)</span>
+            <span class="n">parquet_format</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">ParquetFileFormat</span><span class="p">(</span><span class="o">**</span><span class="n">read_options</span><span class="p">)</span>
             <span class="n">fragment</span> <span class="o">=</span> <span class="n">parquet_format</span><span class="o">.</span><span class="n">make_fragment</span><span class="p">(</span><span class="n">single_file</span><span class="p">,</span> <span class="n">filesystem</span><span class="p">)</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">_dataset</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">FileSystemDataset</span><span class="p">(</span>
@@ -1743,7 +1743,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_enable_parallel_column_conversion</span> <span class="o">=</span> <span class="kc">False</span>
 
-        <span class="n">parquet_format</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">ParquetFileFormat</span><span class="p">(</span><span class="n">read_options</span><span class="o">=</span><span class="n">read_options</span><span class="p">)</span>
+        <span class="n">parquet_format</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">ParquetFileFormat</span><span class="p">(</span><span class="o">**</span><span class="n">read_options</span><span class="p">)</span>
 
         <span class="c1"># check partitioning to enable dictionary encoding</span>
         <span class="k">if</span> <span class="n">partitioning</span> <span class="o">==</span> <span class="s2">&quot;hive&quot;</span><span class="p">:</span>
@@ -2040,7 +2040,7 @@
 
 <div class="viewcode-block" id="write_to_dataset"><a class="viewcode-back" href="../../python/generated/pyarrow.parquet.write_to_dataset.html#pyarrow.parquet.write_to_dataset">[docs]</a><span class="k">def</span> <span class="nf">write_to_dataset</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">root_path</span><span class="p">,</span> <span class="n">partition_cols</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                      <span class="n">partition_filename_cb</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filesystem</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                     <span class="n">use_legacy_dataset</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                     <span class="n">use_legacy_dataset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Wrapper around parquet.write_table for writing a Table to</span>
 <span class="sd">    Parquet format by partitions.</span>
 <span class="sd">    For each combination of partition columns and values,</span>
@@ -2074,7 +2074,8 @@
 <span class="sd">        A callback function that takes the partition key(s) as an argument</span>
 <span class="sd">        and allow you to override the partition filename. If nothing is</span>
 <span class="sd">        passed, the filename will consist of a uuid.</span>
-<span class="sd">    use_legacy_dataset : bool, default True</span>
+<span class="sd">    use_legacy_dataset : bool</span>
+<span class="sd">        Default is True unless a ``pyarrow.fs`` filesystem is passed.</span>
 <span class="sd">        Set to False to enable the new code path (experimental, using the</span>
 <span class="sd">        new Arrow Dataset API). This is more efficient when using partition</span>
 <span class="sd">        columns, but does not (yet) support `partition_filename_cb` and</span>
@@ -2086,6 +2087,14 @@
 <span class="sd">        file metadata instances of dataset pieces. The file paths in the</span>
 <span class="sd">        ColumnChunkMetaData will be set relative to `root_path`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">use_legacy_dataset</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># if a new filesystem is passed -&gt; default to new implementation</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filesystem</span><span class="p">,</span> <span class="n">FileSystem</span><span class="p">):</span>
+            <span class="n">use_legacy_dataset</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="c1"># otherwise the default is still True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">use_legacy_dataset</span> <span class="o">=</span> <span class="kc">True</span>
+
     <span class="k">if</span> <span class="ow">not</span> <span class="n">use_legacy_dataset</span><span class="p">:</span>
         <span class="kn">import</span> <span class="nn">pyarrow.dataset</span> <span class="k">as</span> <span class="nn">ds</span>
 

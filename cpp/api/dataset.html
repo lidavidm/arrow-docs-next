@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Dataset &mdash; Apache Arrow v4.0.0.dev6150+g5287d181c.d20210407</title>
+  <title>Dataset &mdash; Apache Arrow v4.0.0.dev6210+g6abb08e6f.d20210412</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                4.0.0.dev6150+g5287d181c.d20210407
+                4.0.0.dev6210+g6abb08e6f.d20210412
               </div>
             
           
@@ -343,21 +343,21 @@
 </dd></dl>
 
 <dl class="cpp function">
-<dt>
-<span class="target" id="group__dataset-partitioning_1ga523a635c260333ed9082eb4e57018c8d"></span><code class="sig-name descname">ARROW_DS_EXPORT std::string StripPrefixAndFilename (const std::string &amp;path, const std::string &amp;prefix)</code></dt>
+<dt id="_CPPv422StripPrefixAndFilenameRKNSt6stringERKNSt6stringE">
+<span id="_CPPv322StripPrefixAndFilenameRKNSt6stringERKNSt6stringE"></span><span id="_CPPv222StripPrefixAndFilenameRKNSt6stringERKNSt6stringE"></span><span id="StripPrefixAndFilename__ssCR.ssCR"></span><span class="target" id="group__dataset-partitioning_1ga24e40e5fc8b7f84d097f8a0bcb3d77e0"></span>std::string <code class="sig-name descname">StripPrefixAndFilename</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>path</em>, <em class="property">const</em> std::string &amp;<em>prefix</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422StripPrefixAndFilenameRKNSt6stringERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Remove a prefix and the filename of a path. </p>
 <p>e.g., <code class="docutils literal notranslate"><span class="pre">StripPrefixAndFilename(&quot;/data/year=2019/c.txt&quot;,</span> <span class="pre">&quot;/data&quot;)</span> <span class="pre">-&gt;</span> <span class="pre">&quot;year=2019&quot;</span></code> </p>
 </dd></dl>
 
 <dl class="cpp function">
-<dt>
-<span class="target" id="group__dataset-partitioning_1gaab1b052304bd6442c7437147a7c266af"></span><code class="sig-name descname">ARROW_DS_EXPORT std::vector&lt; std::string &gt; StripPrefixAndFilename (const std::vector&lt; std::string &gt; &amp;paths, const std::string &amp;prefix)</code></dt>
+<dt id="_CPPv422StripPrefixAndFilenameRKNSt6vectorINSt6stringEEERKNSt6stringE">
+<span id="_CPPv322StripPrefixAndFilenameRKNSt6vectorINSt6stringEEERKNSt6stringE"></span><span id="_CPPv222StripPrefixAndFilenameRKNSt6vectorINSt6stringEEERKNSt6stringE"></span><span id="StripPrefixAndFilename__std::vector:ss:CR.ssCR"></span><span class="target" id="group__dataset-partitioning_1gabfa1200ecfebac5bdff1239aa1eb8270"></span>std::vector&lt;std::string&gt; <code class="sig-name descname">StripPrefixAndFilename</code><span class="sig-paren">(</span><em class="property">const</em> std::vector&lt;std::string&gt; &amp;<em>paths</em>, <em class="property">const</em> std::string &amp;<em>prefix</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422StripPrefixAndFilenameRKNSt6vectorINSt6stringEEERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Vector version of StripPrefixAndFilename. </p>
 </dd></dl>
 
 <dl class="cpp function">
-<dt>
-<span class="target" id="group__dataset-partitioning_1ga970cb16a814c425ee7ad40af148e406f"></span><code class="sig-name descname">ARROW_DS_EXPORT std::vector&lt; std::string &gt; StripPrefixAndFilename (const std::vector&lt; fs::FileInfo &gt; &amp;files, const std::string &amp;prefix)</code></dt>
+<dt id="_CPPv422StripPrefixAndFilenameRKNSt6vectorIN2fs8FileInfoEEERKNSt6stringE">
+<span id="_CPPv322StripPrefixAndFilenameRKNSt6vectorIN2fs8FileInfoEEERKNSt6stringE"></span><span id="_CPPv222StripPrefixAndFilenameRKNSt6vectorIN2fs8FileInfoEEERKNSt6stringE"></span><span id="StripPrefixAndFilename__std::vector:fs::FileInfo:CR.ssCR"></span><span class="target" id="group__dataset-partitioning_1ga4f897ffe4c649c15c704853fefd5d60c"></span>std::vector&lt;std::string&gt; <code class="sig-name descname">StripPrefixAndFilename</code><span class="sig-paren">(</span><em class="property">const</em> std::vector&lt;fs::FileInfo&gt; &amp;<em>files</em>, <em class="property">const</em> std::string &amp;<em>prefix</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422StripPrefixAndFilenameRKNSt6vectorIN2fs8FileInfoEEERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Vector version of StripPrefixAndFilename. </p>
 </dd></dl>
 
@@ -735,7 +735,7 @@
 <span id="_CPPv3N5arrow7dataset19FragmentScanOptionsE"></span><span id="_CPPv2N5arrow7dataset19FragmentScanOptionsE"></span><span id="arrow::dataset::FragmentScanOptions"></span><span class="target" id="classarrow_1_1dataset_1_1_fragment_scan_options"></span><em class="property">class </em><code class="sig-name descname">FragmentScanOptions</code><a class="headerlink" href="#_CPPv4N5arrow7dataset19FragmentScanOptionsE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><em>#include &lt;arrow/dataset/dataset.h&gt;</em><p>Per-scan options for fragment(s) in a dataset. </p>
 <p>These options are not intrinsic to the format or fragment itself, but do affect the results of a scan. These are options which make sense to change between repeated reads of the same dataset, such as format-specific conversion options (that do not affect the schema). </p>
-<p>Subclassed by <a class="reference internal" href="#structarrow_1_1dataset_1_1_csv_fragment_scan_options"><span class="std std-ref">arrow::dataset::CsvFragmentScanOptions</span></a></p>
+<p>Subclassed by <a class="reference internal" href="#structarrow_1_1dataset_1_1_csv_fragment_scan_options"><span class="std std-ref">arrow::dataset::CsvFragmentScanOptions</span></a>, <a class="reference internal" href="#classarrow_1_1dataset_1_1_ipc_fragment_scan_options"><span class="std std-ref">arrow::dataset::IpcFragmentScanOptions</span></a>, <a class="reference internal" href="#classarrow_1_1dataset_1_1_parquet_fragment_scan_options"><span class="std std-ref">arrow::dataset::ParquetFragmentScanOptions</span></a></p>
 </dd></dl>
 
 <dl class="cpp struct">
@@ -1532,6 +1532,16 @@
 </div>
 <div class="section" id="file-formats">
 <h3><a class="toc-backref" href="#id7">File Formats</a><a class="headerlink" href="#file-formats" title="Permalink to this headline">¶</a></h3>
+<dl class="cpp var">
+<dt id="_CPPv412kIpcTypeName">
+<span id="_CPPv312kIpcTypeName"></span><span id="_CPPv212kIpcTypeName"></span><span id="kIpcTypeName__cA"></span><span class="target" id="group__dataset-file-formats_1ga4f5f2a25385977113858d4ecc7d0f2bf"></span><em class="property">constexpr</em> char <code class="sig-name descname">kIpcTypeName</code>[] = &quot;ipc&quot;<a class="headerlink" href="#_CPPv412kIpcTypeName" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv416kParquetTypeName">
+<span id="_CPPv316kParquetTypeName"></span><span id="_CPPv216kParquetTypeName"></span><span id="kParquetTypeName__cA"></span><span class="target" id="group__dataset-file-formats_1gac995309ed7d81dcc769cd4d2b5419021"></span><em class="property">constexpr</em> char <code class="sig-name descname">kParquetTypeName</code>[] = &quot;parquet&quot;<a class="headerlink" href="#_CPPv416kParquetTypeName" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
 <dl class="cpp class">
 <dt id="_CPPv4N5arrow7dataset13CsvFileFormatE">
 <span id="_CPPv3N5arrow7dataset13CsvFileFormatE"></span><span id="_CPPv2N5arrow7dataset13CsvFileFormatE"></span><span id="arrow::dataset::CsvFileFormat"></span><span class="target" id="classarrow_1_1dataset_1_1_csv_file_format"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">CsvFileFormat</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset10FileFormatE" title="arrow::dataset::FileFormat">FileFormat</a><a class="headerlink" href="#_CPPv4N5arrow7dataset13CsvFileFormatE" title="Permalink to this definition">¶</a><br /></dt>
@@ -1660,6 +1670,22 @@
 </dd></dl>
 
 <dl class="cpp class">
+<dt id="_CPPv4N5arrow7dataset22IpcFragmentScanOptionsE">
+<span id="_CPPv3N5arrow7dataset22IpcFragmentScanOptionsE"></span><span id="_CPPv2N5arrow7dataset22IpcFragmentScanOptionsE"></span><span id="arrow::dataset::IpcFragmentScanOptions"></span><span class="target" id="classarrow_1_1dataset_1_1_ipc_fragment_scan_options"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">IpcFragmentScanOptions</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset19FragmentScanOptionsE" title="arrow::dataset::FragmentScanOptions">FragmentScanOptions</a><a class="headerlink" href="#_CPPv4N5arrow7dataset22IpcFragmentScanOptionsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;arrow/dataset/file_ipc.h&gt;</em><p>Per-scan options for IPC fragments. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset22IpcFragmentScanOptions7optionsE">
+<span id="_CPPv3N5arrow7dataset22IpcFragmentScanOptions7optionsE"></span><span id="_CPPv2N5arrow7dataset22IpcFragmentScanOptions7optionsE"></span><span id="arrow::dataset::IpcFragmentScanOptions::options__std::shared_ptr:ipc::IpcReadOptions:"></span><span class="target" id="classarrow_1_1dataset_1_1_ipc_fragment_scan_options_1a7db62a4708d0ed9da34c20d24afdd5e1"></span>std::shared_ptr&lt;ipc::<a class="reference internal" href="ipc.html#_CPPv4N5arrow3ipc14IpcReadOptionsE" title="arrow::ipc::IpcReadOptions">IpcReadOptions</a>&gt; <code class="sig-name descname">options</code><a class="headerlink" href="#_CPPv4N5arrow7dataset22IpcFragmentScanOptions7optionsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Options passed to the IPC file reader. </p>
+<p>included_fields, memory_pool, and use_threads are ignored. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
 <dt id="_CPPv4N5arrow7dataset19IpcFileWriteOptionsE">
 <span id="_CPPv3N5arrow7dataset19IpcFileWriteOptionsE"></span><span id="_CPPv2N5arrow7dataset19IpcFileWriteOptionsE"></span><span id="arrow::dataset::IpcFileWriteOptions"></span><span class="target" id="classarrow_1_1dataset_1_1_ipc_file_write_options"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">IpcFileWriteOptions</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset16FileWriteOptionsE" title="arrow::dataset::FileWriteOptions">FileWriteOptions</a><a class="headerlink" href="#_CPPv4N5arrow7dataset19IpcFileWriteOptionsE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><em>#include &lt;arrow/dataset/file_ipc.h&gt;</em><div class="breathe-sectiondef docutils container">
@@ -1774,7 +1800,7 @@
 
 <dl class="cpp function">
 <dt id="_CPPv4N5arrow7dataset17ParquetFileFormat12MakeFragmentE10FileSource10Expression">
-<span id="_CPPv3N5arrow7dataset17ParquetFileFormat12MakeFragmentE10FileSource10Expression"></span><span id="_CPPv2N5arrow7dataset17ParquetFileFormat12MakeFragmentE10FileSource10Expression"></span><span id="arrow::dataset::ParquetFileFormat::MakeFragment__FileSource.Expression"></span><span class="target" id="classarrow_1_1dataset_1_1_parquet_file_format_1a0211b20504ca412bfb996f08246935e8"></span><a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;std::shared_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow7dataset12FileFragmentE" title="arrow::dataset::FileFragment">FileFragment</a>&gt;&gt; <code class="sig-name descname">MakeFragment</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N5arrow7dataset10FileSourceE" title="arrow::dataset::FileSource">FileSource</a> <em>source</em>, Expression <em>partition_expression</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5arrow7dataset17ParquetFileFormat12MakeFragmentE10FileSource10Expression" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N5arrow7dataset17ParquetFileFormat12MakeFragmentE10FileSource10Expression"></span><span id="_CPPv2N5arrow7dataset17ParquetFileFormat12MakeFragmentE10FileSource10Expression"></span><span id="arrow::dataset::ParquetFileFormat::MakeFragment__FileSource.Expression"></span><span class="target" id="classarrow_1_1dataset_1_1_parquet_file_format_1a0211b20504ca412bfb996f08246935e8"></span><a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;std::shared_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow7dataset12FileFragmentE" title="arrow::dataset::FileFragment">FileFragment</a>&gt;&gt; <code class="sig-name descname">MakeFragment</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N5arrow7dataset10FileSourceE" title="arrow::dataset::FileSource">FileSource</a> <em>source</em>, Expression <em>partition_expression</em><span class="sig-paren">)</span><br /></dt>
 <dd><p>Create a <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_fragment"><span class="std std-ref">FileFragment</span></a> for a <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_source"><span class="std std-ref">FileSource</span></a>. </p>
 </dd></dl>
 
@@ -1788,17 +1814,7 @@
 <dl class="cpp struct">
 <dt id="_CPPv4N5arrow7dataset17ParquetFileFormat13ReaderOptionsE">
 <span id="_CPPv3N5arrow7dataset17ParquetFileFormat13ReaderOptionsE"></span><span id="_CPPv2N5arrow7dataset17ParquetFileFormat13ReaderOptionsE"></span><span id="arrow::dataset::ParquetFileFormat::ReaderOptions"></span><span class="target" id="structarrow_1_1dataset_1_1_parquet_file_format_1_1_reader_options"></span><em class="property">struct </em><code class="sig-name descname">ReaderOptions</code><a class="headerlink" href="#_CPPv4N5arrow7dataset17ParquetFileFormat13ReaderOptionsE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><em>#include &lt;arrow/dataset/file_parquet.h&gt;</em><div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Members</p>
-<dl class="cpp var">
-<dt id="_CPPv4N5arrow7dataset17ParquetFileFormat13ReaderOptions33enable_parallel_column_conversionE">
-<span id="_CPPv3N5arrow7dataset17ParquetFileFormat13ReaderOptions33enable_parallel_column_conversionE"></span><span id="_CPPv2N5arrow7dataset17ParquetFileFormat13ReaderOptions33enable_parallel_column_conversionE"></span><span id="arrow::dataset::ParquetFileFormat::ReaderOptions::enable_parallel_column_conversion__b"></span><span class="target" id="structarrow_1_1dataset_1_1_parquet_file_format_1_1_reader_options_1adb0045cf9f685519011c85406183292a"></span>bool <code class="sig-name descname">enable_parallel_column_conversion</code> = false<a class="headerlink" href="#_CPPv4N5arrow7dataset17ParquetFileFormat13ReaderOptions33enable_parallel_column_conversionE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>EXPERIMENTAL: Parallelize conversion across columns. </p>
-<p>This option is ignored if a scan is already parallelized across input files to avoid thread contention. This option will be removed after support is added for simultaneous parallelization across files and columns. </p>
-</dd></dl>
-
-</div>
-</dd></dl>
+<dd><em>#include &lt;arrow/dataset/file_parquet.h&gt;</em></dd></dl>
 
 </dd></dl>
 
@@ -1833,6 +1849,36 @@
 <dt id="_CPPv4N5arrow7dataset19ParquetFileFragment6SubsetE10Expression">
 <span id="_CPPv3N5arrow7dataset19ParquetFileFragment6SubsetE10Expression"></span><span id="_CPPv2N5arrow7dataset19ParquetFileFragment6SubsetE10Expression"></span><span id="arrow::dataset::ParquetFileFragment::Subset__Expression"></span><span class="target" id="classarrow_1_1dataset_1_1_parquet_file_fragment_1a0a1715eaf078a23cce3563cf0f5915c4"></span><a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;std::shared_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow7dataset8FragmentE" title="arrow::dataset::Fragment">Fragment</a>&gt;&gt; <code class="sig-name descname">Subset</code><span class="sig-paren">(</span>Expression <em>predicate</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5arrow7dataset19ParquetFileFragment6SubsetE10Expression" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Return fragment which selects a filtered subset of this fragment’s RowGroups. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N5arrow7dataset26ParquetFragmentScanOptionsE">
+<span id="_CPPv3N5arrow7dataset26ParquetFragmentScanOptionsE"></span><span id="_CPPv2N5arrow7dataset26ParquetFragmentScanOptionsE"></span><span id="arrow::dataset::ParquetFragmentScanOptions"></span><span class="target" id="classarrow_1_1dataset_1_1_parquet_fragment_scan_options"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">ParquetFragmentScanOptions</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset19FragmentScanOptionsE" title="arrow::dataset::FragmentScanOptions">FragmentScanOptions</a><a class="headerlink" href="#_CPPv4N5arrow7dataset26ParquetFragmentScanOptionsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;arrow/dataset/file_parquet.h&gt;</em><p>Per-scan options for Parquet fragments. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset26ParquetFragmentScanOptions17reader_propertiesE">
+<span id="_CPPv3N5arrow7dataset26ParquetFragmentScanOptions17reader_propertiesE"></span><span id="_CPPv2N5arrow7dataset26ParquetFragmentScanOptions17reader_propertiesE"></span><span id="arrow::dataset::ParquetFragmentScanOptions::reader_properties__std::shared_ptr:parquet::ReaderProperties:"></span><span class="target" id="classarrow_1_1dataset_1_1_parquet_fragment_scan_options_1a3e1d8b356c7006cfad2ffe72f2f07820"></span>std::shared_ptr&lt;parquet::<a class="reference internal" href="formats.html#_CPPv4N7parquet16ReaderPropertiesE" title="parquet::ReaderProperties">ReaderProperties</a>&gt; <code class="sig-name descname">reader_properties</code><a class="headerlink" href="#_CPPv4N5arrow7dataset26ParquetFragmentScanOptions17reader_propertiesE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reader properties. </p>
+<p>Not all properties are respected: memory_pool comes from <a class="reference internal" href="#structarrow_1_1dataset_1_1_scan_options"><span class="std std-ref">ScanOptions</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset26ParquetFragmentScanOptions23arrow_reader_propertiesE">
+<span id="_CPPv3N5arrow7dataset26ParquetFragmentScanOptions23arrow_reader_propertiesE"></span><span id="_CPPv2N5arrow7dataset26ParquetFragmentScanOptions23arrow_reader_propertiesE"></span><span id="arrow::dataset::ParquetFragmentScanOptions::arrow_reader_properties__std::shared_ptr:parquet::ArrowReaderProperties:"></span><span class="target" id="classarrow_1_1dataset_1_1_parquet_fragment_scan_options_1a229ddd0e9e93f063281e76243a357e89"></span>std::shared_ptr&lt;parquet::<a class="reference internal" href="formats.html#_CPPv4N7parquet21ArrowReaderPropertiesE" title="parquet::ArrowReaderProperties">ArrowReaderProperties</a>&gt; <code class="sig-name descname">arrow_reader_properties</code><a class="headerlink" href="#_CPPv4N5arrow7dataset26ParquetFragmentScanOptions23arrow_reader_propertiesE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Arrow reader properties. </p>
+<p>Not all properties are respected: batch_size comes from <a class="reference internal" href="#structarrow_1_1dataset_1_1_scan_options"><span class="std std-ref">ScanOptions</span></a>, and use_threads will be overridden based on enable_parallel_column_conversion. Additionally, dictionary columns come from ParquetFileFormat::ReaderOptions::dict_columns. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset26ParquetFragmentScanOptions33enable_parallel_column_conversionE">
+<span id="_CPPv3N5arrow7dataset26ParquetFragmentScanOptions33enable_parallel_column_conversionE"></span><span id="_CPPv2N5arrow7dataset26ParquetFragmentScanOptions33enable_parallel_column_conversionE"></span><span id="arrow::dataset::ParquetFragmentScanOptions::enable_parallel_column_conversion__b"></span><span class="target" id="classarrow_1_1dataset_1_1_parquet_fragment_scan_options_1aaa9edd8c366f91581552d4521266965f"></span>bool <code class="sig-name descname">enable_parallel_column_conversion</code> = false<a class="headerlink" href="#_CPPv4N5arrow7dataset26ParquetFragmentScanOptions33enable_parallel_column_conversionE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>EXPERIMENTAL: Parallelize conversion across columns. </p>
+<p>This option is ignored if a scan is already parallelized across input files to avoid thread contention. This option will be removed after support is added for simultaneous parallelization across files and columns. </p>
 </dd></dl>
 
 </div>

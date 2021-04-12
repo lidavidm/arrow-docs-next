@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>pyarrow.parquet.write_to_dataset &mdash; Apache Arrow v4.0.0.dev6150+g5287d181c.d20210407</title>
+  <title>pyarrow.parquet.write_to_dataset &mdash; Apache Arrow v4.0.0.dev6210+g6abb08e6f.d20210412</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                4.0.0.dev6150+g5287d181c.d20210407
+                4.0.0.dev6210+g6abb08e6f.d20210412
               </div>
             
           
@@ -251,7 +251,7 @@
 <h1>pyarrow.parquet.write_to_dataset<a class="headerlink" href="#pyarrow-parquet-write-to-dataset" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt id="pyarrow.parquet.write_to_dataset">
-<code class="sig-prename descclassname">pyarrow.parquet.</code><code class="sig-name descname">write_to_dataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">table</span></em>, <em class="sig-param"><span class="n">root_path</span></em>, <em class="sig-param"><span class="n">partition_cols</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">partition_filename_cb</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">use_legacy_dataset</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyarrow/parquet.html#write_to_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyarrow.parquet.write_to_dataset" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pyarrow.parquet.</code><code class="sig-name descname">write_to_dataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">table</span></em>, <em class="sig-param"><span class="n">root_path</span></em>, <em class="sig-param"><span class="n">partition_cols</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">partition_filename_cb</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">filesystem</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">use_legacy_dataset</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyarrow/parquet.html#write_to_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyarrow.parquet.write_to_dataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wrapper around parquet.write_table for writing a Table to
 Parquet format by partitions.
 For each combination of partition columns and values,
@@ -288,7 +288,8 @@ Columns are partitioned in the order they are given</p></li>
 <li><p><strong>partition_filename_cb</strong> (<em>callable</em><em>,</em>) – A callback function that takes the partition key(s) as an argument
 and allow you to override the partition filename. If nothing is
 passed, the filename will consist of a uuid.</p></li>
-<li><p><strong>use_legacy_dataset</strong> (<em>bool</em><em>, </em><em>default True</em>) – Set to False to enable the new code path (experimental, using the
+<li><p><strong>use_legacy_dataset</strong> (<em>bool</em>) – Default is True unless a <code class="docutils literal notranslate"><span class="pre">pyarrow.fs</span></code> filesystem is passed.
+Set to False to enable the new code path (experimental, using the
 new Arrow Dataset API). This is more efficient when using partition
 columns, but does not (yet) support <cite>partition_filename_cb</cite> and
 <cite>metadata_collector</cite> keywords.</p></li>

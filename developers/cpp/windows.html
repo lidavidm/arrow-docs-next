@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Developing on Windows &mdash; Apache Arrow v4.0.0.dev6150+g5287d181c.d20210407</title>
+  <title>Developing on Windows &mdash; Apache Arrow v4.0.0.dev6210+g6abb08e6f.d20210412</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                4.0.0.dev6150+g5287d181c.d20210407
+                4.0.0.dev6210+g6abb08e6f.d20210412
               </div>
             
           
@@ -126,6 +126,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Developing on Windows</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#system-setup">System Setup</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#using-conda-forge-for-build-dependencies">Using conda-forge for build dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-vcpkg-for-build-dependencies">Using vcpkg for build dependencies</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#building-using-visual-studio-msvc-solution-files">Building using Visual Studio (MSVC) Solution Files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#building-with-ninja-and-clcache">Building with Ninja and clcache</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#building-with-nmake">Building with NMake</a></li>
@@ -220,16 +221,20 @@
 <p>Like Linux and macOS, we have worked to enable builds to work “out of the box”
 with CMake for a reasonably large subset of the project.</p>
 <div class="section" id="system-setup">
-<h2>System Setup<a class="headerlink" href="#system-setup" title="Permalink to this headline">¶</a></h2>
+<span id="windows-system-setup"></span><h2>System Setup<a class="headerlink" href="#system-setup" title="Permalink to this headline">¶</a></h2>
 <p>Microsoft provides the free Visual Studio Community edition. When doing
-development in the shell, you must initialize the development
-environment.</p>
+development in the shell, you must initialize the development environment
+each time you open the shell.</p>
 <p>For Visual Studio 2015, execute the following batch script:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat&quot;</span> amd64
 </pre></div>
 </div>
 <p>For Visual Studio 2017, the script is:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat&quot;</span> -arch<span class="o">=</span>amd64
+</pre></div>
+</div>
+<p>For Visual Studio 2019, the script is:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\VsDevCmd.bat&quot;</span> -arch<span class="o">=</span>amd64
 </pre></div>
 </div>
 <p>One can configure a console emulator like <a class="reference external" href="https://cmder.net/">cmder</a> to
@@ -244,7 +249,9 @@ repository for conda.</p>
 <p>To use <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> for your C++ build dependencies on Windows, first
 download and install a 64-bit distribution from the <a class="reference external" href="https://conda.io/miniconda.html">Miniconda homepage</a></p>
 <p>To configure <code class="docutils literal notranslate"><span class="pre">conda</span></code> to use the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel by default, launch a
-command prompt (<code class="docutils literal notranslate"><span class="pre">cmd.exe</span></code>) and run the command:</p>
+command prompt (<code class="docutils literal notranslate"><span class="pre">cmd.exe</span></code>), run the initialization command shown
+<a class="reference internal" href="#windows-system-setup"><span class="std std-ref">above</span></a> (<code class="docutils literal notranslate"><span class="pre">vcvarsall.bat</span></code> or <code class="docutils literal notranslate"><span class="pre">VsDevCmd.bat</span></code>), then
+run the command:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda config --add channels conda-forge
 </pre></div>
 </div>
@@ -264,9 +271,13 @@ resolving the build dependencies. This is equivalent to setting</p>
 -DARROW_PACKAGE_PREFIX<span class="o">=</span>%CONDA_PREFIX%<span class="se">\L</span>ibrary
 </pre></div>
 </div>
-<p>Note that these packages are only supported for release builds. If you intend
-to use <code class="docutils literal notranslate"><span class="pre">-DCMAKE_BUILD_TYPE=debug</span></code> then you must build the packages from
-source.</p>
+<p>To use the Visual Studio IDE with this conda environment activated, launch it by
+running the command <code class="docutils literal notranslate"><span class="pre">devenv</span></code> from the same command prompt.</p>
+<p>Note that dependencies installed as conda packages are built in release mode and
+cannot link with debug builds. If you intend to use <code class="docutils literal notranslate"><span class="pre">-DCMAKE_BUILD_TYPE=debug</span></code>
+then you must build the packages from source.
+<code class="docutils literal notranslate"><span class="pre">-DCMAKE_BUILD_TYPE=relwithdebinfo</span></code> is also available, which produces a build
+that can both be linked with release libraries and be debugged.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you run into any problems using conda packages for dependencies, a very
@@ -275,6 +286,48 @@ from <code class="docutils literal notranslate"><span class="pre">conda-forge</s
 environment (and their origin) with <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">list</span></code></p>
 </div>
 </div>
+<div class="section" id="using-vcpkg-for-build-dependencies">
+<h2>Using vcpkg for build dependencies<a class="headerlink" href="#using-vcpkg-for-build-dependencies" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/microsoft/vcpkg">vcpkg</a> is an open source package manager
+from Microsoft. It hosts community-contributed ports of C and C++ packages and
+their dependencies. Arrow includes a manifest file <a class="reference external" href="https://github.com/apache/arrow/blob/master/cpp/vcpkg.json">cpp/vcpkg.json</a> that specifies
+which vcpkg packages are required to build the C++ library.</p>
+<p>To use vcpkg for C++ build dependencies on Windows, first
+<a class="reference external" href="https://docs.microsoft.com/en-us/cpp/build/install-vcpkg">install</a> and
+<a class="reference external" href="https://docs.microsoft.com/en-us/cpp/build/integrate-vcpkg">integrate</a>
+vcpkg. Then change working directory in <code class="docutils literal notranslate"><span class="pre">cmd.exe</span></code> to the root directory
+of Arrow and run the command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>vcpkg install ^
+  --triplet x64-windows ^
+  --x-manifest-root cpp  ^
+  --clean-after-build
+</pre></div>
+</div>
+<p>On Windows, vcpkg builds dynamic link libraries by default. Use the triplet
+<code class="docutils literal notranslate"><span class="pre">x64-windows-static</span></code> to build static libraries. vcpkg downloads source
+packages and compiles them locally, so installing dependencies with vcpkg is
+more time-consuming than with conda.</p>
+<p>Then in your <code class="docutils literal notranslate"><span class="pre">cmake</span></code> command, to use dependencies installed by vcpkg, set:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>-DARROW_DEPENDENCY_SOURCE<span class="o">=</span>VCPKG
+</pre></div>
+</div>
+<p>You can optionally set other variables to override the default CMake
+configurations for vcpkg, including:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-DCMAKE_TOOLCHAIN_FILE</span></code>: by default, the CMake scripts automatically find
+the location of the vcpkg CMake toolchain file <code class="docutils literal notranslate"><span class="pre">vcpkg.cmake</span></code>; use this to
+instead specify its location</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DVCPKG_TARGET_TRIPLET</span></code>: by default, the CMake scripts attempt to infer the
+vcpkg
+<a class="reference external" href="https://github.com/microsoft/vcpkg/blob/master/docs/users/triplets.md">triplet</a>;
+use this to instead specify the triplet</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DARROW_DEPENDENCY_USE_SHARED</span></code>: default is <code class="docutils literal notranslate"><span class="pre">ON</span></code>; set to <code class="docutils literal notranslate"><span class="pre">OFF</span></code> for
+static libraries</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DVCPKG_MANIFEST_MODE</span></code>: default is <code class="docutils literal notranslate"><span class="pre">ON</span></code>; set to <code class="docutils literal notranslate"><span class="pre">OFF</span></code> to ignore the
+<code class="docutils literal notranslate"><span class="pre">vcpkg.json</span></code> manifest file and only look for vcpkg packages that are
+already installed under the directory where vcpkg is installed</p></li>
+</ul>
+</div>
 <div class="section" id="building-using-visual-studio-msvc-solution-files">
 <h2>Building using Visual Studio (MSVC) Solution Files<a class="headerlink" href="#building-using-visual-studio-msvc-solution-files" title="Permalink to this headline">¶</a></h2>
 <p>Change working directory in <code class="docutils literal notranslate"><span class="pre">cmd.exe</span></code> to the root directory of Arrow and do
@@ -282,25 +335,39 @@ an out of source build by generating a MSVC solution:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> cpp
 mkdir build
 <span class="nb">cd</span> build
-cmake .. -G <span class="s2">&quot;Visual Studio 14 2015 Win64&quot;</span> ^
+cmake .. -G <span class="s2">&quot;Visual Studio 14 2015&quot;</span> -A x64 ^
       -DARROW_BUILD_TESTS<span class="o">=</span>ON
 cmake --build . --config Release
 </pre></div>
 </div>
+<p>For newer versions of Visual Studio, specify the generator
+<code class="docutils literal notranslate"><span class="pre">Visual</span> <span class="pre">Studio</span> <span class="pre">15</span> <span class="pre">2017</span></code> or <code class="docutils literal notranslate"><span class="pre">Visual</span> <span class="pre">Studio</span> <span class="pre">16</span> <span class="pre">2019</span></code>.</p>
 </div>
 <div class="section" id="building-with-ninja-and-clcache">
 <h2>Building with Ninja and clcache<a class="headerlink" href="#building-with-ninja-and-clcache" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference external" href="https://ninja-build.org/">Ninja</a> build system offsets better build
-parallelization, and the optional <a class="reference external" href="https://github.com/frerich/clcache/">clcache</a> compiler cache which keeps track of
+<p>The <a class="reference external" href="https://ninja-build.org/">Ninja</a> build system offers better build
+parallelization, and the optional <a class="reference external" href="https://github.com/frerich/clcache/">clcache</a> compiler cache keeps track of
 past compilations to avoid running them over and over again (in a way similar
 to the Unix-specific <code class="docutils literal notranslate"><span class="pre">ccache</span></code>).</p>
-<p>Activate your conda build environment to first install those utilities:</p>
+<p>Newer versions of Visual Studio include Ninja. To see if your Visual Studio
+includes Ninja, run the initialization command shown
+<a class="reference internal" href="#windows-system-setup"><span class="std std-ref">above</span></a> (<code class="docutils literal notranslate"><span class="pre">vcvarsall.bat</span></code> or <code class="docutils literal notranslate"><span class="pre">VsDevCmd.bat</span></code>), then</p>
+<blockquote>
+<div><p>run <code class="docutils literal notranslate"><span class="pre">ninja</span> <span class="pre">--version</span></code>.</p>
+</div></blockquote>
+<p>If Ninja is not included in your version of Visual Studio, and you are using
+conda, activate your conda environment and install Ninja and clcache:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>activate arrow-dev
 conda install -c conda-forge ninja
 pip install git+https://github.com/frerich/clcache.git
 </pre></div>
 </div>
-<p>Change working directory in <code class="docutils literal notranslate"><span class="pre">cmd.exe</span></code> to the root directory of Arrow and
+<p>If you are not using conda,
+<a class="reference external" href="https://github.com/ninja-build/ninja/wiki/Pre-built-Ninja-packages">install Ninja from another source</a>
+and optionally
+<a class="reference external" href="https://github.com/frerich/clcache/wiki/Installation">install clcache from another source</a>
+.</p>
+<p>After installation is complete, change working directory in <code class="docutils literal notranslate"><span class="pre">cmd.exe</span></code> to the root directory of Arrow and
 do an out of source build by generating Ninja files:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> cpp
 mkdir build
@@ -370,8 +437,8 @@ make <span class="p">||</span> <span class="k">exit</span> /B
 <div class="section" id="debug-builds">
 <h2>Debug builds<a class="headerlink" href="#debug-builds" title="Permalink to this headline">¶</a></h2>
 <p>To build a Debug version of Arrow, you should have pre-installed a Debug
-version of Boost. It’s recommended to configure cmake build with the
-following variables for Debug build:</p>
+version of Boost. It’s recommended to configure <code class="docutils literal notranslate"><span class="pre">cmake</span></code> with the following
+variables for Debug build:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">-DARROW_BOOST_USE_SHARED=OFF</span></code>: enables static linking with boost debug
 libs and simplifies run-time loading of 3rd parties</p></li>
@@ -382,7 +449,7 @@ libs and simplifies run-time loading of 3rd parties</p></li>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> cpp
 mkdir build
 <span class="nb">cd</span> build
-cmake .. -G <span class="s2">&quot;Visual Studio 14 2015 Win64&quot;</span> ^
+cmake .. -G <span class="s2">&quot;Visual Studio 14 2015&quot;</span> -A x64 ^
       -DARROW_BOOST_USE_SHARED<span class="o">=</span>OFF ^
       -DCMAKE_BUILD_TYPE<span class="o">=</span>Debug ^
       -DBOOST_ROOT<span class="o">=</span>C:/local/boost_1_63_0  ^
