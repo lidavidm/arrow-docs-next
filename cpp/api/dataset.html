@@ -276,12 +276,6 @@
 </dd></dl>
 
 <dl class="cpp function">
-<dt id="_CPPv4NK5arrow7dataset8Fragment10splittableEv">
-<span id="_CPPv3NK5arrow7dataset8Fragment10splittableEv"></span><span id="_CPPv2NK5arrow7dataset8Fragment10splittableEv"></span><span id="arrow::dataset::Fragment::splittableC"></span><span class="target" id="classarrow_1_1dataset_1_1_fragment_1ab80d614113510c903648198e8a076dda"></span><em class="property">virtual</em> bool <code class="sig-name descname">splittable</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK5arrow7dataset8Fragment10splittableEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Return true if the fragment can benefit from parallel scanning. </p>
-</dd></dl>
-
-<dl class="cpp function">
 <dt id="_CPPv4NK5arrow7dataset8Fragment20partition_expressionEv">
 <span id="_CPPv3NK5arrow7dataset8Fragment20partition_expressionEv"></span><span id="_CPPv2NK5arrow7dataset8Fragment20partition_expressionEv"></span><span id="arrow::dataset::Fragment::partition_expressionC"></span><span class="target" id="classarrow_1_1dataset_1_1_fragment_1a5a5533735282505fafec0d992c26a77f"></span><em class="property">inline</em> <em class="property">const</em> Expression &amp;<code class="sig-name descname">partition_expression</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK5arrow7dataset8Fragment20partition_expressionEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>An expression which evaluates to true for all data viewed by this <a class="reference internal" href="#classarrow_1_1dataset_1_1_fragment"><span class="std std-ref">Fragment</span></a>. </p>
@@ -725,9 +719,39 @@
 </div>
 <div class="section" id="scanning">
 <h2><a class="toc-backref" href="#id4">Scanning</a><a class="headerlink" href="#scanning" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp type">
+<dt id="_CPPv426TaggedRecordBatchGenerator">
+<span id="_CPPv326TaggedRecordBatchGenerator"></span><span id="_CPPv226TaggedRecordBatchGenerator"></span><span class="target" id="group__dataset-scanning_1gab483ab439e8b34006f3204005b0724ec"></span><em class="property">using </em><code class="sig-name descname">TaggedRecordBatchGenerator</code> = std::function&lt;Future&lt;TaggedRecordBatch&gt;<span class="sig-paren">(</span><span class="sig-paren">)</span>&gt;<a class="headerlink" href="#_CPPv426TaggedRecordBatchGenerator" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt id="_CPPv425TaggedRecordBatchIterator">
+<span id="_CPPv325TaggedRecordBatchIterator"></span><span id="_CPPv225TaggedRecordBatchIterator"></span><span class="target" id="group__dataset-scanning_1ga26c872b52e47a7e20f901d743df3bef9"></span><em class="property">using </em><code class="sig-name descname">TaggedRecordBatchIterator</code> = Iterator&lt;TaggedRecordBatch&gt;<a class="headerlink" href="#_CPPv425TaggedRecordBatchIterator" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt id="_CPPv430EnumeratedRecordBatchGenerator">
+<span id="_CPPv330EnumeratedRecordBatchGenerator"></span><span id="_CPPv230EnumeratedRecordBatchGenerator"></span><span class="target" id="group__dataset-scanning_1ga2aab0007c4c0e475197811f993db724e"></span><em class="property">using </em><code class="sig-name descname">EnumeratedRecordBatchGenerator</code> = std::function&lt;Future&lt;EnumeratedRecordBatch&gt;<span class="sig-paren">(</span><span class="sig-paren">)</span>&gt;<a class="headerlink" href="#_CPPv430EnumeratedRecordBatchGenerator" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt id="_CPPv429EnumeratedRecordBatchIterator">
+<span id="_CPPv329EnumeratedRecordBatchIterator"></span><span id="_CPPv229EnumeratedRecordBatchIterator"></span><span class="target" id="group__dataset-scanning_1gac15b45b87696d4c200949df0e7965ea1"></span><em class="property">using </em><code class="sig-name descname">EnumeratedRecordBatchIterator</code> = Iterator&lt;EnumeratedRecordBatch&gt;<a class="headerlink" href="#_CPPv429EnumeratedRecordBatchIterator" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
 <dl class="cpp var">
 <dt id="_CPPv417kDefaultBatchSize">
 <span id="_CPPv317kDefaultBatchSize"></span><span id="_CPPv217kDefaultBatchSize"></span><span id="kDefaultBatchSize__int64_t"></span><span class="target" id="group__dataset-scanning_1ga073228430616d6b28274a6f3e570e5d7"></span><em class="property">constexpr</em> int64_t <code class="sig-name descname">kDefaultBatchSize</code> = 1 &lt;&lt; 20<a class="headerlink" href="#_CPPv417kDefaultBatchSize" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv422kDefaultBatchReadahead">
+<span id="_CPPv322kDefaultBatchReadahead"></span><span id="_CPPv222kDefaultBatchReadahead"></span><span id="kDefaultBatchReadahead__int32_t"></span><span class="target" id="group__dataset-scanning_1ga3eb0d0d3032ccacc02cbfe0a94ca5d6c"></span><em class="property">constexpr</em> int32_t <code class="sig-name descname">kDefaultBatchReadahead</code> = 32<a class="headerlink" href="#_CPPv422kDefaultBatchReadahead" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv425kDefaultFragmentReadahead">
+<span id="_CPPv325kDefaultFragmentReadahead"></span><span id="_CPPv225kDefaultFragmentReadahead"></span><span id="kDefaultFragmentReadahead__int32_t"></span><span class="target" id="group__dataset-scanning_1ga6f4b8db3cb8c1bcfc6874453d7ba40b4"></span><em class="property">constexpr</em> int32_t <code class="sig-name descname">kDefaultFragmentReadahead</code> = 8<a class="headerlink" href="#_CPPv425kDefaultFragmentReadahead" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp class">
@@ -780,15 +804,53 @@
 </dd></dl>
 
 <dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset11ScanOptions15batch_readaheadE">
+<span id="_CPPv3N5arrow7dataset11ScanOptions15batch_readaheadE"></span><span id="_CPPv2N5arrow7dataset11ScanOptions15batch_readaheadE"></span><span id="arrow::dataset::ScanOptions::batch_readahead__int32_t"></span><span class="target" id="structarrow_1_1dataset_1_1_scan_options_1a129a6281e006cb6681d6d246b0c6a99b"></span>int32_t <code class="sig-name descname">batch_readahead</code> = <a class="reference internal" href="#_CPPv422kDefaultBatchReadahead" title="kDefaultBatchReadahead">kDefaultBatchReadahead</a><a class="headerlink" href="#_CPPv4N5arrow7dataset11ScanOptions15batch_readaheadE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>How many batches to read ahead within a file. </p>
+<p>Set to 0 to disable batch readahead</p>
+<p>Note: May not be supported by all formats Note: May not be supported by all scanners Note: Will be ignored if use_threads is set to false </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset11ScanOptions18fragment_readaheadE">
+<span id="_CPPv3N5arrow7dataset11ScanOptions18fragment_readaheadE"></span><span id="_CPPv2N5arrow7dataset11ScanOptions18fragment_readaheadE"></span><span id="arrow::dataset::ScanOptions::fragment_readahead__int32_t"></span><span class="target" id="structarrow_1_1dataset_1_1_scan_options_1a63e5bc6675f808e576841fcf13545435"></span>int32_t <code class="sig-name descname">fragment_readahead</code> = <a class="reference internal" href="#_CPPv425kDefaultFragmentReadahead" title="kDefaultFragmentReadahead">kDefaultFragmentReadahead</a><a class="headerlink" href="#_CPPv4N5arrow7dataset11ScanOptions18fragment_readaheadE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>How many files to read ahead. </p>
+<p>Set to 0 to disable fragment readahead</p>
+<p>Note: May not be enforced by all scanners Note: Will be ignored if use_threads is set to false </p>
+</dd></dl>
+
+<dl class="cpp var">
 <dt id="_CPPv4N5arrow7dataset11ScanOptions4poolE">
 <span id="_CPPv3N5arrow7dataset11ScanOptions4poolE"></span><span id="_CPPv2N5arrow7dataset11ScanOptions4poolE"></span><span id="arrow::dataset::ScanOptions::pool__MemoryPoolP"></span><span class="target" id="structarrow_1_1dataset_1_1_scan_options_1a90fc341733356314293b9bf414fa4610"></span><a class="reference internal" href="memory.html#_CPPv4N5arrow10MemoryPoolE" title="arrow::MemoryPool">MemoryPool</a> *<code class="sig-name descname">pool</code> = arrow::<a class="reference internal" href="memory.html#_CPPv4N5arrow19default_memory_poolEv" title="arrow::default_memory_pool">default_memory_pool</a>()<a class="headerlink" href="#_CPPv4N5arrow7dataset11ScanOptions4poolE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>A pool from which materialized and scanned arrays will be allocated. </p>
 </dd></dl>
 
 <dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset11ScanOptions12cpu_executorE">
+<span id="_CPPv3N5arrow7dataset11ScanOptions12cpu_executorE"></span><span id="_CPPv2N5arrow7dataset11ScanOptions12cpu_executorE"></span><span id="arrow::dataset::ScanOptions::cpu_executor__internal::ExecutorP"></span><span class="target" id="structarrow_1_1dataset_1_1_scan_options_1aa3151de18f23357e206197b3f4c0b4b9"></span>internal::Executor *<code class="sig-name descname">cpu_executor</code> = internal::GetCpuThreadPool()<a class="headerlink" href="#_CPPv4N5arrow7dataset11ScanOptions12cpu_executorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Executor on which to run any CPU tasks. </p>
+<p>Note: Will be ignored if use_threads is set to false </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset11ScanOptions10io_contextE">
+<span id="_CPPv3N5arrow7dataset11ScanOptions10io_contextE"></span><span id="_CPPv2N5arrow7dataset11ScanOptions10io_contextE"></span><span id="arrow::dataset::ScanOptions::io_context__io::IOContext"></span><span class="target" id="structarrow_1_1dataset_1_1_scan_options_1a2cbac92967c86d75605244a218ca66d1"></span>io::IOContext <code class="sig-name descname">io_context</code><a class="headerlink" href="#_CPPv4N5arrow7dataset11ScanOptions10io_contextE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>IOContext for any IO tasks. </p>
+<p>Note: The IOContext executor will be ignored if use_threads is set to false </p>
+</dd></dl>
+
+<dl class="cpp var">
 <dt id="_CPPv4N5arrow7dataset11ScanOptions11use_threadsE">
 <span id="_CPPv3N5arrow7dataset11ScanOptions11use_threadsE"></span><span id="_CPPv2N5arrow7dataset11ScanOptions11use_threadsE"></span><span id="arrow::dataset::ScanOptions::use_threads__b"></span><span class="target" id="structarrow_1_1dataset_1_1_scan_options_1a14c08f047d28e5a705ef1e275f11a98a"></span>bool <code class="sig-name descname">use_threads</code> = false<a class="headerlink" href="#_CPPv4N5arrow7dataset11ScanOptions11use_threadsE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Indicate if the <a class="reference internal" href="#classarrow_1_1dataset_1_1_scanner"><span class="std std-ref">Scanner</span></a> should make use of a ThreadPool. </p>
+<dd><p>If true the scanner will scan in parallel. </p>
+<p>Note: If true, this will use threads from both the cpu_executor and the io_context.executor Note: This must be true in order for any readahead to happen </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N5arrow7dataset11ScanOptions9use_asyncE">
+<span id="_CPPv3N5arrow7dataset11ScanOptions9use_asyncE"></span><span id="_CPPv2N5arrow7dataset11ScanOptions9use_asyncE"></span><span id="arrow::dataset::ScanOptions::use_async__b"></span><span class="target" id="structarrow_1_1dataset_1_1_scan_options_1aa9903f4d5ae620c1c35023b17cf2b517"></span>bool <code class="sig-name descname">use_async</code> = false<a class="headerlink" href="#_CPPv4N5arrow7dataset11ScanOptions9use_asyncE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>If true then an asycnhronous implementation of the scanner will be used. </p>
+<p>This implementation is newer and generally performs better. However, it makes extensive use of threading and is still considered experimental </p>
 </dd></dl>
 
 <dl class="cpp var">
@@ -818,38 +880,104 @@
 </div>
 </dd></dl>
 
+<dl class="cpp struct">
+<dt id="_CPPv4I0EN5arrow7dataset10EnumeratedE">
+<span id="_CPPv3I0EN5arrow7dataset10EnumeratedE"></span><span id="_CPPv2I0EN5arrow7dataset10EnumeratedE"></span>template&lt;typename <code class="sig-name descname">T</code>&gt;<br /><span class="target" id="structarrow_1_1dataset_1_1_enumerated"></span><em class="property">struct </em><code class="sig-name descname">Enumerated</code><a class="headerlink" href="#_CPPv4I0EN5arrow7dataset10EnumeratedE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;arrow/dataset/scanner.h&gt;</em></dd></dl>
+
+<dl class="cpp struct">
+<dt id="_CPPv4N5arrow7dataset17TaggedRecordBatchE">
+<span id="_CPPv3N5arrow7dataset17TaggedRecordBatchE"></span><span id="_CPPv2N5arrow7dataset17TaggedRecordBatchE"></span><span id="arrow::dataset::TaggedRecordBatch"></span><span class="target" id="structarrow_1_1dataset_1_1_tagged_record_batch"></span><em class="property">struct </em><code class="sig-name descname">TaggedRecordBatch</code><a class="headerlink" href="#_CPPv4N5arrow7dataset17TaggedRecordBatchE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;arrow/dataset/scanner.h&gt;</em><p>Combines a record batch with the fragment that the record batch originated from. </p>
+<p>Knowing the source fragment can be useful for debugging &amp; understanding loaded data </p>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt id="_CPPv4N5arrow7dataset21EnumeratedRecordBatchE">
+<span id="_CPPv3N5arrow7dataset21EnumeratedRecordBatchE"></span><span id="_CPPv2N5arrow7dataset21EnumeratedRecordBatchE"></span><span id="arrow::dataset::EnumeratedRecordBatch"></span><span class="target" id="structarrow_1_1dataset_1_1_enumerated_record_batch"></span><em class="property">struct </em><code class="sig-name descname">EnumeratedRecordBatch</code><a class="headerlink" href="#_CPPv4N5arrow7dataset21EnumeratedRecordBatchE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;arrow/dataset/scanner.h&gt;</em><p>Combines a tagged batch with positional information. </p>
+<p>This is returned when scanning batches in an unordered fashion. This information is needed if you ever want to reassemble the batches in order </p>
+</dd></dl>
+
 <dl class="cpp class">
 <dt id="_CPPv4N5arrow7dataset7ScannerE">
 <span id="_CPPv3N5arrow7dataset7ScannerE"></span><span id="_CPPv2N5arrow7dataset7ScannerE"></span><span id="arrow::dataset::Scanner"></span><span class="target" id="classarrow_1_1dataset_1_1_scanner"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">Scanner</code><a class="headerlink" href="#_CPPv4N5arrow7dataset7ScannerE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><em>#include &lt;arrow/dataset/scanner.h&gt;</em><p><a class="reference internal" href="#classarrow_1_1dataset_1_1_scanner"><span class="std std-ref">Scanner</span></a> is a materialized scan operation with context and options bound. </p>
-<p>A scanner is the class that glues <a class="reference internal" href="#classarrow_1_1dataset_1_1_scan_task"><span class="std std-ref">ScanTask</span></a>, <a class="reference internal" href="#classarrow_1_1dataset_1_1_fragment"><span class="std std-ref">Fragment</span></a>, and <a class="reference internal" href="#classarrow_1_1dataset_1_1_dataset"><span class="std std-ref">Dataset</span></a>. In python pseudo code, it performs the following:</p>
-<p>def <a class="reference internal" href="#classarrow_1_1dataset_1_1_scanner_1a86c105e69fb69e036ad46c3815226c4a"><span class="std std-ref">Scan()</span></a>: for fragment in self.dataset.GetFragments(this.options.filter): for scan_task in fragment.Scan(this.options): yield scan_task </p>
+<dd><em>#include &lt;arrow/dataset/scanner.h&gt;</em><p>A scanner glues together several dataset classes to load in data. </p>
+<p>The dataset contains a collection of fragments and partitioning rules.</p>
+<p>The fragments identify independently loadable units of data (i.e. each fragment has a potentially unique schema and possibly even format. It should be possible to read fragments in parallel if desired).</p>
+<p>The fragment’s format contains the logic necessary to actually create a task to load the fragment into memory. That task may or may not support parallel execution of its own.</p>
+<p>The scanner is then responsible for creating scan tasks from every fragment in the dataset and (potentially) sequencing the loaded record batches together.</p>
+<p>The scanner should not buffer the entire dataset in memory (unless asked) instead yielding record batches as soon as they are ready to scan. Various readahead properties control how much data is allowed to be scanned before pausing to let a slow consumer catchup.</p>
+<p>Today the scanner also handles projection &amp; filtering although that may change in the future. </p>
+<p>Subclassed by <a class="reference internal" href="#classarrow_1_1dataset_1_1_sync_scanner"><span class="std std-ref">arrow::dataset::SyncScanner</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="cpp function">
 <dt id="_CPPv4N5arrow7dataset7Scanner4ScanEv">
-<span id="_CPPv3N5arrow7dataset7Scanner4ScanEv"></span><span id="_CPPv2N5arrow7dataset7Scanner4ScanEv"></span><span id="arrow::dataset::Scanner::Scan"></span><span class="target" id="classarrow_1_1dataset_1_1_scanner_1a86c105e69fb69e036ad46c3815226c4a"></span><a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;ScanTaskIterator&gt; <code class="sig-name descname">Scan</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5arrow7dataset7Scanner4ScanEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N5arrow7dataset7Scanner4ScanEv"></span><span id="_CPPv2N5arrow7dataset7Scanner4ScanEv"></span><span id="arrow::dataset::Scanner::Scan"></span><span class="target" id="classarrow_1_1dataset_1_1_scanner_1a0e9ac851a76432ff37dd35c7a7417842"></span><em class="property">virtual</em> <a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;ScanTaskIterator&gt; <code class="sig-name descname">Scan</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5arrow7dataset7Scanner4ScanEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>The Scan operator returns a stream of <a class="reference internal" href="#classarrow_1_1dataset_1_1_scan_task"><span class="std std-ref">ScanTask</span></a>. </p>
-<p>The caller is responsible to dispatch/schedule said tasks. Tasks should be safe to run in a concurrent fashion and outlive the iterator. </p>
+<p>The caller is responsible to dispatch/schedule said tasks. Tasks should be safe to run in a concurrent fashion and outlive the iterator.</p>
+<p>Note: Not supported by the async scanner TODO(ARROW-11797) Deprecate <a class="reference internal" href="#classarrow_1_1dataset_1_1_scanner_1a0e9ac851a76432ff37dd35c7a7417842"><span class="std std-ref">Scan()</span></a> </p>
 </dd></dl>
 
 <dl class="cpp function">
 <dt id="_CPPv4N5arrow7dataset7Scanner7ToTableEv">
-<span id="_CPPv3N5arrow7dataset7Scanner7ToTableEv"></span><span id="_CPPv2N5arrow7dataset7Scanner7ToTableEv"></span><span id="arrow::dataset::Scanner::ToTable"></span><span class="target" id="classarrow_1_1dataset_1_1_scanner_1aa45ba3d8bcb3996681ba3912603a5902"></span><a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;std::shared_ptr&lt;<a class="reference internal" href="table.html#_CPPv4N5arrow5TableE" title="arrow::Table">Table</a>&gt;&gt; <code class="sig-name descname">ToTable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5arrow7dataset7Scanner7ToTableEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N5arrow7dataset7Scanner7ToTableEv"></span><span id="_CPPv2N5arrow7dataset7Scanner7ToTableEv"></span><span id="arrow::dataset::Scanner::ToTable"></span><span class="target" id="classarrow_1_1dataset_1_1_scanner_1a706750f2cd07ba40507a7ba139c78ea5"></span><em class="property">virtual</em> <a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;std::shared_ptr&lt;<a class="reference internal" href="table.html#_CPPv4N5arrow5TableE" title="arrow::Table">Table</a>&gt;&gt; <code class="sig-name descname">ToTable</code><span class="sig-paren">(</span><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N5arrow7dataset7Scanner7ToTableEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Convert a <a class="reference internal" href="#classarrow_1_1dataset_1_1_scanner"><span class="std std-ref">Scanner</span></a> into a <a class="reference internal" href="table.html#classarrow_1_1_table"><span class="std std-ref">Table</span></a>. </p>
 <p>Use this convenience utility with care. This will serially materialize the Scan result in memory before creating the <a class="reference internal" href="table.html#classarrow_1_1_table"><span class="std std-ref">Table</span></a>. </p>
 </dd></dl>
 
 <dl class="cpp function">
-<dt id="_CPPv4N5arrow7dataset7Scanner12GetFragmentsEv">
-<span id="_CPPv3N5arrow7dataset7Scanner12GetFragmentsEv"></span><span id="_CPPv2N5arrow7dataset7Scanner12GetFragmentsEv"></span><span id="arrow::dataset::Scanner::GetFragments"></span><span class="target" id="classarrow_1_1dataset_1_1_scanner_1a9599b49f9b801ad756ff7fb2a92830df"></span><a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;FragmentIterator&gt; <code class="sig-name descname">GetFragments</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5arrow7dataset7Scanner12GetFragmentsEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>GetFragments returns an iterator over all Fragments in this scan. </p>
+<dt id="_CPPv4N5arrow7dataset7Scanner11ScanBatchesEv">
+<span id="_CPPv3N5arrow7dataset7Scanner11ScanBatchesEv"></span><span id="_CPPv2N5arrow7dataset7Scanner11ScanBatchesEv"></span><span id="arrow::dataset::Scanner::ScanBatches"></span><span class="target" id="classarrow_1_1dataset_1_1_scanner_1a8c511a98ed14b65d39d36347a4007612"></span><em class="property">virtual</em> <a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;<a class="reference internal" href="#_CPPv425TaggedRecordBatchIterator" title="TaggedRecordBatchIterator">TaggedRecordBatchIterator</a>&gt; <code class="sig-name descname">ScanBatches</code><span class="sig-paren">(</span><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N5arrow7dataset7Scanner11ScanBatchesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Scan the dataset into a stream of record batches. </p>
+<p>Each batch is tagged with the fragment it originated from. The batches will arrive in order. The order of fragments is determined by the dataset.</p>
+<p>Note: The scanner will perform some readahead but will avoid materializing too much in memory (this is goverended by the readahead options and use_threads option). If the readahead queue fills up then I/O will pause until the calling thread catches up. </p>
 </dd></dl>
 
 <dl class="cpp function">
-<dt id="_CPPv4NK5arrow7dataset7Scanner6schemaEv">
-<span id="_CPPv3NK5arrow7dataset7Scanner6schemaEv"></span><span id="_CPPv2NK5arrow7dataset7Scanner6schemaEv"></span><span id="arrow::dataset::Scanner::schemaC"></span><span class="target" id="classarrow_1_1dataset_1_1_scanner_1a10ec007f0958a624a6262d5b3b466dac"></span><em class="property">inline</em> <em class="property">const</em> std::shared_ptr&lt;<a class="reference internal" href="datatype.html#_CPPv4N5arrow6SchemaE" title="arrow::Schema">Schema</a>&gt; &amp;<code class="sig-name descname">schema</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK5arrow7dataset7Scanner6schemaEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Get the schema, including any projected columns. </p>
+<dt id="_CPPv4N5arrow7dataset7Scanner20ScanBatchesUnorderedEv">
+<span id="_CPPv3N5arrow7dataset7Scanner20ScanBatchesUnorderedEv"></span><span id="_CPPv2N5arrow7dataset7Scanner20ScanBatchesUnorderedEv"></span><span id="arrow::dataset::Scanner::ScanBatchesUnordered"></span><span class="target" id="classarrow_1_1dataset_1_1_scanner_1a214ed25513bac9a80544afcc983e5272"></span><em class="property">virtual</em> <a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;<a class="reference internal" href="#_CPPv429EnumeratedRecordBatchIterator" title="EnumeratedRecordBatchIterator">EnumeratedRecordBatchIterator</a>&gt; <code class="sig-name descname">ScanBatchesUnordered</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5arrow7dataset7Scanner20ScanBatchesUnorderedEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Scan the dataset into a stream of record batches. </p>
+<p>Unlike ScanBatches this method may allow record batches to be returned out of order. This allows for more efficient scanning: some fragments may be accessed more quickly than others (e.g. may be cached in RAM or just happen to get scheduled earlier by the I/O)</p>
+<p>To make up for the out-of-order iteration each batch is further tagged with positional information. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK5arrow7dataset7Scanner7optionsEv">
+<span id="_CPPv3NK5arrow7dataset7Scanner7optionsEv"></span><span id="_CPPv2NK5arrow7dataset7Scanner7optionsEv"></span><span id="arrow::dataset::Scanner::optionsC"></span><span class="target" id="classarrow_1_1dataset_1_1_scanner_1adddf7d3dea394e017624ad7ea6c27b71"></span><em class="property">inline</em> <em class="property">const</em> std::shared_ptr&lt;<a class="reference internal" href="#_CPPv4N5arrow7dataset11ScanOptionsE" title="arrow::dataset::ScanOptions">ScanOptions</a>&gt; &amp;<code class="sig-name descname">options</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK5arrow7dataset7Scanner7optionsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the options for this scan. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N5arrow7dataset11SyncScannerE">
+<span id="_CPPv3N5arrow7dataset11SyncScannerE"></span><span id="_CPPv2N5arrow7dataset11SyncScannerE"></span><span id="arrow::dataset::SyncScanner"></span><span class="target" id="classarrow_1_1dataset_1_1_sync_scanner"></span><em class="property">class </em><code class="sig-prename descclassname">arrow::dataset<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">SyncScanner</code> : <em class="property">public</em> arrow::dataset::<a class="reference internal" href="#_CPPv4N5arrow7dataset7ScannerE" title="arrow::dataset::Scanner">Scanner</a><a class="headerlink" href="#_CPPv4N5arrow7dataset11SyncScannerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;arrow/dataset/scanner.h&gt;</em><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N5arrow7dataset11SyncScanner11ScanBatchesEv">
+<span id="_CPPv3N5arrow7dataset11SyncScanner11ScanBatchesEv"></span><span id="_CPPv2N5arrow7dataset11SyncScanner11ScanBatchesEv"></span><span id="arrow::dataset::SyncScanner::ScanBatches"></span><span class="target" id="classarrow_1_1dataset_1_1_sync_scanner_1a66ccfbc0b3f94868f4a40d32b9054365"></span><em class="property">virtual</em> <a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;<a class="reference internal" href="#_CPPv425TaggedRecordBatchIterator" title="TaggedRecordBatchIterator">TaggedRecordBatchIterator</a>&gt; <code class="sig-name descname">ScanBatches</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">override</em><a class="headerlink" href="#_CPPv4N5arrow7dataset11SyncScanner11ScanBatchesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Scan the dataset into a stream of record batches. </p>
+<p>Each batch is tagged with the fragment it originated from. The batches will arrive in order. The order of fragments is determined by the dataset.</p>
+<p>Note: The scanner will perform some readahead but will avoid materializing too much in memory (this is goverended by the readahead options and use_threads option). If the readahead queue fills up then I/O will pause until the calling thread catches up. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N5arrow7dataset11SyncScanner4ScanEv">
+<span id="_CPPv3N5arrow7dataset11SyncScanner4ScanEv"></span><span id="_CPPv2N5arrow7dataset11SyncScanner4ScanEv"></span><span id="arrow::dataset::SyncScanner::Scan"></span><span class="target" id="classarrow_1_1dataset_1_1_sync_scanner_1a87812d62f3adce3d1175082b66a4d531"></span><em class="property">virtual</em> <a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;ScanTaskIterator&gt; <code class="sig-name descname">Scan</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">override</em><a class="headerlink" href="#_CPPv4N5arrow7dataset11SyncScanner4ScanEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The Scan operator returns a stream of <a class="reference internal" href="#classarrow_1_1dataset_1_1_scan_task"><span class="std std-ref">ScanTask</span></a>. </p>
+<p>The caller is responsible to dispatch/schedule said tasks. Tasks should be safe to run in a concurrent fashion and outlive the iterator.</p>
+<p>Note: Not supported by the async scanner TODO(ARROW-11797) Deprecate <a class="reference internal" href="#classarrow_1_1dataset_1_1_sync_scanner_1a87812d62f3adce3d1175082b66a4d531"><span class="std std-ref">Scan()</span></a> </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N5arrow7dataset11SyncScanner7ToTableEv">
+<span id="_CPPv3N5arrow7dataset11SyncScanner7ToTableEv"></span><span id="_CPPv2N5arrow7dataset11SyncScanner7ToTableEv"></span><span id="arrow::dataset::SyncScanner::ToTable"></span><span class="target" id="classarrow_1_1dataset_1_1_sync_scanner_1a4d65e7c0e01afdf89fb72a1e242cd083"></span><em class="property">virtual</em> <a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;std::shared_ptr&lt;<a class="reference internal" href="table.html#_CPPv4N5arrow5TableE" title="arrow::Table">Table</a>&gt;&gt; <code class="sig-name descname">ToTable</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">override</em><a class="headerlink" href="#_CPPv4N5arrow7dataset11SyncScanner7ToTableEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Convert a <a class="reference internal" href="#classarrow_1_1dataset_1_1_scanner"><span class="std std-ref">Scanner</span></a> into a <a class="reference internal" href="table.html#classarrow_1_1_table"><span class="std std-ref">Table</span></a>. </p>
+<p>Use this convenience utility with care. This will serially materialize the Scan result in memory before creating the <a class="reference internal" href="table.html#classarrow_1_1_table"><span class="std std-ref">Table</span></a>. </p>
 </dd></dl>
 
 </div>
@@ -969,12 +1097,6 @@
 <dd><p>Scan returns an iterator of ScanTasks, each of which yields RecordBatches from this <a class="reference internal" href="#classarrow_1_1dataset_1_1_fragment"><span class="std std-ref">Fragment</span></a>. </p>
 <p>Note that batches yielded using this method will not be filtered and may not align with the <a class="reference internal" href="#classarrow_1_1dataset_1_1_fragment"><span class="std std-ref">Fragment</span></a>’s schema. In particular, note that columns referenced by the filter may be present in yielded batches even if they are not projected (so that they are available when a filter is applied). Additionally, explicitly projected columns may be absent if they were not present in this fragment.</p>
 <p>To receive a record batch stream which is fully filtered and projected, use <a class="reference internal" href="#classarrow_1_1dataset_1_1_scanner"><span class="std std-ref">Scanner</span></a>. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt id="_CPPv4NK5arrow7dataset16InMemoryFragment10splittableEv">
-<span id="_CPPv3NK5arrow7dataset16InMemoryFragment10splittableEv"></span><span id="_CPPv2NK5arrow7dataset16InMemoryFragment10splittableEv"></span><span id="arrow::dataset::InMemoryFragment::splittableC"></span><span class="target" id="classarrow_1_1dataset_1_1_in_memory_fragment_1a82ca5c2eb13e2a1f99f6bf37f6a41213"></span><em class="property">inline</em> <em class="property">virtual</em> bool <code class="sig-name descname">splittable</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> <em class="property">override</em><a class="headerlink" href="#_CPPv4NK5arrow7dataset16InMemoryFragment10splittableEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Return true if the fragment can benefit from parallel scanning. </p>
 </dd></dl>
 
 </div>
@@ -1285,12 +1407,6 @@
 </dd></dl>
 
 <dl class="cpp function">
-<dt id="_CPPv4NK5arrow7dataset10FileFormat10splittableEv">
-<span id="_CPPv3NK5arrow7dataset10FileFormat10splittableEv"></span><span id="_CPPv2NK5arrow7dataset10FileFormat10splittableEv"></span><span id="arrow::dataset::FileFormat::splittableC"></span><span class="target" id="classarrow_1_1dataset_1_1_file_format_1ae48aca8d7f632fec22a4fe622e74d3a2"></span><em class="property">inline</em> <em class="property">virtual</em> bool <code class="sig-name descname">splittable</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK5arrow7dataset10FileFormat10splittableEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Return true if fragments of this format can benefit from parallel scanning. </p>
-</dd></dl>
-
-<dl class="cpp function">
 <dt id="_CPPv4NK5arrow7dataset10FileFormat11IsSupportedERK10FileSource">
 <span id="_CPPv3NK5arrow7dataset10FileFormat11IsSupportedERK10FileSource"></span><span id="_CPPv2NK5arrow7dataset10FileFormat11IsSupportedERK10FileSource"></span><span id="arrow::dataset::FileFormat::IsSupported__FileSourceCRC"></span><span class="target" id="classarrow_1_1dataset_1_1_file_format_1ae934a7b69d0402f36aecfa6037fa1343"></span><em class="property">virtual</em> <a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;bool&gt; <code class="sig-name descname">IsSupported</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N5arrow7dataset10FileSourceE" title="arrow::dataset::FileSource">FileSource</a> &amp;<em>source</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK5arrow7dataset10FileFormat11IsSupportedERK10FileSource" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Indicate if the <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_source"><span class="std std-ref">FileSource</span></a> is supported/readable by this format. </p>
@@ -1365,12 +1481,6 @@
 <dd><p>Scan returns an iterator of ScanTasks, each of which yields RecordBatches from this <a class="reference internal" href="#classarrow_1_1dataset_1_1_fragment"><span class="std std-ref">Fragment</span></a>. </p>
 <p>Note that batches yielded using this method will not be filtered and may not align with the <a class="reference internal" href="#classarrow_1_1dataset_1_1_fragment"><span class="std std-ref">Fragment</span></a>’s schema. In particular, note that columns referenced by the filter may be present in yielded batches even if they are not projected (so that they are available when a filter is applied). Additionally, explicitly projected columns may be absent if they were not present in this fragment.</p>
 <p>To receive a record batch stream which is fully filtered and projected, use <a class="reference internal" href="#classarrow_1_1dataset_1_1_scanner"><span class="std std-ref">Scanner</span></a>. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt id="_CPPv4NK5arrow7dataset12FileFragment10splittableEv">
-<span id="_CPPv3NK5arrow7dataset12FileFragment10splittableEv"></span><span id="_CPPv2NK5arrow7dataset12FileFragment10splittableEv"></span><span id="arrow::dataset::FileFragment::splittableC"></span><span class="target" id="classarrow_1_1dataset_1_1_file_fragment_1a3b5dbdd86ec6d9f4afd93976e978c93b"></span><em class="property">inline</em> <em class="property">virtual</em> bool <code class="sig-name descname">splittable</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> <em class="property">override</em><a class="headerlink" href="#_CPPv4NK5arrow7dataset12FileFragment10splittableEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Return true if the fragment can benefit from parallel scanning. </p>
 </dd></dl>
 
 </div>
@@ -1631,12 +1741,6 @@
 </dd></dl>
 
 <dl class="cpp function">
-<dt id="_CPPv4NK5arrow7dataset13IpcFileFormat10splittableEv">
-<span id="_CPPv3NK5arrow7dataset13IpcFileFormat10splittableEv"></span><span id="_CPPv2NK5arrow7dataset13IpcFileFormat10splittableEv"></span><span id="arrow::dataset::IpcFileFormat::splittableC"></span><span class="target" id="classarrow_1_1dataset_1_1_ipc_file_format_1a5d02ae89eeddedc3bdc005eb4d3f2657"></span><em class="property">inline</em> <em class="property">virtual</em> bool <code class="sig-name descname">splittable</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> <em class="property">override</em><a class="headerlink" href="#_CPPv4NK5arrow7dataset13IpcFileFormat10splittableEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Return true if fragments of this format can benefit from parallel scanning. </p>
-</dd></dl>
-
-<dl class="cpp function">
 <dt id="_CPPv4NK5arrow7dataset13IpcFileFormat11IsSupportedERK10FileSource">
 <span id="_CPPv3NK5arrow7dataset13IpcFileFormat11IsSupportedERK10FileSource"></span><span id="_CPPv2NK5arrow7dataset13IpcFileFormat11IsSupportedERK10FileSource"></span><span id="arrow::dataset::IpcFileFormat::IsSupported__FileSourceCRC"></span><span class="target" id="classarrow_1_1dataset_1_1_ipc_file_format_1a7a143ae018f520857453cf983f9a53bf"></span><em class="property">virtual</em> <a class="reference internal" href="support.html#_CPPv4I0EN5arrow6ResultE" title="arrow::Result">Result</a>&lt;bool&gt; <code class="sig-name descname">IsSupported</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N5arrow7dataset10FileSourceE" title="arrow::dataset::FileSource">FileSource</a> &amp;<em>source</em><span class="sig-paren">)</span> <em class="property">const</em> <em class="property">override</em><a class="headerlink" href="#_CPPv4NK5arrow7dataset13IpcFileFormat11IsSupportedERK10FileSource" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Indicate if the <a class="reference internal" href="#classarrow_1_1dataset_1_1_file_source"><span class="std std-ref">FileSource</span></a> is supported/readable by this format. </p>
@@ -1736,12 +1840,6 @@
 <dt id="_CPPv4NK5arrow7dataset17ParquetFileFormat9type_nameEv">
 <span id="_CPPv3NK5arrow7dataset17ParquetFileFormat9type_nameEv"></span><span id="_CPPv2NK5arrow7dataset17ParquetFileFormat9type_nameEv"></span><span id="arrow::dataset::ParquetFileFormat::type_nameC"></span><span class="target" id="classarrow_1_1dataset_1_1_parquet_file_format_1aaae04966393cc5cd4df9258c899d619c"></span><em class="property">inline</em> <em class="property">virtual</em> std::string <code class="sig-name descname">type_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> <em class="property">override</em><a class="headerlink" href="#_CPPv4NK5arrow7dataset17ParquetFileFormat9type_nameEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>The name identifying the kind of file format. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt id="_CPPv4NK5arrow7dataset17ParquetFileFormat10splittableEv">
-<span id="_CPPv3NK5arrow7dataset17ParquetFileFormat10splittableEv"></span><span id="_CPPv2NK5arrow7dataset17ParquetFileFormat10splittableEv"></span><span id="arrow::dataset::ParquetFileFormat::splittableC"></span><span class="target" id="classarrow_1_1dataset_1_1_parquet_file_format_1a93ef2febee8485cf77fd29b9b72ae61e"></span><em class="property">inline</em> <em class="property">virtual</em> bool <code class="sig-name descname">splittable</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> <em class="property">override</em><a class="headerlink" href="#_CPPv4NK5arrow7dataset17ParquetFileFormat10splittableEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Return true if fragments of this format can benefit from parallel scanning. </p>
 </dd></dl>
 
 <dl class="cpp function">

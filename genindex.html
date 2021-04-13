@@ -1492,6 +1492,10 @@
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4NK5arrow7dataset21DirectoryPartitioning9type_nameEv">arrow::dataset::DirectoryPartitioning::type_name (C++ function)</a>
 </li>
+      <li><a href="cpp/api/dataset.html#_CPPv4I0EN5arrow7dataset10EnumeratedE">arrow::dataset::Enumerated (C++ struct)</a>
+</li>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset21EnumeratedRecordBatchE">arrow::dataset::EnumeratedRecordBatch (C++ struct)</a>
+</li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset10FileFormatE">arrow::dataset::FileFormat (C++ class)</a>
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset10FileFormat29default_fragment_scan_optionsE">arrow::dataset::FileFormat::default_fragment_scan_options (C++ member)</a>
@@ -1508,15 +1512,11 @@
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4NK5arrow7dataset10FileFormat8ScanFileENSt10shared_ptrI11ScanOptionsEERKNSt10shared_ptrI12FileFragmentEE">arrow::dataset::FileFormat::ScanFile (C++ function)</a>
 </li>
-      <li><a href="cpp/api/dataset.html#_CPPv4NK5arrow7dataset10FileFormat10splittableEv">arrow::dataset::FileFormat::splittable (C++ function)</a>
-</li>
       <li><a href="cpp/api/dataset.html#_CPPv4NK5arrow7dataset10FileFormat9type_nameEv">arrow::dataset::FileFormat::type_name (C++ function)</a>
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset12FileFragmentE">arrow::dataset::FileFragment (C++ class)</a>
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset12FileFragment4ScanENSt10shared_ptrI11ScanOptionsEE">arrow::dataset::FileFragment::Scan (C++ function)</a>
-</li>
-      <li><a href="cpp/api/dataset.html#_CPPv4NK5arrow7dataset12FileFragment10splittableEv">arrow::dataset::FileFragment::splittable (C++ function)</a>
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset10FileSourceE">arrow::dataset::FileSource (C++ class)</a>
 </li>
@@ -1604,8 +1604,6 @@
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset8Fragment4ScanENSt10shared_ptrI11ScanOptionsEE">arrow::dataset::Fragment::Scan (C++ function)</a>
 </li>
-      <li><a href="cpp/api/dataset.html#_CPPv4NK5arrow7dataset8Fragment10splittableEv">arrow::dataset::Fragment::splittable (C++ function)</a>
-</li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset19FragmentScanOptionsE">arrow::dataset::FragmentScanOptions (C++ class)</a>
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset20FunctionPartitioningE">arrow::dataset::FunctionPartitioning (C++ class)</a>
@@ -1640,8 +1638,6 @@
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset16InMemoryFragment4ScanENSt10shared_ptrI11ScanOptionsEE">arrow::dataset::InMemoryFragment::Scan (C++ function)</a>
 </li>
-      <li><a href="cpp/api/dataset.html#_CPPv4NK5arrow7dataset16InMemoryFragment10splittableEv">arrow::dataset::InMemoryFragment::splittable (C++ function)</a>
-</li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset14InspectOptionsE">arrow::dataset::InspectOptions (C++ struct)</a>
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset14InspectOptions9fragmentsE">arrow::dataset::InspectOptions::fragments (C++ member)</a>
@@ -1659,8 +1655,6 @@
       <li><a href="cpp/api/dataset.html#_CPPv4NK5arrow7dataset13IpcFileFormat10MakeWriterENSt10shared_ptrIN2io12OutputStreamEEENSt10shared_ptrI6SchemaEENSt10shared_ptrI16FileWriteOptionsEE">arrow::dataset::IpcFileFormat::MakeWriter (C++ function)</a>
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4NK5arrow7dataset13IpcFileFormat8ScanFileENSt10shared_ptrI11ScanOptionsEERKNSt10shared_ptrI12FileFragmentEE">arrow::dataset::IpcFileFormat::ScanFile (C++ function)</a>
-</li>
-      <li><a href="cpp/api/dataset.html#_CPPv4NK5arrow7dataset13IpcFileFormat10splittableEv">arrow::dataset::IpcFileFormat::splittable (C++ function)</a>
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4NK5arrow7dataset13IpcFileFormat9type_nameEv">arrow::dataset::IpcFileFormat::type_name (C++ function)</a>
 </li>
@@ -1719,8 +1713,6 @@
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset17ParquetFileFormat13ReaderOptionsE">arrow::dataset::ParquetFileFormat::ReaderOptions (C++ struct)</a>
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4NK5arrow7dataset17ParquetFileFormat8ScanFileENSt10shared_ptrI11ScanOptionsEERKNSt10shared_ptrI12FileFragmentEE">arrow::dataset::ParquetFileFormat::ScanFile (C++ function)</a>
-</li>
-      <li><a href="cpp/api/dataset.html#_CPPv4NK5arrow7dataset17ParquetFileFormat10splittableEv">arrow::dataset::ParquetFileFormat::splittable (C++ function)</a>
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4NK5arrow7dataset17ParquetFileFormat9type_nameEv">arrow::dataset::ParquetFileFormat::type_name (C++ function)</a>
 </li>
@@ -1788,11 +1780,13 @@
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset7ScannerE">arrow::dataset::Scanner (C++ class)</a>
 </li>
-      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset7Scanner12GetFragmentsEv">arrow::dataset::Scanner::GetFragments (C++ function)</a>
+      <li><a href="cpp/api/dataset.html#_CPPv4NK5arrow7dataset7Scanner7optionsEv">arrow::dataset::Scanner::options (C++ function)</a>
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset7Scanner4ScanEv">arrow::dataset::Scanner::Scan (C++ function)</a>
 </li>
-      <li><a href="cpp/api/dataset.html#_CPPv4NK5arrow7dataset7Scanner6schemaEv">arrow::dataset::Scanner::schema (C++ function)</a>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset7Scanner11ScanBatchesEv">arrow::dataset::Scanner::ScanBatches (C++ function)</a>
+</li>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset7Scanner20ScanBatchesUnorderedEv">arrow::dataset::Scanner::ScanBatchesUnordered (C++ function)</a>
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset7Scanner7ToTableEv">arrow::dataset::Scanner::ToTable (C++ function)</a>
 </li>
@@ -1814,13 +1808,21 @@
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset11ScanOptionsE">arrow::dataset::ScanOptions (C++ struct)</a>
 </li>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset11ScanOptions15batch_readaheadE">arrow::dataset::ScanOptions::batch_readahead (C++ member)</a>
+</li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset11ScanOptions10batch_sizeE">arrow::dataset::ScanOptions::batch_size (C++ member)</a>
+</li>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset11ScanOptions12cpu_executorE">arrow::dataset::ScanOptions::cpu_executor (C++ member)</a>
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset11ScanOptions14dataset_schemaE">arrow::dataset::ScanOptions::dataset_schema (C++ member)</a>
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset11ScanOptions6filterE">arrow::dataset::ScanOptions::filter (C++ member)</a>
 </li>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset11ScanOptions18fragment_readaheadE">arrow::dataset::ScanOptions::fragment_readahead (C++ member)</a>
+</li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset11ScanOptions21fragment_scan_optionsE">arrow::dataset::ScanOptions::fragment_scan_options (C++ member)</a>
+</li>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset11ScanOptions10io_contextE">arrow::dataset::ScanOptions::io_context (C++ member)</a>
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset11ScanOptions4poolE">arrow::dataset::ScanOptions::pool (C++ member)</a>
 </li>
@@ -1828,11 +1830,23 @@
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset11ScanOptions10projectionE">arrow::dataset::ScanOptions::projection (C++ member)</a>
 </li>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset11ScanOptions9use_asyncE">arrow::dataset::ScanOptions::use_async (C++ member)</a>
+</li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset11ScanOptions11use_threadsE">arrow::dataset::ScanOptions::use_threads (C++ member)</a>
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset8ScanTaskE">arrow::dataset::ScanTask (C++ class)</a>
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset8ScanTask7ExecuteEv">arrow::dataset::ScanTask::Execute (C++ function)</a>
+</li>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset11SyncScannerE">arrow::dataset::SyncScanner (C++ class)</a>
+</li>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset11SyncScanner4ScanEv">arrow::dataset::SyncScanner::Scan (C++ function)</a>
+</li>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset11SyncScanner11ScanBatchesEv">arrow::dataset::SyncScanner::ScanBatches (C++ function)</a>
+</li>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset11SyncScanner7ToTableEv">arrow::dataset::SyncScanner::ToTable (C++ function)</a>
+</li>
+      <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset17TaggedRecordBatchE">arrow::dataset::TaggedRecordBatch (C++ struct)</a>
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv4N5arrow7dataset12UnionDatasetE">arrow::dataset::UnionDataset (C++ class)</a>
 </li>
@@ -2346,6 +2360,8 @@
 </li>
       <li><a href="cpp/api/flight.html#_CPPv4N5arrow6flight16FlightServerBase5DoPutERK17ServerCallContextNSt10unique_ptrI19FlightMessageReaderEENSt10unique_ptrI20FlightMetadataWriterEE">arrow::flight::FlightServerBase::DoPut (C++ function)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="cpp/api/flight.html#_CPPv4N5arrow6flight16FlightServerBase13GetFlightInfoERK17ServerCallContextRK16FlightDescriptorPNSt10unique_ptrI10FlightInfoEE">arrow::flight::FlightServerBase::GetFlightInfo (C++ function)</a>
 </li>
       <li><a href="cpp/api/flight.html#_CPPv4N5arrow6flight16FlightServerBase9GetSchemaERK17ServerCallContextRK16FlightDescriptorPNSt10unique_ptrI12SchemaResultEE">arrow::flight::FlightServerBase::GetSchema (C++ function)</a>
@@ -2354,8 +2370,6 @@
 </li>
       <li><a href="cpp/api/flight.html#_CPPv4N5arrow6flight16FlightServerBase4InitERK19FlightServerOptions">arrow::flight::FlightServerBase::Init (C++ function)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="cpp/api/flight.html#_CPPv4N5arrow6flight16FlightServerBase11ListActionsERK17ServerCallContextPNSt6vectorI10ActionTypeEE">arrow::flight::FlightServerBase::ListActions (C++ function)</a>
 </li>
       <li><a href="cpp/api/flight.html#_CPPv4N5arrow6flight16FlightServerBase11ListFlightsERK17ServerCallContextPK8CriteriaPNSt10unique_ptrI13FlightListingEE">arrow::flight::FlightServerBase::ListFlights (C++ function)</a>
@@ -5046,6 +5060,10 @@
 </li>
       <li><a href="python/generated/pyarrow.csv.ReadOptions.html#pyarrow.csv.ReadOptions.encoding">encoding (pyarrow.csv.ReadOptions attribute)</a>
 </li>
+      <li><a href="cpp/api/dataset.html#_CPPv430EnumeratedRecordBatchGenerator">EnumeratedRecordBatchGenerator (C++ type)</a>
+</li>
+      <li><a href="cpp/api/dataset.html#_CPPv429EnumeratedRecordBatchIterator">EnumeratedRecordBatchIterator (C++ type)</a>
+</li>
       <li><a href="python/generated/pyarrow.compute.equal.html#pyarrow.compute.equal">equal() (in module pyarrow.compute)</a>
 </li>
       <li><a href="python/generated/pyarrow.Array.html#pyarrow.Array.equals">equals() (pyarrow.Array method)</a>
@@ -6406,14 +6424,18 @@
 <h2 id="K">K</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="cpp/api/dataset.html#_CPPv422kDefaultBatchReadahead">kDefaultBatchReadahead (C++ member)</a>
+</li>
       <li><a href="cpp/api/dataset.html#_CPPv417kDefaultBatchSize">kDefaultBatchSize (C++ member)</a>
+</li>
+      <li><a href="cpp/api/dataset.html#_CPPv425kDefaultFragmentReadahead">kDefaultFragmentReadahead (C++ member)</a>
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv424kDefaultHiveNullFallback">kDefaultHiveNullFallback (C++ member)</a>
 </li>
-      <li><a href="python/generated/pyarrow.MapType.html#pyarrow.MapType.key_type">key_type (pyarrow.MapType attribute)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="python/generated/pyarrow.MapType.html#pyarrow.MapType.key_type">key_type (pyarrow.MapType attribute)</a>
+</li>
       <li><a href="python/generated/pyarrow.StructScalar.html#pyarrow.StructScalar.keys">keys() (pyarrow.StructScalar method)</a>
 </li>
       <li><a href="cpp/api/dataset.html#_CPPv412kIpcTypeName">kIpcTypeName (C++ member)</a>
@@ -8105,6 +8127,10 @@
       <li><a href="python/generated/pyarrow.Table.html#pyarrow.Table">Table (class in pyarrow)</a>
 </li>
       <li><a href="python/generated/pyarrow.table.html#pyarrow.table">table() (in module pyarrow)</a>
+</li>
+      <li><a href="cpp/api/dataset.html#_CPPv426TaggedRecordBatchGenerator">TaggedRecordBatchGenerator (C++ type)</a>
+</li>
+      <li><a href="cpp/api/dataset.html#_CPPv425TaggedRecordBatchIterator">TaggedRecordBatchIterator (C++ type)</a>
 </li>
       <li><a href="python/generated/pyarrow.compute.take.html#pyarrow.compute.take">take() (in module pyarrow.compute)</a>
 
