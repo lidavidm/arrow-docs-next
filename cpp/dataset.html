@@ -246,7 +246,7 @@ tabular, potentially larger than memory, and multi-file datasets. This includes:
 Parquet, Feather / Arrow IPC, and CSV files) and different file systems (local,
 cloud).</p></li>
 <li><p>Discovery of sources (crawling directories, handling partitioned datasets with
-various partitioning schemes, basic schema normalization, ..)</p></li>
+various partitioning schemes, basic schema normalization, …)</p></li>
 <li><p>Optimized reading with predicate pushdown (filtering rows), projection
 (selecting and deriving columns), and optionally parallel reading.</p></li>
 </ul>
@@ -372,8 +372,8 @@ This lets us choose between (for example) reading local files or files in Amazon
 S3, or between Parquet and CSV.</p>
 <p>In addition to searching a base directory, we can list file paths manually.</p>
 <p>Creating a <a class="reference internal" href="api/dataset.html#_CPPv4N5arrow7dataset7DatasetE" title="arrow::dataset::Dataset"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">arrow::dataset::Dataset</span></code></a> does not begin reading the data
-itself. If needed, it only crawls the directory to find all the files
-(<a class="reference internal" href="api/dataset.html#_CPPv4NK5arrow7dataset17FileSystemDataset5filesEv" title="arrow::dataset::FileSystemDataset::files"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">arrow::dataset::FileSystemDataset::files()</span></code></a>):</p>
+itself. It only crawls the directory to find all the files (if needed), which can
+be retrieved with <a class="reference internal" href="api/dataset.html#_CPPv4NK5arrow7dataset17FileSystemDataset5filesEv" title="arrow::dataset::FileSystemDataset::files"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">arrow::dataset::FileSystemDataset::files()</span></code></a>:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Print out the files crawled (only for FileSystemDataset)</span>
 <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">filename</span> <span class="p">:</span> <span class="n">dataset</span><span class="o">-&gt;</span><span class="n">files</span><span class="p">())</span> <span class="p">{</span>
   <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">filename</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
@@ -438,7 +438,7 @@ filtering/projecting.</p>
 </div>
 <div class="section" id="reading-different-file-formats">
 <h3>Reading different file formats<a class="headerlink" href="#reading-different-file-formats" title="Permalink to this headline">¶</a></h3>
-<p>The above examples use Parquet files on local disk but the Dataset API
+<p>The above examples use Parquet files on local disk, but the Dataset API
 provides a consistent interface across multiple file formats and filesystems.
 (See <a class="reference internal" href="#cpp-dataset-cloud-storage"><span class="std std-ref">Reading from cloud storage</span></a> for more information on the latter.)
 Currently, Parquet, Feather / Arrow IPC, and CSV file formats are supported;
@@ -481,7 +481,7 @@ more formats are planned in the future.</p>
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
-<p>…then we can read the Feather file by passing a <a class="reference internal" href="api/dataset.html#_CPPv4N5arrow7dataset13IpcFileFormatE" title="arrow::dataset::IpcFileFormat"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">arrow::dataset::IpcFileFormat</span></code></a>:</p>
+<p>…then we can read the Feather file by passing an <a class="reference internal" href="api/dataset.html#_CPPv4N5arrow7dataset13IpcFileFormatE" title="arrow::dataset::IpcFileFormat"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">arrow::dataset::IpcFileFormat</span></code></a>:</p>
 <div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
 <span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="n">format</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">ds</span><span class="o">::</span><span class="n">IpcFileFormat</span><span class="o">&gt;</span><span class="p">();</span>
     <span class="n">table</span> <span class="o">=</span> <span class="n">ScanWholeDataset</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">format</span><span class="p">,</span> <span class="n">base_path</span><span class="p">);</span>
@@ -496,7 +496,13 @@ files are read. For example:</p>
 <span class="n">format</span><span class="o">-&gt;</span><span class="n">reader_options</span><span class="p">.</span><span class="n">dict_columns</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Will configure column <code class="docutils literal notranslate"><span class="pre">&quot;a&quot;</span></code> to be dictionary-encoded when read.</p>
+<p>Will configure column <code class="docutils literal notranslate"><span class="pre">&quot;a&quot;</span></code> to be dictionary-encoded when read. Similarly,
+setting <a class="reference internal" href="api/dataset.html#_CPPv4N5arrow7dataset13CsvFileFormat13parse_optionsE" title="arrow::dataset::CsvFileFormat::parse_options"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">arrow::dataset::CsvFileFormat::parse_options</span></code></a> lets us change
+things like reading comma-separated or tab-separated data.</p>
+<p>Additionally, passing an <a class="reference internal" href="api/dataset.html#_CPPv4N5arrow7dataset19FragmentScanOptionsE" title="arrow::dataset::FragmentScanOptions"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">arrow::dataset::FragmentScanOptions</span></code></a> to
+<a class="reference internal" href="api/dataset.html#_CPPv4N5arrow7dataset14ScannerBuilder19FragmentScanOptionsENSt10shared_ptrI19FragmentScanOptionsEE" title="arrow::dataset::ScannerBuilder::FragmentScanOptions"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">arrow::dataset::ScannerBuilder::FragmentScanOptions()</span></code></a> offers fine-grained
+control over data scanning. For example, for CSV files, we can change what values
+are converted into Boolean true and false at scan time.</p>
 </div>
 </div>
 <div class="section" id="filtering-data">
@@ -598,7 +604,9 @@ reduce the amount of I/O needed.</p>
 <div class="section" id="projecting-columns">
 <h2>Projecting columns<a class="headerlink" href="#projecting-columns" title="Permalink to this headline">¶</a></h2>
 <p>In addition to selecting columns, <a class="reference internal" href="api/dataset.html#_CPPv4N5arrow7dataset14ScannerBuilder7ProjectENSt6vectorINSt6stringEEE" title="arrow::dataset::ScannerBuilder::Project"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">arrow::dataset::ScannerBuilder::Project()</span></code></a>
-can also be used for more complex projections.</p>
+can also be used for more complex projections, such as renaming columns, casting
+them to other types, and even deriving new columns based on evaluating
+expressions.</p>
 <p>In this case, we pass a vector of expressions used to construct column values
 and a vector of names for the columns:</p>
 <div class="highlight-cpp notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">193</span>
@@ -729,6 +737,13 @@ dataset schema:</p>
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When combining filters and projections, Arrow will determine all
+necessary columns to read. For instance, if you filter on a column that
+isn’t ultimately selected, Arrow will still read the column to evaluate
+the filter.</p>
+</div>
 </div>
 <div class="section" id="reading-and-writing-partitioned-data">
 <h2>Reading and writing partitioned data<a class="headerlink" href="#reading-and-writing-partitioned-data" title="Permalink to this headline">¶</a></h2>
