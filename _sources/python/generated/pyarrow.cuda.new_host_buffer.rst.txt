@@ -1,6 +1,6 @@
 pyarrow.cuda.new\_host\_buffer
 ==============================
 
-.. currentmodule:: pyarrow.cuda
+.. currentmodule:: pyarrow
 
-.. autoattribute:: new_host_buffer
+.. autoattribute:: cuda.new_host_buffer

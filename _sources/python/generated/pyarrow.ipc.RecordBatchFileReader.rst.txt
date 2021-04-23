@@ -17,7 +17,6 @@ pyarrow.ipc.RecordBatchFileReader
       ~RecordBatchFileReader.get_batch
       ~RecordBatchFileReader.get_record_batch
       ~RecordBatchFileReader.read_all
-      ~RecordBatchFileReader.read_pandas
    
    
 
@@ -28,6 +27,7 @@ pyarrow.ipc.RecordBatchFileReader
    .. autosummary::
    
       ~RecordBatchFileReader.num_record_batches
+      ~RecordBatchFileReader.read_pandas
       ~RecordBatchFileReader.schema
       ~RecordBatchFileReader.stats
    

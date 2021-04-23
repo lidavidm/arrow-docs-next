@@ -1,6 +1,6 @@
 pyarrow.cuda.CudaBuffer
 =======================
 
-.. currentmodule:: pyarrow.cuda
+.. currentmodule:: pyarrow
 
-.. autoattribute:: CudaBuffer
+.. autoattribute:: cuda.CudaBuffer

@@ -1,6 +1,6 @@
 pyarrow.flight.FlightMethod
 ===========================
 
-.. currentmodule:: pyarrow.flight
+.. currentmodule:: pyarrow
 
-.. autoattribute:: FlightMethod
+.. autoattribute:: flight.FlightMethod

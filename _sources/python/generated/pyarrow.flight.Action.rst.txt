@@ -1,6 +1,6 @@
 pyarrow.flight.Action
 =====================
 
-.. currentmodule:: pyarrow.flight
+.. currentmodule:: pyarrow
 
-.. autoattribute:: Action
+.. autoattribute:: flight.Action

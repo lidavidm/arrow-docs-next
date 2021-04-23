@@ -1,6 +1,6 @@
 pyarrow.flight.ClientMiddleware
 ===============================
 
-.. currentmodule:: pyarrow.flight
+.. currentmodule:: pyarrow
 
-.. autoattribute:: ClientMiddleware
+.. autoattribute:: flight.ClientMiddleware

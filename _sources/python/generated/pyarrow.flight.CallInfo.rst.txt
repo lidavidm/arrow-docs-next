@@ -1,6 +1,6 @@
 pyarrow.flight.CallInfo
 =======================
 
-.. currentmodule:: pyarrow.flight
+.. currentmodule:: pyarrow
 
-.. autoattribute:: CallInfo
+.. autoattribute:: flight.CallInfo

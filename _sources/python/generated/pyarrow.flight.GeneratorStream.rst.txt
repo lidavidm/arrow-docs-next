@@ -1,6 +1,6 @@
 pyarrow.flight.GeneratorStream
 ==============================
 
-.. currentmodule:: pyarrow.flight
+.. currentmodule:: pyarrow
 
-.. autoattribute:: GeneratorStream
+.. autoattribute:: flight.GeneratorStream

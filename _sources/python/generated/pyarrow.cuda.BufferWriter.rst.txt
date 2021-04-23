@@ -1,6 +1,6 @@
 pyarrow.cuda.BufferWriter
 =========================
 
-.. currentmodule:: pyarrow.cuda
+.. currentmodule:: pyarrow
 
-.. autoattribute:: BufferWriter
+.. autoattribute:: cuda.BufferWriter

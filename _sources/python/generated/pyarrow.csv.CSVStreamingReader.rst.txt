@@ -18,7 +18,6 @@ pyarrow.csv.CSVStreamingReader
       ~CSVStreamingReader.get_next_batch
       ~CSVStreamingReader.read_all
       ~CSVStreamingReader.read_next_batch
-      ~CSVStreamingReader.read_pandas
    
    
 
@@ -28,6 +27,7 @@ pyarrow.csv.CSVStreamingReader
 
    .. autosummary::
    
+      ~CSVStreamingReader.read_pandas
       ~CSVStreamingReader.schema
    
    

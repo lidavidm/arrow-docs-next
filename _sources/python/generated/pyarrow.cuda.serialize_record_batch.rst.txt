@@ -1,6 +1,6 @@
 pyarrow.cuda.serialize\_record\_batch
 =====================================
 
-.. currentmodule:: pyarrow.cuda
+.. currentmodule:: pyarrow
 
-.. autoattribute:: serialize_record_batch
+.. autoattribute:: cuda.serialize_record_batch

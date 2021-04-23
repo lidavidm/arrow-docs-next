@@ -1,6 +1,6 @@
 pyarrow.flight.FlightServerBase
 ===============================
 
-.. currentmodule:: pyarrow.flight
+.. currentmodule:: pyarrow
 
-.. autoattribute:: FlightServerBase
+.. autoattribute:: flight.FlightServerBase

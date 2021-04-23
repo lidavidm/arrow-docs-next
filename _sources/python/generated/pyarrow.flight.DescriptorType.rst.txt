@@ -1,6 +1,6 @@
 pyarrow.flight.DescriptorType
 =============================
 
-.. currentmodule:: pyarrow.flight
+.. currentmodule:: pyarrow
 
-.. autoattribute:: DescriptorType
+.. autoattribute:: flight.DescriptorType

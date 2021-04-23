@@ -1,6 +1,6 @@
 pyarrow.cuda.BufferReader
 =========================
 
-.. currentmodule:: pyarrow.cuda
+.. currentmodule:: pyarrow
 
-.. autoattribute:: BufferReader
+.. autoattribute:: cuda.BufferReader

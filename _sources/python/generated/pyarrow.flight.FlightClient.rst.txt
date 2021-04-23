@@ -1,6 +1,6 @@
 pyarrow.flight.FlightClient
 ===========================
 
-.. currentmodule:: pyarrow.flight
+.. currentmodule:: pyarrow
 
-.. autoattribute:: FlightClient
+.. autoattribute:: flight.FlightClient

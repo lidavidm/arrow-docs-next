@@ -15,6 +15,7 @@ pyarrow.dataset.Dataset
    
       ~Dataset.__init__
       ~Dataset.get_fragments
+      ~Dataset.head
       ~Dataset.replace_schema
       ~Dataset.scan
       ~Dataset.to_batches

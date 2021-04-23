@@ -1,6 +1,6 @@
 pyarrow.cuda.HostBuffer
 =======================
 
-.. currentmodule:: pyarrow.cuda
+.. currentmodule:: pyarrow
 
-.. autoattribute:: HostBuffer
+.. autoattribute:: cuda.HostBuffer

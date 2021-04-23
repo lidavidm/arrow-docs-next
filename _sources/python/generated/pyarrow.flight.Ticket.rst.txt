@@ -1,6 +1,6 @@
 pyarrow.flight.Ticket
 =====================
 
-.. currentmodule:: pyarrow.flight
+.. currentmodule:: pyarrow
 
-.. autoattribute:: Ticket
+.. autoattribute:: flight.Ticket

@@ -23,10 +23,6 @@
 Compute Functions
 =================
 
-.. sidebar:: Contents
-
-   .. contents:: :local:
-
 The generic Compute API
 =======================
 
@@ -271,6 +267,10 @@ an ``Invalid`` :class:`Status` when overflow is detected.
 | divide                   | Binary     | Numeric            | Numeric             |
 +--------------------------+------------+--------------------+---------------------+
 | divide_checked           | Binary     | Numeric            | Numeric             |
++--------------------------+------------+--------------------+---------------------+
+| power                    | Binary     | Numeric            | Numeric             |
++--------------------------+------------+--------------------+---------------------+
+| power_checked            | Binary     | Numeric            | Numeric             |
 +--------------------------+------------+--------------------+---------------------+
 | multiply                 | Binary     | Numeric            | Numeric             |
 +--------------------------+------------+--------------------+---------------------+

@@ -1,6 +1,6 @@
 pyarrow.flight.FlightCallOptions
 ================================
 
-.. currentmodule:: pyarrow.flight
+.. currentmodule:: pyarrow
 
-.. autoattribute:: FlightCallOptions
+.. autoattribute:: flight.FlightCallOptions

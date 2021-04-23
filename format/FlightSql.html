@@ -1,0 +1,4019 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Arrow Flight SQL &#8212; Apache Arrow v4.0.0.dev712+g772de38b7.d20210423</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/theme_overrides.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Integration Testing" href="Integration.html" />
+    <link rel="prev" title="Arrow Flight RPC" href="Flight.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar">
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/arrow.png" class="logo" alt="logo">
+</a>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+    <p class="caption">
+ <span class="caption-text">
+  Specifications and Protocols
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Versioning.html">
+   Format Versioning and Stability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Columnar.html">
+   Arrow Columnar Format
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Flight.html">
+   Arrow Flight RPC
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Arrow Flight SQL
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Integration.html">
+   Integration Testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="CDataInterface.html">
+   The Arrow C data interface
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="CStreamInterface.html">
+   The Arrow C stream interface
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Other.html">
+   Other Data Structures
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Libraries
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../status.html">
+   Implementation Status
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://arrow.apache.org/docs/c_glib/">
+   C/GLib
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../cpp/index.html">
+   C++
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../cpp/getting_started.html">
+     User Guide
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/overview.html">
+       High-Level Overview
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/conventions.html">
+       Conventions
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/cmake.html">
+       Using Arrow C++ in your own project
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/memory.html">
+       Memory Management
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/arrays.html">
+       Arrays
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/datatypes.html">
+       Data Types
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/tables.html">
+       Tabular Data
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/compute.html">
+       Compute Functions
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/io.html">
+       Input / output and filesystems
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/ipc.html">
+       Reading and writing the Arrow IPC format
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/parquet.html">
+       Reading and writing Parquet files
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/csv.html">
+       Reading CSV files
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/json.html">
+       Reading JSON files
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/dataset.html">
+       Tabular Datasets
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/flight.html">
+       Arrow Flight RPC
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../cpp/examples/index.html">
+     Examples
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <label for="toctree-checkbox-3">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/examples/cmake_minimal_build.html">
+       Minimal build using CMake
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/examples/dataset_documentation_example.html">
+       Arrow Datasets example
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/examples/row_columnar_conversion.html">
+       Row to columnar conversion
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/examples/tuple_range_conversion.html">
+       std::tuple-like ranges to Arrow
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../cpp/api.html">
+     API Reference
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/api/support.html">
+       Programming Support
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/api/memory.html">
+       Memory (management)
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/api/datatype.html">
+       Data Types
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/api/array.html">
+       Arrays
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/api/scalar.html">
+       Scalars
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/api/builder.html">
+       Array Builders
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/api/table.html">
+       Two-dimensional Datasets
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/api/c_abi.html">
+       C Interfaces
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/api/compute.html">
+       Compute Functions
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/api/tensor.html">
+       Tensors
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/api/utilities.html">
+       Utilities
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/api/io.html">
+       Input / output
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/api/ipc.html">
+       Arrow IPC
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/api/formats.html">
+       File Formats
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/api/cuda.html">
+       CUDA support
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/api/flight.html">
+       Arrow Flight RPC
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/api/filesystem.html">
+       Filesystems
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../cpp/api/dataset.html">
+       Dataset
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://github.com/apache/arrow/blob/master/csharp/README.md">
+   C#
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://godoc.org/github.com/apache/arrow/go/arrow">
+   Go
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../java/index.html">
+   Java
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../java/vector.html">
+     ValueVector
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../java/vector_schema_root.html">
+     VectorSchemaRoot
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../java/ipc.html">
+     Reading/Writing IPC formats
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference external" href="https://arrow.apache.org/docs/java/reference/">
+     Reference (javadoc)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://arrow.apache.org/docs/js/">
+   JavaScript
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://github.com/apache/arrow/blob/master/julia/Arrow/README.md">
+   Julia
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://github.com/apache/arrow/blob/master/matlab/README.md">
+   MATLAB
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python/index.html">
+   Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/install.html">
+     Installing PyArrow
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/memory.html">
+     Memory and IO Interfaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/data.html">
+     Data Types and In-Memory Data Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/compute.html">
+     Compute Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/ipc.html">
+     Streaming, Serialization, and IPC
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/filesystems.html">
+     Filesystem Interface
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../python/filesystems_deprecated.html">
+     Filesystem Interface (legacy)
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+    <label for="toctree-checkbox-7">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../python/generated/pyarrow.hdfs.connect.html">
+       pyarrow.hdfs.connect
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../python/generated/pyarrow.HadoopFileSystem.cat.html">
+       pyarrow.HadoopFileSystem.cat
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../python/generated/pyarrow.HadoopFileSystem.chmod.html">
+       pyarrow.HadoopFileSystem.chmod
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../python/generated/pyarrow.HadoopFileSystem.chown.html">
+       pyarrow.HadoopFileSystem.chown
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../python/generated/pyarrow.HadoopFileSystem.delete.html">
+       pyarrow.HadoopFileSystem.delete
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../python/generated/pyarrow.HadoopFileSystem.df.html">
+       pyarrow.HadoopFileSystem.df
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../python/generated/pyarrow.HadoopFileSystem.disk_usage.html">
+       pyarrow.HadoopFileSystem.disk_usage
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../python/generated/pyarrow.HadoopFileSystem.download.html">
+       pyarrow.HadoopFileSystem.download
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../python/generated/pyarrow.HadoopFileSystem.exists.html">
+       pyarrow.HadoopFileSystem.exists
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../python/generated/pyarrow.HadoopFileSystem.get_capacity.html">
+       pyarrow.HadoopFileSystem.get_capacity
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../python/generated/pyarrow.HadoopFileSystem.get_space_used.html">
+       pyarrow.HadoopFileSystem.get_space_used
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../python/generated/pyarrow.HadoopFileSystem.info.html">
+       pyarrow.HadoopFileSystem.info
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../python/generated/pyarrow.HadoopFileSystem.ls.html">
+       pyarrow.HadoopFileSystem.ls
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../python/generated/pyarrow.HadoopFileSystem.mkdir.html">
+       pyarrow.HadoopFileSystem.mkdir
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../python/generated/pyarrow.HadoopFileSystem.open.html">
+       pyarrow.HadoopFileSystem.open
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../python/generated/pyarrow.HadoopFileSystem.rename.html">
+       pyarrow.HadoopFileSystem.rename
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../python/generated/pyarrow.HadoopFileSystem.rm.html">
+       pyarrow.HadoopFileSystem.rm
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../python/generated/pyarrow.HadoopFileSystem.upload.html">
+       pyarrow.HadoopFileSystem.upload
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../python/generated/pyarrow.HdfsFile.html">
+       pyarrow.HdfsFile
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/plasma.html">
+     The Plasma In-Memory Object Store
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/numpy.html">
+     NumPy Integration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/pandas.html">
+     Pandas Integration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/timestamps.html">
+     Timestamps
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/csv.html">
+     Reading CSV files
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/feather.html">
+     Feather File Format
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/json.html">
+     Reading JSON files
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/parquet.html">
+     Reading and Writing the Apache Parquet Format
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/dataset.html">
+     Tabular Datasets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/cuda.html">
+     CUDA Integration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/extending_types.html">
+     Extending pyarrow
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/extending.html">
+     Using pyarrow from C++ and Cython Code
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../python/api.html">
+     API Reference
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+    <label for="toctree-checkbox-8">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../python/api/datatypes.html">
+       Data Types and Schemas
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+      <label for="toctree-checkbox-9">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.null.html">
+         pyarrow.null
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.bool_.html">
+         pyarrow.bool_
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.int8.html">
+         pyarrow.int8
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.int16.html">
+         pyarrow.int16
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.int32.html">
+         pyarrow.int32
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.int64.html">
+         pyarrow.int64
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.uint8.html">
+         pyarrow.uint8
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.uint16.html">
+         pyarrow.uint16
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.uint32.html">
+         pyarrow.uint32
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.uint64.html">
+         pyarrow.uint64
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.float16.html">
+         pyarrow.float16
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.float32.html">
+         pyarrow.float32
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.float64.html">
+         pyarrow.float64
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.time32.html">
+         pyarrow.time32
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.time64.html">
+         pyarrow.time64
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.timestamp.html">
+         pyarrow.timestamp
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.date32.html">
+         pyarrow.date32
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.date64.html">
+         pyarrow.date64
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.binary.html">
+         pyarrow.binary
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.string.html">
+         pyarrow.string
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.utf8.html">
+         pyarrow.utf8
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.large_binary.html">
+         pyarrow.large_binary
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.large_string.html">
+         pyarrow.large_string
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.large_utf8.html">
+         pyarrow.large_utf8
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.decimal128.html">
+         pyarrow.decimal128
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.list_.html">
+         pyarrow.list_
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.large_list.html">
+         pyarrow.large_list
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.map_.html">
+         pyarrow.map_
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.struct.html">
+         pyarrow.struct
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.dictionary.html">
+         pyarrow.dictionary
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.field.html">
+         pyarrow.field
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.schema.html">
+         pyarrow.schema
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.from_numpy_dtype.html">
+         pyarrow.from_numpy_dtype
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.DataType.html">
+         pyarrow.DataType
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.DictionaryType.html">
+         pyarrow.DictionaryType
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.ListType.html">
+         pyarrow.ListType
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.MapType.html">
+         pyarrow.MapType
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.StructType.html">
+         pyarrow.StructType
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.UnionType.html">
+         pyarrow.UnionType
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.TimestampType.html">
+         pyarrow.TimestampType
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.Time32Type.html">
+         pyarrow.Time32Type
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.Time64Type.html">
+         pyarrow.Time64Type
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.FixedSizeBinaryType.html">
+         pyarrow.FixedSizeBinaryType
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.Decimal128Type.html">
+         pyarrow.Decimal128Type
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.Field.html">
+         pyarrow.Field
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.Schema.html">
+         pyarrow.Schema
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.ExtensionType.html">
+         pyarrow.ExtensionType
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.PyExtensionType.html">
+         pyarrow.PyExtensionType
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.register_extension_type.html">
+         pyarrow.register_extension_type
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.unregister_extension_type.html">
+         pyarrow.unregister_extension_type
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_boolean.html">
+         pyarrow.types.is_boolean
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_integer.html">
+         pyarrow.types.is_integer
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_signed_integer.html">
+         pyarrow.types.is_signed_integer
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_unsigned_integer.html">
+         pyarrow.types.is_unsigned_integer
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_int8.html">
+         pyarrow.types.is_int8
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_int16.html">
+         pyarrow.types.is_int16
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_int32.html">
+         pyarrow.types.is_int32
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_int64.html">
+         pyarrow.types.is_int64
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_uint8.html">
+         pyarrow.types.is_uint8
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_uint16.html">
+         pyarrow.types.is_uint16
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_uint32.html">
+         pyarrow.types.is_uint32
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_uint64.html">
+         pyarrow.types.is_uint64
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_floating.html">
+         pyarrow.types.is_floating
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_float16.html">
+         pyarrow.types.is_float16
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_float32.html">
+         pyarrow.types.is_float32
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_float64.html">
+         pyarrow.types.is_float64
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_decimal.html">
+         pyarrow.types.is_decimal
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_list.html">
+         pyarrow.types.is_list
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_large_list.html">
+         pyarrow.types.is_large_list
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_struct.html">
+         pyarrow.types.is_struct
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_union.html">
+         pyarrow.types.is_union
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_nested.html">
+         pyarrow.types.is_nested
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_temporal.html">
+         pyarrow.types.is_temporal
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_timestamp.html">
+         pyarrow.types.is_timestamp
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_date.html">
+         pyarrow.types.is_date
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_date32.html">
+         pyarrow.types.is_date32
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_date64.html">
+         pyarrow.types.is_date64
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_time.html">
+         pyarrow.types.is_time
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_time32.html">
+         pyarrow.types.is_time32
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_time64.html">
+         pyarrow.types.is_time64
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_null.html">
+         pyarrow.types.is_null
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_binary.html">
+         pyarrow.types.is_binary
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_unicode.html">
+         pyarrow.types.is_unicode
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_string.html">
+         pyarrow.types.is_string
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_large_binary.html">
+         pyarrow.types.is_large_binary
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_large_unicode.html">
+         pyarrow.types.is_large_unicode
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_large_string.html">
+         pyarrow.types.is_large_string
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_fixed_size_binary.html">
+         pyarrow.types.is_fixed_size_binary
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_map.html">
+         pyarrow.types.is_map
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.types.is_dictionary.html">
+         pyarrow.types.is_dictionary
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../python/api/arrays.html">
+       Arrays and Scalars
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+      <label for="toctree-checkbox-10">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.array.html">
+         pyarrow.array
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.nulls.html">
+         pyarrow.nulls
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.Array.html">
+         pyarrow.Array
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.BooleanArray.html">
+         pyarrow.BooleanArray
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.FloatingPointArray.html">
+         pyarrow.FloatingPointArray
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.IntegerArray.html">
+         pyarrow.IntegerArray
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.Int8Array.html">
+         pyarrow.Int8Array
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.Int16Array.html">
+         pyarrow.Int16Array
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.Int32Array.html">
+         pyarrow.Int32Array
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.Int64Array.html">
+         pyarrow.Int64Array
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.NullArray.html">
+         pyarrow.NullArray
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.NumericArray.html">
+         pyarrow.NumericArray
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.UInt8Array.html">
+         pyarrow.UInt8Array
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.UInt16Array.html">
+         pyarrow.UInt16Array
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.UInt32Array.html">
+         pyarrow.UInt32Array
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.UInt64Array.html">
+         pyarrow.UInt64Array
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.BinaryArray.html">
+         pyarrow.BinaryArray
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.StringArray.html">
+         pyarrow.StringArray
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.FixedSizeBinaryArray.html">
+         pyarrow.FixedSizeBinaryArray
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.LargeBinaryArray.html">
+         pyarrow.LargeBinaryArray
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.LargeStringArray.html">
+         pyarrow.LargeStringArray
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.Time32Array.html">
+         pyarrow.Time32Array
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.Time64Array.html">
+         pyarrow.Time64Array
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.Date32Array.html">
+         pyarrow.Date32Array
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.Date64Array.html">
+         pyarrow.Date64Array
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.TimestampArray.html">
+         pyarrow.TimestampArray
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.Decimal128Array.html">
+         pyarrow.Decimal128Array
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.DictionaryArray.html">
+         pyarrow.DictionaryArray
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.ListArray.html">
+         pyarrow.ListArray
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.LargeListArray.html">
+         pyarrow.LargeListArray
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.StructArray.html">
+         pyarrow.StructArray
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.UnionArray.html">
+         pyarrow.UnionArray
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.ExtensionArray.html">
+         pyarrow.ExtensionArray
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.scalar.html">
+         pyarrow.scalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.NA.html">
+         pyarrow.NA
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.Scalar.html">
+         pyarrow.Scalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.BooleanScalar.html">
+         pyarrow.BooleanScalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.Int8Scalar.html">
+         pyarrow.Int8Scalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.Int16Scalar.html">
+         pyarrow.Int16Scalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.Int32Scalar.html">
+         pyarrow.Int32Scalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.Int64Scalar.html">
+         pyarrow.Int64Scalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.UInt8Scalar.html">
+         pyarrow.UInt8Scalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.UInt16Scalar.html">
+         pyarrow.UInt16Scalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.UInt32Scalar.html">
+         pyarrow.UInt32Scalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.UInt64Scalar.html">
+         pyarrow.UInt64Scalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.FloatScalar.html">
+         pyarrow.FloatScalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.DoubleScalar.html">
+         pyarrow.DoubleScalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.BinaryScalar.html">
+         pyarrow.BinaryScalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.StringScalar.html">
+         pyarrow.StringScalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.FixedSizeBinaryScalar.html">
+         pyarrow.FixedSizeBinaryScalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.LargeBinaryScalar.html">
+         pyarrow.LargeBinaryScalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.LargeStringScalar.html">
+         pyarrow.LargeStringScalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.Time32Scalar.html">
+         pyarrow.Time32Scalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.Time64Scalar.html">
+         pyarrow.Time64Scalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.Date32Scalar.html">
+         pyarrow.Date32Scalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.Date64Scalar.html">
+         pyarrow.Date64Scalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.TimestampScalar.html">
+         pyarrow.TimestampScalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.Decimal128Scalar.html">
+         pyarrow.Decimal128Scalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.DictionaryScalar.html">
+         pyarrow.DictionaryScalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.ListScalar.html">
+         pyarrow.ListScalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.LargeListScalar.html">
+         pyarrow.LargeListScalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.StructScalar.html">
+         pyarrow.StructScalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.UnionScalar.html">
+         pyarrow.UnionScalar
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../python/api/memory.html">
+       Buffers and Memory
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+      <label for="toctree-checkbox-11">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.allocate_buffer.html">
+         pyarrow.allocate_buffer
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.py_buffer.html">
+         pyarrow.py_buffer
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.foreign_buffer.html">
+         pyarrow.foreign_buffer
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.Buffer.html">
+         pyarrow.Buffer
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.ResizableBuffer.html">
+         pyarrow.ResizableBuffer
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compress.html">
+         pyarrow.compress
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.decompress.html">
+         pyarrow.decompress
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.MemoryPool.html">
+         pyarrow.MemoryPool
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.default_memory_pool.html">
+         pyarrow.default_memory_pool
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.jemalloc_memory_pool.html">
+         pyarrow.jemalloc_memory_pool
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.mimalloc_memory_pool.html">
+         pyarrow.mimalloc_memory_pool
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.system_memory_pool.html">
+         pyarrow.system_memory_pool
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.jemalloc_set_decay_ms.html">
+         pyarrow.jemalloc_set_decay_ms
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.set_memory_pool.html">
+         pyarrow.set_memory_pool
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.log_memory_allocations.html">
+         pyarrow.log_memory_allocations
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.total_allocated_bytes.html">
+         pyarrow.total_allocated_bytes
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../python/api/compute.html">
+       Compute Functions
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+      <label for="toctree-checkbox-12">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.count.html">
+         pyarrow.compute.count
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.mean.html">
+         pyarrow.compute.mean
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.min_max.html">
+         pyarrow.compute.min_max
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.mode.html">
+         pyarrow.compute.mode
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.stddev.html">
+         pyarrow.compute.stddev
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.sum.html">
+         pyarrow.compute.sum
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.variance.html">
+         pyarrow.compute.variance
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.add.html">
+         pyarrow.compute.add
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.add_checked.html">
+         pyarrow.compute.add_checked
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.divide.html">
+         pyarrow.compute.divide
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.divide_checked.html">
+         pyarrow.compute.divide_checked
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.multiply.html">
+         pyarrow.compute.multiply
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.multiply_checked.html">
+         pyarrow.compute.multiply_checked
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.subtract.html">
+         pyarrow.compute.subtract
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.subtract_checked.html">
+         pyarrow.compute.subtract_checked
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.power.html">
+         pyarrow.compute.power
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.power_checked.html">
+         pyarrow.compute.power_checked
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.equal.html">
+         pyarrow.compute.equal
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.greater.html">
+         pyarrow.compute.greater
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.greater_equal.html">
+         pyarrow.compute.greater_equal
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.less.html">
+         pyarrow.compute.less
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.less_equal.html">
+         pyarrow.compute.less_equal
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.not_equal.html">
+         pyarrow.compute.not_equal
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.and_.html">
+         pyarrow.compute.and_
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.and_kleene.html">
+         pyarrow.compute.and_kleene
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.all.html">
+         pyarrow.compute.all
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.any.html">
+         pyarrow.compute.any
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.invert.html">
+         pyarrow.compute.invert
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.or_.html">
+         pyarrow.compute.or_
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.or_kleene.html">
+         pyarrow.compute.or_kleene
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.xor.html">
+         pyarrow.compute.xor
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.ascii_is_alnum.html">
+         pyarrow.compute.ascii_is_alnum
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.ascii_is_alpha.html">
+         pyarrow.compute.ascii_is_alpha
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.ascii_is_decimal.html">
+         pyarrow.compute.ascii_is_decimal
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.ascii_is_lower.html">
+         pyarrow.compute.ascii_is_lower
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.ascii_is_printable.html">
+         pyarrow.compute.ascii_is_printable
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.ascii_is_space.html">
+         pyarrow.compute.ascii_is_space
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.ascii_is_upper.html">
+         pyarrow.compute.ascii_is_upper
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.utf8_is_alnum.html">
+         pyarrow.compute.utf8_is_alnum
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.utf8_is_alpha.html">
+         pyarrow.compute.utf8_is_alpha
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.utf8_is_decimal.html">
+         pyarrow.compute.utf8_is_decimal
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.utf8_is_digit.html">
+         pyarrow.compute.utf8_is_digit
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.utf8_is_lower.html">
+         pyarrow.compute.utf8_is_lower
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.utf8_is_numeric.html">
+         pyarrow.compute.utf8_is_numeric
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.utf8_is_printable.html">
+         pyarrow.compute.utf8_is_printable
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.utf8_is_space.html">
+         pyarrow.compute.utf8_is_space
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.utf8_is_upper.html">
+         pyarrow.compute.utf8_is_upper
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.ascii_is_title.html">
+         pyarrow.compute.ascii_is_title
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.utf8_is_title.html">
+         pyarrow.compute.utf8_is_title
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.string_is_ascii.html">
+         pyarrow.compute.string_is_ascii
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.ascii_lower.html">
+         pyarrow.compute.ascii_lower
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.ascii_upper.html">
+         pyarrow.compute.ascii_upper
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.utf8_lower.html">
+         pyarrow.compute.utf8_lower
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.utf8_upper.html">
+         pyarrow.compute.utf8_upper
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.index_in.html">
+         pyarrow.compute.index_in
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.is_in.html">
+         pyarrow.compute.is_in
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.match_substring.html">
+         pyarrow.compute.match_substring
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.match_substring_regex.html">
+         pyarrow.compute.match_substring_regex
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.cast.html">
+         pyarrow.compute.cast
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.strptime.html">
+         pyarrow.compute.strptime
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.filter.html">
+         pyarrow.compute.filter
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.take.html">
+         pyarrow.compute.take
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.dictionary_encode.html">
+         pyarrow.compute.dictionary_encode
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.unique.html">
+         pyarrow.compute.unique
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.value_counts.html">
+         pyarrow.compute.value_counts
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.partition_nth_indices.html">
+         pyarrow.compute.partition_nth_indices
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.sort_indices.html">
+         pyarrow.compute.sort_indices
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.binary_length.html">
+         pyarrow.compute.binary_length
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.fill_null.html">
+         pyarrow.compute.fill_null
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.is_null.html">
+         pyarrow.compute.is_null
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.is_valid.html">
+         pyarrow.compute.is_valid
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.list_value_length.html">
+         pyarrow.compute.list_value_length
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.list_flatten.html">
+         pyarrow.compute.list_flatten
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.compute.list_parent_indices.html">
+         pyarrow.compute.list_parent_indices
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../python/api/files.html">
+       Streams and File Access
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+      <label for="toctree-checkbox-13">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.input_stream.html">
+         pyarrow.input_stream
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.output_stream.html">
+         pyarrow.output_stream
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.memory_map.html">
+         pyarrow.memory_map
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.create_memory_map.html">
+         pyarrow.create_memory_map
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.NativeFile.html">
+         pyarrow.NativeFile
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.OSFile.html">
+         pyarrow.OSFile
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.PythonFile.html">
+         pyarrow.PythonFile
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.BufferReader.html">
+         pyarrow.BufferReader
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.BufferOutputStream.html">
+         pyarrow.BufferOutputStream
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.FixedSizeBufferWriter.html">
+         pyarrow.FixedSizeBufferWriter
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.MemoryMappedFile.html">
+         pyarrow.MemoryMappedFile
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.CompressedInputStream.html">
+         pyarrow.CompressedInputStream
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.CompressedOutputStream.html">
+         pyarrow.CompressedOutputStream
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.hdfs.connect.html">
+         pyarrow.hdfs.connect
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.LocalFileSystem.html">
+         pyarrow.LocalFileSystem
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../python/api/tables.html">
+       Tables and Tensors
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+      <label for="toctree-checkbox-14">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.chunked_array.html">
+         pyarrow.chunked_array
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.concat_arrays.html">
+         pyarrow.concat_arrays
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.concat_tables.html">
+         pyarrow.concat_tables
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.record_batch.html">
+         pyarrow.record_batch
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.table.html">
+         pyarrow.table
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.ChunkedArray.html">
+         pyarrow.ChunkedArray
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.RecordBatch.html">
+         pyarrow.RecordBatch
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.Table.html">
+         pyarrow.Table
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.Tensor.html">
+         pyarrow.Tensor
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../python/api/ipc.html">
+       Serialization and IPC
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+      <label for="toctree-checkbox-15">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.ipc.new_file.html">
+         pyarrow.ipc.new_file
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.ipc.open_file.html">
+         pyarrow.ipc.open_file
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.ipc.new_stream.html">
+         pyarrow.ipc.new_stream
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.ipc.open_stream.html">
+         pyarrow.ipc.open_stream
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.ipc.read_message.html">
+         pyarrow.ipc.read_message
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.ipc.read_record_batch.html">
+         pyarrow.ipc.read_record_batch
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.ipc.get_record_batch_size.html">
+         pyarrow.ipc.get_record_batch_size
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.ipc.read_tensor.html">
+         pyarrow.ipc.read_tensor
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.ipc.write_tensor.html">
+         pyarrow.ipc.write_tensor
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.ipc.get_tensor_size.html">
+         pyarrow.ipc.get_tensor_size
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.ipc.Message.html">
+         pyarrow.ipc.Message
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.ipc.MessageReader.html">
+         pyarrow.ipc.MessageReader
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.ipc.RecordBatchFileReader.html">
+         pyarrow.ipc.RecordBatchFileReader
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.ipc.RecordBatchFileWriter.html">
+         pyarrow.ipc.RecordBatchFileWriter
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.ipc.RecordBatchStreamReader.html">
+         pyarrow.ipc.RecordBatchStreamReader
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.ipc.RecordBatchStreamWriter.html">
+         pyarrow.ipc.RecordBatchStreamWriter
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.serialize.html">
+         pyarrow.serialize
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.serialize_to.html">
+         pyarrow.serialize_to
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.deserialize.html">
+         pyarrow.deserialize
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.deserialize_components.html">
+         pyarrow.deserialize_components
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.deserialize_from.html">
+         pyarrow.deserialize_from
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.read_serialized.html">
+         pyarrow.read_serialized
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.SerializedPyObject.html">
+         pyarrow.SerializedPyObject
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.SerializationContext.html">
+         pyarrow.SerializationContext
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../python/api/flight.html">
+       Arrow Flight
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+      <label for="toctree-checkbox-16">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.flight.Action.html">
+         pyarrow.flight.Action
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.flight.ActionType.html">
+         pyarrow.flight.ActionType
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.flight.DescriptorType.html">
+         pyarrow.flight.DescriptorType
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.flight.FlightDescriptor.html">
+         pyarrow.flight.FlightDescriptor
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.flight.FlightEndpoint.html">
+         pyarrow.flight.FlightEndpoint
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.flight.FlightInfo.html">
+         pyarrow.flight.FlightInfo
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.flight.Location.html">
+         pyarrow.flight.Location
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.flight.Ticket.html">
+         pyarrow.flight.Ticket
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.flight.Result.html">
+         pyarrow.flight.Result
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.flight.FlightCallOptions.html">
+         pyarrow.flight.FlightCallOptions
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.flight.FlightClient.html">
+         pyarrow.flight.FlightClient
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.flight.ClientMiddlewareFactory.html">
+         pyarrow.flight.ClientMiddlewareFactory
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.flight.ClientMiddleware.html">
+         pyarrow.flight.ClientMiddleware
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.flight.FlightServerBase.html">
+         pyarrow.flight.FlightServerBase
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.flight.GeneratorStream.html">
+         pyarrow.flight.GeneratorStream
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.flight.RecordBatchStream.html">
+         pyarrow.flight.RecordBatchStream
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.flight.ServerMiddlewareFactory.html">
+         pyarrow.flight.ServerMiddlewareFactory
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.flight.ServerMiddleware.html">
+         pyarrow.flight.ServerMiddleware
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.flight.ClientAuthHandler.html">
+         pyarrow.flight.ClientAuthHandler
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.flight.ServerAuthHandler.html">
+         pyarrow.flight.ServerAuthHandler
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.flight.FlightMethod.html">
+         pyarrow.flight.FlightMethod
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.flight.CallInfo.html">
+         pyarrow.flight.CallInfo
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../python/api/formats.html">
+       Tabular File Formats
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/>
+      <label for="toctree-checkbox-17">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.csv.ReadOptions.html">
+         pyarrow.csv.ReadOptions
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.csv.ParseOptions.html">
+         pyarrow.csv.ParseOptions
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.csv.ConvertOptions.html">
+         pyarrow.csv.ConvertOptions
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.csv.read_csv.html">
+         pyarrow.csv.read_csv
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.csv.open_csv.html">
+         pyarrow.csv.open_csv
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.csv.CSVStreamingReader.html">
+         pyarrow.csv.CSVStreamingReader
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.feather.read_feather.html">
+         pyarrow.feather.read_feather
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.feather.read_table.html">
+         pyarrow.feather.read_table
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.feather.write_feather.html">
+         pyarrow.feather.write_feather
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.json.ReadOptions.html">
+         pyarrow.json.ReadOptions
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.json.ParseOptions.html">
+         pyarrow.json.ParseOptions
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.json.read_json.html">
+         pyarrow.json.read_json
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.parquet.ParquetDataset.html">
+         pyarrow.parquet.ParquetDataset
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.parquet.ParquetFile.html">
+         pyarrow.parquet.ParquetFile
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.parquet.ParquetWriter.html">
+         pyarrow.parquet.ParquetWriter
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.parquet.read_table.html">
+         pyarrow.parquet.read_table
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.parquet.read_metadata.html">
+         pyarrow.parquet.read_metadata
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.parquet.read_pandas.html">
+         pyarrow.parquet.read_pandas
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.parquet.read_schema.html">
+         pyarrow.parquet.read_schema
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.parquet.write_metadata.html">
+         pyarrow.parquet.write_metadata
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.parquet.write_table.html">
+         pyarrow.parquet.write_table
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.parquet.write_to_dataset.html">
+         pyarrow.parquet.write_to_dataset
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../python/api/filesystems.html">
+       Filesystems
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/>
+      <label for="toctree-checkbox-18">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.fs.FileInfo.html">
+         pyarrow.fs.FileInfo
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.fs.FileSelector.html">
+         pyarrow.fs.FileSelector
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.fs.FileSystem.html">
+         pyarrow.fs.FileSystem
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.fs.LocalFileSystem.html">
+         pyarrow.fs.LocalFileSystem
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.fs.SubTreeFileSystem.html">
+         pyarrow.fs.SubTreeFileSystem
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.fs.PyFileSystem.html">
+         pyarrow.fs.PyFileSystem
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.fs.FileSystemHandler.html">
+         pyarrow.fs.FileSystemHandler
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.fs.FSSpecHandler.html">
+         pyarrow.fs.FSSpecHandler
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../python/api/dataset.html">
+       Dataset
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/>
+      <label for="toctree-checkbox-19">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.dataset.dataset.html">
+         pyarrow.dataset.dataset
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.dataset.parquet_dataset.html">
+         pyarrow.dataset.parquet_dataset
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.dataset.partitioning.html">
+         pyarrow.dataset.partitioning
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.dataset.field.html">
+         pyarrow.dataset.field
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.dataset.scalar.html">
+         pyarrow.dataset.scalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.dataset.FileFormat.html">
+         pyarrow.dataset.FileFormat
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.dataset.ParquetFileFormat.html">
+         pyarrow.dataset.ParquetFileFormat
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.dataset.Partitioning.html">
+         pyarrow.dataset.Partitioning
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.dataset.PartitioningFactory.html">
+         pyarrow.dataset.PartitioningFactory
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.dataset.DirectoryPartitioning.html">
+         pyarrow.dataset.DirectoryPartitioning
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.dataset.HivePartitioning.html">
+         pyarrow.dataset.HivePartitioning
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.dataset.Dataset.html">
+         pyarrow.dataset.Dataset
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.dataset.FileSystemDataset.html">
+         pyarrow.dataset.FileSystemDataset
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.dataset.FileSystemFactoryOptions.html">
+         pyarrow.dataset.FileSystemFactoryOptions
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.dataset.FileSystemDatasetFactory.html">
+         pyarrow.dataset.FileSystemDatasetFactory
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.dataset.UnionDataset.html">
+         pyarrow.dataset.UnionDataset
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.dataset.Scanner.html">
+         pyarrow.dataset.Scanner
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.dataset.Expression.html">
+         pyarrow.dataset.Expression
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../python/api/plasma.html">
+       Plasma In-Memory Object Store
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../python/api/cuda.html">
+       CUDA Integration
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/>
+      <label for="toctree-checkbox-20">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.cuda.Context.html">
+         pyarrow.cuda.Context
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.cuda.CudaBuffer.html">
+         pyarrow.cuda.CudaBuffer
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.cuda.new_host_buffer.html">
+         pyarrow.cuda.new_host_buffer
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.cuda.HostBuffer.html">
+         pyarrow.cuda.HostBuffer
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.cuda.BufferReader.html">
+         pyarrow.cuda.BufferReader
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.cuda.BufferWriter.html">
+         pyarrow.cuda.BufferWriter
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.cuda.serialize_record_batch.html">
+         pyarrow.cuda.serialize_record_batch
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.cuda.read_record_batch.html">
+         pyarrow.cuda.read_record_batch
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.cuda.read_message.html">
+         pyarrow.cuda.read_message
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.cuda.IpcMemHandle.html">
+         pyarrow.cuda.IpcMemHandle
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../python/api/misc.html">
+       Miscellaneous
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/>
+      <label for="toctree-checkbox-21">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.cpu_count.html">
+         pyarrow.cpu_count
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.set_cpu_count.html">
+         pyarrow.set_cpu_count
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.get_include.html">
+         pyarrow.get_include
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.get_libraries.html">
+         pyarrow.get_libraries
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../python/generated/pyarrow.get_library_dirs.html">
+         pyarrow.get_library_dirs
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/getting_involved.html">
+     Getting Involved
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python/benchmarks.html">
+     Benchmarks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://arrow.apache.org/docs/r/">
+   R
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://github.com/apache/arrow/blob/master/ruby/README.md">
+   Ruby
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://docs.rs/crate/arrow/">
+   Rust
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Development
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../developers/contributing.html">
+   Contributing to Apache Arrow
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../developers/cpp/index.html">
+   C++ Development
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/>
+  <label for="toctree-checkbox-22">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../developers/cpp/building.html">
+     Building Arrow C++
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../developers/cpp/development.html">
+     Development Guidelines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../developers/cpp/windows.html">
+     Developing on Windows
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../developers/cpp/conventions.html">
+     Conventions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../developers/cpp/fuzzing.html">
+     Fuzzing Arrow C++
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../developers/python.html">
+   Python Development
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../developers/archery.html">
+   Daily Development using Archery
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../developers/crossbow.html">
+   Packaging and Testing with Crossbow
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../developers/docker.html">
+   Running Docker Builds
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../developers/benchmarks.html">
+   Benchmarks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../developers/documentation.html">
+   Building the Documentation
+  </a>
+ </li>
+</ul>
+
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#metadata-commands">
+   Metadata Commands
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#query-execution">
+   Query Execution
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#request-flows">
+     Request Flows
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#query-statements">
+       Query Statements
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#insert-update-statements">
+       Insert/Update Statements
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#prepared-statements">
+       Prepared Statements
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#error-handling">
+   Error Handling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#protocol-buffer-definitions">
+   Protocol Buffer Definitions
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="arrow-flight-sql">
+<span id="flight-sql"></span><h1>Arrow Flight SQL<a class="headerlink" href="#arrow-flight-sql" title="Permalink to this headline">¶</a></h1>
+<p>Arrow Flight SQL is a protocol for clients and servers to communicate with SQL-like semantics over Arrow Flight.
+While Arrow Flight provides basic request flows and data type definitions, it leaves several points up to the application.
+This document describes request flows and Protobuf message definitions to enable clients to retrieve metadata about and execute SQL-like queries against compliant Arrow Flight services.</p>
+<p>All RPC calls defined here can be found in Flight.proto.
+All Protobuf definitions can be found in FlightSql.proto.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This specification is still experimental and subject to change.</p>
+</div>
+<div class="section" id="metadata-commands">
+<h2>Metadata Commands<a class="headerlink" href="#metadata-commands" title="Permalink to this headline">¶</a></h2>
+<p>Servers expose metadata about the Arrow format, SQL syntax/features, and available tables/resources over Flight’s DoAction endpoint.
+A client should call DoAction with an action type specified below.
+If applicable, the action body should be the serialized form of the specified Protobuf message.
+The server should respond with an appropriate number of Flight Result values, where the Result body is the serialized form of the specified Protobuf message.</p>
+<p>Message fields which are specified as a “filter pattern” can contain <code class="docutils literal notranslate"><span class="pre">%</span></code> and <code class="docutils literal notranslate"><span class="pre">_</span></code> wildcards to match multiple values.
+These wildcards function as in SQL LIKE clauses.</p>
+<table class="table">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 28%" />
+<col style="width: 22%" />
+<col style="width: 23%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Action Type</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Request Message</p></th>
+<th class="head"><p>Result Message</p></th>
+<th class="head"><p>Number of results</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>GetSqlInfo</p></td>
+<td><p>Describe the server version and
+supported SQL features.</p></td>
+<td><p>N/A</p></td>
+<td><p>ActionGetSqlInfoResult</p></td>
+<td><p>Exactly one</p></td>
+</tr>
+<tr class="row-odd"><td><p>GetCatalogs</p></td>
+<td><p>List available catalogs.</p></td>
+<td><p>ActionGetCatalogsRequest</p></td>
+<td><p>ActionGetCatalogResult</p></td>
+<td><p>Zero or more</p></td>
+</tr>
+<tr class="row-even"><td><p>GetSchemas</p></td>
+<td><p>List available schemas.</p></td>
+<td><p>ActionGetSchemasRequest</p></td>
+<td><p>ActionGetSchemasResult</p></td>
+<td><p>Zero or more</p></td>
+</tr>
+<tr class="row-odd"><td><p>GetTables</p></td>
+<td><p>List available tables.</p></td>
+<td><p>ActionGetTablesRequest</p></td>
+<td><p>ActionGetTablesResult</p></td>
+<td><p>Zero or more</p></td>
+</tr>
+<tr class="row-even"><td><p>GetTableTypes</p></td>
+<td><p>List table types.</p></td>
+<td><p>N/A</p></td>
+<td><p>ActionGetTableTypesResult</p></td>
+<td><p>Zero or more</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="query-execution">
+<h2>Query Execution<a class="headerlink" href="#query-execution" title="Permalink to this headline">¶</a></h2>
+<p>Queries can be executed directly, or as prepared statements; they can also be executed either as result-returning statements, or as updates.</p>
+<p>Transaction semantics are not currently defined.
+All queries are treated as though they run in their own transaction, with an implementation-defined isolation level, and auto-commit enabled.</p>
+<p>Statements which return more than one result set, e.g. semicolon-delimited queries, are not supported.</p>
+<div class="section" id="request-flows">
+<h3>Request Flows<a class="headerlink" href="#request-flows" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="query-statements">
+<h4>Query Statements<a class="headerlink" href="#query-statements" title="Permalink to this headline">¶</a></h4>
+<p>This allows clients to execute ad-hoc queries which return tabular results.</p>
+<p>To retrieve query results:</p>
+<ol class="arabic simple">
+<li><p>The client calls GetFlightInfo with a command-type FlightDescriptor.
+The descriptor command contains the serialization of the CommandStatementQuery message.</p></li>
+<li><p>The server returns a FlightInfo with one or more FlightEndpoints, each with an implementation-defined Ticket payload.
+The FlightInfo may optionally be populated the Arrow schema of the returned data.</p></li>
+<li><p>To retrieve the query results: for each returned endpoint, the client calls DoGet with the ticket of that endpoint.
+If there are multiple endpoints, the full result set is the concatentation of the indvididual result sets from each endpoint, in the order given by the server.</p></li>
+</ol>
+<p>To instead retrieve the query schema:</p>
+<ol class="arabic simple">
+<li><p>The client calls GetSchema with a command-type FlightDescriptor.
+The descriptor command contains the serialization of the CommandStatementQuery message.</p></li>
+<li><p>The server returns a SchemaResult with the serialized Arrow schema.</p></li>
+</ol>
+</div>
+<div class="section" id="insert-update-statements">
+<h4>Insert/Update Statements<a class="headerlink" href="#insert-update-statements" title="Permalink to this headline">¶</a></h4>
+<p>This allows clients to execute ad-hoc queries which do not return tabular results (e.g. DDL statements, insert/update queries).</p>
+<ol class="arabic simple">
+<li><p>The client calls DoPut with a command-type FlightDescriptor.
+The descriptor command contains the serialization of the CommandStatementUpdate message.
+The client also supplies the schema of the parameter values, if needed.</p></li>
+<li><p>During the DoPut call, the client supplies parameter values as batches of Arrow data.
+Each row is taken to be a set of parameter values and used to execute the query.</p></li>
+<li><p>The server returns a PutResult message containing the serialization of a DoPutUpdateResult message.
+This contains the number of affected rows, which can be zero, or -1 if the number is unknown.</p></li>
+</ol>
+</div>
+<div class="section" id="prepared-statements">
+<h4>Prepared Statements<a class="headerlink" href="#prepared-statements" title="Permalink to this headline">¶</a></h4>
+<p>This allows clients to create prepared statements for more efficient query execution.</p>
+<p>To create a prepared statement:</p>
+<ol class="arabic simple">
+<li><p>The client calls DoAction with type equal to GetPreparedStatement and with body containing a serialized ActionGetPreparedStatementRequest.</p></li>
+<li><p>The server returns a Result with body containing a serialized ActionGetPreparedStatementResult.</p></li>
+</ol>
+<p>To close a prepared statement:</p>
+<ol class="arabic simple">
+<li><p>The client calls DoAction with type equal to ClosePreparedStatement and with body containing a serialized ActionClosePreparedStatementRequest.</p></li>
+</ol>
+<p>Clients must close prepared statements after they are done using the statement.
+Prepared statements may also time out after an implementation-defined duration.
+It is an error to close a prepared statement while a query is ongoing.</p>
+<p>To use a prepared statement to query values:</p>
+<ol class="arabic simple">
+<li><p>Optionally, to bind values to the statement:</p>
+<ol class="arabic simple">
+<li><p>The client calls DoPut with a command-type FlightDescriptor.
+The descriptor command contains the serialization of a CommandPreparedStatementQuery message.
+The client_execution_handle is a client-chosen value.
+The prepared_statement_handle must come from a prior GetPreparedStatement call.</p></li>
+<li><p>The client supplies parameter values as batches of Arrow data.
+Each row is taken to be a set of parameter values.</p></li>
+</ol>
+</li>
+<li><p>The client calls GetFlightInfo with a command-type FlightDescriptor.
+The descriptor command contains the serialization of the CommandPreparedStatementQuery message.
+The client_execution_handle is a client-chosen value, consistent with a prior DoPut call if there are parameters.
+The prepared_statement_handle must come from a prior GetPreparedStatement call.</p></li>
+<li><p>The server returns a FlightInfo with one or more FlightEndpoints, each with an implementation-defined Ticket payload.
+The FlightInfo may optionally be populated the Arrow schema of the returned data.</p></li>
+<li><p>To retrieve the query results: for each returned endpoint, the client calls DoGet with the ticket of that endpoint.
+If there are multiple endpoints, the full result set is the concatentation of the indvididual result sets from each endpoint, in the order given by the server.</p></li>
+</ol>
+<p>To use a prepared statement to insert/update values:</p>
+<ol class="arabic simple">
+<li><p>The client calls GetFlightInfo with a command-type FlightDescriptor.
+The descriptor command contains the serialization of the CommandPreparedStatementQuery message.
+The client_execution_handle is a client-chosen value.
+The prepared_statement_handle must come from a prior GetPreparedStatement call.</p></li>
+<li><p>During the DoPut call, the client supplies parameter values as batches of Arrow data.
+Each row is taken to be a set of parameter values and used to execute the query.</p></li>
+<li><p>The server returns a PutResult message containing the serialization of a DoPutUpdateResult message.
+This contains the number of affected rows, which can be zero, or -1 if the number is unknown.</p></li>
+</ol>
+<p>client_execution_handle values may not be resued.
+They need not be distinct between distinct connections, but also cannot be reused across distinct connections.
+They need not be distinct between distinct prepared_statement_handle values.
+It is an error to use a prepared statement that is parameterized, but for which parameter values have not been bound.</p>
+</div>
+</div>
+</div>
+<div class="section" id="error-handling">
+<h2>Error Handling<a class="headerlink" href="#error-handling" title="Permalink to this headline">¶</a></h2>
+<table class="table">
+<colgroup>
+<col style="width: 43%" />
+<col style="width: 36%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Error Case</p></th>
+<th class="head"><p>Applicable RPC Calls</p></th>
+<th class="head"><p>Error Code</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Query syntax is unrecognized/invalid.</p></td>
+<td><ul class="simple">
+<li><p>DoAction(GetPreparedStatement)</p></li>
+<li><p>DoPut</p></li>
+<li><p>GetFlightInfo</p></li>
+<li><p>GetSchema</p></li>
+</ul>
+</td>
+<td><p>INVALID_ARGUMENT</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ticket is unrecognized/invalid.</p></td>
+<td><ul class="simple">
+<li><p>DoGet</p></li>
+</ul>
+</td>
+<td><p>INVALID_ARGUMENT</p></td>
+</tr>
+<tr class="row-even"><td><p>The prepared statement handle is
+unrecognized/invalid.</p></td>
+<td><ul class="simple">
+<li><p>DoAction(ClosePreparedstatement)</p></li>
+<li><p>DoPut</p></li>
+<li><p>GetFlightInfo</p></li>
+<li><p>GetSchema</p></li>
+</ul>
+</td>
+<td><p>NOT_FOUND</p></td>
+</tr>
+<tr class="row-odd"><td><p>Too many or too few parameter values
+have been bound to the given
+client_execution_handle prior to
+execution.</p></td>
+<td><ul class="simple">
+<li><p>GetFlightInfo</p></li>
+<li><p>DoPut</p></li>
+</ul>
+</td>
+<td><p>INVALID_ARGUMENT</p></td>
+</tr>
+<tr class="row-even"><td><p>Prepared statement is in use and cannot
+be closed.</p></td>
+<td><ul class="simple">
+<li><p>DoAction(ClosePreparedstatement)</p></li>
+</ul>
+</td>
+<td><p>INVALID_ARGUMENT</p></td>
+</tr>
+<tr class="row-odd"><td><p>The client_execution_handle value was
+already used for the given
+prepared_statement_handle value.</p></td>
+<td><ul class="simple">
+<li><p>DoPut</p></li>
+<li><p>GetFlightInfo</p></li>
+</ul>
+</td>
+<td><p>ALREADY_EXISTS</p></td>
+</tr>
+</tbody>
+</table>
+<p>Edge cases:</p>
+<ul class="simple">
+<li><p>It is not an error if the server returns a different schema between GetFlightInfo and DoGet, or between a GetPreparedStatement action and DoGet.</p></li>
+</ul>
+</div>
+<div class="section" id="protocol-buffer-definitions">
+<h2>Protocol Buffer Definitions<a class="headerlink" href="#protocol-buffer-definitions" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-protobuf notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span>
+<span class="normal">349</span>
+<span class="normal">350</span>
+<span class="normal">351</span>
+<span class="normal">352</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span>
+<span class="normal">356</span>
+<span class="normal">357</span>
+<span class="normal">358</span>
+<span class="normal">359</span>
+<span class="normal">360</span>
+<span class="normal">361</span>
+<span class="normal">362</span>
+<span class="normal">363</span>
+<span class="normal">364</span>
+<span class="normal">365</span>
+<span class="normal">366</span>
+<span class="normal">367</span>
+<span class="normal">368</span>
+<span class="normal">369</span>
+<span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span>
+<span class="normal">374</span>
+<span class="normal">375</span>
+<span class="normal">376</span>
+<span class="normal">377</span>
+<span class="normal">378</span>
+<span class="normal">379</span>
+<span class="normal">380</span>
+<span class="normal">381</span>
+<span class="normal">382</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span>
+<span class="normal">386</span>
+<span class="normal">387</span>
+<span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span>
+<span class="normal">392</span>
+<span class="normal">393</span>
+<span class="normal">394</span>
+<span class="normal">395</span>
+<span class="normal">396</span>
+<span class="normal">397</span>
+<span class="normal">398</span>
+<span class="normal">399</span>
+<span class="normal">400</span>
+<span class="normal">401</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="cm"> * or more contributor license agreements.  See the NOTICE file</span>
+<span class="cm"> * distributed with this work for additional information</span>
+<span class="cm"> * regarding copyright ownership.  The ASF licenses this file</span>
+<span class="cm"> * to you under the Apache License, Version 2.0 (the</span>
+<span class="cm"> * &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="cm"> * with the License.  You may obtain a copy of the License at</span>
+<span class="cm"> * &lt;p&gt;</span>
+<span class="cm"> * http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm"> * &lt;p&gt;</span>
+<span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
+<span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="cm"> * See the License for the specific language governing permissions and</span>
+<span class="cm"> * limitations under the License.</span>
+<span class="cm"> */</span>
+
+<span class="k">syntax</span> <span class="o">=</span> <span class="s">&quot;proto3&quot;</span><span class="p">;</span>
+
+<span class="k">option</span> <span class="na">java_package</span> <span class="o">=</span> <span class="s">&quot;org.apache.arrow.flight.sql.impl&quot;</span><span class="p">;</span>
+<span class="kn">package</span> <span class="nn">arrow</span><span class="o">.</span><span class="n">flight.protocol.sql</span><span class="p">;</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * FlightSQL: a protocol for exposing SQL-like functionality over Arrow Flight.</span>
+<span class="cm"> */</span>
+
+<span class="c1">// Metadata Actions</span>
+<span class="c1">//</span>
+<span class="c1">// All messages here are for use with Flight DoAction.</span>
+<span class="c1">// Serialized ActionXXXRequest messages are used as the &quot;body&quot; field of a Action.</span>
+<span class="c1">// Serialized ActionXXXResult messages are used as the &quot;body&quot; field of a Result.</span>
+
+<span class="c1">// GetSqlInfo: Request metadata about the SQL dialect implemented by the server.</span>
+<span class="c1">//</span>
+<span class="c1">// The Action type must be &quot;GetSqlInfo&quot;.</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * The result of a &quot;GetSqlInfo&quot; action.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Keys and values are modeled after ODBC&#39;s SQLGetInfo() function. This information is intended</span>
+<span class="cm"> * to provide FlightSQL clients with basic information about supported SQL syntax and features.</span>
+<span class="cm"> *</span>
+<span class="cm"> * This is not an exhaustive list and more information may be added in future releases, including</span>
+<span class="cm"> * more syntax, supported functions, type conversion support, etc.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Some values are provided at the top level instead, as direct message fields.</span>
+<span class="cm"> *</span>
+<span class="cm"> * FlightSQL supports the following information types:</span>
+<span class="cm"> * 1. Server Information</span>
+<span class="cm"> * 2. SQL Syntax Information</span>
+<span class="cm"> * 3. Custom Information</span>
+<span class="cm"> */</span>
+<span class="kd">message</span> <span class="nc">ActionGetSqlInfoResult</span> <span class="p">{</span>
+  <span class="c1">// 1. Server: basic information about the server.</span>
+  <span class="n">ServerInfo</span> <span class="na">server_info</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+  <span class="cm">/*</span>
+<span class="cm">   * 2. SQL Syntax: information about supported SQL syntax and features.</span>
+<span class="cm">   *</span>
+<span class="cm">   * Values are encoded in a map. Implementations are not required to return any of the keys</span>
+<span class="cm">   * below. They may not return implementation-defined keys, but clients should prepared to</span>
+<span class="cm">   * communicate with a server that implements newer or older revisions of FlightSQL and hence</span>
+<span class="cm">   * may return deprecated or unknown keys. The keys and expected value types are as follows:</span>
+<span class="cm">   *</span>
+<span class="cm">   * SQL_DDL_CATALOG : integer_bitmask</span>
+<span class="cm">   * Indicates whether the server supports CREATE (flag SQL_DI_CREATE) and DROP (flag</span>
+<span class="cm">   * SQL_DI_DROP) of catalogs.</span>
+<span class="cm">   * In a SQL environment, a catalog is a collection of schemas.</span>
+<span class="cm">   * This property does not have a direct ODBC equivalent.</span>
+<span class="cm">   *</span>
+<span class="cm">   * SQL_DDL_SCHEMA : integer_bitmask</span>
+<span class="cm">   * Indicates whether the server supports CREATE (flag SQL_DI_CREATE) and DROP (flag</span>
+<span class="cm">   * SQL_DI_DROP) of schemas.</span>
+<span class="cm">   * In a SQL environment, a schema is a collection of tables, views, indexes etc.</span>
+<span class="cm">   * This property does not have a direct ODBC equivalent.</span>
+<span class="cm">   *</span>
+<span class="cm">   * SQL_DDL_TABLE : integer_bitmask</span>
+<span class="cm">   * Indicates whether the server supports CREATE (flag SQL_DI_CREATE) and DROP (flag</span>
+<span class="cm">   * SQL_DI_DROP) of tables.</span>
+<span class="cm">   * In a SQL environment, a table is a collection of rows of information. Each row of information</span>
+<span class="cm">   * may have one or more columns of data.</span>
+<span class="cm">   * This property does not have a direct ODBC equivalent.</span>
+<span class="cm">   *</span>
+<span class="cm">   * SQL_IDENTIFIER_CASE : integer_value</span>
+<span class="cm">   * Indicates the case sensitivity of catalog, table and schema names. Value must be one of the</span>
+<span class="cm">   * constants SQL_IC_UPPER, SQL_IC_LOWER, SQL_IC_SENSITIVE, SQL_IC_MIXED.</span>
+<span class="cm">   *</span>
+<span class="cm">   * SQL_IDENTIFIER_QUOTE_CHAR : string_value</span>
+<span class="cm">   * Indicates the supported character(s) used to surround a delimited identifier.</span>
+<span class="cm">   *</span>
+<span class="cm">   * SQL_QUOTED_IDENTIFIER_CASE : integer_value</span>
+<span class="cm">   * Indicates case sensitivity of quoted identifiers. Value must be one of the</span>
+<span class="cm">   * constants SQL_IC_UPPER, SQL_IC_LOWER, SQL_IC_SENSITIVE, SQL_IC_MIXED.</span>
+<span class="cm">   */</span>
+  <span class="n">map</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">GetSqlInfoValue</span><span class="p">&gt;</span> <span class="na">flight_sql_info</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="c1">// 3. Custom Information: implementation-defined properties.</span>
+  <span class="c1">//</span>
+  <span class="c1">// Implementations should prefix keys with an identifier to avoid collisions with other</span>
+  <span class="c1">// implementations.</span>
+  <span class="n">map</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">GetSqlInfoValue</span><span class="p">&gt;</span> <span class="na">custom_info</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Basic information about the server.</span>
+<span class="kd">message</span> <span class="nc">ServerInfo</span> <span class="p">{</span>
+  <span class="c1">// The name of the server.</span>
+  <span class="kt">string</span> <span class="na">name</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="c1">// The native version of the server.</span>
+  <span class="kt">string</span> <span class="na">version</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="c1">// The Arrow format version of the server.</span>
+  <span class="kt">string</span> <span class="na">arrow_format_version</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+  <span class="c1">// The Arrow library version of the server.</span>
+  <span class="kt">string</span> <span class="na">arrow_library_version</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+  <span class="c1">// Indicates whether the server is read only.</span>
+  <span class="kt">bool</span> <span class="na">read_only</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * Wrapper for values returned in ActionGetSqlInfoResult.</span>
+<span class="cm"> */</span>
+<span class="kd">message</span> <span class="nc">GetSqlInfoValue</span> <span class="p">{</span>
+  <span class="k">oneof</span> <span class="n">value</span> <span class="p">{</span>
+    <span class="kt">string</span> <span class="na">string_value</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="kt">int32</span> <span class="na">integer_value</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="kt">int32</span> <span class="na">integer_bitmask</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Enums used for ServerInfo values. These enums are not directly referenced; instead their</span>
+<span class="c1">// values are encoded as bitfields in the integer_bitmask field in GetSqlInfoValue, or as</span>
+<span class="c1">// integers in the integer_value field.</span>
+<span class="kd">enum</span> <span class="n">SqlInfoDdl</span> <span class="p">{</span>
+  <span class="na">SQL_DI_NONE</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="na">SQL_DI_CREATE</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="na">SQL_DI_DROP</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="c1">// Next value is 4</span>
+<span class="p">}</span>
+<span class="kd">enum</span> <span class="n">SqlInfoIdentifierCase</span> <span class="p">{</span>
+  <span class="na">SQL_IC_UPPER</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="na">SQL_IC_LOWER</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="na">SQL_IC_SENSITIVE</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="na">SQL_IC_MIXED</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * Request message for the &quot;GetCatalogs&quot; action.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Requests a list of catalogs available in the server.</span>
+<span class="cm"> */</span>
+<span class="kd">message</span> <span class="nc">ActionGetCatalogsRequest</span> <span class="p">{</span>
+  <span class="cm">/*</span>
+<span class="cm">   * Specifies the order of result values.</span>
+<span class="cm">   */</span>
+  <span class="n">ResultsOrder</span> <span class="na">order</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * The result of a &quot;GetCatalogs&quot; action.</span>
+<span class="cm"> */</span>
+<span class="kd">message</span> <span class="nc">ActionGetCatalogsResult</span> <span class="p">{</span>
+  <span class="k">repeated</span> <span class="kt">string</span> <span class="na">catalog</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * Request message for the &quot;GetSchemas&quot; action.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Requests a list of schemas available in the server.</span>
+<span class="cm"> */</span>
+<span class="kd">message</span> <span class="nc">ActionGetSchemasRequest</span> <span class="p">{</span>
+  <span class="cm">/*</span>
+<span class="cm">   * Specifies the order of result values with precedence:</span>
+<span class="cm">   *  - catalog</span>
+<span class="cm">   *  - schema</span>
+<span class="cm">   */</span>
+  <span class="n">ResultsOrder</span> <span class="na">order</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+  <span class="cm">/*</span>
+<span class="cm">   * Specifies the Catalog to search for schemas.</span>
+<span class="cm">   * If omitted, then schemas for all catalogs are searched.</span>
+<span class="cm">   */</span>
+  <span class="kt">string</span> <span class="na">catalog</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="cm">/*</span>
+<span class="cm">   * Specifies a filter pattern for schemas to search for.</span>
+<span class="cm">   * When no schema_filter_pattern is provided, the pattern will not be used to narrow the search.</span>
+<span class="cm">   * In the pattern string, two special characters can be used to denote matching rules:</span>
+<span class="cm">   *    - &quot;%&quot; means to match any substring with 0 or more characters.</span>
+<span class="cm">   *    - &quot;_&quot; means to match any one character.</span>
+<span class="cm">   */</span>
+  <span class="kt">string</span> <span class="na">schema_filter_pattern</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * The result of a &quot;GetSchemas&quot; action.</span>
+<span class="cm"> */</span>
+<span class="kd">message</span> <span class="nc">ActionGetSchemasResult</span> <span class="p">{</span>
+  <span class="kt">string</span> <span class="na">catalog</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="kt">string</span> <span class="na">schema</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * Request message for the &quot;GetTables&quot; action.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Requests a list of tables available in the server.</span>
+<span class="cm"> */</span>
+<span class="kd">message</span> <span class="nc">ActionGetTablesRequest</span> <span class="p">{</span>
+  <span class="cm">/*</span>
+<span class="cm">   * Specifies the order of result values with precedence:</span>
+<span class="cm">   *  - catalog</span>
+<span class="cm">   *  - schema</span>
+<span class="cm">   *  - table_type</span>
+<span class="cm">   *  - table</span>
+<span class="cm">   */</span>
+  <span class="n">ResultsOrder</span> <span class="na">order</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+  <span class="c1">// Specifies the Catalog to search for schemas.</span>
+  <span class="kt">string</span> <span class="na">catalog</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="cm">/* Specifies a filter pattern for schemas to search for.</span>
+<span class="cm">   * When no schema_filter_pattern is provided, the pattern will not be used to narrow the search.</span>
+<span class="cm">   * In the pattern string, two special characters can be used to denote matching rules:</span>
+<span class="cm">   *    - &quot;%&quot; means to match any substring with 0 or more characters.</span>
+<span class="cm">   *    - &quot;_&quot; means to match any one character.</span>
+<span class="cm">   */</span>
+  <span class="kt">string</span> <span class="na">schema_filter_pattern</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+
+  <span class="cm">/* Specifies a filter pattern for tables to search for.</span>
+<span class="cm">   * When no schema_filter_pattern is provided, the pattern will not be used to narrow the search.</span>
+<span class="cm">   * In the pattern string, two special characters can be used to denote matching rules:</span>
+<span class="cm">   *    - &quot;%&quot; means to match any substring with 0 or more characters.</span>
+<span class="cm">   *    - &quot;_&quot; means to match any one character.</span>
+<span class="cm">   */</span>
+  <span class="kt">string</span> <span class="na">table_name_filter_pattern</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+
+  <span class="c1">// Specifies literal table types to search for.</span>
+  <span class="c1">//</span>
+  <span class="c1">// When no types are provided, tables of all types will be returned. Otherwise, tables of any</span>
+  <span class="c1">// given type will be returned.</span>
+  <span class="k">repeated</span> <span class="kt">string</span> <span class="na">table_types</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+
+  <span class="c1">// Specifies if the schema should be returned for found tables.</span>
+  <span class="kt">bool</span> <span class="na">include_schema</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * The result of a &quot;GetTables&quot; action.</span>
+<span class="cm"> */</span>
+<span class="kd">message</span> <span class="nc">ActionGetTablesResult</span> <span class="p">{</span>
+  <span class="kt">string</span> <span class="na">catalog</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="kt">string</span> <span class="na">schema</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="kt">string</span> <span class="na">table</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+  <span class="kt">string</span> <span class="na">table_type</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+
+  <span class="c1">// If include_schema was set in the request, this is the Arrow schema of the table to be</span>
+  <span class="c1">// returned, as described in Schema.fbs::Schema, serialized as an IPC message.</span>
+  <span class="kt">bytes</span> <span class="na">table_schema</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * The result of a &quot;GetTableTypes&quot; action.</span>
+<span class="cm"> */</span>
+<span class="kd">message</span> <span class="nc">ActionGetTableTypesResult</span> <span class="p">{</span>
+  <span class="cm">/*</span>
+<span class="cm">   * A possible table type. E.g. table (regular data table), view, system table etc.</span>
+<span class="cm">   *</span>
+<span class="cm">   * The possible values are implementation-defined.</span>
+<span class="cm">   */</span>
+  <span class="k">repeated</span> <span class="kt">string</span> <span class="na">table_type</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// SQL Execution Actions</span>
+<span class="c1">//</span>
+<span class="c1">// All messages here are for use with Flight DoAction.</span>
+<span class="c1">// Serialized ActionXXXRequest messages are used as the &quot;body&quot; field of a Action.</span>
+<span class="c1">// Serialized ActionXXXResult messages are used as the &quot;body&quot; field of a Result.</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * Request message for the &quot;GetPreparedStatement&quot; action.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Creates a new prepared statement server-side. Once the application is done with the prepared</span>
+<span class="cm"> * statement, it must follow up with a ClosePreparedStatement action.</span>
+<span class="cm"> */</span>
+<span class="kd">message</span> <span class="nc">ActionGetPreparedStatementRequest</span> <span class="p">{</span>
+  <span class="c1">// The valid SQL string to get a prepared statement for.</span>
+  <span class="kt">string</span> <span class="na">query</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * The result of a &quot;GetPreparedStatement&quot; action.</span>
+<span class="cm"> */</span>
+<span class="kd">message</span> <span class="nc">ActionGetPreparedStatementResult</span> <span class="p">{</span>
+  <span class="c1">// Opaque implementation-defined handle for the prepared statement on the server.</span>
+  <span class="kt">bytes</span> <span class="na">prepared_statement_handle</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+  <span class="c1">// If the given query generates a result set, this is the Arrow schema of the results to be</span>
+  <span class="c1">// returned, as described in Schema.fbs::Schema, serialized as an IPC message.</span>
+  <span class="kt">bytes</span> <span class="na">dataset_schema</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="c1">// If the given query contained parameters, this is the Arrow schema of the expected</span>
+  <span class="c1">// parameters, as described in Schema.fbs::Schema, serialized as an IPC message.</span>
+  <span class="kt">bytes</span> <span class="na">parameter_schema</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * Request message for the &quot;ClosePreparedStatement&quot; action.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Closes server resources associated with the prepared statement handle.</span>
+<span class="cm"> */</span>
+<span class="kd">message</span> <span class="nc">ActionClosePreparedStatementRequest</span> <span class="p">{</span>
+  <span class="c1">// Opaque handle for the prepared statement on the server.</span>
+  <span class="kt">string</span> <span class="na">prepared_statement_handle</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="c1">// SQL Execution Messages</span>
+<span class="c1">//</span>
+<span class="c1">// Serialized CommandXXX messages are wrapped in a Command message, then used as the &quot;cmd&quot; field of a FlightDescriptor.</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * Execute an ad-hoc SQL query that returns a table of results.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Valid for the following RPC calls:</span>
+<span class="cm"> *  - GetSchema: return the schema of the query.</span>
+<span class="cm"> *  - GetFlightInfo: execute the query. In this case, the application should follow with a DoGet call.</span>
+<span class="cm"> */</span>
+<span class="kd">message</span> <span class="nc">CommandStatementQuery</span> <span class="p">{</span>
+  <span class="c1">// The SQL query.</span>
+  <span class="kt">string</span> <span class="na">query</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * Execute a prepared statement that returns a table of results.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Must be preceded with a GetPreparedStatement action.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Valid for the following RPC calls:</span>
+<span class="cm"> *  - DoPut: bind parameter values.</span>
+<span class="cm"> *  - GetFlightInfo: execute the prepared statement instance.</span>
+<span class="cm"> *</span>
+<span class="cm"> * The sequence of requests must be as follows:</span>
+<span class="cm"> * 1. DoAction with a GetPreparedStatement payload</span>
+<span class="cm"> * 2. DoPut with a CommandPreparedStatementQuery payload, with the prepared_statement_handle</span>
+<span class="cm"> *    returned from the server previously</span>
+<span class="cm"> * 3. GetFlightInfo with the same payload.</span>
+<span class="cm"> * 4. DoGet for each endpoint returned from the previous step.</span>
+<span class="cm"> */</span>
+<span class="kd">message</span> <span class="nc">CommandPreparedStatementQuery</span> <span class="p">{</span>
+  <span class="c1">// Unique identifier for the instance of the prepared statement to execute.</span>
+  <span class="kt">bytes</span> <span class="na">client_execution_handle</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="c1">// Opaque handle for the prepared statement on the server.</span>
+  <span class="kt">bytes</span> <span class="na">prepared_statement_handle</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * Execute an ad-hoc SQL query that does not return a table of results.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Valid for the following RPC calls:</span>
+<span class="cm"> *  - DoPut: execute the query. In this case, the server should return exactly one DoPutUpdateResult message.</span>
+<span class="cm"> */</span>
+<span class="kd">message</span> <span class="nc">CommandStatementUpdate</span> <span class="p">{</span>
+  <span class="c1">// The SQL query.</span>
+  <span class="kt">string</span> <span class="na">query</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * Execute a prepared statement that does not return a table of results.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Must be preceded with a GetPreparedStatement action.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Valid for the following RPC calls:</span>
+<span class="cm"> *  - DoPut: bind parameter values and execute the query.</span>
+<span class="cm"> */</span>
+<span class="kd">message</span> <span class="nc">CommandPreparedStatementUpdate</span> <span class="p">{</span>
+  <span class="c1">// Unique identifier for the instance of the prepared statement to execute.</span>
+  <span class="kt">bytes</span> <span class="na">client_execution_handle</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="c1">// Opaque handle for the prepared statement on the server.</span>
+  <span class="kt">bytes</span> <span class="na">prepared_statement_handle</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * A top-level variant that wraps all the possible commands.</span>
+<span class="cm"> */</span>
+<span class="kd">message</span> <span class="nc">Command</span> <span class="p">{</span>
+  <span class="k">oneof</span> <span class="n">command</span> <span class="p">{</span>
+    <span class="n">CommandStatementQuery</span> <span class="na">statement_query</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">CommandPreparedStatementQuery</span> <span class="na">prepared_statement_query</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">CommandStatementUpdate</span> <span class="na">statement_update</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="n">CommandPreparedStatementUpdate</span> <span class="na">prepared_statement_update</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Miscellaneous Messages</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * If the client calls DoPut after CommandStatementUpdate or CommandPreparedStatementUpdate, this</span>
+<span class="cm"> * message is used as the &quot;app_metadata&quot; field of the returned PutResult.</span>
+<span class="cm"> */</span>
+<span class="kd">message</span> <span class="nc">DoPutUpdateResult</span> <span class="p">{</span>
+  <span class="c1">// The number of records updated. A return value of -1 represents</span>
+  <span class="c1">// an unknown updated record count.</span>
+  <span class="kt">int64</span> <span class="na">record_count</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * Helper message for clients to specify a result ordering in metadata actions.</span>
+<span class="cm"> */</span>
+<span class="kd">message</span> <span class="nc">ResultsOrder</span> <span class="p">{</span>
+  <span class="kd">enum</span> <span class="n">Order</span> <span class="p">{</span>
+    <span class="c1">// Protobuf pattern, not used.</span>
+    <span class="na">ORDER_UNKNOWN</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="c1">// No ordering enforcement.</span>
+    <span class="na">ORDER_UNORDERED</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="c1">// Order results by ascending value order.</span>
+    <span class="na">ORDER_ASCENDING</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+    <span class="c1">// Order results by descending value order.</span>
+    <span class="na">ORDER_DESCENDING</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">Order</span> <span class="na">order</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="Flight.html" title="previous page">Arrow Flight RPC</a>
+    <a class='right-next' id="next-link" href="Integration.html" title="next page">Integration Testing</a>
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+    
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-107500873-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2016-2019 Apache Software Foundation.<br/>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

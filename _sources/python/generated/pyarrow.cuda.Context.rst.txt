@@ -1,6 +1,6 @@
 pyarrow.cuda.Context
 ====================
 
-.. currentmodule:: pyarrow.cuda
+.. currentmodule:: pyarrow
 
-.. autoattribute:: Context
+.. autoattribute:: cuda.Context

@@ -14,6 +14,15 @@ pyarrow.fs.FileSystemHandler
    .. autosummary::
    
       ~FileSystemHandler.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
       ~FileSystemHandler.copy_file
       ~FileSystemHandler.create_dir
       ~FileSystemHandler.delete_dir
@@ -29,9 +38,5 @@ pyarrow.fs.FileSystemHandler
       ~FileSystemHandler.open_input_file
       ~FileSystemHandler.open_input_stream
       ~FileSystemHandler.open_output_stream
-   
-   
-
-   
    
    

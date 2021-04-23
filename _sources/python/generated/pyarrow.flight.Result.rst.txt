@@ -1,6 +1,6 @@
 pyarrow.flight.Result
 =====================
 
-.. currentmodule:: pyarrow.flight
+.. currentmodule:: pyarrow
 
-.. autoattribute:: Result
+.. autoattribute:: flight.Result

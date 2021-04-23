@@ -1,6 +1,6 @@
 pyarrow.flight.FlightDescriptor
 ===============================
 
-.. currentmodule:: pyarrow.flight
+.. currentmodule:: pyarrow
 
-.. autoattribute:: FlightDescriptor
+.. autoattribute:: flight.FlightDescriptor
